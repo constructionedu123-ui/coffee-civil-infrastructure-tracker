@@ -40,7 +40,7 @@ export const App: React.FC = () => {
 
   // UI Drawer and List states
   const [selectedProject, setSelectedProject] = useState<ProjectFeature | null>(null);
-  const [isListOpen, setIsListOpen] = useState<boolean>(true);
+  const [isListOpen, setIsListOpen] = useState<boolean>(false);
   const [flyToCoords, setFlyToCoords] = useState<[number, number] | null>(null);
 
   // Fetch GeoJSON data on mount
