@@ -248,16 +248,6 @@ export const App: React.FC = () => {
           />
         )}
 
-        {/* Detailed Slide-out Drawer (Right) — accessible from both Map and Table views */}
-        <ProjectDrawer
-          project={selectedProject}
-          onClose={() => setSelectedProject(null)}
-          onZoomTo={(coords) => {
-            setActiveView('map');
-            setFlyToCoords(coords);
-          }}
-        />
-
         {/* Contractor & BUMN Analytics Drawer */}
         <AnalyticsDrawer
           isOpen={isAnalyticsOpen}
@@ -269,6 +259,16 @@ export const App: React.FC = () => {
           }}
         />
       </main>
+
+      {/* Detailed Slide-out Drawer (Right) — rendered at root level so it covers header/KPI/filter bars */}
+      <ProjectDrawer
+        project={selectedProject}
+        onClose={() => setSelectedProject(null)}
+        onZoomTo={(coords) => {
+          setActiveView('map');
+          setFlyToCoords(coords);
+        }}
+      />
     </div>
   );
 };

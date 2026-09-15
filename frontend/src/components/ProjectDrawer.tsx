@@ -1,5 +1,5 @@
-import React, { useEffect } from 'react';
-import { ExternalLink } from 'lucide-react';
+﻿import React, { useEffect } from 'react';
+import { ExternalLink, X } from 'lucide-react';
 import { ProjectFeature } from '../types/project';
 import { CATEGORY_CONFIG, STATUS_CONFIG } from '../constants/categories';
 import { formatBudget, formatDate } from '../utils/formatters';
@@ -17,12 +17,23 @@ const MILESTONES = [
   { step: '04', title: 'Operasional', subtitle: 'Beroperasi Penuh' },
 ];
 
+const BUMN_TAGS: { match: string; label: string }[] = [
+  { match: 'WIKA',       label: 'Wijaya Karya (WIKA)' },
+  { match: 'PP',         label: 'PT PP (Persero)' },
+  { match: 'Hutama',     label: 'Hutama Karya (HK)' },
+  { match: 'Adhi',       label: 'Adhi Karya' },
+  { match: 'Waskita',    label: 'Waskita Karya' },
+  { match: 'Jasa Marga', label: 'Jasa Marga' },
+  { match: 'PLN',        label: 'PT PLN (Persero)' },
+  { match: 'Pertamina',  label: 'PT Pertamina (Persero)' },
+];
+
 export const ProjectDrawer: React.FC<ProjectDrawerProps> = ({
   project,
   onClose,
   onZoomTo,
 }) => {
-  // Listen for Escape key to dismiss drawer
+  // Escape key dismissal
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === 'Escape') onClose();
@@ -46,60 +57,52 @@ export const ProjectDrawer: React.FC<ProjectDrawerProps> = ({
   const coords = project?.geometry.coordinates || [0, 0];
   const [lon, lat] = coords;
 
-  // Determine current milestone step index
+  // Milestone step index
   const getMilestoneIndex = (status?: string) => {
     switch (status) {
-      case 'Planning':
-        return 0;
-      case 'Construction':
-        return 2;
+      case 'Planning':     return 0;
+      case 'Construction': return 2;
       case 'Operational':
-      case 'Completed':
-        return 3;
-      default:
-        return 1;
+      case 'Completed':    return 3;
+      default:             return 1;
     }
   };
   const currentMilestone = getMilestoneIndex(props?.status);
 
-  // Generate LPSE tender search URL based on project name
+  // LPSE tender search URL
   const lpseSearchUrl = props
     ? `https://inaproc.id/pengadaan?keyword=${encodeURIComponent(
         props.project_name.replace(/[–\-\/]/g, ' ').trim()
       )}`
     : '#';
 
-  // Funding Scheme styling helper
+  // Funding scheme badge helper
   const getSchemeBadge = (scheme?: string | null) => {
     const s = (scheme || 'KPBU / PPP').toLowerCase();
-    if (s.includes('kpbu') || s.includes('ppp')) {
+    if (s.includes('kpbu') || s.includes('ppp'))
       return {
         label: scheme || 'KPBU / PPP (BUJT Concession)',
         desc: 'Kerjasama Pemerintah dan Badan Usaha (Public-Private Partnership)',
         badge: 'bg-indigo-500/20 text-indigo-300 border-indigo-500/30',
       };
-    }
-    if (s.includes('apbn')) {
+    if (s.includes('apbn'))
       return {
         label: scheme || 'APBN (State Budget)',
         desc: 'Anggaran Pendapatan dan Belanja Negara murni atau pinjaman bilateral',
         badge: 'bg-emerald-500/20 text-emerald-300 border-emerald-500/30',
       };
-    }
-    if (s.includes('bumn') || s.includes('penugasan')) {
+    if (s.includes('bumn') || s.includes('penugasan'))
       return {
         label: scheme || 'Penugasan BUMN',
         desc: 'Penugasan Khusus Pemerintah kepada BUMN (Corporate Finance)',
         badge: 'bg-amber-500/20 text-amber-300 border-amber-500/30',
       };
-    }
-    if (s.includes('swasta') || s.includes('private') || s.includes('kks') || s.includes('ipp')) {
+    if (s.includes('swasta') || s.includes('private') || s.includes('kks') || s.includes('ipp'))
       return {
         label: scheme || 'Swasta / Private Investment',
         desc: 'Investasi Swasta Mandiri / Independent Power Producer (IPP) / KKS',
         badge: 'bg-cyan-500/20 text-cyan-300 border-cyan-500/30',
       };
-    }
     return {
       label: scheme || 'APBN / KPBU Mixed',
       desc: 'Pembiayaan Campuran Pemerintah & Badan Usaha',
@@ -108,256 +111,219 @@ export const ProjectDrawer: React.FC<ProjectDrawerProps> = ({
   };
 
   const schemeInfo = getSchemeBadge(props?.funding_scheme);
+  const contractorStr = props?.contractor || '';
+  const matchedTags = BUMN_TAGS.filter(({ match }) => contractorStr.includes(match));
 
   return (
     <>
-      {/* Dimmed backdrop */}
+      {/* ── Backdrop ── */}
       <div
         onClick={onClose}
-        className={`fixed inset-0 bg-black/60 z-40 transition-opacity duration-200 ${
-          isOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
+        aria-hidden="true"
+        className={`fixed inset-0 bg-black/60 transition-opacity duration-200 ${
+          isOpen
+            ? 'opacity-100 pointer-events-auto z-[1100]'
+            : 'opacity-0 pointer-events-none z-[-1]'
         }`}
       />
 
-      {/* Slide-out Editorial Inspection Drawer */}
+      {/* ── Full-height right-side drawer ── */}
       <aside
-        className={`fixed inset-y-0 right-0 z-50 w-full sm:w-[440px] md:w-[480px] bg-neutral-950 border-l border-neutral-800 shadow-2xl flex flex-col transform transition-transform duration-200 ease-in-out ${
-          isOpen ? 'translate-x-0' : 'translate-x-full'
-        }`}
+        role="dialog"
+        aria-modal="true"
+        aria-label={props?.project_name ?? 'Project detail'}
+        className={`fixed top-0 right-0 h-full w-full sm:w-[420px] md:w-[460px] z-[1200]
+          bg-[#0f141c] border-l border-neutral-800 shadow-2xl
+          flex flex-col
+          transform transition-transform duration-200 ease-in-out
+          ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}
       >
         {props && categoryConfig && statusConfig && (
           <>
-            {/* Drawer Header */}
-            <div className="px-5 py-4 border-b border-neutral-800 bg-neutral-900/90 flex items-start justify-between gap-3 shrink-0">
-              <div className="space-y-1.5 flex-1 pr-2">
+            {/* ── Sticky Header ── */}
+            <div className="sticky top-0 z-10 shrink-0 px-5 pt-5 pb-4 bg-[#0f141c] border-b border-neutral-800">
+              {/* Top row: sector/status badges + close button */}
+              <div className="flex items-start justify-between gap-3 mb-3">
                 <div className="flex items-center gap-2 flex-wrap">
-                  {/* PSN Sector Badge */}
                   <span
-                    className={`text-[10px] font-semibold uppercase tracking-wider px-2 py-0.5 rounded border ${categoryConfig.badgeClass}`}
+                    className={`text-[10px] font-bold uppercase tracking-wider px-2.5 py-1 rounded border ${categoryConfig.badgeClass}`}
                   >
                     {categoryConfig.label}
                   </span>
-
-                  {/* Status Milestone Tag */}
                   <span
-                    className={`text-[10px] font-medium px-2 py-0.5 rounded border ${statusConfig.badgeClass}`}
+                    className={`text-[10px] font-medium px-2.5 py-1 rounded border ${statusConfig.badgeClass}`}
                   >
                     {statusConfig.label}
                   </span>
-
-                  {/* National Scope Tag */}
                   {isNational && (
-                    <span className="text-[10px] font-medium px-2 py-0.5 rounded bg-neutral-800 text-neutral-300 border border-neutral-700 font-mono">
+                    <span className="text-[10px] font-medium px-2.5 py-1 rounded bg-neutral-800 text-neutral-300 border border-neutral-700 font-mono">
                       Lintas Wilayah
                     </span>
                   )}
                 </div>
 
-                <h2 className="text-base sm:text-lg font-bold text-neutral-100 leading-snug tracking-tight">
-                  {props.project_name}
-                </h2>
+                <button
+                  onClick={onClose}
+                  className="shrink-0 p-1.5 rounded-md text-neutral-400 hover:text-white hover:bg-neutral-800 transition-colors"
+                  title="Close (Esc)"
+                  aria-label="Close drawer"
+                >
+                  <X className="w-4 h-4" />
+                </button>
               </div>
 
-              {/* Close Button */}
-              <button
-                onClick={onClose}
-                className="text-neutral-400 hover:text-white p-1 rounded hover:bg-neutral-800 transition-colors shrink-0 text-sm"
-                title="Close drawer (Esc)"
-              >
-                ✕
-              </button>
+              {/* Project title */}
+              <h2 className="text-lg font-bold text-neutral-100 leading-snug tracking-tight">
+                {props.project_name}
+              </h2>
             </div>
 
-            {/* Drawer Scrollable Content */}
-            <div className="flex-1 overflow-y-auto p-5 space-y-3.5 text-xs">
-              {/* 1. Status Milestone Lifecycle Tracker */}
-              <div className="bg-neutral-900/60 border border-neutral-800 rounded-lg p-3.5 space-y-2.5">
+            {/* ── Scrollable body ── */}
+            <div className="flex-1 overflow-y-auto px-5 py-4 space-y-4 text-xs">
+
+              {/* 1. Lifecycle Milestone Stepper */}
+              <section className="bg-neutral-900/60 border border-neutral-800 rounded-lg p-4 space-y-3">
                 <div className="flex items-center justify-between">
                   <span className="text-[10px] font-bold uppercase tracking-wider text-neutral-400">
                     Project Lifecycle Stage
                   </span>
-                  <span className="text-[10px] font-mono text-neutral-400">
-                    PSN Milestone
-                  </span>
+                  <span className="text-[10px] font-mono text-neutral-500">PSN Milestone</span>
                 </div>
 
-                <div className="grid grid-cols-4 gap-1.5 pt-1">
+                <div className="grid grid-cols-4 gap-2">
                   {MILESTONES.map((m, idx) => {
                     const isCompleted = idx < currentMilestone;
-                    const isCurrent = idx === currentMilestone;
+                    const isCurrent   = idx === currentMilestone;
                     return (
                       <div
                         key={m.step}
-                        className={`rounded p-2 text-center border transition-colors ${
+                        className={`rounded-md p-2.5 border text-center transition-colors ${
                           isCurrent
                             ? 'bg-neutral-800 border-neutral-500 text-white'
                             : isCompleted
                             ? 'bg-neutral-900 border-neutral-700 text-neutral-300'
-                            : 'bg-neutral-950/60 border-neutral-800/80 text-neutral-500'
+                            : 'bg-neutral-950/60 border-neutral-800 text-neutral-600'
                         }`}
                       >
                         <div className="text-[9px] font-mono font-bold mb-0.5 text-neutral-400">
-                          {isCompleted ? '✓ ' + m.step : m.step}
+                          {isCompleted ? `✓ ${m.step}` : m.step}
                         </div>
-                        <div className="text-[11px] font-semibold truncate">{m.title}</div>
-                        <div className="text-[9px] text-neutral-500 hidden sm:block truncate">{m.subtitle}</div>
+                        <div className="text-[11px] font-semibold leading-tight">{m.title}</div>
+                        <div className="text-[9px] text-neutral-500 mt-0.5 leading-tight">{m.subtitle}</div>
                       </div>
                     );
                   })}
                 </div>
-              </div>
+              </section>
 
-              {/* 2. Financial Breakdown (CAPEX & Scheme) */}
-              <div className="bg-neutral-900/60 border border-neutral-800 rounded-lg p-3.5 space-y-2.5">
+              {/* 2. CAPEX & Funding Scheme */}
+              <section className="bg-neutral-900/60 border border-neutral-800 rounded-lg p-4 space-y-3">
                 <div className="flex items-center justify-between">
                   <span className="text-[10px] font-bold uppercase tracking-wider text-neutral-400">
                     Estimated Investment (CAPEX)
                   </span>
-                  <span className="text-[10px] text-neutral-400 font-mono">
-                    IDR Trillion
-                  </span>
+                  <span className="text-[10px] text-neutral-500 font-mono">IDR Trillion</span>
                 </div>
 
-                <div className="space-y-0.5">
-                  <div className="text-xl sm:text-2xl font-bold text-neutral-100 font-mono tabular-nums tracking-tight">
+                <div>
+                  <div className="text-2xl font-bold text-neutral-100 font-mono tabular-nums tracking-tight">
                     {formatBudget(props.budget_idr, props.budget_raw)}
                   </div>
                   {props.budget_raw && props.budget_raw !== formatBudget(props.budget_idr) && (
-                    <p className="text-[11px] text-neutral-400 italic">
+                    <p className="text-[11px] text-neutral-400 italic mt-0.5">
                       Official Gazette: "{props.budget_raw}"
                     </p>
                   )}
                 </div>
 
-                {/* Funding Scheme Sub-section */}
-                <div className="pt-2.5 border-t border-neutral-800/80 space-y-1">
-                  <div className="flex items-center justify-between text-[11px]">
-                    <span className="text-neutral-400 font-medium">
-                      Funding Scheme:
-                    </span>
-                    <span className="font-semibold text-neutral-200">
+                <div className="pt-2 border-t border-neutral-800 space-y-1.5">
+                  <div className="flex items-start justify-between gap-2 text-[11px]">
+                    <span className="text-neutral-400 font-medium shrink-0">Funding Scheme</span>
+                    <span
+                      className={`font-semibold text-right px-2 py-0.5 rounded border text-[10px] ${schemeInfo.badge}`}
+                    >
                       {schemeInfo.label}
                     </span>
                   </div>
-                  <p className="text-[10px] text-neutral-500">
-                    {schemeInfo.desc}
-                  </p>
+                  <p className="text-[10px] text-neutral-500">{schemeInfo.desc}</p>
                 </div>
-              </div>
+              </section>
 
-              {/* 3. Penanggung Jawab Proyek Kerjasama (PJPK) / Ministry */}
-              <div className="bg-neutral-900/60 border border-neutral-800 rounded-lg p-3.5 space-y-1.5">
-                <div className="flex items-center justify-between">
-                  <span className="text-[10px] font-bold uppercase tracking-wider text-neutral-400">
-                    Responsible Agency / PJPK
-                  </span>
-                  <span className="text-[10px] text-neutral-500 font-mono">
-                    GCA Authority
-                  </span>
-                </div>
-                <div className="space-y-0.5">
-                  <h3 className="font-bold text-neutral-100 text-sm leading-snug">
-                    {props.pjpk || 'Kementerian PUPR / Lembaga Terkait'}
-                  </h3>
-                  <p className="text-[10px] text-neutral-500">
-                    Sector regulating ministry and project contracting authority
-                  </p>
-                </div>
-              </div>
+              {/* 3. Responsible Agency / PJPK */}
+              <section className="bg-neutral-900/60 border border-neutral-800 rounded-lg p-4 space-y-2">
+                <span className="text-[10px] font-bold uppercase tracking-wider text-neutral-400">
+                  Responsible Agency / PJPK
+                </span>
+                <h3 className="font-bold text-neutral-100 text-sm leading-snug">
+                  {props.pjpk || 'Kementerian PUPR / Lembaga Terkait'}
+                </h3>
+                <p className="text-[10px] text-neutral-500">
+                  Sector regulating ministry and project contracting authority
+                </p>
+              </section>
 
-              {/* 4. Contractors & Implementing Entities */}
-              <div className="bg-neutral-900/60 border border-neutral-800 rounded-lg p-3.5 space-y-2">
-                <div className="text-[10px] font-bold uppercase tracking-wider text-neutral-400">
+              {/* 4. Lead Contractor */}
+              <section className="bg-neutral-900/60 border border-neutral-800 rounded-lg p-4 space-y-2">
+                <span className="text-[10px] font-bold uppercase tracking-wider text-neutral-400">
                   Lead Contractor / Concessionaire
+                </span>
+                <div className="font-semibold text-neutral-200 text-[12px] leading-snug">
+                  {contractorStr || 'BUMN Konstruksi / Swasta'}
                 </div>
-                <div className="space-y-1.5">
-                  <div className="font-semibold text-neutral-200 text-xs">
-                    {props.contractor || 'BUMN Konstruksi / Swasta'}
-                  </div>
+                {matchedTags.length > 0 && (
                   <div className="flex flex-wrap gap-1.5 pt-1 border-t border-neutral-800/60">
-                    {props.contractor?.includes('WIKA') && (
-                      <span className="text-[10px] font-medium px-2 py-0.5 rounded bg-neutral-800 text-neutral-300 border border-neutral-700">
-                        Wijaya Karya (WIKA)
+                    {matchedTags.map(({ match, label }) => (
+                      <span
+                        key={match}
+                        className="text-[10px] font-medium px-2 py-0.5 rounded bg-neutral-800 text-neutral-300 border border-neutral-700"
+                      >
+                        {label}
                       </span>
-                    )}
-                    {props.contractor?.includes('PP') && (
-                      <span className="text-[10px] font-medium px-2 py-0.5 rounded bg-neutral-800 text-neutral-300 border border-neutral-700">
-                        PT PP (Persero)
-                      </span>
-                    )}
-                    {props.contractor?.includes('Hutama') && (
-                      <span className="text-[10px] font-medium px-2 py-0.5 rounded bg-neutral-800 text-neutral-300 border border-neutral-700">
-                        Hutama Karya (HK)
-                      </span>
-                    )}
-                    {props.contractor?.includes('Adhi') && (
-                      <span className="text-[10px] font-medium px-2 py-0.5 rounded bg-neutral-800 text-neutral-300 border border-neutral-700">
-                        Adhi Karya
-                      </span>
-                    )}
-                    {props.contractor?.includes('Waskita') && (
-                      <span className="text-[10px] font-medium px-2 py-0.5 rounded bg-neutral-800 text-neutral-300 border border-neutral-700">
-                        Waskita Karya
-                      </span>
-                    )}
-                    {props.contractor?.includes('Jasa Marga') && (
-                      <span className="text-[10px] font-medium px-2 py-0.5 rounded bg-neutral-800 text-neutral-300 border border-neutral-700">
-                        Jasa Marga
-                      </span>
-                    )}
-                    {props.contractor?.includes('PLN') && (
-                      <span className="text-[10px] font-medium px-2 py-0.5 rounded bg-neutral-800 text-neutral-300 border border-neutral-700">
-                        PT PLN (Persero)
-                      </span>
-                    )}
-                    {props.contractor?.includes('Pertamina') && (
-                      <span className="text-[10px] font-medium px-2 py-0.5 rounded bg-neutral-800 text-neutral-300 border border-neutral-700">
-                        PT Pertamina (Persero)
-                      </span>
-                    )}
+                    ))}
                   </div>
-                </div>
-              </div>
+                )}
+              </section>
 
-              {/* 5. Geographic Scope & Coordinates */}
-              <div className="bg-neutral-900/60 border border-neutral-800 rounded-lg p-3.5 space-y-2">
-                <div className="text-[10px] font-bold uppercase tracking-wider text-neutral-400">
+              {/* 5. Location & Coordinates */}
+              <section className="bg-neutral-900/60 border border-neutral-800 rounded-lg p-4 space-y-3">
+                <span className="text-[10px] font-bold uppercase tracking-wider text-neutral-400">
                   Location & Coordinates
-                </div>
-                <div className="grid grid-cols-2 gap-2 text-neutral-300 text-xs">
-                  <div className="bg-neutral-950 p-2 rounded border border-neutral-800">
-                    <span className="text-neutral-500 block text-[9px] uppercase font-semibold">
+                </span>
+
+                <div className="grid grid-cols-2 gap-2">
+                  <div className="bg-neutral-950 p-2.5 rounded border border-neutral-800">
+                    <span className="text-neutral-500 block text-[9px] uppercase font-semibold mb-0.5">
                       Province
                     </span>
-                    <span className="font-semibold text-neutral-200">
+                    <span className="font-semibold text-neutral-200 text-[12px] leading-snug">
                       {props.province || 'National / Multi-Province'}
                     </span>
                   </div>
-                  <div className="bg-neutral-950 p-2 rounded border border-neutral-800">
-                    <span className="text-neutral-500 block text-[9px] uppercase font-semibold">
+                  <div className="bg-neutral-950 p-2.5 rounded border border-neutral-800">
+                    <span className="text-neutral-500 block text-[9px] uppercase font-semibold mb-0.5">
                       Regency / City
                     </span>
-                    <span className="font-semibold text-neutral-200">
+                    <span className="font-semibold text-neutral-200 text-[12px] leading-snug">
                       {props.regency || (isNational ? 'Lintas Wilayah' : 'Provincial Scope')}
                     </span>
                   </div>
                 </div>
 
-                <div className="pt-1 flex items-center justify-between text-[11px] text-neutral-400">
-                  <span className="font-mono tabular-nums text-neutral-400">
-                    {lat.toFixed(4)}° N, {lon.toFixed(4)}° E
+                <div className="flex items-center justify-between">
+                  <span className="font-mono tabular-nums text-[11px] text-neutral-400">
+                    {lat.toFixed(4)}°&nbsp;{lat >= 0 ? 'N' : 'S'},&nbsp;{lon.toFixed(4)}°&nbsp;E
                   </span>
                   <button
                     onClick={() => onZoomTo([lat, lon])}
-                    className="px-2.5 py-1 rounded bg-neutral-800 hover:bg-neutral-700 text-neutral-200 border border-neutral-700 text-xs font-medium transition-colors"
+                    className="px-3 py-1 rounded bg-neutral-800 hover:bg-neutral-700 text-neutral-200 border border-neutral-700 text-[11px] font-medium transition-colors"
                   >
                     Center on Map
                   </button>
                 </div>
-              </div>
+              </section>
 
-              {/* Ingestion & Audit Metadata */}
-              <div className="p-2.5 border-t border-neutral-800/60 space-y-1 text-[10px] text-neutral-500 font-mono">
+              {/* 6. Audit Metadata */}
+              <div className="px-1 pb-1 space-y-1 text-[10px] text-neutral-500 font-mono border-t border-neutral-800/60 pt-2">
                 <div className="flex items-center justify-between">
                   <span>Source Registry:</span>
                   <span className="text-neutral-400">{props.source_name} Proyek Strategis Nasional</span>
@@ -369,26 +335,26 @@ export const ProjectDrawer: React.FC<ProjectDrawerProps> = ({
               </div>
             </div>
 
-            {/* External Links Action Bar */}
-            <div className="p-4 border-t border-neutral-800 bg-neutral-900/90 space-y-2 shrink-0">
+            {/* ── Pinned Action Bar ── */}
+            <div className="shrink-0 px-5 py-4 border-t border-neutral-800 bg-[#0f141c] space-y-2">
               <a
                 href={props.source_url}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full py-2 px-3 rounded bg-blue-600 hover:bg-blue-500 text-white font-semibold text-xs flex items-center justify-center gap-1.5 transition-colors"
+                className="w-full py-2.5 px-4 rounded-md bg-blue-600 hover:bg-blue-500 text-white font-semibold text-xs flex items-center justify-center gap-2 transition-colors"
               >
                 <span>Official Document Profile ({props.source_name})</span>
-                <ExternalLink className="w-3.5 h-3.5" />
+                <ExternalLink className="w-3.5 h-3.5 shrink-0" />
               </a>
 
               <a
                 href={lpseSearchUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="w-full py-2 px-3 rounded bg-neutral-800 hover:bg-neutral-700 text-neutral-200 hover:text-white font-medium text-xs flex items-center justify-center gap-1.5 border border-neutral-700 transition-colors"
+                className="w-full py-2 px-4 rounded-md bg-neutral-800 hover:bg-neutral-700 text-neutral-200 hover:text-white font-medium text-xs flex items-center justify-center gap-2 border border-neutral-700 transition-colors"
               >
                 <span>Search Tenders on LPSE / INAPROC</span>
-                <ExternalLink className="w-3 h-3 text-neutral-400" />
+                <ExternalLink className="w-3 h-3 text-neutral-400 shrink-0" />
               </a>
             </div>
           </>
@@ -397,4 +363,3 @@ export const ProjectDrawer: React.FC<ProjectDrawerProps> = ({
     </>
   );
 };
-
