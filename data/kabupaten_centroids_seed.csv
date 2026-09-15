@@ -1,0 +1,436 @@
+normalised_name,lat,lon
+jakarta,-6.2088,106.8456
+dki jakarta,-6.2088,106.8456
+surabaya,-7.2504,112.7688
+bandung,-6.9175,107.6191
+medan,3.5952,98.6722
+semarang,-6.9667,110.4167
+makassar,-5.1477,119.4327
+palembang,-2.9761,104.7754
+tangerang,-6.1781,106.6297
+depok,-6.4025,106.7942
+batam,1.0784,104.0207
+pekanbaru,0.5333,101.4500
+balikpapan,-1.2654,116.8312
+samarinda,-0.5022,117.1536
+banjarmasin,-3.3167,114.5914
+pontianak,-0.0263,109.3425
+manado,1.4748,124.8421
+padang,-0.9492,100.3543
+jambi,-1.6101,103.6131
+bengkulu,-3.8004,102.2655
+lampung,-4.5586,105.4068
+bandar lampung,-5.4294,105.2618
+pangkal pinang,-2.1337,106.1167
+tanjung pinang,0.9180,104.4520
+serang,-6.1200,106.1511
+cilegon,-6.0010,106.0230
+bogor,-6.5971,106.8060
+bekasi,-6.2349,106.9925
+karawang,-6.3022,107.3019
+purwakarta,-6.5565,107.4439
+cirebon,-6.7322,108.5523
+sukabumi,-6.9277,106.9303
+tasikmalaya,-7.3508,108.2199
+garut,-7.2169,107.9067
+ciamis,-7.3278,108.3527
+kuningan,-6.9757,108.4754
+majalengka,-6.8370,108.2266
+subang,-6.5701,107.7580
+indramayu,-6.3270,108.3265
+purwokerto,-7.4167,109.2333
+banyumas,-7.4397,109.2157
+cilacap,-7.7264,109.0060
+kebumen,-7.6667,109.6500
+magelang,-7.4797,110.2177
+temanggung,-7.3167,110.1667
+wonosobo,-7.3606,109.9039
+purbalingga,-7.3897,109.3619
+banjarnegara,-7.3897,109.7039
+boyolali,-7.5314,110.5986
+klaten,-7.7044,110.6019
+sukoharjo,-7.6833,110.8333
+wonogiri,-7.8122,110.9264
+karanganyar,-7.5989,110.9797
+sragen,-7.4261,111.0181
+grobogan,-7.0142,110.9022
+blora,-6.9683,111.4131
+rembang,-6.7000,111.3500
+pati,-6.7500,111.0333
+kudus,-6.8049,110.8370
+jepara,-6.5841,110.6672
+demak,-6.8933,110.6408
+semarang kota,-6.9667,110.4167
+kendal,-6.9197,110.1983
+batang,-6.9161,109.7317
+pekalongan,-6.8833,109.6500
+pemalang,-6.8978,109.3786
+tegal,-6.8694,109.1253
+brebes,-6.8783,108.9961
+yogyakarta,-7.7956,110.3695
+sleman,-7.7167,110.3500
+bantul,-7.8844,110.3353
+gunungkidul,-7.9667,110.5333
+kulonprogo,-7.8167,110.1667
+surabaya kota,-7.2504,112.7688
+sidoarjo,-7.4561,112.7144
+gresik,-7.1571,112.6542
+lamongan,-7.1172,112.4186
+tuban,-6.8978,112.0256
+bojonegoro,-7.1500,111.8833
+ngawi,-7.4333,111.4500
+madiun,-7.6306,111.5247
+magetan,-7.6505,111.3295
+ponorogo,-7.8667,111.5000
+pacitan,-8.1942,111.1025
+trenggalek,-8.0500,111.7000
+tulungagung,-8.0653,111.9022
+blitar,-8.0956,112.1614
+kediri,-7.8167,112.0167
+nganjuk,-7.5944,111.9028
+jombang,-7.5461,112.2328
+mojokerto,-7.4697,112.4328
+pasuruan,-7.6461,112.9061
+probolinggo,-7.7547,113.2153
+lumajang,-8.1333,113.2167
+jember,-8.1653,113.7019
+situbondo,-7.7061,114.0056
+bondowoso,-7.9089,113.8261
+banyuwangi,-8.2197,114.3678
+malang,-7.9667,112.6333
+batu,-7.8667,112.5167
+madura,-7.1897,113.3478
+bangkalan,-7.0431,112.7397
+sampang,-7.2050,113.2456
+pamekasan,-7.1658,113.4764
+sumenep,-6.9894,113.8608
+aceh,5.5483,95.3238
+banda aceh,5.5483,95.3238
+sabang,5.8933,95.3194
+lhokseumawe,5.1800,97.1503
+langsa,4.4783,97.9683
+subulussalam,2.6556,98.0014
+nias,1.0819,97.5786
+tapanuli,-1.6167,99.0500
+pematangsiantar,2.9595,99.0681
+sibolga,1.7405,98.7756
+padangsidimpuan,1.3789,99.2728
+gunungsitoli,1.2833,97.6167
+bukittinggi,-0.3089,100.3694
+payakumbuh,-0.2272,100.6406
+solok,-0.7994,100.6669
+sawahlunto,-0.6853,100.7789
+sijunjung,-0.6933,100.9681
+pesisir selatan,-1.8422,100.5700
+pasaman,-0.0617,99.8533
+riau,0.2933,101.7068
+dumai,1.6831,101.4456
+kampar,0.3631,100.8511
+rokan hulu,1.0833,100.3667
+rokan hilir,2.1667,100.6167
+bengkalis,1.4756,102.0786
+kepulauan meranti,1.0167,102.7667
+siak,0.8656,102.0158
+pelalawan,-0.0167,102.5833
+kuantan singingi,-0.5572,101.4633
+indragiri hulu,-0.3044,102.8683
+indragiri hilir,-0.3375,103.6028
+kepri,0.9200,104.4800
+bintan,1.1222,104.5000
+karimun,1.1667,103.4167
+natuna,3.9083,108.3458
+lingga,0.2000,104.6333
+anambas,3.3556,106.1417
+jambi kota,-1.6101,103.6131
+batanghari,-1.6167,103.0000
+muarojambi,-1.5333,103.5333
+tanjungjabung timur,-0.9167,103.9833
+tanjungjabung barat,-1.1333,103.4833
+tebo,-1.4833,102.3667
+bungo,-1.4667,102.1167
+merangin,-2.0833,102.5333
+sarolangun,-2.0000,102.9167
+kerinci,-2.0833,101.5167
+sungai penuh,-2.0642,101.5261
+palembang kota,-2.9761,104.7754
+lubuklinggau,-3.3006,102.8617
+prabumulih,-3.4500,104.2000
+pagaralam,-4.0169,103.2683
+musi rawas,-2.9800,103.1833
+musi rawas utara,-2.6333,103.1333
+musi banyuasin,-2.5833,103.8000
+ogan ilir,-3.5167,104.4167
+ogan komering ilir,-4.0833,104.6167
+ogan komering ulu,-4.0333,104.0333
+oku timur,-4.4000,104.4000
+oku selatan,-4.5333,103.9333
+lahat,-3.7833,103.5333
+empat lawang,-3.8833,103.1167
+penukal abab lematang ilir,-4.1333,103.6167
+banyuasin,-2.7667,104.5333
+bangka,-2.1333,106.1167
+bangka barat,-2.0667,105.6667
+bangka tengah,-2.3000,106.5000
+bangka selatan,-3.0000,106.3167
+belitung,-2.6833,107.6167
+belitung timur,-2.8333,107.9167
+bengkulu kota,-3.8004,102.2655
+rejang lebong,-3.5167,102.5333
+kepahiang,-3.6667,102.6667
+seluma,-3.9833,102.3333
+bengkulu selatan,-4.4500,102.4000
+bengkulu tengah,-3.7667,102.3000
+bengkulu utara,-3.3833,101.7667
+kaur,-4.7333,103.3667
+muko muko,-2.5333,101.1167
+lebong,-3.0167,101.9167
+lampung kota,-5.4294,105.2618
+lampung barat,-5.2167,104.0000
+pesisir barat,-5.3167,103.7833
+tanggamus,-5.5500,104.5667
+pringsewu,-5.3667,104.9833
+pesawaran,-5.4000,105.2333
+lampung selatan,-5.5667,105.3833
+lampung tengah,-4.6500,105.4167
+lampung timur,-4.8167,105.8667
+lampung utara,-4.4167,104.9333
+way kanan,-4.3167,104.5667
+tulangbawang,-4.1333,105.6833
+tulangbawang barat,-4.3500,105.1500
+mesuji,-3.9833,105.5000
+banten kota,-6.1200,106.1511
+tangerang selatan,-6.2894,106.7143
+tangerang kota,-6.1781,106.6297
+kalimantan barat,-0.0263,109.3425
+sambas,1.3667,109.3000
+bengkayang,0.8167,109.7333
+landak,0.3333,109.9000
+pontianak kota,-0.0263,109.3425
+kubu raya,-0.2833,109.3167
+mempawah,0.3667,108.9833
+singkawang,0.9000,108.9833
+ketapang,-1.8333,109.9667
+kayong utara,-1.2333,110.0333
+melawi,-0.8667,111.5000
+sintang,0.0667,111.5000
+kapuas hulu,1.0000,114.0000
+sekadau,0.0167,110.9833
+kalimantan tengah,-2.2167,113.9167
+palangka raya,-2.2167,113.9167
+kotawaringin barat,-2.3167,111.6500
+kotawaringin timur,-2.1167,112.7167
+seruyan,-2.6167,112.0667
+katingan,-1.7167,113.3167
+pulang pisau,-2.6167,114.0333
+gunung mas,-1.1333,113.3500
+kapuas,-3.0167,114.3667
+barito selatan,-1.9167,114.7500
+barito timur,-1.8333,115.5000
+barito utara,-0.7167,114.8333
+murung raya,-0.5000,114.5500
+kalimantan selatan,-3.3167,114.5914
+banjarmasin kota,-3.3167,114.5914
+banjarbaru,-3.4500,114.8333
+banjar,-3.3833,114.9667
+tanah laut,-3.6833,115.0333
+tanah bumbu,-3.7333,115.9833
+kotabaru,-3.3000,116.2167
+barito kuala,-3.1333,114.4167
+hulu sungai selatan,-2.6833,115.5000
+hulu sungai tengah,-2.5167,115.3333
+hulu sungai utara,-2.1667,115.2333
+tabalong,-2.0167,115.3833
+tapin,-3.4333,115.0000
+balangan,-2.3167,115.5333
+kalimantan timur,-0.5022,117.1536
+balikpapan kota,-1.2654,116.8312
+samarinda kota,-0.5022,117.1536
+bontang,0.1167,117.5000
+kutai kartanegara,-0.4167,117.0000
+kutai barat,-0.3333,115.5000
+kutai timur,0.5000,117.8333
+berau,2.1667,117.5000
+paser,-1.8333,115.8333
+penajam paser utara,-1.4567,116.3278
+mahakam ulu,0.2833,115.5833
+kalimantan utara,3.0000,116.0000
+tarakan,3.3000,117.6333
+bulungan,2.5833,117.3333
+malinau,3.5833,116.5000
+nunukan,4.1333,117.6667
+tana tidung,3.4167,117.0000
+sulawesi utara,1.4748,124.8421
+manado kota,1.4748,124.8421
+bitung,1.4333,125.1833
+kotamobagu,0.7333,124.3167
+tomohon,1.3167,124.8333
+minahasa,1.3333,124.8333
+minahasa utara,1.5167,124.9333
+minahasa selatan,0.9000,124.5333
+minahasa tenggara,0.7333,124.8000
+kepulauan sangihe,3.5833,125.5000
+kepulauan talaud,4.3167,126.7500
+kepulauan sitaro,2.5833,125.3833
+bolaang mongondow,0.6167,124.2500
+bolaang mongondow utara,1.1000,124.6167
+bolaang mongondow timur,0.4667,124.5833
+bolaang mongondow selatan,0.4167,123.9833
+sulawesi tengah,-1.4167,121.4000
+palu,-0.8917,119.8707
+donggala,-0.6667,119.7500
+sigi,-1.2833,120.0167
+parigi moutong,-0.6833,120.2167
+poso,-1.4167,120.7667
+morowali,-2.9833,122.0000
+morowali utara,-2.1167,121.6333
+tojo una-una,-1.3333,121.3333
+banggai,-1.5000,122.5000
+banggai kepulauan,-1.7167,123.4667
+banggai laut,-1.5833,123.3500
+buol,1.1500,121.4833
+toli-toli,1.0167,120.8167
+sulawesi selatan,-5.1477,119.4327
+makassar kota,-5.1477,119.4327
+pare-pare,-4.0167,119.6333
+palopo,-2.9903,120.1972
+gowa,-5.3000,119.6667
+takalar,-5.4333,119.5167
+jeneponto,-5.6833,119.7833
+bantaeng,-5.5500,119.9500
+bulukumba,-5.5333,120.2000
+sinjai,-5.1333,120.2500
+bone,-4.5333,120.3333
+wajo,-4.1667,120.3333
+soppeng,-4.3500,119.8833
+barru,-4.4000,119.6000
+pangkep,-4.8333,119.5333
+maros,-5.0000,119.5667
+gowa luar,-5.2333,119.8500
+kepulauan selayar,-6.1167,120.4333
+luwu,-2.9333,121.0000
+luwu timur,-2.5000,121.7833
+luwu utara,-2.6500,120.8000
+toraja utara,-3.0000,119.8667
+tana toraja,-3.1667,119.8667
+enrekang,-3.5667,119.7833
+pinrang,-3.7833,119.6500
+sidrap,-3.8667,119.9333
+sulawesi tenggara,-3.9667,122.5000
+kendari,-3.9667,122.5147
+bau-bau,-5.4667,122.5833
+konawe,-3.7333,122.1833
+konawe selatan,-4.2500,122.4167
+konawe utara,-3.2500,122.0833
+konawe kepulauan,-4.0333,123.2167
+kolaka,-4.0167,121.6500
+kolaka utara,-3.4167,121.2500
+kolaka timur,-3.8167,121.7833
+muna,-5.0500,122.5500
+muna barat,-4.8667,122.3667
+buton,-5.3667,122.5000
+buton selatan,-5.3167,122.6167
+buton tengah,-4.9500,122.7833
+buton utara,-4.4833,122.7833
+bombana,-4.5833,122.0333
+wakatobi,-5.4833,123.5500
+gorontalo,0.5333,123.0733
+gorontalo kota,0.5333,123.0733
+bone bolango,0.6167,123.3500
+gorontalo kabupaten,0.5333,123.0000
+pohuwato,0.3500,121.9500
+boalemo,0.5167,122.3167
+gorut,1.0500,122.5500
+sulawesi barat,-2.5667,119.6667
+mamuju,-2.6667,118.8833
+mamuju utara,-2.0167,119.3833
+pasangkayu,-1.8667,119.4833
+mamuju tengah,-2.3167,119.5000
+majene,-3.5333,118.9667
+polewali mandar,-3.4167,119.1833
+maluku,-3.0000,129.0000
+ambon,-3.6881,128.1922
+tual,-5.6333,132.7500
+maluku tengah,-3.3000,128.8667
+maluku barat daya,-7.5833,127.8833
+maluku tenggara,-5.6333,132.7500
+maluku tenggara barat,-7.9167,131.5667
+kepulauan aru,-6.1667,134.4500
+seram bagian barat,-3.1667,128.1667
+seram bagian timur,-3.2667,130.1000
+kepulauan tanimbar,-7.9167,131.5667
+buru,-3.4333,126.7000
+buru selatan,-3.8333,126.7000
+maluku utara,1.0000,127.8833
+ternate,0.7833,127.3833
+tidore kepulauan,0.6667,127.4167
+halmahera barat,1.0833,127.5667
+halmahera utara,1.5000,128.1667
+halmahera timur,0.6667,128.4667
+halmahera selatan,-0.5667,127.5500
+halmahera tengah,0.4833,128.1833
+kepulauan sula,-1.8833,125.5000
+pulau taliabu,-1.7833,124.8167
+pulau morotai,2.3333,128.3333
+papua,-4.0000,136.0000
+jayapura,-2.5333,140.7167
+sorong,-0.8833,131.2167
+manokwari,-0.8667,134.0833
+fakfak,-2.9167,132.3000
+kaimana,-3.6500,133.7667
+teluk bintuni,-2.0833,133.5500
+teluk wondama,-2.5000,134.5667
+bintuni,-2.1000,133.5167
+raja ampat,-0.3333,130.5167
+tambrauw,-0.4167,132.5833
+maybrat,-1.3667,132.0000
+biak numfor,-0.9500,136.0833
+kepulauan yapen,-1.7833,136.2500
+waropen,-2.1667,136.5000
+nabire,-3.3667,135.5000
+mimika,-4.5500,136.8833
+puncak jaya,-3.5833,137.2167
+puncak,-3.8500,137.1333
+intan jaya,-3.8500,136.2833
+pegunungan bintang,-4.9167,140.2833
+paniai,-3.8333,136.2000
+deiyai,-4.0000,136.2000
+dogiyai,-4.0000,136.5000
+memberamo raya,-2.5000,138.0000
+sarmi,-1.8333,138.7500
+jayawijaya,-4.0667,138.9333
+lanny jaya,-3.9500,138.7000
+nduga,-4.7833,138.5000
+yalimo,-4.4167,139.0833
+tolikara,-3.8500,138.5000
+yahukimo,-4.4833,139.1000
+pegunungan arfak,-1.4167,133.8667
+asmat,-6.0000,138.5000
+boven digoel,-5.7500,140.3333
+mappi,-5.6667,139.1500
+merauke,-8.4939,140.3342
+papua selatan,-7.0000,139.0000
+papua tengah,-4.0000,136.0000
+papua pegunungan,-4.5000,138.5000
+papua barat daya,-1.5000,132.0000
+lhok guci,4.3500,96.1800
+aceh barat,4.4500,96.1800
+aceh barat daya,3.8333,96.8333
+aceh besar,5.3833,95.5167
+aceh jaya,4.7167,95.6833
+aceh selatan,3.1667,97.4167
+aceh singkil,2.3333,97.8333
+aceh tamiang,4.2500,98.0333
+aceh tengah,4.5000,96.8500
+aceh tenggara,3.3667,97.7000
+aceh timur,4.6333,97.6333
+aceh utara,4.9833,97.1333
+bener meriah,4.7333,96.8667
+bireuen,5.0833,96.6000
+gayo lues,3.9667,97.3500
+nagan raya,4.1667,96.5167
+pidie,5.1167,95.9500
+pidie jaya,5.1500,96.1833
+simeulue,2.6167,96.0833
+binjai,3.6001,98.4854
+langkat,3.7333,98.4500
+binjai langsa,4.0400,98.2250

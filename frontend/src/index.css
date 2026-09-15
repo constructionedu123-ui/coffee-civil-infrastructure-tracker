@@ -1,0 +1,162 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Custom Leaflet Map styling for dark dashboard theme */
+.leaflet-container {
+  width: 100%;
+  height: 100%;
+  background-color: #0b0f17 !important;
+  outline: none;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+
+/* Custom attribution link color */
+.leaflet-control-attribution {
+  background: rgba(11, 15, 23, 0.8) !important;
+  color: #64748b !important;
+  font-size: 11px !important;
+  border-top-left-radius: 4px;
+}
+
+.leaflet-control-attribution a {
+  color: #94a3b8 !important;
+}
+
+/* Custom Zoom Control */
+.leaflet-control-zoom {
+  border: 1px solid #1f2937 !important;
+  border-radius: 8px !important;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.5) !important;
+}
+
+.leaflet-control-zoom a {
+  background-color: #111827 !important;
+  color: #f3f4f6 !important;
+  border-bottom: 1px solid #1f2937 !important;
+  transition: all 0.15s ease-in-out;
+}
+
+.leaflet-control-zoom a:hover {
+  background-color: #1f2937 !important;
+  color: #60a5fa !important;
+}
+
+/* Custom Leaflet Popup (Editorial Placard Style) */
+.leaflet-popup-content-wrapper {
+  background: #0f172a !important;
+  color: #f1f5f9 !important;
+  border: 1px solid #334155 !important;
+  border-radius: 8px !important;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5) !important;
+  padding: 0 !important;
+  overflow: hidden;
+}
+
+.leaflet-popup-content {
+  margin: 0 !important;
+  line-height: 1.4 !important;
+}
+
+.leaflet-popup-tip {
+  background: #0f172a !important;
+  border: 1px solid #334155 !important;
+}
+
+.leaflet-popup-close-button {
+  color: #94a3b8 !important;
+  padding: 6px 8px !important;
+}
+
+.leaflet-popup-close-button:hover {
+  color: #ffffff !important;
+}
+
+/* Custom Marker Hover Effect (Clean Scale without Glow Bloom) */
+.custom-project-pin:hover .marker-dot-wrapper > div {
+  transform: scale(1.3);
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.8), 0 2px 8px rgba(0, 0, 0, 0.6) !important;
+}
+
+/* Custom Leaflet Tooltip (Flat Editorial Placard) */
+.leaflet-tooltip.custom-map-tooltip {
+  background: #0f172a !important;
+  color: #f1f5f9 !important;
+  border: 1px solid #334155 !important;
+  border-radius: 6px !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.4) !important;
+  padding: 6px 10px !important;
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif !important;
+}
+
+.leaflet-tooltip-top.custom-map-tooltip:before {
+  border-top-color: #334155 !important;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+::-webkit-scrollbar-track {
+  background: #0b0f17;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #1e293b;
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #334155;
+}
+
+/* Minimal Data-Journalism Marker Cluster Styling */
+.custom-cluster-wrapper {
+  background: transparent !important;
+  border: none !important;
+}
+
+.custom-cluster-badge {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: #0f172a;
+  border: 1.5px solid #475569;
+  color: #f8fafc;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'JetBrains Mono', monospace, sans-serif;
+  font-size: 11px;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.6);
+  cursor: pointer;
+  transition: transform 0.15s ease-out, border-color 0.15s ease-out, background-color 0.15s ease-out;
+}
+
+.custom-cluster-badge:hover {
+  border-color: #94a3b8;
+  background: #1e293b;
+  transform: scale(1.12);
+}
+
+/* Spider Leg Subtle Dashed Line */
+.leaflet-cluster-spider-leg {
+  stroke: #64748b !important;
+  stroke-width: 1.5 !important;
+  stroke-dasharray: 3, 3 !important;
+  stroke-opacity: 0.85 !important;
+}
+
+/* Satellite Mode High-Contrast Marker & Cluster Enhancements */
+.is-satellite .custom-cluster-badge {
+  border: 2px solid #ffffff !important;
+  box-shadow: 0 0 0 2px rgba(0, 0, 0, 0.75), 0 4px 10px rgba(0, 0, 0, 0.9) !important;
+  background: #020617 !important;
+}
+
+
