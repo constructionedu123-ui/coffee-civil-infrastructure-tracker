@@ -11,81 +11,152 @@ from typing import Optional
 
 from pipeline.config import IKN_KEYWORDS, KPPIP_SECTOR_CATEGORY, STATUS_KEYWORDS
 
-# ── Budget parsing ────────────────────────────────────────────────────────────
-
-# Regex to capture numeric value + magnitude unit
-_BUDGET_RE = re.compile(
-    r"(?:rp\.?|idr\.?|usd\.?|us\$)?\s*"
-    r"([\d.,]+)"
-    r"\s*(triliun|trilion|trillion|miliar|milion|million|m|t|b|juta|rb)?",
-    re.IGNORECASE,
-)
+# -- Budget parsing ------------------------------------------------------------
 
 # Multiplier to convert everything to trillions IDR
 _UNIT_MULTIPLIER: dict[str, float] = {
+    # Triliun variants
     "triliun": 1.0,
     "trilion": 1.0,
     "trillion": 1.0,
+    "trilyun": 1.0,   # alternate Indonesian spelling
+    "triyun":  1.0,   # alternate informal spelling
     "t": 1.0,
+    # Miliar variants
     "miliar": 0.001,
+    "milyar": 0.001,  # alternate Indonesian spelling
     "milion": 0.001,
+    "milyun": 0.001,  # alternate informal spelling
     "million": 0.001,
     "m": 0.001,
     "b": 0.001,       # billion treated as miliar (IDR context)
+    # Smaller units
     "juta": 0.000001,
     "rb": 0.000000001,
 }
 
-# Approximate USD → IDR conversion (rough static)
+# Approximate USD -> IDR conversion (rough static)
 _USD_IDR_RATE = 15_500.0
 
 
 def parse_budget(text: Optional[str]) -> Optional[float]:
     """
-    Parse a budget string into trillions IDR.
-    Returns None when parsing fails.
+    Parse an Indonesian infrastructure budget string into trillions IDR.
+    Handles Indonesian number formatting correctly:
+      - Comma = decimal separator:  "10,83 Triliun" -> 10.83 T
+      - Dot   = decimal separator:  "8.508 Triliun" -> 8.508 T
+      - Dot   = thousand separator: "1.600 Miliar"  -> 1600 Miliar -> 1.6 T
+      - Both dot+comma (European):  "1.234,56 T"    -> 1234.56 T
 
-    Examples
-    --------
-    >>> parse_budget("Rp 9,1 triliun")
-    9.1
-    >>> parse_budget("US$ 1.2 billion")
-    18.6
-    >>> parse_budget("IDR 500 miliar")
-    0.5
+    Returns None when parsing fails.
     """
     if not text:
         return None
 
     is_usd = bool(re.search(r"usd|us\$|dollar", text, re.IGNORECASE))
 
-    # Normalise Indonesian decimal comma
-    clean = text.replace(",", ".")
-    # Remove thousand-separator dots (e.g. "9.100.000")
-    clean = re.sub(r"\.(?=\d{3}(?:[.,]|\b))", "", clean)
+    # Step 1: detect unit (before any numeric transformation)
+    unit_match = re.search(
+        r"\b(triliun|trilion|trilyun|triyun|trillion|miliar|milyar|milion|milyun|million|juta|rb|[tmb])\b",
+        text,
+        re.IGNORECASE,
+    )
+    unit = unit_match.group(1).lower() if unit_match else ""
+    multiplier = _UNIT_MULTIPLIER.get(unit, 1.0)
 
-    match = _BUDGET_RE.search(clean)
-    if not match:
+    # Step 2: strip currency prefix and unit suffix to isolate the number string
+    num_str = re.sub(
+        r"(?:rp\.?\s*|idr\.?\s*|usd\.?\s*|us\$\s*)",
+        "",
+        text,
+        flags=re.IGNORECASE,
+    )
+    num_str = re.sub(
+        r"\s*(?:triliun|trilion|trilyun|triyun|trillion|miliar|milyar|milion|milyun|million|juta|rb|[tmb])\b.*",
+        "",
+        num_str,
+        flags=re.IGNORECASE,
+    ).strip()
+
+    # Step 3: resolve Indonesian dot/comma ambiguity
+    #
+    # KPPIP publishes values like:
+    #   "1,680 Triliun"  -> comma is decimal -> 1.680 T
+    #   "10,83 Triliun"  -> comma is decimal -> 10.83 T
+    #   "8.508 Triliun"  -> dot is decimal   -> 8.508 T
+    #   "28.720 Triliun" -> dot is decimal   -> 28.720 T
+    #   "1.600 Miliar"   -> dot is thousand-sep, 1600 Miliar -> 1.6 T
+    #   "9.100.000"      -> two dots, all thousand-seps (raw IDR)
+    #
+    # Rules:
+    #  A) If BOTH comma and dot exist -> European format: dots=thousand-sep, comma=decimal
+    #  B) If only COMMA -> comma is decimal
+    #  C) If only DOT(s):
+    #     - Multiple dots (>=2) -> all thousand-seps
+    #     - Single dot:
+    #       * Unit is Miliar/blank AND exactly 3 digits after dot -> thousand-sep
+    #       * Otherwise -> decimal
+
+    has_comma = "," in num_str
+    has_dot   = "." in num_str
+
+    if has_comma and has_dot:
+        # European format: "1.234,56" -> remove dots, replace comma with dot
+        clean_num = num_str.replace(".", "").replace(",", ".")
+    elif has_comma:
+        # Comma-only case. Two sub-cases based on unit context:
+        #   Triliun: comma = decimal   → "1,680 T" = 1.680 T  | "16,210 T" = 16.210 T
+        #   Miliar:  if comma followed by exactly 3 digits → thousand-sep
+        #            → "1,410 Miliar" = 1410 Miliar = 1.41 T
+        #            otherwise → decimal → "10,5 Miliar" = 10.5 Miliar = 0.0105 T
+        comma_idx = num_str.index(",")
+        after_comma = num_str[comma_idx + 1:].strip()
+        is_miliar_unit = unit in ("miliar", "milyar", "milion", "milyun", "million", "m", "b")
+        if is_miliar_unit and len(after_comma) == 3 and after_comma.isdigit():
+            # Thousand separator in Miliar context
+            clean_num = num_str.replace(",", "")  # "1,410" → "1410"
+        else:
+            # Decimal separator
+            clean_num = num_str.replace(",", ".")  # "1,680" → "1.680"
+    elif has_dot:
+        dot_count = num_str.count(".")
+        if dot_count >= 2:
+            # Multiple dots: all thousand-seps
+            clean_num = num_str.replace(".", "")
+        else:
+            # Single dot
+            idx = num_str.index(".")
+            after_dot = num_str[idx + 1:].strip()
+            # Miliar context OR no unit AND exactly 3 digits after dot -> thousand-sep
+            is_miliar_ctx = unit in ("miliar", "milion", "million", "m", "b", "", "juta", "rb")
+            if len(after_dot) == 3 and is_miliar_ctx:
+                clean_num = num_str.replace(".", "")  # "1.600" -> "1600"
+            else:
+                clean_num = num_str  # "8.508" -> "8.508" (decimal)
+    else:
+        clean_num = num_str
+
+    # Step 4: strip any residual non-numeric characters except dot
+    clean_num = re.sub(r"[^\d.]", "", clean_num).strip(".")
+
+    if not clean_num:
         return None
 
     try:
-        value = float(match.group(1).replace(",", "."))
+        value = float(clean_num)
     except ValueError:
         return None
 
-    unit = (match.group(2) or "").lower().strip()
-    multiplier = _UNIT_MULTIPLIER.get(unit, 1.0)
-
     result = value * multiplier
 
-    # Convert USD to IDR if necessary (rough)
+    # Convert USD to IDR if necessary
     if is_usd:
         result = result * _USD_IDR_RATE / 1e12
 
     return round(result, 6) if result > 0 else None
 
 
-# ── Status normalisation ──────────────────────────────────────────────────────
+# -- Status normalisation ------------------------------------------------------
 
 def normalise_status(text: Optional[str]) -> str:
     """
@@ -103,7 +174,7 @@ def normalise_status(text: Optional[str]) -> str:
     return "Unknown"
 
 
-# ── Category detection ────────────────────────────────────────────────────────
+# -- Category detection --------------------------------------------------------
 
 def detect_category(project_name: str, sector_slug: str = "") -> str:
     """
@@ -122,7 +193,7 @@ def detect_category(project_name: str, sector_slug: str = "") -> str:
     return "Transport"   # default fallback
 
 
-# ── Text normalisation helpers ────────────────────────────────────────────────
+# -- Text normalisation helpers ------------------------------------------------
 
 def strip_accents(text: str) -> str:
     """Remove diacritics from a string."""
@@ -181,7 +252,7 @@ def infer_pjpk(project_name: str, category: str = "", raw_pjpk: Optional[str] = 
     if "tanggul laut" in name or "ncicd" in name or "tanggul pantai" in name:
         return "Kementerian PUPR (Ditjen SDA) / Pemprov DKI Jakarta"
     if "jalan tol" in name or "tol " in name or (cat == "transport" and "jalan" in name):
-        return "BPJT – Kementerian PUPR"
+        return "BPJT - Kementerian PUPR"
     if any(k in name for k in ["kereta", "mrt", "lrt", "perkeretaapian", "railway"]):
         return "Kementerian Perhubungan (Ditjen Perkeretaapian)"
     if any(k in name for k in ["bandara", "bandar udara", "airport"]):
@@ -238,4 +309,3 @@ def infer_funding_scheme(project_name: str, category: str = "", raw_scheme: Opti
         return "APBN & KPBU Nusantara"
 
     return "APBN / KPBU"
-

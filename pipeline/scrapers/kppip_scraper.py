@@ -110,6 +110,11 @@ class KppipScraper(BaseScraper):
                             "detail_url": detail_url if has_detail_link else None,
                             "fallback_url": sector_url,
                         }
+                    elif has_detail_link and not candidates[norm_key]["detail_url"]:
+                        # Upgrade: earlier crawl had no detail link, this one does
+                        candidates[norm_key]["detail_url"] = detail_url
+                        if loc_text and not candidates[norm_key]["location_text"]:
+                            candidates[norm_key]["location_text"] = loc_text
 
         # 2. Also crawl priority sector pages
         for path in PRIORITY_SECTOR_PAGES:
@@ -235,13 +240,17 @@ class KppipScraper(BaseScraper):
         status_raw = self._extract_field(soup, full_text, ["Status Terakhir", "Status", "Kondisi", "Fase", "Tahap"])
         status = normalise_status(status_raw or full_text)
 
-        # Budget
+        # Budget — search all known KPPIP label variants
         budget_raw = self._extract_field(
             soup, full_text,
-            ["Investasi Total", "Nilai Investasi", "Investasi", "Nilai Proyek", "Budget", "Biaya", "Anggaran"]
+            [
+                "Investasi Total", "Nilai Investasi", "Total Investasi",
+                "Estimasi Biaya", "Biaya Proyek", "Investasi", "Nilai Proyek",
+                "Budget", "Biaya", "Anggaran",
+            ]
         )
         if not budget_raw:
-            m = re.search(r"Rp\.?\s*[\d.,]+\s*(?:triliun|miliar|milion|t|m)?", full_text, re.I)
+            m = re.search(r"Rp\.?\s*[\d.,]+\s*(?:triliun|miliar|milion|t|m)?\b", full_text, re.I)
             budget_raw = m.group(0) if m else None
 
         budget_idr = parse_budget(budget_raw)
