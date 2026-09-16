@@ -22,9 +22,13 @@ import { AnalyticsDrawer } from './components/AnalyticsDrawer';
 import { exportAsGeoJSON, exportAsCSV } from './utils/export';
 import { resolveContractorEntity } from './utils/contractor';
 import { getRegionForProvince } from './utils/geo';
+import { MixDesignSimulator } from './components/MixDesign/MixDesignSimulator';
 import { Loader2, AlertTriangle } from 'lucide-react';
 
 export const App: React.FC = () => {
+  // Top App Mode ('tracker' | 'jmf')
+  const [activeTab, setActiveTab] = useState<'tracker' | 'jmf'>('tracker');
+
   const [allProjects, setAllProjects] = useState<ProjectFeature[]>([]);
   const [batchingPlants, setBatchingPlants] = useState<BatchingPlantFeature[]>([]);
   const [showBatchingPlants, setShowBatchingPlants] = useState<boolean>(true);
@@ -223,113 +227,124 @@ export const App: React.FC = () => {
         onExportCSV={() => exportAsCSV(filteredProjects, 'psn_projects.csv')}
         isAnalyticsOpen={isAnalyticsOpen}
         onToggleAnalytics={() => setIsAnalyticsOpen((prev) => !prev)}
+        activeTab={activeTab}
+        onTabChange={setActiveTab}
       />
 
-      {/* KPI Cards */}
-      <KPICards projects={filteredProjects} allProjectsCount={allProjects.length} />
+      {activeTab === 'jmf' ? (
+        /* Concrete Mix Design & Sieve Analysis Simulator View */
+        <main className="relative flex-1 w-full overflow-hidden flex flex-col">
+          <MixDesignSimulator />
+        </main>
+      ) : (
+        /* National Infrastructure Tracker View */
+        <>
+          {/* KPI Cards */}
+          <KPICards projects={filteredProjects} allProjectsCount={allProjects.length} />
 
-      {/* Filter Bar */}
-      <FilterBar
-        selectedCategories={selectedCategories}
-        onToggleCategory={handleToggleCategory}
-        selectedStatus={selectedStatus}
-        onSelectStatus={setSelectedStatus}
-        selectedRegion={selectedRegion}
-        onSelectRegion={setSelectedRegion}
-        allProjects={allProjects}
-        selectedContractor={selectedContractor}
-        onClearContractor={() => setSelectedContractor(null)}
-        onFocusIKN={() => {
-          setActiveView('map');
-          setFocusIKNCounter((c) => c + 1);
-        }}
-        basemap={basemap}
-        onBasemapChange={(newBasemap) => {
-          setBasemap(newBasemap);
-          setActiveView('map');
-        }}
-        showBatchingPlants={showBatchingPlants}
-        onToggleBatchingPlants={() => {
-          setShowBatchingPlants((prev) => {
-            const next = !prev;
-            if (!next) setShowSupplyBuffers(false);
-            return next;
-          });
-        }}
-        showSupplyBuffers={showSupplyBuffers}
-        onToggleSupplyBuffers={() => {
-          setShowSupplyBuffers((prev) => {
-            const next = !prev;
-            if (next) setShowBatchingPlants(true);
-            return next;
-          });
-        }}
-      />
-
-      {/* Map & Overlays or Table View Container */}
-      <main className="relative flex-1 w-full overflow-hidden flex flex-col">
-        {activeView === 'map' ? (
-          <>
-            {/* Interactive Map */}
-            <InfrastructureMap
-              projects={filteredProjects}
-              selectedProject={selectedProject}
-              onSelectProject={handleSelectProject}
-              flyToCoords={flyToCoords}
-              focusIKNCounter={focusIKNCounter}
-              basemap={basemap}
-              batchingPlants={batchingPlants}
-              showBatchingPlants={showBatchingPlants}
-              showSupplyBuffers={showSupplyBuffers}
-            />
-
-            {/* Collapsible Project Directory List (Left) */}
-            <ProjectList
-              projects={filteredProjects}
-              selectedProject={selectedProject}
-              onSelectProject={handleSelectProject}
-              isOpen={isListOpen}
-              onToggleOpen={() => setIsListOpen(!isListOpen)}
-            />
-
-            {/* Map Legend (Bottom Right) */}
-            <MapLegend
-              showBatchingPlants={showBatchingPlants}
-              showSupplyBuffers={showSupplyBuffers}
-            />
-
-          </>
-        ) : (
-          /* Minimalist Data Table View */
-          <ProjectTable
-            projects={filteredProjects}
-            selectedProject={selectedProject}
-            onSelectProject={handleSelectProject}
+          {/* Filter Bar */}
+          <FilterBar
+            selectedCategories={selectedCategories}
+            onToggleCategory={handleToggleCategory}
+            selectedStatus={selectedStatus}
+            onSelectStatus={setSelectedStatus}
+            selectedRegion={selectedRegion}
+            onSelectRegion={setSelectedRegion}
+            allProjects={allProjects}
+            selectedContractor={selectedContractor}
+            onClearContractor={() => setSelectedContractor(null)}
+            onFocusIKN={() => {
+              setActiveView('map');
+              setFocusIKNCounter((c) => c + 1);
+            }}
+            basemap={basemap}
+            onBasemapChange={(newBasemap) => {
+              setBasemap(newBasemap);
+              setActiveView('map');
+            }}
+            showBatchingPlants={showBatchingPlants}
+            onToggleBatchingPlants={() => {
+              setShowBatchingPlants((prev) => {
+                const next = !prev;
+                if (!next) setShowSupplyBuffers(false);
+                return next;
+              });
+            }}
+            showSupplyBuffers={showSupplyBuffers}
+            onToggleSupplyBuffers={() => {
+              setShowSupplyBuffers((prev) => {
+                const next = !prev;
+                if (next) setShowBatchingPlants(true);
+                return next;
+              });
+            }}
           />
-        )}
 
-        {/* Contractor & BUMN Analytics Drawer */}
-        <AnalyticsDrawer
-          isOpen={isAnalyticsOpen}
-          onClose={() => setIsAnalyticsOpen(false)}
-          projects={allProjects}
-          selectedContractor={selectedContractor}
-          onSelectContractor={(contractor) => {
-            setSelectedContractor(contractor);
-          }}
-        />
-      </main>
+          {/* Map & Overlays or Table View Container */}
+          <main className="relative flex-1 w-full overflow-hidden flex flex-col">
+            {activeView === 'map' ? (
+              <>
+                {/* Interactive Map */}
+                <InfrastructureMap
+                  projects={filteredProjects}
+                  selectedProject={selectedProject}
+                  onSelectProject={handleSelectProject}
+                  flyToCoords={flyToCoords}
+                  focusIKNCounter={focusIKNCounter}
+                  basemap={basemap}
+                  batchingPlants={batchingPlants}
+                  showBatchingPlants={showBatchingPlants}
+                  showSupplyBuffers={showSupplyBuffers}
+                />
 
-      {/* Detailed Slide-out Drawer (Right) — rendered at root level so it covers header/KPI/filter bars */}
-      <ProjectDrawer
-        project={selectedProject}
-        onClose={() => setSelectedProject(null)}
-        onZoomTo={(coords) => {
-          setActiveView('map');
-          setFlyToCoords(coords);
-        }}
-        batchingPlants={batchingPlants}
-      />
+                {/* Collapsible Project Directory List (Left) */}
+                <ProjectList
+                  projects={filteredProjects}
+                  selectedProject={selectedProject}
+                  onSelectProject={handleSelectProject}
+                  isOpen={isListOpen}
+                  onToggleOpen={() => setIsListOpen(!isListOpen)}
+                />
+
+                {/* Map Legend (Bottom Right) */}
+                <MapLegend
+                  showBatchingPlants={showBatchingPlants}
+                  showSupplyBuffers={showSupplyBuffers}
+                />
+              </>
+            ) : (
+              /* Minimalist Data Table View */
+              <ProjectTable
+                projects={filteredProjects}
+                selectedProject={selectedProject}
+                onSelectProject={handleSelectProject}
+              />
+            )}
+
+            {/* Contractor & BUMN Analytics Drawer */}
+            <AnalyticsDrawer
+              isOpen={isAnalyticsOpen}
+              onClose={() => setIsAnalyticsOpen(false)}
+              projects={allProjects}
+              selectedContractor={selectedContractor}
+              onSelectContractor={(contractor) => {
+                setSelectedContractor(contractor);
+              }}
+            />
+          </main>
+
+          {/* Detailed Slide-out Drawer (Right) */}
+          <ProjectDrawer
+            project={selectedProject}
+            onClose={() => setSelectedProject(null)}
+            onZoomTo={(coords) => {
+              setActiveView('map');
+              setFlyToCoords(coords);
+            }}
+            batchingPlants={batchingPlants}
+          />
+        </>
+      )}
 
     </div>
   );
