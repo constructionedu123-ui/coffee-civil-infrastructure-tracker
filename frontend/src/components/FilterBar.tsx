@@ -29,9 +29,10 @@ export const FilterBar: React.FC<FilterBarProps> = ({
   selectedContractor,
   onClearContractor,
   onFocusIKN,
-  basemap = 'dark',
+  basemap = 'satellite',
   onBasemapChange,
 }) => {
+
 
   const categories: ProjectCategory[] = ["Transport", "Energy", "Water", "Housing", "IKN"];
   const statusOptions: (ProjectStatus | "All")[] = [

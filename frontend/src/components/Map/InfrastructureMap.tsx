@@ -29,8 +29,9 @@ export const InfrastructureMap: React.FC<InfrastructureMapProps> = ({
   onSelectProject,
   flyToCoords,
   focusIKNCounter = 0,
-  basemap = 'dark',
+  basemap = 'satellite',
 }) => {
+
   const mapContainerRef = useRef<HTMLDivElement>(null);
   const mapInstanceRef = useRef<L.Map | null>(null);
   const clusterGroupRef = useRef<L.MarkerClusterGroup | null>(null);

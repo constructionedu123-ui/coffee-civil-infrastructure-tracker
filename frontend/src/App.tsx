@@ -49,7 +49,8 @@ export const App: React.FC = () => {
   const [isListOpen, setIsListOpen] = useState<boolean>(false);
   const [flyToCoords, setFlyToCoords] = useState<[number, number] | null>(null);
   const [focusIKNCounter, setFocusIKNCounter] = useState<number>(0);
-  const [basemap, setBasemap] = useState<'dark' | 'satellite'>('dark');
+  const [basemap, setBasemap] = useState<'dark' | 'satellite'>('satellite');
+
 
 
 
