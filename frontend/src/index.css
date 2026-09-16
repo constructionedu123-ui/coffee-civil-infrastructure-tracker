@@ -159,4 +159,71 @@
   background: #020617 !important;
 }
 
+/* ==========================================================================
+   Print / PDF Layout Reset (Multi-Page Laboratory Report)
+   ========================================================================== */
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 10mm 12mm 12mm 12mm;
+  }
+
+  /* Root Container Print Reset: remove all height locks and overflow cutoffs */
+  html,
+  body,
+  #root,
+  main,
+  .simulator-container,
+  .print-reset-container {
+    height: auto !important;
+    min-height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+    background: white !important;
+    position: static !important;
+  }
+
+  /* Retain exact background colors, chart lines, and borders in PDF output */
+  *,
+  *::before,
+  *::after {
+    -webkit-print-color-adjust: exact !important;
+    print-color-adjust: exact !important;
+  }
+
+  /* Clean up shadows that cause PDF raster artifacts */
+  .shadow-2xs,
+  .shadow-xs,
+  .shadow-sm,
+  .shadow-md,
+  .shadow-lg,
+  .shadow-xl,
+  .shadow-2xl {
+    box-shadow: none !important;
+  }
+
+  /* Page break helpers */
+  .print-page-break {
+    break-before: page !important;
+    page-break-before: always !important;
+  }
+
+  .print-avoid-break {
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+
+  /* Force display of hidden tab modules in print */
+  .print-force-block {
+    display: block !important;
+  }
+
+  /* Hide interactive controls and screen-only elements */
+  .no-print,
+  .print\\:hidden {
+    display: none !important;
+  }
+}
+
+
 

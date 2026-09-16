@@ -195,7 +195,7 @@ export const SieveAnalysisModule: React.FC<SieveAnalysisModuleProps> = ({
                 <span>Module 1: Analisis Ayakan Agregat & Kurva Gradasi</span>
                 <button
                   onClick={() => setShowGuide(!showGuide)}
-                  className="text-slate-400 hover:text-slate-600 p-0.5"
+                  className="text-slate-400 hover:text-slate-600 p-0.5 print:hidden"
                   title="Info Standar SNI"
                 >
                   <HelpCircle className="w-3.5 h-3.5" />
@@ -209,7 +209,7 @@ export const SieveAnalysisModule: React.FC<SieveAnalysisModuleProps> = ({
         </div>
 
         {/* Action Preset Chips */}
-        <div className="flex items-center flex-wrap gap-2">
+        <div className="flex items-center flex-wrap gap-2 print:hidden">
           <span className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider">Presets:</span>
           <button
             onClick={() => handleLoadPreset('natural_sand_zona2')}
@@ -240,7 +240,7 @@ export const SieveAnalysisModule: React.FC<SieveAnalysisModuleProps> = ({
 
       {/* Guide Card (Collapsible) */}
       {showGuide && (
-        <div className="p-4 bg-sky-50/70 border border-sky-200/80 rounded-xl text-xs text-slate-700 space-y-2">
+        <div className="p-4 bg-sky-50/70 border border-sky-200/80 rounded-xl text-xs text-slate-700 space-y-2 print:hidden">
           <div className="font-semibold text-sky-900 flex items-center gap-1.5">
             <Sparkles className="w-4 h-4 text-sky-600" /> Panduan Laboratorium Uji Agregat SNI & ASTM:
           </div>
@@ -533,7 +533,7 @@ export const SieveAnalysisModule: React.FC<SieveAnalysisModuleProps> = ({
               <p className="text-xs text-slate-500">Input massa tertahan atau % lolos</p>
             </div>
 
-            <div className="flex items-center bg-slate-100 border border-slate-200 rounded-xl p-0.5 shadow-2xs">
+            <div className="flex items-center bg-slate-100 border border-slate-200 rounded-xl p-0.5 shadow-2xs print:hidden">
               <button
                 onClick={() => setInputMode('weight')}
                 className={`px-2.5 py-1 text-xs font-semibold rounded-lg transition ${
@@ -608,7 +608,7 @@ export const SieveAnalysisModule: React.FC<SieveAnalysisModuleProps> = ({
                             onChange={(e) =>
                               handleWeightChange(s.id, parseFloat(e.target.value) || 0)
                             }
-                            className="w-20 bg-white border border-slate-200 rounded-md px-1.5 py-0.5 text-right text-slate-900 focus:outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900 font-mono shadow-2xs"
+                            className="w-20 bg-white border border-slate-200 rounded-md px-1.5 py-0.5 text-right text-slate-900 focus:outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900 font-mono shadow-2xs print:border-none print:shadow-none print:p-0 print:bg-transparent"
                           />
                         </td>
                       ) : (
@@ -622,7 +622,7 @@ export const SieveAnalysisModule: React.FC<SieveAnalysisModuleProps> = ({
                             onChange={(e) =>
                               handlePassingChange(s.id, parseFloat(e.target.value) || 0)
                             }
-                            className="w-16 bg-white border border-slate-200 rounded-md px-1.5 py-0.5 text-right text-slate-900 focus:outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900 font-mono shadow-2xs"
+                            className="w-16 bg-white border border-slate-200 rounded-md px-1.5 py-0.5 text-right text-slate-900 focus:outline-none focus:border-slate-900 focus:ring-1 focus:ring-slate-900 font-mono shadow-2xs print:border-none print:shadow-none print:p-0 print:bg-transparent"
                           />
                         </td>
                       )}

@@ -60,12 +60,15 @@ export const FieldCorrectionModule: React.FC<FieldCorrectionModuleProps> = ({
 
         {/* Batch Volume Multiplier Quick Selector */}
         <div className="flex items-center flex-wrap gap-2">
-          <span className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider">Kapasitas Batch:</span>
+          <span className="text-[11px] font-semibold text-slate-500 uppercase tracking-wider print:hidden">Kapasitas Batch:</span>
+          <span className="hidden print:inline-block text-xs font-bold text-slate-800 border border-slate-700 px-2 py-0.5 rounded">
+            Volume Batch Terpilih: {moistureInputs.batchVolumeM3} m³
+          </span>
           {volumePresets.map((preset) => (
             <button
               key={preset.val}
               onClick={() => onChangeMoisture({ ...moistureInputs, batchVolumeM3: preset.val })}
-              className={`px-3 py-1.5 text-xs font-semibold rounded-xl border transition ${
+              className={`px-3 py-1.5 text-xs font-semibold rounded-xl border transition print:hidden ${
                 moistureInputs.batchVolumeM3 === preset.val
                   ? 'bg-slate-900 text-white border-slate-900 shadow-xs'
                   : 'bg-slate-50 text-slate-700 border-slate-200 hover:bg-slate-100'
@@ -127,9 +130,9 @@ export const FieldCorrectionModule: React.FC<FieldCorrectionModuleProps> = ({
                     sandMoisturePercent: parseFloat(e.target.value) || 0,
                   })
                 }
-                className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-slate-900"
+                className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-slate-900 print:hidden"
               />
-              <div className="flex justify-between text-[10px] text-slate-400 mt-0.5 font-medium">
+              <div className="flex justify-between text-[10px] text-slate-400 mt-0.5 font-medium print:hidden">
                 <span>0.0% (Kering Oven)</span>
                 <span>5.0% (Lembab Normal)</span>
                 <span>10.0% (Sangat Basah)</span>
@@ -156,9 +159,9 @@ export const FieldCorrectionModule: React.FC<FieldCorrectionModuleProps> = ({
                     sandAbsorptionPercent: parseFloat(e.target.value) || 0.5,
                   })
                 }
-                className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-sky-600"
+                className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-sky-600 print:hidden"
               />
-              <div className="flex justify-between text-[10px] text-slate-400 mt-0.5 font-medium">
+              <div className="flex justify-between text-[10px] text-slate-400 mt-0.5 font-medium print:hidden">
                 <span>0.5% (Pasir Kuarsa)</span>
                 <span>1.5% (Standar SNI)</span>
                 <span>3.5% (Pasir Berpori)</span>
@@ -207,9 +210,9 @@ export const FieldCorrectionModule: React.FC<FieldCorrectionModuleProps> = ({
                     gravelMoisturePercent: parseFloat(e.target.value) || 0,
                   })
                 }
-                className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-slate-900"
+                className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-slate-900 print:hidden"
               />
-              <div className="flex justify-between text-[10px] text-slate-400 mt-0.5 font-medium">
+              <div className="flex justify-between text-[10px] text-slate-400 mt-0.5 font-medium print:hidden">
                 <span>0.0% (Kering)</span>
                 <span>2.0% (Agak Lembab)</span>
                 <span>6.0% (Basah Terendam)</span>
@@ -236,9 +239,9 @@ export const FieldCorrectionModule: React.FC<FieldCorrectionModuleProps> = ({
                     gravelAbsorptionPercent: parseFloat(e.target.value) || 0.5,
                   })
                 }
-                className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-sky-600"
+                className="w-full h-2 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-sky-600 print:hidden"
               />
-              <div className="flex justify-between text-[10px] text-slate-400 mt-0.5 font-medium">
+              <div className="flex justify-between text-[10px] text-slate-400 mt-0.5 font-medium print:hidden">
                 <span>0.5% (Batu Andesit)</span>
                 <span>1.0% (Standar SNI)</span>
                 <span>2.5% (Batu Kapur)</span>

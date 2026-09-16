@@ -135,7 +135,7 @@ export const JobMixFormulaModule: React.FC<JobMixFormulaModuleProps> = ({
             </div>
 
             {/* Quick K Presets */}
-            <div className="flex flex-wrap gap-1.5 pt-1">
+            <div className="flex flex-wrap gap-1.5 pt-1 print:hidden">
               {K_VALUE_PRESETS.map((preset) => (
                 <button
                   key={preset.k}

@@ -52,7 +52,7 @@ export const App: React.FC = () => {
     // Render ONLY the Concrete Mix Design Lab (Sieve Analysis curve, JMF calculator, Batching scaler)
     return (
       <Suspense fallback={<LoadingFallback />}>
-        <div className="w-screen h-screen flex flex-col bg-[#f8fafc] text-slate-900 overflow-hidden font-['Plus_Jakarta_Sans',sans-serif]">
+        <div className="w-screen h-screen flex flex-col bg-[#f8fafc] text-slate-900 overflow-hidden font-['Plus_Jakarta_Sans',sans-serif] print:w-auto print:h-auto print:overflow-visible print:bg-white print-reset-container">
           <MixDesignSimulator />
         </div>
       </Suspense>
