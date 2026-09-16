@@ -49,6 +49,8 @@ export const App: React.FC = () => {
   const [isListOpen, setIsListOpen] = useState<boolean>(false);
   const [flyToCoords, setFlyToCoords] = useState<[number, number] | null>(null);
   const [focusIKNCounter, setFocusIKNCounter] = useState<number>(0);
+  const [basemap, setBasemap] = useState<'dark' | 'satellite'>('dark');
+
 
 
   // Fetch GeoJSON data on mount
@@ -226,6 +228,11 @@ export const App: React.FC = () => {
           setActiveView('map');
           setFocusIKNCounter((c) => c + 1);
         }}
+        basemap={basemap}
+        onBasemapChange={(newBasemap) => {
+          setBasemap(newBasemap);
+          setActiveView('map');
+        }}
       />
 
       {/* Map & Overlays or Table View Container */}
@@ -239,7 +246,9 @@ export const App: React.FC = () => {
               onSelectProject={handleSelectProject}
               flyToCoords={flyToCoords}
               focusIKNCounter={focusIKNCounter}
+              basemap={basemap}
             />
+
 
 
             {/* Collapsible Project Directory List (Left) */}

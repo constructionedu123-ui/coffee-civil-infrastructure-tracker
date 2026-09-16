@@ -1,4 +1,4 @@
-﻿import React from "react";
+import React from "react";
 import { ProjectCategory, ProjectStatus, ProjectFeature } from "../types/project";
 import { CATEGORY_CONFIG, STATUS_CONFIG } from "../constants/categories";
 import { INDONESIA_REGIONS } from "../utils/geo";
@@ -14,6 +14,8 @@ interface FilterBarProps {
   selectedContractor?: string | null;
   onClearContractor?: () => void;
   onFocusIKN?: () => void;
+  basemap?: 'dark' | 'satellite';
+  onBasemapChange?: (basemap: 'dark' | 'satellite') => void;
 }
 
 export const FilterBar: React.FC<FilterBarProps> = ({
@@ -27,7 +29,10 @@ export const FilterBar: React.FC<FilterBarProps> = ({
   selectedContractor,
   onClearContractor,
   onFocusIKN,
+  basemap = 'dark',
+  onBasemapChange,
 }) => {
+
   const categories: ProjectCategory[] = ["Transport", "Energy", "Water", "Housing", "IKN"];
   const statusOptions: (ProjectStatus | "All")[] = [
     "All",
@@ -133,6 +138,7 @@ export const FilterBar: React.FC<FilterBarProps> = ({
         {/* IKN Nusantara Camera Preset */}
         {onFocusIKN && (
           <button
+            type="button"
             onClick={onFocusIKN}
             className="flex items-center gap-1.5 px-2.5 py-1 rounded-md border border-neutral-700 bg-neutral-900 hover:bg-neutral-800 hover:border-neutral-600 text-neutral-300 hover:text-white text-[11px] font-semibold transition-colors whitespace-nowrap"
             title="Fly to IKN Nusantara, Sepaku, East Kalimantan"
@@ -140,7 +146,38 @@ export const FilterBar: React.FC<FilterBarProps> = ({
             🏛️ Focus IKN
           </button>
         )}
+
+        {/* Basemap Switcher Segmented Pill */}
+        {onBasemapChange && (
+          <div className="flex items-center rounded-md bg-neutral-900 p-0.5 border border-neutral-800">
+            <button
+              type="button"
+              onClick={() => onBasemapChange('dark')}
+              className={`px-2 py-1 rounded text-[11px] font-medium transition-colors flex items-center gap-1 ${
+                basemap === 'dark'
+                  ? 'bg-neutral-800 text-white border border-neutral-700 shadow-sm'
+                  : 'text-neutral-400 hover:text-white'
+              }`}
+              title="Dark Canvas Basemap"
+            >
+              <span>🗺️</span> Canvas
+            </button>
+            <button
+              type="button"
+              onClick={() => onBasemapChange('satellite')}
+              className={`px-2 py-1 rounded text-[11px] font-medium transition-colors flex items-center gap-1 ${
+                basemap === 'satellite'
+                  ? 'bg-blue-600 text-white border border-blue-500 shadow-sm'
+                  : 'text-neutral-400 hover:text-white'
+              }`}
+              title="High-Resolution ESRI Satellite Basemap"
+            >
+              <span>🛰️</span> Satelit
+            </button>
+          </div>
+        )}
       </div>
     </div>
   );
 };
+

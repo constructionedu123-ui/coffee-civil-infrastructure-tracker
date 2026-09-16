@@ -8,7 +8,8 @@ export const MapLegend: React.FC = () => {
   const categories: ProjectCategory[] = ['Transport', 'Energy', 'Water', 'Housing', 'IKN'];
 
   return (
-    <div className="absolute right-4 bottom-[62px] z-20 bg-neutral-900/95 border border-neutral-800 rounded-lg shadow-lg overflow-hidden text-xs w-52">
+    <div className="absolute right-4 bottom-6 z-20 bg-neutral-900/95 border border-neutral-800 rounded-lg shadow-lg overflow-hidden text-xs w-52">
+
       <button
         onClick={() => setIsExpanded(!isExpanded)}
         className="w-full px-3 py-2 flex items-center justify-between text-neutral-300 hover:text-white bg-neutral-800/80 transition-colors"
