@@ -24,8 +24,6 @@ interface HeaderProps {
   onExportCSV: () => void;
   isAnalyticsOpen: boolean;
   onToggleAnalytics: () => void;
-  activeTab?: 'tracker' | 'jmf';
-  onTabChange?: (tab: 'tracker' | 'jmf') => void;
 }
 
 export const Header: React.FC<HeaderProps> = ({
@@ -41,8 +39,6 @@ export const Header: React.FC<HeaderProps> = ({
   onExportCSV,
   isAnalyticsOpen,
   onToggleAnalytics,
-  activeTab = 'tracker',
-  onTabChange,
 }) => {
   const [isExportOpen, setIsExportOpen] = useState(false);
   const exportRef = useRef<HTMLDivElement>(null);
@@ -60,61 +56,28 @@ export const Header: React.FC<HeaderProps> = ({
 
   return (
     <header className="bg-[#0b0f17] border-b border-neutral-800 px-4 sm:px-6 py-2.5 sticky top-0 z-30 flex flex-col md:flex-row md:items-center md:justify-between gap-2.5">
-      {/* Brand & Editorial Title + Top Mode Switcher */}
-      <div className="flex items-center flex-wrap gap-4">
-        <div className="flex items-center gap-3">
-          <div className="w-7 h-7 rounded bg-neutral-800 border border-neutral-700 flex items-center justify-center text-xs font-mono font-bold text-neutral-200 shrink-0">
-            {activeTab === 'tracker' ? 'PSN' : 'JMF'}
-          </div>
-          <div>
-            <div className="flex items-baseline gap-2">
-              <h1 className="text-sm sm:text-base font-bold text-neutral-100 tracking-tight">
-                {activeTab === 'tracker'
-                  ? 'Indonesian National Infrastructure Tracker (PSN)'
-                  : 'Concrete Mix Design & Sieve Simulator'}
-              </h1>
-              <span className="hidden lg:inline text-[11px] text-neutral-400 font-medium">
-                {activeTab === 'tracker' ? 'Katalog Proyek Strategis Nasional' : 'SNI 7656:2012 / ACI 211.1'}
-              </span>
-            </div>
-            <p className="text-[11px] text-neutral-500 hidden sm:block">
-              {activeTab === 'tracker'
-                ? 'Official infrastructure monitoring catalog • KPPIP & BPJT Registry'
-                : 'Interactive Civil Engineering Lab • Kurva Gradasi Semi-Log & Koreksi Batching Lapangan'}
-            </p>
-          </div>
+      {/* Brand & Editorial Title */}
+      <div className="flex items-center gap-3">
+        <div className="w-7 h-7 rounded bg-neutral-800 border border-neutral-700 flex items-center justify-center text-xs font-mono font-bold text-neutral-200 shrink-0">
+          PSN
         </div>
-
-        {/* Primary App Mode Switcher */}
-        {onTabChange && (
-          <div className="flex items-center bg-neutral-900 border border-neutral-800 rounded-lg p-0.5 ml-0 sm:ml-2">
-            <button
-              onClick={() => onTabChange('tracker')}
-              className={`flex items-center gap-1.5 px-3 py-1 rounded text-xs font-semibold transition-colors ${
-                activeTab === 'tracker'
-                  ? 'bg-blue-600 text-white shadow-sm'
-                  : 'text-neutral-400 hover:text-neutral-200'
-              }`}
-            >
-              <span>🗺️ Infrastructure Tracker</span>
-            </button>
-            <button
-              onClick={() => onTabChange('jmf')}
-              className={`flex items-center gap-1.5 px-3 py-1 rounded text-xs font-semibold transition-colors ${
-                activeTab === 'jmf'
-                  ? 'bg-emerald-600 text-white shadow-sm'
-                  : 'text-neutral-400 hover:text-neutral-200'
-              }`}
-            >
-              <span>🧪 Concrete JMF Simulator</span>
-            </button>
+        <div>
+          <div className="flex items-baseline gap-2">
+            <h1 className="text-sm sm:text-base font-bold text-neutral-100 tracking-tight">
+              Indonesian National Infrastructure Tracker (PSN)
+            </h1>
+            <span className="hidden lg:inline text-[11px] text-neutral-400 font-medium">
+              Katalog Proyek Strategis Nasional
+            </span>
           </div>
-        )}
+          <p className="text-[11px] text-neutral-500 hidden sm:block">
+            Official infrastructure monitoring catalog • KPPIP & BPJT Registry
+          </p>
+        </div>
       </div>
 
       {/* Controls: Search, View Switcher & Export */}
-      {activeTab === 'tracker' ? (
-        <div className="flex items-center flex-wrap sm:flex-nowrap gap-2.5 w-full md:w-auto justify-between sm:justify-end">
+      <div className="flex items-center flex-wrap sm:flex-nowrap gap-2.5 w-full md:w-auto justify-between sm:justify-end">
         {/* Search Bar */}
         <div className="relative flex-1 sm:w-64">
           <Search className="w-3.5 h-3.5 text-neutral-500 absolute left-2.5 top-1/2 -translate-y-1/2 pointer-events-none" />
@@ -240,7 +203,6 @@ export const Header: React.FC<HeaderProps> = ({
           )}
         </div>
       </div>
-      ) : null}
     </header>
   );
 };

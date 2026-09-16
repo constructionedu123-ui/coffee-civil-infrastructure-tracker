@@ -3,9 +3,6 @@ import {
   Layers,
   Calculator,
   Truck,
-  Download,
-  Printer,
-  RotateCcw,
   LayoutDashboard,
 } from 'lucide-react';
 import {
@@ -29,6 +26,7 @@ import { SieveAnalysisModule } from './SieveAnalysisModule';
 import { JobMixFormulaModule } from './JobMixFormulaModule';
 import { FieldCorrectionModule } from './FieldCorrectionModule';
 import { exportJMFToCSV, printJMFReport } from './exportUtils';
+import { MixDesignHeader } from './MixDesignHeader';
 
 export const MixDesignSimulator: React.FC = () => {
   // Active Tab state inside simulator: 'all' | 'sieve' | 'jmf' | 'moisture'
@@ -235,66 +233,26 @@ export const MixDesignSimulator: React.FC = () => {
   };
 
   return (
-    <div className="w-full h-full overflow-y-auto bg-[#0b0f17] text-slate-100 p-4 sm:p-6 font-['Plus_Jakarta_Sans',sans-serif]">
-      <div className="max-w-7xl mx-auto space-y-6">
-        {/* Top Control Bar: Title, Sub-tabs & Export Actions */}
-        <div className="bg-[#0f141c] border border-neutral-800 rounded-2xl p-4 sm:p-5 flex flex-col md:flex-row md:items-center justify-between gap-4">
-          <div>
-            <div className="flex items-center gap-2.5">
-              <span className="w-8 h-8 rounded-lg bg-emerald-950 border border-emerald-500/30 flex items-center justify-center text-sm font-bold text-emerald-400">
-                🧪
-              </span>
-              <div>
-                <h1 className="text-base sm:text-lg font-bold text-white tracking-tight">
-                  Concrete Mix Design & Sieve Analysis Simulator
-                </h1>
-                <p className="text-xs text-neutral-400">
-                  Standar SNI 7656:2012 / ACI 211.1 • ASTM C136 Gradasi Ayakan • Koreksi Kadar Air Lapangan
-                </p>
-              </div>
-            </div>
-          </div>
+    <div className="w-full h-full flex flex-col bg-[#0b0f17] text-slate-100 font-['Plus_Jakarta_Sans',sans-serif] overflow-hidden">
+      {/* Isolated Standalone Header */}
+      <MixDesignHeader
+        onExportCSV={() =>
+          exportJMFToCSV(
+            sieves,
+            finenessModulus,
+            selectedZone,
+            mixInputs,
+            mixOutputs,
+            moistureInputs,
+            batchingOutputs
+          )
+        }
+        onPrintPDF={printJMFReport}
+        onReset={handleResetAll}
+      />
 
-          {/* Action Buttons: CSV, Print, Reset */}
-          <div className="flex items-center flex-wrap gap-2">
-            <button
-              onClick={() =>
-                exportJMFToCSV(
-                  sieves,
-                  finenessModulus,
-                  selectedZone,
-                  mixInputs,
-                  mixOutputs,
-                  moistureInputs,
-                  batchingOutputs
-                )
-              }
-              className="flex items-center gap-1.5 px-3 py-1.5 bg-neutral-900 hover:bg-neutral-800 border border-neutral-700 text-xs font-semibold text-neutral-200 hover:text-white rounded-lg transition"
-              title="Download full JMF ticket as CSV spreadsheet"
-            >
-              <Download className="w-3.5 h-3.5 text-emerald-400" />
-              <span>Download CSV</span>
-            </button>
-
-            <button
-              onClick={printJMFReport}
-              className="flex items-center gap-1.5 px-3 py-1.5 bg-neutral-900 hover:bg-neutral-800 border border-neutral-700 text-xs font-semibold text-neutral-200 hover:text-white rounded-lg transition"
-              title="Cetak Lembar Uji Laboratorium / Simpan PDF"
-            >
-              <Printer className="w-3.5 h-3.5 text-blue-400" />
-              <span>Print / PDF</span>
-            </button>
-
-            <button
-              onClick={handleResetAll}
-              className="flex items-center gap-1.5 px-3 py-1.5 bg-neutral-900 hover:bg-neutral-800 border border-neutral-700 text-xs font-semibold text-neutral-400 hover:text-white rounded-lg transition"
-              title="Reset ke parameter default SNI"
-            >
-              <RotateCcw className="w-3.5 h-3.5" />
-              <span>Reset</span>
-            </button>
-          </div>
-        </div>
+      <div className="flex-1 overflow-y-auto p-4 sm:p-6">
+        <div className="max-w-7xl mx-auto space-y-6">
 
         {/* Sub-navigation tabs */}
         <div className="flex items-center gap-1 bg-neutral-900 border border-neutral-800 rounded-xl p-1 w-fit">
@@ -429,5 +387,6 @@ export const MixDesignSimulator: React.FC = () => {
         </footer>
       </div>
     </div>
+  </div>
   );
 };
