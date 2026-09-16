@@ -186,7 +186,7 @@ export const JobMixFormulaModule: React.FC<JobMixFormulaModuleProps> = ({
               <button
                 type="button"
                 onClick={() => onChangeInputs({ ...inputs, coarseAggregateMaxSizeMm: 19 })}
-                className={`py-2 px-3 text-xs font-semibold rounded-xl border transition text-center ${
+                className={`py-2 px-3 text-xs font-semibold rounded-xl border transition text-center break-words whitespace-normal leading-snug ${
                   inputs.coarseAggregateMaxSizeMm === 19
                     ? 'bg-slate-900 border-slate-900 text-white shadow-xs'
                     : 'bg-white border-slate-200 text-slate-700 hover:bg-slate-50'
@@ -197,7 +197,7 @@ export const JobMixFormulaModule: React.FC<JobMixFormulaModuleProps> = ({
               <button
                 type="button"
                 onClick={() => onChangeInputs({ ...inputs, coarseAggregateMaxSizeMm: 25 })}
-                className={`py-2 px-3 text-xs font-semibold rounded-xl border transition text-center ${
+                className={`py-2 px-3 text-xs font-semibold rounded-xl border transition text-center break-words whitespace-normal leading-snug ${
                   inputs.coarseAggregateMaxSizeMm === 25
                     ? 'bg-slate-900 border-slate-900 text-white shadow-xs'
                     : 'bg-white border-slate-200 text-slate-700 hover:bg-slate-50'
@@ -286,54 +286,62 @@ export const JobMixFormulaModule: React.FC<JobMixFormulaModuleProps> = ({
 
             {/* Key Calculated Indicators */}
             <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-4">
-              <div className="bg-slate-50 border border-slate-200/80 rounded-xl p-3 shadow-2xs">
-                <div className="text-[10px] uppercase tracking-wider text-slate-500 font-semibold">
+              <div className="bg-slate-50 border border-slate-200/80 rounded-xl p-3 shadow-2xs flex flex-col justify-between">
+                <div className="text-[10px] uppercase tracking-wider text-slate-500 font-semibold break-words whitespace-normal leading-tight pb-0.5">
                   Faktor Air Semen (w/c)
                 </div>
-                <div className="text-xl font-mono font-extrabold text-sky-700 mt-1">
-                  {outputs.waterCementRatio.toFixed(3)}
+                <div>
+                  <div className="text-xl font-mono font-extrabold text-sky-700 mt-1">
+                    {outputs.waterCementRatio.toFixed(3)}
+                  </div>
+                  <div className="text-[11px] text-slate-500 mt-0.5 break-words whitespace-normal">Berdasarkan f'cr</div>
                 </div>
-                <div className="text-[11px] text-slate-500">Berdasarkan f'cr</div>
               </div>
 
-              <div className="bg-slate-50 border border-slate-200/80 rounded-xl p-3 shadow-2xs">
-                <div className="text-[10px] uppercase tracking-wider text-slate-500 font-semibold">
+              <div className="bg-slate-50 border border-slate-200/80 rounded-xl p-3 shadow-2xs flex flex-col justify-between">
+                <div className="text-[10px] uppercase tracking-wider text-slate-500 font-semibold break-words whitespace-normal leading-tight pb-0.5">
                   Target f'cr Rencana
                 </div>
-                <div className="text-xl font-mono font-extrabold text-slate-900 mt-1">
-                  {outputs.targetRequiredStrengthMPa.toFixed(1)} <span className="text-xs font-normal text-slate-500">MPa</span>
-                </div>
-                <div className="text-[11px] text-slate-500">
-                  Margin: +{outputs.marginOfSafetyMPa.toFixed(1)} MPa
+                <div>
+                  <div className="text-xl font-mono font-extrabold text-slate-900 mt-1">
+                    {outputs.targetRequiredStrengthMPa.toFixed(1)} <span className="text-xs font-normal text-slate-500">MPa</span>
+                  </div>
+                  <div className="text-[11px] text-slate-500 mt-0.5 break-words whitespace-normal">
+                    Margin: +{outputs.marginOfSafetyMPa.toFixed(1)} MPa
+                  </div>
                 </div>
               </div>
 
-              <div className="bg-slate-50 border border-slate-200/80 rounded-xl p-3 shadow-2xs">
-                <div className="text-[10px] uppercase tracking-wider text-slate-500 font-semibold">
+              <div className="bg-slate-50 border border-slate-200/80 rounded-xl p-3 shadow-2xs flex flex-col justify-between">
+                <div className="text-[10px] uppercase tracking-wider text-slate-500 font-semibold break-words whitespace-normal leading-tight pb-0.5">
                   Rasio Campuran
                 </div>
-                <div className="text-xs font-mono font-bold text-slate-900 mt-1.5">
-                  1 : {outputs.mixRatio.sand.toFixed(2)} : {outputs.mixRatio.gravel.toFixed(2)}
-                </div>
-                <div className="text-[10px] text-slate-500">
-                  Semen : Pasir : Kerikil
+                <div>
+                  <div className="text-xs font-mono font-bold text-slate-900 mt-1.5 break-words whitespace-normal">
+                    1 : {outputs.mixRatio.sand.toFixed(2)} : {outputs.mixRatio.gravel.toFixed(2)}
+                  </div>
+                  <div className="text-[10px] text-slate-500 mt-0.5 break-words whitespace-normal">
+                    Semen : Pasir : Kerikil
+                  </div>
                 </div>
               </div>
 
-              <div className="bg-slate-50 border border-slate-200/80 rounded-xl p-3 shadow-2xs">
-                <div className="text-[10px] uppercase tracking-wider text-slate-500 font-semibold">
+              <div className="bg-slate-50 border border-slate-200/80 rounded-xl p-3 shadow-2xs flex flex-col justify-between">
+                <div className="text-[10px] uppercase tracking-wider text-slate-500 font-semibold break-words whitespace-normal leading-tight pb-0.5">
                   Kerapatan Segar
                 </div>
-                <div className="text-xl font-mono font-extrabold text-emerald-700 mt-1">
-                  {(
-                    outputs.waterKg +
-                    outputs.cementKg +
-                    outputs.fineAggregateKg +
-                    outputs.coarseAggregateKg
-                  ).toFixed(0)}{' '}
-                  <span className="text-xs font-normal text-slate-500">kg/m³</span>
+                <div>
+                  <div className="text-xl font-mono font-extrabold text-emerald-700 mt-1">
+                    {(
+                      outputs.waterKg +
+                      outputs.cementKg +
+                      outputs.fineAggregateKg +
+                      outputs.coarseAggregateKg
+                    ).toFixed(0)}{' '}
+                    <span className="text-xs font-normal text-slate-500">kg/m³</span>
+                  </div>
+                  <div className="text-[11px] text-slate-500 mt-0.5 break-words whitespace-normal">Unit Weight</div>
                 </div>
-                <div className="text-[11px] text-slate-500">Unit Weight</div>
               </div>
             </div>
 

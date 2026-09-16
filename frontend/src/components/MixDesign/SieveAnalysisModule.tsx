@@ -260,46 +260,46 @@ export const SieveAnalysisModule: React.FC<SieveAnalysisModuleProps> = ({
       {/* KPI Stats Bar (Built Intelligence Metric Cards) */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
         {/* Fineness Modulus KPI */}
-        <div className="bg-white rounded-xl border border-slate-200 p-4 hover:border-slate-300 transition shadow-xs flex items-center justify-between">
-          <div>
-            <div className="text-[11px] uppercase tracking-wider text-slate-500 font-semibold flex items-center gap-1.5">
-              <TrendingUp className="w-3.5 h-3.5 text-sky-600" />
-              Fineness Modulus (FM)
+        <div className="bg-white rounded-xl border border-slate-200 p-4 hover:border-slate-300 transition shadow-xs flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+          <div className="flex-1 min-w-0 pb-1">
+            <div className="text-[11px] uppercase tracking-wider text-slate-500 font-semibold flex items-center gap-1.5 break-words whitespace-normal leading-tight">
+              <TrendingUp className="w-3.5 h-3.5 text-sky-600 shrink-0" />
+              <span>Fineness Modulus (FM)</span>
             </div>
-            <div className="text-3xl font-extrabold text-slate-900 font-mono mt-1">
+            <div className="text-3xl font-extrabold text-slate-900 font-mono mt-1 leading-none">
               {finenessModulus.toFixed(2)}
             </div>
-            <div className="text-[11px] text-slate-500 mt-0.5">Target Standar: 2.30 – 3.10</div>
+            <div className="text-[11px] text-slate-500 mt-1.5 break-words whitespace-normal pb-0.5">Target Standar: 2.30 – 3.10</div>
           </div>
-          <div className={`px-2.5 py-1 rounded-full text-xs font-semibold ${fmStatus.colorClass}`}>
+          <div className={`px-2.5 py-1 rounded-full text-xs font-semibold shrink-0 text-center break-words whitespace-normal max-w-full ${fmStatus.colorClass}`}>
             {fmStatus.label}
           </div>
         </div>
 
         {/* Envelope Compliance KPI */}
-        <div className="bg-white rounded-xl border border-slate-200 p-4 hover:border-slate-300 transition shadow-xs flex items-center justify-between">
-          <div>
-            <div className="text-[11px] uppercase tracking-wider text-slate-500 font-semibold">
+        <div className="bg-white rounded-xl border border-slate-200 p-4 hover:border-slate-300 transition shadow-xs flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+          <div className="flex-1 min-w-0 pb-1">
+            <div className="text-[11px] uppercase tracking-wider text-slate-500 font-semibold break-words whitespace-normal leading-tight">
               Kesesuaian Amplop Gradasi
             </div>
-            <div className="text-sm font-bold text-slate-900 mt-1 truncate max-w-[190px]">
+            <div className="text-sm font-bold text-slate-900 mt-1 break-words whitespace-normal leading-snug">
               {selectedZone.name}
             </div>
-            <div className="text-[11px] text-slate-500 mt-0.5">
+            <div className="text-[11px] text-slate-500 mt-1 break-words whitespace-normal pb-0.5">
               {envelopeCompliance.violations.length === 0
                 ? 'Semua titik ayakan dalam batas'
                 : `${envelopeCompliance.violations.length} titik ayakan di luar toleransi`}
             </div>
           </div>
-          <div>
+          <div className="shrink-0">
             {envelopeCompliance.isCompliant ? (
-              <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200/80 text-emerald-700 text-xs font-semibold">
-                <CheckCircle2 className="w-3.5 h-3.5" />
+              <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-50 border border-emerald-200/80 text-emerald-700 text-xs font-semibold whitespace-normal text-center">
+                <CheckCircle2 className="w-3.5 h-3.5 shrink-0" />
                 <span>LOLOS (PASS)</span>
               </div>
             ) : (
-              <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-rose-50 border border-rose-200/80 text-rose-700 text-xs font-semibold">
-                <AlertTriangle className="w-3.5 h-3.5" />
+              <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-rose-50 border border-rose-200/80 text-rose-700 text-xs font-semibold whitespace-normal text-center">
+                <AlertTriangle className="w-3.5 h-3.5 shrink-0" />
                 <span>VIOLATION</span>
               </div>
             )}
@@ -307,19 +307,19 @@ export const SieveAnalysisModule: React.FC<SieveAnalysisModuleProps> = ({
         </div>
 
         {/* Total Sample Weight KPI */}
-        <div className="bg-white rounded-xl border border-slate-200 p-4 hover:border-slate-300 transition shadow-xs flex items-center justify-between">
-          <div>
-            <div className="text-[11px] uppercase tracking-wider text-slate-500 font-semibold">
+        <div className="bg-white rounded-xl border border-slate-200 p-4 hover:border-slate-300 transition shadow-xs flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+          <div className="flex-1 min-w-0 pb-1">
+            <div className="text-[11px] uppercase tracking-wider text-slate-500 font-semibold break-words whitespace-normal leading-tight">
               Total Massa Sampel
             </div>
-            <div className="text-3xl font-extrabold text-slate-900 font-mono mt-1">
+            <div className="text-3xl font-extrabold text-slate-900 font-mono mt-1 leading-none">
               {totalWeight.toLocaleString('id-ID')} <span className="text-sm font-normal text-slate-500">gram</span>
             </div>
-            <div className="text-[11px] text-slate-500 mt-0.5">
+            <div className="text-[11px] text-slate-500 mt-1.5 break-words whitespace-normal pb-0.5">
               {sieves.length} fraksi saringan teruji
             </div>
           </div>
-          <div>
+          <div className="shrink-0">
             <span className="text-xs px-2.5 py-1 rounded-full bg-slate-100 text-slate-700 font-mono border border-slate-200">
               Pan: {sieves.find((s) => s.id === 'sieve-pan')?.retainedWeightGrams || 0}g
             </span>

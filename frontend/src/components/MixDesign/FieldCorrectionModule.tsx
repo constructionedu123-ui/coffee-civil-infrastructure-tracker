@@ -285,25 +285,25 @@ export const FieldCorrectionModule: React.FC<FieldCorrectionModuleProps> = ({
                 : 'bg-sky-50/80 border-sky-200/80'
             }`}
           >
-            <div className="flex items-start justify-between">
-              <div>
-                <span className="text-[10px] uppercase font-bold tracking-wider px-2.5 py-0.5 rounded-full bg-white border border-slate-200 text-slate-700 shadow-2xs">
+            <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+              <div className="flex-1 min-w-0">
+                <span className="text-[10px] uppercase font-bold tracking-wider px-2.5 py-0.5 rounded-full bg-white border border-slate-200 text-slate-700 shadow-2xs inline-block">
                   Instruksi Lapangan Operator Batching Plant
                 </span>
-                <h4 className="text-base sm:text-lg font-bold text-slate-900 mt-2 flex items-center gap-2">
+                <h4 className="text-base sm:text-lg font-bold text-slate-900 mt-2 flex items-center gap-2 break-words whitespace-normal leading-tight">
                   {isDeductingWater ? (
                     <>
-                      <TrendingDown className="w-5 h-5 text-amber-600" />
+                      <TrendingDown className="w-5 h-5 text-amber-600 shrink-0" />
                       <span>Koreksi Air: PENGURANGAN AIR MIXER</span>
                     </>
                   ) : (
                     <>
-                      <TrendingUp className="w-5 h-5 text-sky-600" />
+                      <TrendingUp className="w-5 h-5 text-sky-600 shrink-0" />
                       <span>Koreksi Air: PENAMBAHAN AIR MIXER</span>
                     </>
                   )}
                 </h4>
-                <p className="text-xs text-slate-600 mt-1 max-w-xl leading-relaxed">
+                <p className="text-xs text-slate-600 mt-1 max-w-xl leading-relaxed break-words whitespace-normal">
                   {isDeductingWater ? (
                     <>
                       Agregat mengandung kelembaban permukaan lebih tinggi dari absorpsi (Air Bebas
@@ -321,7 +321,7 @@ export const FieldCorrectionModule: React.FC<FieldCorrectionModuleProps> = ({
               </div>
 
               {/* Deduction Large Badge */}
-              <div className="text-right">
+              <div className="shrink-0 text-left sm:text-right">
                 <div className="text-xs text-slate-500 font-medium">Koreksi per m³:</div>
                 <div
                   className={`text-2xl sm:text-3xl font-mono font-extrabold ${
