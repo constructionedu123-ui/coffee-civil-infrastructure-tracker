@@ -1,4 +1,5 @@
-import { ProjectFeature } from '../types/project';
+import { ProjectFeature, getProjectCoordinates } from '../types/project';
+
 
 /**
  * Downloads a string or blob as a local file.
@@ -56,7 +57,7 @@ export function exportAsCSV(projects: ProjectFeature[], filename = 'psn_projects
 
   const rows = projects.map((feat) => {
     const p = feat.properties;
-    const [lon, lat] = feat.geometry.coordinates;
+    const [lon, lat] = getProjectCoordinates(feat.geometry);
 
     const budgetTrillion =
       p.budget_idr !== null && p.budget_idr !== undefined

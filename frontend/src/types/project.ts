@@ -30,10 +30,10 @@ export interface ProjectProperties {
 
 export interface ProjectFeature {
   type: 'Feature';
-  geometry: {
-    type: 'Point';
-    coordinates: [number, number]; // [longitude, latitude]
-  };
+  geometry:
+    | { type: 'Point'; coordinates: [number, number] }
+    | { type: 'LineString'; coordinates: [number, number][] }
+    | { type: 'MultiLineString'; coordinates: [number, number][][] };
   properties: ProjectProperties;
 }
 
@@ -53,3 +53,20 @@ export interface FilterState {
   selectedStatus: ProjectStatus | 'All';
   selectedRegion: string | 'All';
 }
+
+/**
+ * Safely extracts a representative [lon, lat] coordinate pair from any supported GeoJSON geometry
+ */
+export function getProjectCoordinates(geometry: ProjectFeature['geometry']): [number, number] {
+  if (geometry.type === 'Point') {
+    return geometry.coordinates;
+  }
+  if (geometry.type === 'LineString') {
+    return geometry.coordinates[0] || [0, 0];
+  }
+  if (geometry.type === 'MultiLineString') {
+    return geometry.coordinates[0]?.[0] || [0, 0];
+  }
+  return [0, 0];
+}
+

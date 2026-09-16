@@ -1,5 +1,11 @@
 import React, { useState, useEffect, useMemo } from 'react';
-import { ProjectFeature, ProjectCategory, ProjectStatus, ProjectFeatureCollection } from './types/project';
+import {
+  ProjectFeature,
+  ProjectCategory,
+  ProjectStatus,
+  ProjectFeatureCollection,
+  getProjectCoordinates,
+} from './types/project';
 import { Header } from './components/Header';
 import { KPICards } from './components/KPICards';
 import { FilterBar } from './components/FilterBar';
@@ -42,6 +48,8 @@ export const App: React.FC = () => {
   const [selectedProject, setSelectedProject] = useState<ProjectFeature | null>(null);
   const [isListOpen, setIsListOpen] = useState<boolean>(false);
   const [flyToCoords, setFlyToCoords] = useState<[number, number] | null>(null);
+  const [focusIKNCounter, setFocusIKNCounter] = useState<number>(0);
+
 
   // Fetch GeoJSON data on mount
   useEffect(() => {
@@ -150,9 +158,10 @@ export const App: React.FC = () => {
   // Handle Project Selection from List, Marker, or Search
   const handleSelectProject = (project: ProjectFeature) => {
     setSelectedProject(project);
-    const [lon, lat] = project.geometry.coordinates;
+    const [lon, lat] = getProjectCoordinates(project.geometry);
     setFlyToCoords([lat, lon]);
   };
+
 
   if (loading) {
     return (
@@ -213,6 +222,10 @@ export const App: React.FC = () => {
         allProjects={allProjects}
         selectedContractor={selectedContractor}
         onClearContractor={() => setSelectedContractor(null)}
+        onFocusIKN={() => {
+          setActiveView('map');
+          setFocusIKNCounter((c) => c + 1);
+        }}
       />
 
       {/* Map & Overlays or Table View Container */}
@@ -225,7 +238,9 @@ export const App: React.FC = () => {
               selectedProject={selectedProject}
               onSelectProject={handleSelectProject}
               flyToCoords={flyToCoords}
+              focusIKNCounter={focusIKNCounter}
             />
+
 
             {/* Collapsible Project Directory List (Left) */}
             <ProjectList

@@ -1,6 +1,6 @@
-﻿import React, { useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { ExternalLink, X } from 'lucide-react';
-import { ProjectFeature } from '../types/project';
+import { ProjectFeature, getProjectCoordinates } from '../types/project';
 import { CATEGORY_CONFIG, STATUS_CONFIG } from '../constants/categories';
 import { formatBudget, formatDate } from '../utils/formatters';
 
@@ -54,8 +54,9 @@ export const ProjectDrawer: React.FC<ProjectDrawerProps> = ({
     props?.province === 'Nasional' ||
     props?.geocode_method === 'national_fallback';
 
-  const coords = project?.geometry.coordinates || [0, 0];
+  const coords = project ? getProjectCoordinates(project.geometry) : [0, 0];
   const [lon, lat] = coords;
+
 
   // Milestone step index
   const getMilestoneIndex = (status?: string) => {

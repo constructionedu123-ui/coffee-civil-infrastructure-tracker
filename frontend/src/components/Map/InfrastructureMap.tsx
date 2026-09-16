@@ -7,25 +7,35 @@ import { createProjectIcon } from './ProjectMarker';
 import { CATEGORY_CONFIG, STATUS_CONFIG } from '../../constants/categories';
 import { formatBudget } from '../../utils/formatters';
 
+// IKN Nusantara camera preset (Sepaku, East Kalimantan)
+const IKN_CENTER: [number, number] = [-0.97, 116.70];
+const IKN_ZOOM = 11;
+
 interface InfrastructureMapProps {
   projects: ProjectFeature[];
   selectedProject: ProjectFeature | null;
   onSelectProject: (project: ProjectFeature) => void;
   flyToCoords: [number, number] | null;
+  /** Increment each time user clicks "Focus IKN" to trigger the fly-to */
+  focusIKNCounter?: number;
 }
+
 
 export const InfrastructureMap: React.FC<InfrastructureMapProps> = ({
   projects,
   selectedProject,
   onSelectProject,
   flyToCoords,
+  focusIKNCounter = 0,
 }) => {
   const mapContainerRef = useRef<HTMLDivElement>(null);
   const mapInstanceRef = useRef<L.Map | null>(null);
   const clusterGroupRef = useRef<L.MarkerClusterGroup | null>(null);
+  const polylineLayerRef = useRef<L.FeatureGroup | null>(null);
   const [basemap, setBasemap] = useState<'dark' | 'satellite'>('dark');
   const baseTileLayerRef = useRef<L.TileLayer | null>(null);
   const refTileLayerRef = useRef<L.TileLayer | null>(null);
+
 
   // Initialize Map
   useEffect(() => {
@@ -68,13 +78,20 @@ export const InfrastructureMap: React.FC<InfrastructureMapProps> = ({
 
     map.addLayer(clusterGroup);
     clusterGroupRef.current = clusterGroup;
+
+    // Dedicated FeatureGroup for linear alignments (LineString / MultiLineString)
+    const polylineLayer = L.featureGroup().addTo(map);
+    polylineLayerRef.current = polylineLayer;
+
     mapInstanceRef.current = map;
 
     return () => {
       clusterGroup.clearLayers();
+      polylineLayer.clearLayers();
       map.remove();
       mapInstanceRef.current = null;
       clusterGroupRef.current = null;
+      polylineLayerRef.current = null;
     };
   }, []);
 
@@ -131,29 +148,21 @@ export const InfrastructureMap: React.FC<InfrastructureMapProps> = ({
     }
   }, [basemap]);
 
-  // Update Markers whenever `projects`, `selectedProject`, or `basemap` changes
+  // Update Markers + Linear Alignments whenever projects/selectedProject/basemap change
   useEffect(() => {
     const clusterGroup = clusterGroupRef.current;
-    if (!clusterGroup) return;
+    const polylineLayer = polylineLayerRef.current;
+    if (!clusterGroup || !polylineLayer) return;
 
     clusterGroup.clearLayers();
+    polylineLayer.clearLayers();
+
     const markers: L.Marker[] = [];
     const isSatellite = basemap === 'satellite';
 
     projects.forEach((project) => {
-      const [lon, lat] = project.geometry.coordinates;
       const props = project.properties;
-      const isSelected = selectedProject?.properties.project_id === props.project_id;
-      const isNational =
-        props.province === 'Lintas Provinsi' ||
-        props.province === 'Nasional' ||
-        props.geocode_method === 'national_fallback';
-
-      const icon = createProjectIcon(props.category, isNational, isSelected, isSatellite);
-
-      const marker = L.marker([lat, lon], { icon });
-
-      // Custom Tooltip on hover
+      const geomType = (project.geometry as { type: string }).type;
       const categoryCfg = CATEGORY_CONFIG[props.category];
       const statusCfg = STATUS_CONFIG[props.status] || STATUS_CONFIG.Unknown;
 
@@ -179,6 +188,63 @@ export const InfrastructureMap: React.FC<InfrastructureMapProps> = ({
         </div>
       `;
 
+      // ── Linear alignments (LineString / MultiLineString) ──────────────────
+      if (geomType === 'LineString' || geomType === 'MultiLineString') {
+        const lines: [number, number][][] =
+          geomType === 'LineString'
+            ? [(project.geometry as { type: 'LineString'; coordinates: [number, number][] }).coordinates]
+            : (project.geometry as { type: 'MultiLineString'; coordinates: [number, number][][] }).coordinates;
+
+        lines.forEach((line) => {
+          // Leaflet expects [lat, lng]
+          const latlngs = line.map(([lng, lat]) => [lat, lng] as [number, number]);
+
+          // Subtle casing underlay for contrast against dark canvas or satellite imagery
+          L.polyline(latlngs, {
+            color: isSatellite ? 'rgba(0, 0, 0, 0.5)' : 'rgba(15, 23, 42, 0.6)',
+            weight: 4.5,
+            opacity: 0.6,
+            interactive: false,
+          }).addTo(polylineLayer!);
+
+          // 2.5px solid path matching sector color (e.g. Transport = Blue)
+          const polyline = L.polyline(latlngs, {
+            color: categoryCfg.color,
+            weight: 2.5,
+            opacity: 0.9,
+            lineCap: 'round',
+            lineJoin: 'round',
+          }).addTo(polylineLayer!);
+
+          polyline.bindTooltip(tooltipHtml, {
+            sticky: true,
+            className: 'custom-map-tooltip',
+            opacity: 0.98,
+          });
+
+          polyline.on('click', (e) => {
+            L.DomEvent.stopPropagation(e);
+            onSelectProject(project);
+          });
+        });
+
+        return; // don't add a marker for line features
+      }
+
+      // ── Point markers ────────────────────────────────────────────────────────
+      if (geomType !== 'Point') return;
+      const pointGeom = project.geometry as { type: 'Point'; coordinates: [number, number] };
+      const [lon, lat] = pointGeom.coordinates;
+      const isSelected = selectedProject?.properties.project_id === props.project_id;
+      const isNational =
+        props.province === 'Lintas Provinsi' ||
+        props.province === 'Nasional' ||
+        props.geocode_method === 'national_fallback';
+
+      const icon = createProjectIcon(props.category, isNational, isSelected, isSatellite);
+      const marker = L.marker([lat, lon], { icon });
+
+
       marker.bindTooltip(tooltipHtml, {
         direction: 'top',
         offset: [0, -12],
@@ -186,7 +252,6 @@ export const InfrastructureMap: React.FC<InfrastructureMapProps> = ({
         opacity: 0.98,
       });
 
-      // Interactive Popup for "Click to Inspect" (Data Journalism Placard)
       const popupHtml = `
         <div style="font-family: 'Plus Jakarta Sans', system-ui, sans-serif; min-width: 250px; max-width: 280px; padding: 10px 12px; background: #0f172a;">
           <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px;">
@@ -210,7 +275,7 @@ export const InfrastructureMap: React.FC<InfrastructureMapProps> = ({
               <span style="color: #94a3b8; font-size: 10px; max-width: 170px; text-overflow: ellipsis; overflow: hidden; white-space: nowrap; text-align: right;">${props.pjpk || 'Kementerian Terkait'}</span>
             </div>
           </div>
-          <button id="inspect-btn-${props.project_id}" style="width: 100%; background: #1e293b; hover:background: #334155; color: #f8fafc; font-weight: 600; font-size: 11px; padding: 6px 10px; border-radius: 4px; border: 1px solid #334155; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 4px;">
+          <button id="inspect-btn-${props.project_id}" style="width: 100%; background: #1e293b; color: #f8fafc; font-weight: 600; font-size: 11px; padding: 6px 10px; border-radius: 4px; border: 1px solid #334155; cursor: pointer; display: flex; align-items: center; justify-content: center; gap: 4px;">
             <span>Inspect Project Details</span> &rarr;
           </button>
         </div>
@@ -246,7 +311,8 @@ export const InfrastructureMap: React.FC<InfrastructureMapProps> = ({
     clusterGroup.addLayers(markers);
   }, [projects, selectedProject, onSelectProject, basemap]);
 
-  // Handle Fly-To coordinates
+
+  // Handle Fly-To coordinates (from project list / marker click)
   useEffect(() => {
     const map = mapInstanceRef.current;
     if (!map || !flyToCoords) return;
@@ -258,6 +324,15 @@ export const InfrastructureMap: React.FC<InfrastructureMapProps> = ({
       easeLinearity: 0.25,
     });
   }, [flyToCoords]);
+
+  // Handle "Focus IKN Nusantara" camera preset
+  useEffect(() => {
+    if (!focusIKNCounter) return;
+    const map = mapInstanceRef.current;
+    if (!map) return;
+    map.flyTo(IKN_CENTER, IKN_ZOOM, { duration: 1.6, easeLinearity: 0.2 });
+  }, [focusIKNCounter]);
+
 
   return (
     <div className={`relative w-full h-full ${basemap === 'satellite' ? 'is-satellite' : ''}`}>
@@ -274,7 +349,7 @@ export const InfrastructureMap: React.FC<InfrastructureMapProps> = ({
           }`}
           title="Switch to ESRI Dark Gray Canvas"
         >
-          Dark Canvas
+          🗺️ Canvas
         </button>
         <button
           onClick={() => setBasemap('satellite')}
@@ -285,9 +360,10 @@ export const InfrastructureMap: React.FC<InfrastructureMapProps> = ({
           }`}
           title="Switch to High-Resolution ESRI World Imagery Satellite"
         >
-          Satellite
+          🛰️ Satellite
         </button>
       </div>
+
     </div>
   );
 };

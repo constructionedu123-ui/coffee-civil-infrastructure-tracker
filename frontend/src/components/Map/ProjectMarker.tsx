@@ -17,7 +17,8 @@ export function createProjectIcon(
   const color = config.color;
 
   const size = isSelected ? 18 : 14;
-  const borderWidth = isSatellite ? 2 : 1.5;
+  const borderWidth = 1.5;
+
 
   // National / corridor project: crisp inner white dot
   const nationalCore = isNational
