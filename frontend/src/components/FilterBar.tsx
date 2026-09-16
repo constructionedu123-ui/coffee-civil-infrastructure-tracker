@@ -16,6 +16,10 @@ interface FilterBarProps {
   onFocusIKN?: () => void;
   basemap?: 'dark' | 'satellite';
   onBasemapChange?: (basemap: 'dark' | 'satellite') => void;
+  showBatchingPlants?: boolean;
+  onToggleBatchingPlants?: () => void;
+  showSupplyBuffers?: boolean;
+  onToggleSupplyBuffers?: () => void;
 }
 
 export const FilterBar: React.FC<FilterBarProps> = ({
@@ -31,7 +35,12 @@ export const FilterBar: React.FC<FilterBarProps> = ({
   onFocusIKN,
   basemap = 'satellite',
   onBasemapChange,
+  showBatchingPlants = false,
+  onToggleBatchingPlants,
+  showSupplyBuffers = false,
+  onToggleSupplyBuffers,
 }) => {
+
 
 
   const categories: ProjectCategory[] = ["Transport", "Energy", "Water", "Housing", "IKN"];
@@ -147,6 +156,40 @@ export const FilterBar: React.FC<FilterBarProps> = ({
             🏛️ Focus IKN
           </button>
         )}
+
+        {/* Concrete Supply Radar Layer Toggles */}
+        {onToggleBatchingPlants && (
+          <div className="flex items-center gap-1.5">
+            <button
+              type="button"
+              onClick={onToggleBatchingPlants}
+              className={`flex items-center gap-1.5 px-2.5 py-1 rounded-md border text-[11px] font-semibold transition-colors whitespace-nowrap ${
+                showBatchingPlants
+                  ? 'bg-amber-500/20 text-amber-300 border-amber-500/80 shadow-sm'
+                  : 'bg-neutral-900 border-neutral-800 text-neutral-400 hover:text-neutral-200 hover:border-neutral-700'
+              }`}
+              title="Toggle Commercial Concrete Batching Plants & Precast Facilities Layer"
+            >
+              <span>🏗️</span> Batching Plants
+            </button>
+
+            {onToggleSupplyBuffers && (
+              <button
+                type="button"
+                onClick={onToggleSupplyBuffers}
+                className={`flex items-center gap-1.5 px-2.5 py-1 rounded-md border text-[11px] font-semibold transition-colors whitespace-nowrap ${
+                  showSupplyBuffers
+                    ? 'bg-emerald-500/20 text-emerald-300 border-emerald-500/80 shadow-sm'
+                    : 'bg-neutral-900 border-neutral-800 text-neutral-400 hover:text-neutral-200 hover:border-neutral-700'
+                }`}
+                title="Toggle 15 km Optimal (ASTM 90-min) & 30 km Max Retarded Delivery Radii"
+              >
+                <span>⭕</span> Supply Buffers
+              </button>
+            )}
+          </div>
+        )}
+
 
         {/* Basemap Switcher Segmented Pill */}
         {onBasemapChange && (

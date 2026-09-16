@@ -1,0 +1,1330 @@
+{
+  "type": "FeatureCollection",
+  "metadata": {
+    "total_features": 66,
+    "category": "Commercial Batching Plants & Precast Facilities",
+    "source": "Verified Directory of BUMN & National Readymix Operators (WIKA Beton, Pionirbeton, SCG Jayamix, SIB, WSBP, Adhi Beton)"
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "id": "bp-jkt-01",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          106.9024,
+          -6.1952
+        ]
+      },
+      "properties": {
+        "id": "bp-jkt-01",
+        "name": "WIKA Beton - Plant Pulogadung",
+        "operator": "WIKA Beton",
+        "type": "Ready-Mix Batching Plant",
+        "city": "Jakarta Timur",
+        "province": "DKI Jakarta",
+        "capacity_m3_per_hour": 120
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "bp-jkt-02",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          106.8451,
+          -6.1254
+        ]
+      },
+      "properties": {
+        "id": "bp-jkt-02",
+        "name": "Pionirbeton - Batching Plant Ancol",
+        "operator": "Pionirbeton",
+        "type": "Ready-Mix Batching Plant",
+        "city": "Jakarta Utara",
+        "province": "DKI Jakarta",
+        "capacity_m3_per_hour": 90
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "bp-jkt-03",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          106.8052,
+          -6.2951
+        ]
+      },
+      "properties": {
+        "id": "bp-jkt-03",
+        "name": "SCG Jayamix - Plant Cilandak",
+        "operator": "SCG Jayamix",
+        "type": "Ready-Mix Batching Plant",
+        "city": "Jakarta Selatan",
+        "province": "DKI Jakarta",
+        "capacity_m3_per_hour": 90
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "bp-jkt-04",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          106.7453,
+          -6.1552
+        ]
+      },
+      "properties": {
+        "id": "bp-jkt-04",
+        "name": "Semen Indonesia Beton - Plant Daan Mogot",
+        "operator": "Semen Indonesia Beton",
+        "type": "Ready-Mix Batching Plant",
+        "city": "Jakarta Barat",
+        "province": "DKI Jakarta",
+        "capacity_m3_per_hour": 100
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "bp-jkt-05",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          106.9421,
+          -6.1754
+        ]
+      },
+      "properties": {
+        "id": "bp-jkt-05",
+        "name": "Adhi Beton - Plant Cakung",
+        "operator": "Adhi Beton",
+        "type": "Precast & Ready-Mix Plant",
+        "city": "Jakarta Timur",
+        "province": "DKI Jakarta",
+        "capacity_m3_per_hour": 120
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "bp-bks-01",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          107.0954,
+          -6.2652
+        ]
+      },
+      "properties": {
+        "id": "bp-bks-01",
+        "name": "WSBP - Plant Precast & Ready-Mix Cibitung",
+        "operator": "Waskita Beton Precast",
+        "type": "Precast & Ready-Mix Plant",
+        "city": "Bekasi",
+        "province": "Jawa Barat",
+        "capacity_m3_per_hour": 150
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "bp-bks-02",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          107.1452,
+          -6.3151
+        ]
+      },
+      "properties": {
+        "id": "bp-bks-02",
+        "name": "Adhi Beton - Plant Cikarang Delta Silicon",
+        "operator": "Adhi Beton",
+        "type": "Ready-Mix Batching Plant",
+        "city": "Bekasi",
+        "province": "Jawa Barat",
+        "capacity_m3_per_hour": 90
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "bp-bgr-01",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          106.8653,
+          -6.5352
+        ]
+      },
+      "properties": {
+        "id": "bp-bgr-01",
+        "name": "Pionirbeton - Plant Sentul Industrial",
+        "operator": "Pionirbeton",
+        "type": "Ready-Mix Batching Plant",
+        "city": "Bogor",
+        "province": "Jawa Barat",
+        "capacity_m3_per_hour": 90
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "bp-tng-01",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          106.6552,
+          -6.3051
+        ]
+      },
+      "properties": {
+        "id": "bp-tng-01",
+        "name": "SCG Jayamix - Plant BSD Serpong",
+        "operator": "SCG Jayamix",
+        "type": "Ready-Mix Batching Plant",
+        "city": "Tangerang Selatan",
+        "province": "Banten",
+        "capacity_m3_per_hour": 90
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "bp-tng-02",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          106.5254,
+          -6.2353
+        ]
+      },
+      "properties": {
+        "id": "bp-tng-02",
+        "name": "Semen Indonesia Beton - Plant Cikupa",
+        "operator": "Semen Indonesia Beton",
+        "type": "Ready-Mix Batching Plant",
+        "city": "Tangerang",
+        "province": "Banten",
+        "capacity_m3_per_hour": 100
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "bp-krw-01",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          107.2753,
+          -6.3552
+        ]
+      },
+      "properties": {
+        "id": "bp-krw-01",
+        "name": "WSBP - Plant Precast Karawang KIIC",
+        "operator": "Waskita Beton Precast",
+        "type": "Precast & Ready-Mix Plant",
+        "city": "Karawang",
+        "province": "Jawa Barat",
+        "capacity_m3_per_hour": 150
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "bp-pwk-01",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          107.4452,
+          -6.5153
+        ]
+      },
+      "properties": {
+        "id": "bp-pwk-01",
+        "name": "WIKA Beton - Pabrik Produk Beton Sadang",
+        "operator": "WIKA Beton",
+        "type": "Precast & Ready-Mix Plant",
+        "city": "Purwakarta",
+        "province": "Jawa Barat",
+        "capacity_m3_per_hour": 120
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "bp-clg-01",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          106.0152,
+          -5.9953
+        ]
+      },
+      "properties": {
+        "id": "bp-clg-01",
+        "name": "Pionirbeton - Plant Krakatau Cilegon",
+        "operator": "Pionirbeton",
+        "type": "Ready-Mix Batching Plant",
+        "city": "Cilegon",
+        "province": "Banten",
+        "capacity_m3_per_hour": 90
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "bp-bdg-01",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          106.6953,
+          -6.9552
+        ]
+      },
+      "properties": {
+        "id": "bp-bdg-01",
+        "name": "SCG Jayamix - Plant Gedebage Bandung",
+        "operator": "SCG Jayamix",
+        "type": "Ready-Mix Batching Plant",
+        "city": "Bandung",
+        "province": "Jawa Barat",
+        "capacity_m3_per_hour": 90
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "bp-bdg-02",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          106.4754,
+          -6.8451
+        ]
+      },
+      "properties": {
+        "id": "bp-bdg-02",
+        "name": "WIKA Beton - PPB Padalarang",
+        "operator": "WIKA Beton",
+        "type": "Precast Plant",
+        "city": "Bandung Barat",
+        "province": "Jawa Barat",
+        "capacity_m3_per_hour": 100
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "bp-crb-01",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          108.4352,
+          -6.7153
+        ]
+      },
+      "properties": {
+        "id": "bp-crb-01",
+        "name": "Pionirbeton - Plant Palimanan Cirebon",
+        "operator": "Pionirbeton",
+        "type": "Ready-Mix Batching Plant",
+        "city": "Cirebon",
+        "province": "Jawa Barat",
+        "capacity_m3_per_hour": 80
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "bp-idr-01",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          108.3854,
+          -6.3751
+        ]
+      },
+      "properties": {
+        "id": "bp-idr-01",
+        "name": "Semen Indonesia Beton - Plant Balongan",
+        "operator": "Semen Indonesia Beton",
+        "type": "Ready-Mix Batching Plant",
+        "city": "Indramayu",
+        "province": "Jawa Barat",
+        "capacity_m3_per_hour": 90
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "bp-smg-01",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          110.4552,
+          -6.9653
+        ]
+      },
+      "properties": {
+        "id": "bp-smg-01",
+        "name": "Semen Indonesia Beton - Plant Kaligawe Semarang",
+        "operator": "Semen Indonesia Beton",
+        "type": "Ready-Mix Batching Plant",
+        "city": "Semarang",
+        "province": "Jawa Tengah",
+        "capacity_m3_per_hour": 90
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "bp-smg-02",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          110.3154,
+          -6.9752
+        ]
+      },
+      "properties": {
+        "id": "bp-smg-02",
+        "name": "WSBP - Plant Precast & Ready-Mix Mangkang",
+        "operator": "Waskita Beton Precast",
+        "type": "Precast & Ready-Mix Plant",
+        "city": "Semarang",
+        "province": "Jawa Tengah",
+        "capacity_m3_per_hour": 120
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "bp-knd-01",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          110.2652,
+          -6.9554
+        ]
+      },
+      "properties": {
+        "id": "bp-knd-01",
+        "name": "WIKA Beton - PPB Kaliwungu Kendal",
+        "operator": "WIKA Beton",
+        "type": "Precast & Ready-Mix Plant",
+        "city": "Kendal",
+        "province": "Jawa Tengah",
+        "capacity_m3_per_hour": 120
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "bp-btg-01",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          109.8553,
+          -6.9152
+        ]
+      },
+      "properties": {
+        "id": "bp-btg-01",
+        "name": "Adhi Beton - Plant Kawasan Industri Terpadu Batang",
+        "operator": "Adhi Beton",
+        "type": "Ready-Mix Batching Plant",
+        "city": "Batang",
+        "province": "Jawa Tengah",
+        "capacity_m3_per_hour": 90
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "bp-slo-01",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          110.8251,
+          -7.5553
+        ]
+      },
+      "properties": {
+        "id": "bp-slo-01",
+        "name": "Pionirbeton - Plant Solo Mojosongo",
+        "operator": "Pionirbeton",
+        "type": "Ready-Mix Batching Plant",
+        "city": "Surakarta",
+        "province": "Jawa Tengah",
+        "capacity_m3_per_hour": 80
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "bp-byl-01",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          110.6052,
+          -7.5351
+        ]
+      },
+      "properties": {
+        "id": "bp-byl-01",
+        "name": "WIKA Beton - PPB Boyolali",
+        "operator": "WIKA Beton",
+        "type": "Precast Plant",
+        "city": "Boyolali",
+        "province": "Jawa Tengah",
+        "capacity_m3_per_hour": 100
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "bp-clc-01",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          109.0154,
+          -7.6952
+        ]
+      },
+      "properties": {
+        "id": "bp-clc-01",
+        "name": "Semen Indonesia Beton - Plant Cilacap",
+        "operator": "Semen Indonesia Beton",
+        "type": "Ready-Mix Batching Plant",
+        "city": "Cilacap",
+        "province": "Jawa Tengah",
+        "capacity_m3_per_hour": 90
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "bp-jog-01",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          110.3752,
+          -7.7453
+        ]
+      },
+      "properties": {
+        "id": "bp-jog-01",
+        "name": "SCG Jayamix - Plant Sleman Yogyakarta",
+        "operator": "SCG Jayamix",
+        "type": "Ready-Mix Batching Plant",
+        "city": "Sleman",
+        "province": "DI Yogyakarta",
+        "capacity_m3_per_hour": 80
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "bp-sby-01",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          112.7352,
+          -7.2153
+        ]
+      },
+      "properties": {
+        "id": "bp-sby-01",
+        "name": "Semen Indonesia Beton - Plant Tanjung Perak",
+        "operator": "Semen Indonesia Beton",
+        "type": "Ready-Mix Batching Plant",
+        "city": "Surabaya",
+        "province": "Jawa Timur",
+        "capacity_m3_per_hour": 120
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "bp-sby-02",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          112.7654,
+          -7.3251
+        ]
+      },
+      "properties": {
+        "id": "bp-sby-02",
+        "name": "SCG Jayamix - Plant Rungkut Industri",
+        "operator": "SCG Jayamix",
+        "type": "Ready-Mix Batching Plant",
+        "city": "Surabaya",
+        "province": "Jawa Timur",
+        "capacity_m3_per_hour": 90
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "bp-sda-01",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          112.5952,
+          -7.4053
+        ]
+      },
+      "properties": {
+        "id": "bp-sda-01",
+        "name": "WSBP - Plant Precast Prambon Krian",
+        "operator": "Waskita Beton Precast",
+        "type": "Precast & Ready-Mix Plant",
+        "city": "Sidoarjo",
+        "province": "Jawa Timur",
+        "capacity_m3_per_hour": 120
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "bp-grs-01",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          112.6353,
+          -7.1652
+        ]
+      },
+      "properties": {
+        "id": "bp-grs-01",
+        "name": "Semen Indonesia Beton - Plant Kebomas Gresik",
+        "operator": "Semen Indonesia Beton",
+        "type": "Ready-Mix Batching Plant",
+        "city": "Gresik",
+        "province": "Jawa Timur",
+        "capacity_m3_per_hour": 120
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "bp-psr-01",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          112.8752,
+          -7.6553
+        ]
+      },
+      "properties": {
+        "id": "bp-psr-01",
+        "name": "WIKA Beton - PPB Pasuruan PIER",
+        "operator": "WIKA Beton",
+        "type": "Precast & Ready-Mix Plant",
+        "city": "Pasuruan",
+        "province": "Jawa Timur",
+        "capacity_m3_per_hour": 120
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "bp-pro-01",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          113.4153,
+          -7.7552
+        ]
+      },
+      "properties": {
+        "id": "bp-pro-01",
+        "name": "WSBP - Batching Plant Tol Trans Jawa Probolinggo",
+        "operator": "Waskita Beton Precast",
+        "type": "Ready-Mix Batching Plant",
+        "city": "Probolinggo",
+        "province": "Jawa Timur",
+        "capacity_m3_per_hour": 90
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "bp-mlg-01",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          112.6654,
+          -7.8951
+        ]
+      },
+      "properties": {
+        "id": "bp-mlg-01",
+        "name": "Pionirbeton - Plant Singosari Malang",
+        "operator": "Pionirbeton",
+        "type": "Ready-Mix Batching Plant",
+        "city": "Malang",
+        "province": "Jawa Timur",
+        "capacity_m3_per_hour": 80
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "bp-byw-01",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.3952,
+          -8.1453
+        ]
+      },
+      "properties": {
+        "id": "bp-byw-01",
+        "name": "Semen Indonesia Beton - Plant Ketapang Banyuwangi",
+        "operator": "Semen Indonesia Beton",
+        "type": "Ready-Mix Batching Plant",
+        "city": "Banyuwangi",
+        "province": "Jawa Timur",
+        "capacity_m3_per_hour": 80
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "bp-mdn-01",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          98.6853,
+          3.6552
+        ]
+      },
+      "properties": {
+        "id": "bp-mdn-01",
+        "name": "WIKA Beton - PPB KIM Mabar Medan",
+        "operator": "WIKA Beton",
+        "type": "Precast & Ready-Mix Plant",
+        "city": "Medan",
+        "province": "Sumatera Utara",
+        "capacity_m3_per_hour": 120
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "bp-mdn-02",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          98.6951,
+          3.7654
+        ]
+      },
+      "properties": {
+        "id": "bp-mdn-02",
+        "name": "Pionirbeton - Plant Belawan Hub",
+        "operator": "Pionirbeton",
+        "type": "Ready-Mix Batching Plant",
+        "city": "Medan",
+        "province": "Sumatera Utara",
+        "capacity_m3_per_hour": 90
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "bp-bnj-01",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          98.4952,
+          3.6053
+        ]
+      },
+      "properties": {
+        "id": "bp-bnj-01",
+        "name": "WSBP - Batching Plant Tol Trans Sumatera Binjai",
+        "operator": "Waskita Beton Precast",
+        "type": "Ready-Mix Batching Plant",
+        "city": "Binjai",
+        "province": "Sumatera Utara",
+        "capacity_m3_per_hour": 90
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "bp-tbt-01",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          99.1654,
+          3.3251
+        ]
+      },
+      "properties": {
+        "id": "bp-tbt-01",
+        "name": "Semen Indonesia Beton - Plant Tebing Tinggi",
+        "operator": "Semen Indonesia Beton",
+        "type": "Ready-Mix Batching Plant",
+        "city": "Tebing Tinggi",
+        "province": "Sumatera Utara",
+        "capacity_m3_per_hour": 80
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "bp-pku-01",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          101.4452,
+          0.5853
+        ]
+      },
+      "properties": {
+        "id": "bp-pku-01",
+        "name": "WSBP - Batching Plant Pekanbaru Rumbai",
+        "operator": "Waskita Beton Precast",
+        "type": "Ready-Mix Batching Plant",
+        "city": "Pekanbaru",
+        "province": "Riau",
+        "capacity_m3_per_hour": 90
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "bp-dum-01",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          101.4354,
+          1.6752
+        ]
+      },
+      "properties": {
+        "id": "bp-dum-01",
+        "name": "Semen Indonesia Beton - Plant Pelabuhan Dumai",
+        "operator": "Semen Indonesia Beton",
+        "type": "Ready-Mix Batching Plant",
+        "city": "Dumai",
+        "province": "Riau",
+        "capacity_m3_per_hour": 90
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "bp-plb-01",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          104.7153,
+          -3.0052
+        ]
+      },
+      "properties": {
+        "id": "bp-plb-01",
+        "name": "WSBP - Plant Precast & Ready-Mix Gandus",
+        "operator": "Waskita Beton Precast",
+        "type": "Precast & Ready-Mix Plant",
+        "city": "Palembang",
+        "province": "Sumatera Selatan",
+        "capacity_m3_per_hour": 120
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "bp-plb-02",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          104.7551,
+          -3.0254
+        ]
+      },
+      "properties": {
+        "id": "bp-plb-02",
+        "name": "WIKA Beton - PPB Kertapati Palembang",
+        "operator": "WIKA Beton",
+        "type": "Precast & Ready-Mix Plant",
+        "city": "Palembang",
+        "province": "Sumatera Selatan",
+        "capacity_m3_per_hour": 100
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "bp-lpg-01",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          105.3452,
+          -5.5253
+        ]
+      },
+      "properties": {
+        "id": "bp-lpg-01",
+        "name": "WIKA Beton - PPB Lampung Tarahan",
+        "operator": "WIKA Beton",
+        "type": "Precast Plant",
+        "city": "Lampung Selatan",
+        "province": "Lampung",
+        "capacity_m3_per_hour": 120
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "bp-lpg-02",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          105.7454,
+          -5.8651
+        ]
+      },
+      "properties": {
+        "id": "bp-lpg-02",
+        "name": "Semen Indonesia Beton - Plant Bakauheni Gateway",
+        "operator": "Semen Indonesia Beton",
+        "type": "Ready-Mix Batching Plant",
+        "city": "Lampung Selatan",
+        "province": "Lampung",
+        "capacity_m3_per_hour": 90
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "bp-pdg-01",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          100.3752,
+          -0.9953
+        ]
+      },
+      "properties": {
+        "id": "bp-pdg-01",
+        "name": "Semen Padang (SIB) - Plant Indarung & Teluk Bayur",
+        "operator": "Semen Indonesia Beton",
+        "type": "Precast & Ready-Mix Plant",
+        "city": "Padang",
+        "province": "Sumatera Barat",
+        "capacity_m3_per_hour": 120
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "bp-ace-01",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          95.4953,
+          5.5852
+        ]
+      },
+      "properties": {
+        "id": "bp-ace-01",
+        "name": "Semen Indonesia Beton - Plant Krueng Raya",
+        "operator": "Semen Indonesia Beton",
+        "type": "Ready-Mix Batching Plant",
+        "city": "Aceh Besar",
+        "province": "Aceh",
+        "capacity_m3_per_hour": 80
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "bp-ikn-01",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.7153,
+          -0.9452
+        ]
+      },
+      "properties": {
+        "id": "bp-ikn-01",
+        "name": "WSBP - Batching Plant Sepaku IKN Nusantara Hub 1",
+        "operator": "Waskita Beton Precast",
+        "type": "Ready-Mix Batching Plant",
+        "city": "Penajam Paser Utara (IKN)",
+        "province": "Kalimantan Timur",
+        "capacity_m3_per_hour": 120
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "bp-ikn-02",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.6854,
+          -0.9651
+        ]
+      },
+      "properties": {
+        "id": "bp-ikn-02",
+        "name": "Adhi Beton - Batching Plant Sepaku IKN KIPP Hub",
+        "operator": "Adhi Beton",
+        "type": "Ready-Mix Batching Plant",
+        "city": "Penajam Paser Utara (IKN)",
+        "province": "Kalimantan Timur",
+        "capacity_m3_per_hour": 120
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "bp-ikn-03",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.7052,
+          -0.9353
+        ]
+      },
+      "properties": {
+        "id": "bp-ikn-03",
+        "name": "Semen Indonesia Beton - Batching Plant IKN Central",
+        "operator": "Semen Indonesia Beton",
+        "type": "Ready-Mix Batching Plant",
+        "city": "Penajam Paser Utara (IKN)",
+        "province": "Kalimantan Timur",
+        "capacity_m3_per_hour": 150
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "bp-ikn-04",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.7351,
+          -0.9754
+        ]
+      },
+      "properties": {
+        "id": "bp-ikn-04",
+        "name": "WIKA Beton - Mobile Plant Sepaku Corridor",
+        "operator": "WIKA Beton",
+        "type": "Ready-Mix Batching Plant",
+        "city": "Penajam Paser Utara (IKN)",
+        "province": "Kalimantan Timur",
+        "capacity_m3_per_hour": 90
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "bp-bpn-01",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.8252,
+          -1.1853
+        ]
+      },
+      "properties": {
+        "id": "bp-bpn-01",
+        "name": "WIKA Beton - Plant Kariangau Balikpapan",
+        "operator": "WIKA Beton",
+        "type": "Precast & Ready-Mix Plant",
+        "city": "Balikpapan",
+        "province": "Kalimantan Timur",
+        "capacity_m3_per_hour": 120
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "bp-bpn-02",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.9254,
+          -1.2452
+        ]
+      },
+      "properties": {
+        "id": "bp-bpn-02",
+        "name": "SCG Jayamix - Plant Batakan Balikpapan",
+        "operator": "SCG Jayamix",
+        "type": "Ready-Mix Batching Plant",
+        "city": "Balikpapan",
+        "province": "Kalimantan Timur",
+        "capacity_m3_per_hour": 90
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "bp-smd-01",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          117.1652,
+          -0.5653
+        ]
+      },
+      "properties": {
+        "id": "bp-smd-01",
+        "name": "WSBP - Batching Plant Palaran Samarinda",
+        "operator": "Waskita Beton Precast",
+        "type": "Ready-Mix Batching Plant",
+        "city": "Samarinda",
+        "province": "Kalimantan Timur",
+        "capacity_m3_per_hour": 90
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "bp-btg-02",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          117.4753,
+          0.1352
+        ]
+      },
+      "properties": {
+        "id": "bp-btg-02",
+        "name": "Semen Indonesia Beton - Plant Bontang Industri",
+        "operator": "Semen Indonesia Beton",
+        "type": "Ready-Mix Batching Plant",
+        "city": "Bontang",
+        "province": "Kalimantan Timur",
+        "capacity_m3_per_hour": 80
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "bp-bjm-01",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.5652,
+          -3.3253
+        ]
+      },
+      "properties": {
+        "id": "bp-bjm-01",
+        "name": "WIKA Beton - Plant Pelabuhan Trisakti Banjarmasin",
+        "operator": "WIKA Beton",
+        "type": "Ready-Mix Batching Plant",
+        "city": "Banjarmasin",
+        "province": "Kalimantan Selatan",
+        "capacity_m3_per_hour": 80
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "bp-ptk-01",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          109.3354,
+          -0.0251
+        ]
+      },
+      "properties": {
+        "id": "bp-ptk-01",
+        "name": "Pionirbeton - Plant Dwikora Pontianak",
+        "operator": "Pionirbeton",
+        "type": "Ready-Mix Batching Plant",
+        "city": "Pontianak",
+        "province": "Kalimantan Barat",
+        "capacity_m3_per_hour": 80
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "bp-mks-01",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          119.5152,
+          -5.0953
+        ]
+      },
+      "properties": {
+        "id": "bp-mks-01",
+        "name": "WIKA Beton - PPB Biringkanaya Makassar",
+        "operator": "WIKA Beton",
+        "type": "Precast & Ready-Mix Plant",
+        "city": "Makassar",
+        "province": "Sulawesi Selatan",
+        "capacity_m3_per_hour": 120
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "bp-mks-02",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          119.4553,
+          -5.1452
+        ]
+      },
+      "properties": {
+        "id": "bp-mks-02",
+        "name": "Semen Tonasa (SIB) - Plant Biringkassi & Makassar",
+        "operator": "Semen Indonesia Beton",
+        "type": "Precast & Ready-Mix Plant",
+        "city": "Makassar",
+        "province": "Sulawesi Selatan",
+        "capacity_m3_per_hour": 120
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "bp-mrs-01",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          119.5754,
+          -5.0051
+        ]
+      },
+      "properties": {
+        "id": "bp-mrs-01",
+        "name": "Semen Indonesia Beton - Plant Maros Trans Sulawesi",
+        "operator": "Semen Indonesia Beton",
+        "type": "Ready-Mix Batching Plant",
+        "city": "Maros",
+        "province": "Sulawesi Selatan",
+        "capacity_m3_per_hour": 90
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "bp-btg-03",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          120.0452,
+          -5.5453
+        ]
+      },
+      "properties": {
+        "id": "bp-btg-03",
+        "name": "WSBP - Batching Plant KEK Bantaeng",
+        "operator": "Waskita Beton Precast",
+        "type": "Ready-Mix Batching Plant",
+        "city": "Bantaeng",
+        "province": "Sulawesi Selatan",
+        "capacity_m3_per_hour": 90
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "bp-mrw-01",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          122.1453,
+          -2.8152
+        ]
+      },
+      "properties": {
+        "id": "bp-mrw-01",
+        "name": "Adhi Beton - Batching Plant IMIP Morowali",
+        "operator": "Adhi Beton",
+        "type": "Ready-Mix Batching Plant",
+        "city": "Morowali",
+        "province": "Sulawesi Tengah",
+        "capacity_m3_per_hour": 120
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "bp-plu-01",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          119.8654,
+          -0.7151
+        ]
+      },
+      "properties": {
+        "id": "bp-plu-01",
+        "name": "WIKA Beton - Plant Pantoloan Palu",
+        "operator": "WIKA Beton",
+        "type": "Ready-Mix Batching Plant",
+        "city": "Palu",
+        "province": "Sulawesi Tengah",
+        "capacity_m3_per_hour": 90
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "bp-mnd-01",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          124.9152,
+          1.5353
+        ]
+      },
+      "properties": {
+        "id": "bp-mnd-01",
+        "name": "Semen Indonesia Beton - Plant Mapanget Manado",
+        "operator": "Semen Indonesia Beton",
+        "type": "Ready-Mix Batching Plant",
+        "city": "Manado",
+        "province": "Sulawesi Utara",
+        "capacity_m3_per_hour": 90
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "bp-btg-04",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          125.1854,
+          1.4452
+        ]
+      },
+      "properties": {
+        "id": "bp-btg-04",
+        "name": "WSBP - Batching Plant KEK Bitung",
+        "operator": "Waskita Beton Precast",
+        "type": "Ready-Mix Batching Plant",
+        "city": "Bitung",
+        "province": "Sulawesi Utara",
+        "capacity_m3_per_hour": 90
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "bp-dps-01",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.2153,
+          -8.7452
+        ]
+      },
+      "properties": {
+        "id": "bp-dps-01",
+        "name": "SCG Jayamix - Plant Benoa Denpasar",
+        "operator": "SCG Jayamix",
+        "type": "Ready-Mix Batching Plant",
+        "city": "Denpasar",
+        "province": "Bali",
+        "capacity_m3_per_hour": 90
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "bp-lop-01",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.0754,
+          -8.7251
+        ]
+      },
+      "properties": {
+        "id": "bp-lop-01",
+        "name": "WIKA Beton - PPB Lembar Lombok",
+        "operator": "WIKA Beton",
+        "type": "Precast & Ready-Mix Plant",
+        "city": "Lombok Barat",
+        "province": "Nusa Tenggara Barat",
+        "capacity_m3_per_hour": 90
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "bp-kpg-01",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          123.5452,
+          -10.1853
+        ]
+      },
+      "properties": {
+        "id": "bp-kpg-01",
+        "name": "Semen Indonesia Beton - Plant Pelabuhan Tenau Kupang",
+        "operator": "Semen Indonesia Beton",
+        "type": "Ready-Mix Batching Plant",
+        "city": "Kupang",
+        "province": "Nusa Tenggara Timur",
+        "capacity_m3_per_hour": 80
+      }
+    }
+  ]
+}

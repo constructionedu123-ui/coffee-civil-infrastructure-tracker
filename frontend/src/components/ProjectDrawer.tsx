@@ -1,6 +1,8 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 import { ExternalLink, X } from 'lucide-react';
 import { ProjectFeature, getProjectCoordinates } from '../types/project';
+import { BatchingPlantFeature } from '../types/batchingPlant';
+import { findNearestBatchingPlants } from '../utils/logistics';
 import { CATEGORY_CONFIG, STATUS_CONFIG } from '../constants/categories';
 import { formatBudget, formatDate } from '../utils/formatters';
 
@@ -8,7 +10,9 @@ interface ProjectDrawerProps {
   project: ProjectFeature | null;
   onClose: () => void;
   onZoomTo: (coords: [number, number]) => void;
+  batchingPlants?: BatchingPlantFeature[];
 }
+
 
 const MILESTONES = [
   { step: '01', title: 'Penyiapan', subtitle: 'Feasibility & Readiness' },
@@ -32,6 +36,7 @@ export const ProjectDrawer: React.FC<ProjectDrawerProps> = ({
   project,
   onClose,
   onZoomTo,
+  batchingPlants = [],
 }) => {
   // Escape key dismissal
   useEffect(() => {
@@ -56,6 +61,15 @@ export const ProjectDrawer: React.FC<ProjectDrawerProps> = ({
 
   const coords = project ? getProjectCoordinates(project.geometry) : [0, 0];
   const [lon, lat] = coords;
+
+  // Nearest concrete batching facilities calculation (Haversine proximity)
+  const nearbyPlants = useMemo(() => {
+    if (!project || !batchingPlants || batchingPlants.length === 0) return [];
+    return findNearestBatchingPlants(lat, lon, batchingPlants, 3);
+  }, [project, lat, lon, batchingPlants]);
+
+  const nearestPlant = nearbyPlants[0] || null;
+
 
 
   // Milestone step index
@@ -323,7 +337,96 @@ export const ProjectDrawer: React.FC<ProjectDrawerProps> = ({
                 </div>
               </section>
 
-              {/* 6. Audit Metadata */}
+              {/* 6. Concrete Supply & Logistics Radar */}
+              <section className="bg-neutral-900/60 border border-neutral-800 rounded-lg p-4 space-y-3">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-1.5">
+                    <span className="text-sm">🏗️</span>
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-neutral-300">
+                      Concrete Supply & Logistics Radar
+                    </span>
+                  </div>
+                  <span className="text-[9px] font-mono px-2 py-0.5 rounded bg-neutral-800 text-neutral-400 border border-neutral-700">
+                    ASTM C94 / SNI
+                  </span>
+                </div>
+
+                {nearestPlant ? (
+                  <div className="space-y-2.5">
+                    {/* Nearest Facility Card */}
+                    <div className="p-3 rounded-lg bg-neutral-950/80 border border-neutral-800 space-y-2">
+                      <div className="flex items-start justify-between gap-2">
+                        <div>
+                          <span className="text-[9px] uppercase font-bold text-neutral-500 tracking-wider block">
+                            Nearest Batching Facility
+                          </span>
+                          <div className="text-[13px] font-bold text-neutral-100 leading-snug">
+                            {nearestPlant.plant.properties.name}
+                          </div>
+                          <div className="text-[11px] text-neutral-400 mt-0.5">
+                            Operator: <span className="font-semibold text-neutral-200">{nearestPlant.plant.properties.operator}</span> • {nearestPlant.plant.properties.city}, {nearestPlant.plant.properties.province}
+                          </div>
+                        </div>
+                        <div className="text-right shrink-0">
+                          <div className="text-lg font-bold font-mono text-white tabular-nums">
+                            {nearestPlant.distanceKm.toFixed(1)} km
+                          </div>
+                          <span className="text-[9px] text-neutral-500 uppercase font-mono block">Haul Distance</span>
+                        </div>
+                      </div>
+
+                      {/* Capacity & Type Row */}
+                      <div className="flex items-center justify-between pt-1.5 border-t border-neutral-800/80 text-[10px] text-neutral-400">
+                        <span>Capacity: <strong className="text-neutral-200 font-mono">{nearestPlant.plant.properties.capacity_m3_per_hour} m³/h</strong></span>
+                        <span className="text-neutral-500">•</span>
+                        <span className="truncate max-w-[170px]">{nearestPlant.plant.properties.type}</span>
+                      </div>
+                    </div>
+
+                    {/* Supply Status Badge & Engineering Specs */}
+                    <div className={`p-3 rounded-lg border ${nearestPlant.status.badgeClass} space-y-1.5`}>
+                      <div className="flex items-center gap-2 font-bold text-xs">
+                        <span>{nearestPlant.status.icon}</span>
+                        <span>{nearestPlant.status.label}</span>
+                      </div>
+                      <p className="text-[11px] leading-relaxed opacity-90">
+                        {nearestPlant.status.technicalGuidance}
+                      </p>
+                    </div>
+
+                    {/* Alternative Nearby Facilities */}
+                    {nearbyPlants.length > 1 && (
+                      <div className="pt-2 border-t border-neutral-800 space-y-1.5">
+                        <span className="text-[9px] uppercase font-bold text-neutral-500 tracking-wider block">
+                          Alternative Facilities in Range
+                        </span>
+                        <div className="space-y-1">
+                          {nearbyPlants.slice(1, 3).map((alt) => (
+                            <div
+                              key={alt.plant.properties.id}
+                              className="flex items-center justify-between text-[11px] p-2 rounded bg-neutral-950/70 border border-neutral-800/60"
+                            >
+                              <div className="truncate pr-2">
+                                <span className="font-semibold text-neutral-300">{alt.plant.properties.operator}</span>
+                                <span className="text-neutral-500"> • {alt.plant.properties.name}</span>
+                              </div>
+                              <div className="font-mono text-neutral-400 shrink-0 font-medium tabular-nums">
+                                {alt.distanceKm.toFixed(1)} km
+                              </div>
+                            </div>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+                ) : (
+                  <div className="text-neutral-500 text-xs py-2">
+                    Calculating nearest concrete facilities...
+                  </div>
+                )}
+              </section>
+
+              {/* 7. Audit Metadata */}
               <div className="px-1 pb-1 space-y-1 text-[10px] text-neutral-500 font-mono border-t border-neutral-800/60 pt-2">
                 <div className="flex items-center justify-between">
                   <span>Source Registry:</span>
@@ -334,6 +437,7 @@ export const ProjectDrawer: React.FC<ProjectDrawerProps> = ({
                   <span className="text-neutral-400">{formatDate(props.scraped_at)}</span>
                 </div>
               </div>
+
             </div>
 
             {/* ── Pinned Action Bar ── */}

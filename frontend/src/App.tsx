@@ -6,6 +6,10 @@ import {
   ProjectFeatureCollection,
   getProjectCoordinates,
 } from './types/project';
+import {
+  BatchingPlantFeature,
+  BatchingPlantFeatureCollection,
+} from './types/batchingPlant';
 import { Header } from './components/Header';
 import { KPICards } from './components/KPICards';
 import { FilterBar } from './components/FilterBar';
@@ -22,6 +26,9 @@ import { Loader2, AlertTriangle } from 'lucide-react';
 
 export const App: React.FC = () => {
   const [allProjects, setAllProjects] = useState<ProjectFeature[]>([]);
+  const [batchingPlants, setBatchingPlants] = useState<BatchingPlantFeature[]>([]);
+  const [showBatchingPlants, setShowBatchingPlants] = useState<boolean>(true);
+  const [showSupplyBuffers, setShowSupplyBuffers] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -51,23 +58,29 @@ export const App: React.FC = () => {
   const [focusIKNCounter, setFocusIKNCounter] = useState<number>(0);
   const [basemap, setBasemap] = useState<'dark' | 'satellite'>('satellite');
 
-
-
-
-  // Fetch GeoJSON data on mount
+  // Fetch GeoJSON data on mount (Projects & Batching Plants)
   useEffect(() => {
     async function loadData() {
       try {
         setLoading(true);
-        const res = await fetch('/data/projects.geojson');
-        if (!res.ok) {
-          throw new Error(`Failed to load data/projects.geojson: HTTP ${res.status}`);
+        const [resProjects, resPlants] = await Promise.all([
+          fetch('/data/projects.geojson'),
+          fetch('/data/batching_plants.geojson'),
+        ]);
+
+        if (!resProjects.ok) {
+          throw new Error(`Failed to load data/projects.geojson: HTTP ${resProjects.status}`);
         }
-        const data: ProjectFeatureCollection = await res.json();
-        setAllProjects(data.features || []);
+        const dataProjects: ProjectFeatureCollection = await resProjects.json();
+        setAllProjects(dataProjects.features || []);
+
+        if (resPlants.ok) {
+          const dataPlants: BatchingPlantFeatureCollection = await resPlants.json();
+          setBatchingPlants(dataPlants.features || []);
+        }
         setError(null);
       } catch (err: any) {
-        console.error('Error fetching GeoJSON:', err);
+        console.error('Error fetching GIS data:', err);
         setError(err.message || 'Failed to load projects.geojson');
       } finally {
         setLoading(false);
@@ -78,6 +91,7 @@ export const App: React.FC = () => {
   }, []);
 
   // Category Toggle
+
   const handleToggleCategory = (category: ProjectCategory) => {
     setSelectedCategories((prev) => {
       if (prev.includes(category)) {
@@ -234,6 +248,22 @@ export const App: React.FC = () => {
           setBasemap(newBasemap);
           setActiveView('map');
         }}
+        showBatchingPlants={showBatchingPlants}
+        onToggleBatchingPlants={() => {
+          setShowBatchingPlants((prev) => {
+            const next = !prev;
+            if (!next) setShowSupplyBuffers(false);
+            return next;
+          });
+        }}
+        showSupplyBuffers={showSupplyBuffers}
+        onToggleSupplyBuffers={() => {
+          setShowSupplyBuffers((prev) => {
+            const next = !prev;
+            if (next) setShowBatchingPlants(true);
+            return next;
+          });
+        }}
       />
 
       {/* Map & Overlays or Table View Container */}
@@ -248,9 +278,10 @@ export const App: React.FC = () => {
               flyToCoords={flyToCoords}
               focusIKNCounter={focusIKNCounter}
               basemap={basemap}
+              batchingPlants={batchingPlants}
+              showBatchingPlants={showBatchingPlants}
+              showSupplyBuffers={showSupplyBuffers}
             />
-
-
 
             {/* Collapsible Project Directory List (Left) */}
             <ProjectList
@@ -262,7 +293,11 @@ export const App: React.FC = () => {
             />
 
             {/* Map Legend (Bottom Right) */}
-            <MapLegend />
+            <MapLegend
+              showBatchingPlants={showBatchingPlants}
+              showSupplyBuffers={showSupplyBuffers}
+            />
+
           </>
         ) : (
           /* Minimalist Data Table View */
@@ -293,7 +328,9 @@ export const App: React.FC = () => {
           setActiveView('map');
           setFlyToCoords(coords);
         }}
+        batchingPlants={batchingPlants}
       />
+
     </div>
   );
 };

@@ -1,10 +1,11 @@
 import React, { useEffect, useRef } from 'react';
-
 import L from 'leaflet';
 import 'leaflet.markercluster';
 import 'leaflet.markercluster/dist/MarkerCluster.css';
 import { ProjectFeature } from '../../types/project';
+import { BatchingPlantFeature } from '../../types/batchingPlant';
 import { createProjectIcon } from './ProjectMarker';
+import { createBatchingPlantIcon } from './BatchingPlantMarker';
 import { CATEGORY_CONFIG, STATUS_CONFIG } from '../../constants/categories';
 import { formatBudget } from '../../utils/formatters';
 
@@ -20,8 +21,10 @@ interface InfrastructureMapProps {
   /** Increment each time user clicks "Focus IKN" to trigger the fly-to */
   focusIKNCounter?: number;
   basemap?: 'dark' | 'satellite';
+  batchingPlants?: BatchingPlantFeature[];
+  showBatchingPlants?: boolean;
+  showSupplyBuffers?: boolean;
 }
-
 
 export const InfrastructureMap: React.FC<InfrastructureMapProps> = ({
   projects,
@@ -30,14 +33,19 @@ export const InfrastructureMap: React.FC<InfrastructureMapProps> = ({
   flyToCoords,
   focusIKNCounter = 0,
   basemap = 'satellite',
+  batchingPlants = [],
+  showBatchingPlants = false,
+  showSupplyBuffers = false,
 }) => {
-
   const mapContainerRef = useRef<HTMLDivElement>(null);
   const mapInstanceRef = useRef<L.Map | null>(null);
   const clusterGroupRef = useRef<L.MarkerClusterGroup | null>(null);
   const polylineLayerRef = useRef<L.FeatureGroup | null>(null);
+  const supplyBufferLayerRef = useRef<L.FeatureGroup | null>(null);
+  const batchingPlantLayerRef = useRef<L.FeatureGroup | null>(null);
   const baseTileLayerRef = useRef<L.TileLayer | null>(null);
   const refTileLayerRef = useRef<L.TileLayer | null>(null);
+
 
 
 
@@ -83,6 +91,14 @@ export const InfrastructureMap: React.FC<InfrastructureMapProps> = ({
     map.addLayer(clusterGroup);
     clusterGroupRef.current = clusterGroup;
 
+    // Dedicated FeatureGroup for spatial concrete delivery buffers (rendered under markers)
+    const supplyBufferLayer = L.featureGroup().addTo(map);
+    supplyBufferLayerRef.current = supplyBufferLayer;
+
+    // Dedicated FeatureGroup for batching plant pins
+    const batchingPlantLayer = L.featureGroup().addTo(map);
+    batchingPlantLayerRef.current = batchingPlantLayer;
+
     // Dedicated FeatureGroup for linear alignments (LineString / MultiLineString)
     const polylineLayer = L.featureGroup().addTo(map);
     polylineLayerRef.current = polylineLayer;
@@ -92,12 +108,17 @@ export const InfrastructureMap: React.FC<InfrastructureMapProps> = ({
     return () => {
       clusterGroup.clearLayers();
       polylineLayer.clearLayers();
+      supplyBufferLayer.clearLayers();
+      batchingPlantLayer.clearLayers();
       map.remove();
       mapInstanceRef.current = null;
       clusterGroupRef.current = null;
       polylineLayerRef.current = null;
+      supplyBufferLayerRef.current = null;
+      batchingPlantLayerRef.current = null;
     };
   }, []);
+
 
   // Update Basemap Tiles (Dark Canvas vs High-Res Satellite)
   useEffect(() => {
@@ -315,8 +336,121 @@ export const InfrastructureMap: React.FC<InfrastructureMapProps> = ({
     clusterGroup.addLayers(markers);
   }, [projects, selectedProject, onSelectProject, basemap]);
 
+  // Render Commercial Batching Plants & Spatial Supply Buffers
+  useEffect(() => {
+    const plantLayer = batchingPlantLayerRef.current;
+    const bufferLayer = supplyBufferLayerRef.current;
+    if (!plantLayer || !bufferLayer) return;
+
+    plantLayer.clearLayers();
+    bufferLayer.clearLayers();
+
+    if (!showBatchingPlants) return;
+
+    batchingPlants.forEach((plant) => {
+      const [lon, lat] = plant.geometry.coordinates;
+      const p = plant.properties;
+
+      // ── Spatial Delivery Buffers (Concentric ASTM/SNI radii) ──────────────
+      if (showSupplyBuffers) {
+        // 30 km Outer Limit (Amber, opacity 0.08): Max Retarded Delivery Limit
+        L.circle([lat, lon], {
+          radius: 30000,
+          color: '#F59E0B',
+          weight: 1.2,
+          opacity: 0.5,
+          fillColor: '#F59E0B',
+          fillOpacity: 0.08,
+          dashArray: '4, 4',
+          interactive: false,
+        }).addTo(bufferLayer);
+
+        // 15 km Inner Circle (Green, opacity 0.12): Optimal Delivery Radius (ASTM/SNI 90-min limit)
+        L.circle([lat, lon], {
+          radius: 15000,
+          color: '#10B981',
+          weight: 1.2,
+          opacity: 0.65,
+          fillColor: '#10B981',
+          fillOpacity: 0.12,
+          dashArray: '3, 3',
+          interactive: false,
+        }).addTo(bufferLayer);
+      }
+
+      // ── Batching Plant Marker Pin ──────────────────────────────────────────
+      const icon = createBatchingPlantIcon(p);
+      const marker = L.marker([lat, lon], { icon });
+
+      // Clean Editorial Tooltip
+      const tooltipHtml = `
+        <div style="font-family: 'Plus Jakarta Sans', system-ui, sans-serif; font-size: 11px; padding: 2px;">
+          <div style="display: flex; align-items: center; gap: 6px; margin-bottom: 2px;">
+            <span style="font-size: 9px; font-weight: 700; text-transform: uppercase; color: #F59E0B;">
+              ${p.operator}
+            </span>
+            <span style="font-size: 9px; color: #94a3b8;">
+              • ${p.capacity_m3_per_hour} m³/h
+            </span>
+          </div>
+          <div style="font-size: 12px; font-weight: 700; color: #f8fafc; line-height: 1.35; max-width: 240px;">
+            ${p.name}
+          </div>
+          <div style="font-size: 10px; color: #94a3b8; margin-top: 4px;">
+            ${p.type} • ${p.city}, ${p.province}
+          </div>
+        </div>
+      `;
+
+      marker.bindTooltip(tooltipHtml, {
+        direction: 'top',
+        offset: [0, -12],
+        className: 'custom-map-tooltip',
+        opacity: 0.98,
+      });
+
+      // Interactive Placard Popup
+      const popupHtml = `
+        <div style="font-family: 'Plus Jakarta Sans', system-ui, sans-serif; min-width: 240px; padding: 10px 12px; background: #0f172a;">
+          <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 4px;">
+            <span style="font-size: 9px; font-weight: 700; text-transform: uppercase; color: #F59E0B;">
+              ${p.operator}
+            </span>
+            <span style="font-size: 9px; color: #10B981; font-weight: 600;">
+              Active Batching Facility
+            </span>
+          </div>
+          <div style="font-size: 13px; font-weight: 700; color: #f8fafc; line-height: 1.35; margin-bottom: 8px;">
+            ${p.name}
+          </div>
+          <div style="font-size: 11px; border-top: 1px solid #1e293b; padding-top: 6px; margin-bottom: 6px;">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 3px;">
+              <span style="color: #64748b; font-size: 10px;">Capacity</span>
+              <span style="font-weight: 700; color: #f8fafc; font-family: monospace;">${p.capacity_m3_per_hour} m³/hour</span>
+            </div>
+            <div style="display: flex; justify-content: space-between; margin-bottom: 3px;">
+              <span style="color: #64748b; font-size: 10px;">Facility Type</span>
+              <span style="color: #cbd5e1; font-size: 10px;">${p.type}</span>
+            </div>
+            <div style="display: flex; justify-content: space-between;">
+              <span style="color: #64748b; font-size: 10px;">Location</span>
+              <span style="color: #cbd5e1; font-size: 10px;">${p.city}, ${p.province}</span>
+            </div>
+          </div>
+        </div>
+      `;
+
+      marker.bindPopup(popupHtml, {
+        className: 'custom-map-popup',
+        offset: [0, -12],
+      });
+
+      marker.addTo(plantLayer);
+    });
+  }, [batchingPlants, showBatchingPlants, showSupplyBuffers]);
 
   // Handle Fly-To coordinates (from project list / marker click)
+
   useEffect(() => {
     const map = mapInstanceRef.current;
     if (!map || !flyToCoords) return;
