@@ -15,6 +15,7 @@ import { findNearestFaultLine } from '../utils/seismic';
 import { CATEGORY_CONFIG, STATUS_CONFIG } from '../constants/categories';
 import { formatBudget, formatDate } from '../utils/formatters';
 import { getProjectContractors, getPrimaryContractor } from '../utils/contractorMatcher';
+import { getProjectRainfallAnalysis } from '../utils/rainfallData';
 
 const BimViewerModal = lazy(() => import('./BimViewerModal'));
 
@@ -119,6 +120,12 @@ export const ProjectDrawer: React.FC<ProjectDrawerProps> = ({
     const text = (props.project_name + ' ' + (props.province || '') + ' ' + (props.regency || '')).toLowerCase();
     return props.category === 'IKN' || text.includes('ikn') || text.includes('sepaku') || text.includes('penajam') || text.includes('kalimantan timur');
   }, [props]);
+
+  // Regional hydrometeorology and rainfall mitigation analysis (BMKG Normals)
+  const rainfallAnalysis = useMemo(() => {
+    if (!props) return null;
+    return getProjectRainfallAnalysis(props.province, props.regency, props.project_name);
+  }, [props?.province, props?.regency, props?.project_name]);
 
 
 
@@ -820,7 +827,103 @@ export const ProjectDrawer: React.FC<ProjectDrawerProps> = ({
                 )}
               </section>
 
-              {/* 8. Audit Metadata */}
+              {/* 9. Site Hydrometeorology & Rainfall Mitigation Card (BMKG) */}
+              {rainfallAnalysis && (
+                <section className="bg-neutral-900/60 border border-neutral-800 rounded-lg p-4 space-y-3">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-1.5">
+                      <span className="text-sm">🌧️</span>
+                      <span className="text-[10px] font-bold uppercase tracking-wider text-neutral-300">
+                        Analisis Hidrologi & Mitigasi Cuaca (BMKG)
+                      </span>
+                    </div>
+                    <span className="text-[9px] font-mono px-2 py-0.5 rounded bg-neutral-800 text-neutral-400 border border-neutral-700">
+                      BMKG Normals
+                    </span>
+                  </div>
+
+                  {/* Header: Curah Hujan Tahunan & Color-coded Severity Badge */}
+                  <div className="p-3 rounded-lg bg-neutral-950/80 border border-neutral-800 space-y-2.5">
+                    <div className="flex items-start justify-between gap-2">
+                      <div>
+                        <span className="text-[9px] uppercase font-bold text-neutral-500 tracking-wider block">
+                          Rata-rata Curah Hujan Tahunan
+                        </span>
+                        <div className="flex items-baseline gap-2 mt-0.5">
+                          <span className="text-xl font-bold font-mono text-white tabular-nums">
+                            ~{rainfallAnalysis.annualMm.toLocaleString('id-ID')}
+                          </span>
+                          <span className="text-xs text-neutral-400 font-medium">mm/tahun</span>
+                        </div>
+                        <div className="text-[11px] text-neutral-400 mt-0.5">
+                          Rentang Historis: <span className="text-neutral-200 font-mono font-medium">{rainfallAnalysis.annualRangeText}</span>
+                        </div>
+                      </div>
+
+                      {/* Color-Coded Severity Badge */}
+                      <div className="shrink-0 text-right">
+                        <span
+                          className={`inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] font-bold border ${rainfallAnalysis.badgeColorClass}`}
+                        >
+                          <span className={`w-2 h-2 rounded-full ${rainfallAnalysis.badgeBgClass}`} />
+                          {rainfallAnalysis.badgeLabel}
+                        </span>
+                      </div>
+                    </div>
+
+                    {/* Peak Wet Season & Climate Zone */}
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 pt-2 border-t border-neutral-800/80 text-[11px]">
+                      <div className="bg-neutral-900/80 p-2 rounded border border-neutral-800/60">
+                        <span className="text-[9px] text-neutral-500 uppercase font-semibold block">
+                          Puncak Musim Hujan
+                        </span>
+                        <span className="font-semibold text-sky-300">
+                          {rainfallAnalysis.peakSeasonMonths}
+                        </span>
+                      </div>
+                      <div className="bg-neutral-900/80 p-2 rounded border border-neutral-800/60">
+                        <span className="text-[9px] text-neutral-500 uppercase font-semibold block">
+                          Tipe Iklim Tapak
+                        </span>
+                        <span className="font-medium text-neutral-200 truncate block" title={rainfallAnalysis.climateZone}>
+                          {rainfallAnalysis.climateZone}
+                        </span>
+                      </div>
+                    </div>
+
+                    <p className="text-[11px] text-neutral-300/90 leading-relaxed bg-neutral-900/40 p-2 rounded border border-neutral-800/40 italic">
+                      💡 {rainfallAnalysis.summaryGuidance}
+                    </p>
+                  </div>
+
+                  {/* Actionable Engineering Mitigation Advice */}
+                  <div className="space-y-2">
+                    <span className="text-[9px] uppercase font-bold text-neutral-400 tracking-wider block">
+                      Rekomendasi Metode Kerja & Mitigasi Konstruksi:
+                    </span>
+                    <div className="grid grid-cols-1 gap-2">
+                      {rainfallAnalysis.mitigations.map((item, idx) => (
+                        <div
+                          key={idx}
+                          className="flex items-start gap-2.5 p-2.5 rounded-lg bg-neutral-950/60 border border-neutral-800/70 text-xs"
+                        >
+                          <span className="text-base shrink-0 select-none mt-0.5">{item.icon}</span>
+                          <div className="space-y-0.5">
+                            <div className="font-semibold text-neutral-200 text-[11px]">
+                              {item.title}
+                            </div>
+                            <div className="text-[10.5px] text-neutral-400 leading-relaxed">
+                              {item.desc}
+                            </div>
+                          </div>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+                </section>
+              )}
+
+              {/* 10. Audit Metadata */}
               <div className="px-1 pb-1 space-y-1 text-[10px] text-neutral-500 font-mono border-t border-neutral-800/60 pt-2">
                 <div className="flex items-center justify-between">
                   <span>Source Registry:</span>
