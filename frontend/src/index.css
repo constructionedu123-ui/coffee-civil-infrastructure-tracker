@@ -331,10 +331,37 @@
 
   /* Hide interactive controls and screen-only elements */
   .no-print,
-  .print\\:hidden {
+  .print\:hidden {
     display: none !important;
   }
 }
 
+/* ── Geospatial Measurement Tool (Phase 13) ─────────────────────────── */
+.is-measuring,
+.is-measuring .leaflet-container {
+  cursor: crosshair !important;
+}
 
+/* Suppress marker and popup clicks while measuring so user can click anywhere on the map */
+.is-measuring .leaflet-marker-pane,
+.is-measuring .leaflet-overlay-pane path:not(.measure-active-geometry),
+.is-measuring .custom-cluster-wrapper {
+  pointer-events: none !important;
+}
 
+/* Floating dynamic measurement tooltip */
+.leaflet-tooltip.custom-measure-tooltip {
+  background: rgba(15, 23, 42, 0.95) !important;
+  color: #38bdf8 !important;
+  border: 1px solid #0284c7 !important;
+  border-radius: 6px !important;
+  font-size: 11px !important;
+  font-weight: 700 !important;
+  font-family: monospace !important;
+  padding: 3px 8px !important;
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.5) !important;
+}
+
+.leaflet-tooltip-top.custom-measure-tooltip:before {
+  border-top-color: #0284c7 !important;
+}

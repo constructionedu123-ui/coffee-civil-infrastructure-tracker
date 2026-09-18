@@ -1,4 +1,4 @@
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import L from 'leaflet';
 import 'leaflet.markercluster';
 import 'leaflet.markercluster/dist/MarkerCluster.css';
@@ -7,6 +7,7 @@ import { BatchingPlantFeature } from '../../types/batchingPlant';
 import { FaultLineFeature } from '../../types/faultLine';
 import { createProjectIcon } from './ProjectMarker';
 import { createBatchingPlantIcon } from './BatchingPlantMarker';
+import { MeasureTool } from './MeasureTool';
 import { CATEGORY_CONFIG, STATUS_CONFIG } from '../../constants/categories';
 import { formatBudget } from '../../utils/formatters';
 
@@ -51,9 +52,7 @@ export const InfrastructureMap: React.FC<InfrastructureMapProps> = ({
   const faultLineLayerRef = useRef<L.FeatureGroup | null>(null);
   const baseTileLayerRef = useRef<L.TileLayer | null>(null);
   const refTileLayerRef = useRef<L.TileLayer | null>(null);
-
-
-
+  const [mapReady, setMapReady] = useState<L.Map | null>(null);
 
   // Initialize Map
   useEffect(() => {
@@ -114,6 +113,7 @@ export const InfrastructureMap: React.FC<InfrastructureMapProps> = ({
     faultLineLayerRef.current = faultLineLayer;
 
     mapInstanceRef.current = map;
+    setMapReady(map);
 
     return () => {
       clusterGroup.clearLayers();
@@ -123,6 +123,7 @@ export const InfrastructureMap: React.FC<InfrastructureMapProps> = ({
       faultLineLayer.clearLayers();
       map.remove();
       mapInstanceRef.current = null;
+      setMapReady(null);
       clusterGroupRef.current = null;
       polylineLayerRef.current = null;
       supplyBufferLayerRef.current = null;
@@ -554,6 +555,7 @@ export const InfrastructureMap: React.FC<InfrastructureMapProps> = ({
   return (
     <div className={`relative w-full h-full ${basemap === 'satellite' ? 'is-satellite' : ''}`}>
       <div ref={mapContainerRef} className="w-full h-full" />
+      <MeasureTool map={mapReady} forceCloseTrigger={selectedProject} />
     </div>
   );
 };
