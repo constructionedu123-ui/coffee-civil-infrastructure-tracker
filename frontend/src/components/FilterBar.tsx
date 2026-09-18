@@ -4,6 +4,8 @@ import { ProjectCategory, ProjectStatus, ProjectFeature } from "../types/project
 import { CATEGORY_CONFIG, STATUS_CONFIG } from "../constants/categories";
 import { INDONESIA_REGIONS } from "../utils/geo";
 import { getContractorStats } from "../utils/contractorMatcher";
+import { WorkModeId, WorkModeConfig } from "../types/workModes";
+import { WorkModeSelector } from "./WorkModeSelector";
 
 export interface MaterialHubFilterState {
   quarry: boolean;
@@ -16,8 +18,8 @@ export interface MaterialHubFilterState {
 interface FilterBarProps {
   selectedCategories: ProjectCategory[];
   onToggleCategory: (category: ProjectCategory) => void;
-  selectedStatus: ProjectStatus | "All";
-  onSelectStatus: (status: ProjectStatus | "All") => void;
+  selectedStatus: ProjectStatus | "All" | "active_construction_and_tender";
+  onSelectStatus: (status: ProjectStatus | "All" | "active_construction_and_tender") => void;
   selectedRegion: string | "All";
   onSelectRegion: (region: string | "All") => void;
   allProjects: ProjectFeature[];
@@ -38,6 +40,8 @@ interface FilterBarProps {
   materialFilters?: MaterialHubFilterState;
   onToggleMaterialFilter?: (key: keyof MaterialHubFilterState) => void;
   onSetAllMaterialFilters?: (val: boolean) => void;
+  activeWorkModeId?: WorkModeId;
+  onSelectWorkMode?: (mode: WorkModeConfig) => void;
 }
 
 export const FilterBar: React.FC<FilterBarProps> = ({
@@ -65,10 +69,13 @@ export const FilterBar: React.FC<FilterBarProps> = ({
   materialFilters,
   onToggleMaterialFilter,
   onSetAllMaterialFilters,
+  activeWorkModeId = 'standard',
+  onSelectWorkMode,
 }) => {
   const categories: ProjectCategory[] = ["Transport", "Energy", "Water", "Housing", "IKN", "Commercial & Private"];
-  const statusOptions: (ProjectStatus | "All")[] = [
+  const statusOptions: (ProjectStatus | "All" | "active_construction_and_tender")[] = [
     "All",
+    "active_construction_and_tender",
     "Tender & Transaksi",
     "Construction",
     "Planning",
@@ -113,8 +120,17 @@ export const FilterBar: React.FC<FilterBarProps> = ({
 
   return (
     <div className="bg-[#0b0f17] border-b border-neutral-800 px-4 sm:px-6 py-2 flex flex-wrap items-center justify-between gap-3 text-xs">
-      {/* Category Toggle Chips */}
+      {/* Category Toggle Chips & Work Mode Selector */}
       <div className="flex items-center gap-1.5 overflow-x-auto pb-1 sm:pb-0 scrollbar-none w-full md:w-auto">
+        {onSelectWorkMode && (
+          <>
+            <WorkModeSelector
+              activeModeId={activeWorkModeId}
+              onSelectMode={onSelectWorkMode}
+            />
+            <div className="h-4 w-px bg-neutral-800 shrink-0 mx-1 hidden sm:block" />
+          </>
+        )}
         <span className="text-neutral-400 text-[10px] uppercase font-semibold tracking-wider mr-1 shrink-0">
           Sector:
         </span>
@@ -207,9 +223,11 @@ export const FilterBar: React.FC<FilterBarProps> = ({
           </span>
           <select
             value={selectedStatus}
-            onChange={(e) => onSelectStatus(e.target.value as ProjectStatus | "All")}
+            onChange={(e) => onSelectStatus(e.target.value as ProjectStatus | "All" | "active_construction_and_tender")}
             className={`border rounded px-2.5 py-1 text-xs focus:outline-none transition-colors font-medium cursor-pointer ${
-              selectedStatus === 'Tender & Transaksi'
+              selectedStatus === 'active_construction_and_tender'
+                ? 'text-emerald-300 border-emerald-500/60 bg-emerald-950/30'
+                : selectedStatus === 'Tender & Transaksi'
                 ? 'text-amber-300 border-amber-500/60 bg-amber-950/30'
                 : selectedStatus !== 'All'
                 ? 'bg-neutral-900 text-neutral-100 border-neutral-700'
@@ -220,9 +238,11 @@ export const FilterBar: React.FC<FilterBarProps> = ({
               <option key={status} value={status}>
                 {status === "All"
                   ? "All Status"
+                  : status === "active_construction_and_tender"
+                  ? "⚡ Konstruksi & Tender"
                   : status === "Tender & Transaksi"
                   ? "🟡 Tender & Transaksi"
-                  : STATUS_CONFIG[status]?.label || status}
+                  : STATUS_CONFIG[status as ProjectStatus]?.label || status}
               </option>
             ))}
           </select>

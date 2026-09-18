@@ -38,6 +38,8 @@ import {
 import { exportAsGeoJSON, exportAsCSV } from '../utils/export';
 import { projectMatchesContractor } from '../utils/contractorMatcher';
 import { getRegionForProvince } from '../utils/geo';
+import { WorkModeId, WorkModeConfig } from '../types/workModes';
+import { WorkModeToast } from '../components/WorkModeToast';
 import { Loader2, AlertTriangle } from 'lucide-react';
 
 export const TrackerPage: React.FC = () => {
@@ -78,6 +80,10 @@ export const TrackerPage: React.FC = () => {
   const [opportunityPresetName, setOpportunityPresetName] = useState<string>('jabodetabek');
   const [mapInstance, setMapInstance] = useState<L.Map | null>(null);
 
+  // Work Mode Presets & Toast States
+  const [activeWorkModeId, setActiveWorkModeId] = useState<WorkModeId>('standard');
+  const [workModeToast, setWorkModeToast] = useState<{ message: string; icon: string } | null>(null);
+
   // Filter States
   const [searchQuery, setSearchQuery] = useState<string>('');
   const [selectedCategories, setSelectedCategories] = useState<ProjectCategory[]>([
@@ -88,7 +94,7 @@ export const TrackerPage: React.FC = () => {
     'IKN',
     'Commercial & Private',
   ]);
-  const [selectedStatus, setSelectedStatus] = useState<ProjectStatus | 'All'>('All');
+  const [selectedStatus, setSelectedStatus] = useState<ProjectStatus | 'All' | 'active_construction_and_tender'>('All');
   const [selectedRegion, setSelectedRegion] = useState<string | 'All'>('All');
 
   // UI Drawer and List states
@@ -355,6 +361,58 @@ export const TrackerPage: React.FC = () => {
     setIsPickingOpportunityCenter(false);
   };
 
+  // Handle Work Mode Preset Selection
+  const handleSelectWorkMode = (mode: WorkModeConfig) => {
+    setActiveWorkModeId(mode.id);
+    const s = mode.settings;
+
+    if (s.categories) {
+      setSelectedCategories(s.categories);
+    }
+    if (s.status !== undefined) {
+      setSelectedStatus(s.status);
+    }
+    if (s.region !== undefined) {
+      setSelectedRegion(s.region);
+    }
+    if (s.contractor !== undefined) {
+      setSelectedContractor(s.contractor);
+    }
+    if (s.basemap !== undefined) {
+      setBasemap(s.basemap);
+    }
+    if (s.showBatchingPlants !== undefined) {
+      setMaterialFilters((prev) => ({
+        ...prev,
+        batching: Boolean(s.showBatchingPlants),
+      }));
+    }
+    if (s.showSupplyBuffers !== undefined) {
+      setShowSupplyBuffers(s.showSupplyBuffers);
+    }
+    if (s.showFaultLines !== undefined) {
+      setShowFaultLines(s.showFaultLines);
+    }
+    if (s.showMaritimeRoutes !== undefined) {
+      setShowMaritimeRoutes(s.showMaritimeRoutes);
+    }
+    if (s.materialFilters !== undefined) {
+      setMaterialFilters(s.materialFilters);
+    }
+    if (s.camera) {
+      setActiveView('map');
+      if (mapInstance) {
+        mapInstance.flyTo(s.camera.center, s.camera.zoom, { duration: 1.5 });
+      }
+      setFlyToCoords([s.camera.center[0], s.camera.center[1]]);
+    }
+
+    setWorkModeToast({
+      message: mode.toastMessage,
+      icon: mode.icon,
+    });
+  };
+
   // Filter projects by Search, Category, Status, Region, and Contractor
   const filteredProjects = useMemo(() => {
     return allProjects.filter((project) => {
@@ -386,13 +444,19 @@ export const TrackerPage: React.FC = () => {
       // Status Filter
       if (selectedStatus !== 'All') {
         const matchesStatus =
-          props.status === selectedStatus ||
-          (selectedStatus === 'Tender & Transaksi' &&
-            (props.status === 'Tender & Transaksi' ||
-              (props.status as string) === 'Tender' ||
-              (props.status as string) === 'Transaksi')) ||
-          (selectedStatus === 'Construction' && props.status === 'Under Construction') ||
-          (selectedStatus === 'Planning' && props.status === 'Planning & Prep');
+          selectedStatus === 'active_construction_and_tender'
+            ? (props.status === 'Under Construction' ||
+               props.status === 'Construction' ||
+               props.status === 'Tender & Transaksi' ||
+               (props.status as string) === 'Tender' ||
+               (props.status as string) === 'Transaksi')
+            : (props.status === selectedStatus ||
+               (selectedStatus === 'Tender & Transaksi' &&
+                 (props.status === 'Tender & Transaksi' ||
+                   (props.status as string) === 'Tender' ||
+                   (props.status as string) === 'Transaksi')) ||
+               (selectedStatus === 'Construction' && props.status === 'Under Construction') ||
+               (selectedStatus === 'Planning' && props.status === 'Planning & Prep'));
         if (!matchesStatus) {
           return false;
         }
@@ -462,6 +526,7 @@ export const TrackerPage: React.FC = () => {
           setSelectedStatus('All');
           setSelectedRegion('All');
           setSelectedContractor(null);
+          setActiveWorkModeId('standard');
         }}
         hasActiveFilters={hasActiveFilters}
         activeView={activeView}
@@ -484,6 +549,8 @@ export const TrackerPage: React.FC = () => {
 
       {/* Filter Bar */}
       <FilterBar
+        activeWorkModeId={activeWorkModeId}
+        onSelectWorkMode={handleSelectWorkMode}
         selectedCategories={selectedCategories}
         onToggleCategory={handleToggleCategory}
         selectedStatus={selectedStatus}
@@ -638,6 +705,13 @@ export const TrackerPage: React.FC = () => {
           setActiveView('map');
           setFlyToCoords(coords);
         }}
+      />
+
+      {/* Work Mode Active Feedback Toast */}
+      <WorkModeToast
+        message={workModeToast?.message ?? null}
+        icon={workModeToast?.icon}
+        onClose={() => setWorkModeToast(null)}
       />
     </div>
   );
