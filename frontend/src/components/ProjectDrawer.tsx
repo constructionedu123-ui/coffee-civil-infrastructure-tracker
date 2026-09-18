@@ -1,5 +1,6 @@
 import React, { useEffect, useMemo, useState, Suspense, lazy } from 'react';
-import { ExternalLink, X, Copy, Check } from 'lucide-react';
+import { ExternalLink, X, Copy, Check, Printer } from 'lucide-react';
+import { ProjectPrintDossier } from './ProjectPrintDossier';
 
 const WhatsAppIcon: React.FC<{ className?: string }> = ({ className = 'w-4 h-4' }) => (
   <svg className={`${className} fill-current`} viewBox="0 0 24 24">
@@ -251,7 +252,7 @@ export const ProjectDrawer: React.FC<ProjectDrawerProps> = ({
       <div
         onClick={onClose}
         aria-hidden="true"
-        className={`fixed inset-0 bg-black/60 transition-opacity duration-200 ${
+        className={`fixed inset-0 bg-black/60 transition-opacity duration-200 print:hidden ${
           isOpen
             ? 'opacity-100 pointer-events-auto z-[1100]'
             : 'opacity-0 pointer-events-none z-[-1]'
@@ -267,7 +268,7 @@ export const ProjectDrawer: React.FC<ProjectDrawerProps> = ({
           bg-[#0f141c] border-l border-neutral-800 shadow-2xl
           flex flex-col
           transform transition-transform duration-200 ease-in-out
-          ${isOpen ? 'translate-x-0' : 'translate-x-full'}`}
+          ${isOpen ? 'translate-x-0' : 'translate-x-full'} print:hidden`}
       >
         {props && categoryConfig && statusConfig && (
           <>
@@ -967,6 +968,18 @@ export const ProjectDrawer: React.FC<ProjectDrawerProps> = ({
                   )}
                 </button>
               </div>
+
+              {/* Printable A4 Engineering Fact Sheet Button (Phase 21) */}
+              <button
+                type="button"
+                onClick={() => window.print()}
+                className="w-full py-2 px-3 rounded-md bg-sky-950/40 hover:bg-sky-900/60 text-sky-300 hover:text-sky-200 border border-sky-600/50 hover:border-sky-400 font-semibold text-xs flex items-center justify-center gap-2 transition-all shadow-sm active:scale-95 group"
+                title="Cetak atau simpan Lembar Intelijen Rekayasa Proyek ke PDF A4"
+              >
+                <Printer className="w-3.5 h-3.5 text-sky-400 group-hover:scale-110 transition-transform shrink-0" />
+                <span>🖨️ Cetak Ringkasan / PDF (A4)</span>
+              </button>
+
               {(props.bim_viewer_url || props.bim_uuid) && (
                 <button
                   onClick={() => setIsBimModalOpen(true)}
@@ -1000,6 +1013,16 @@ export const ProjectDrawer: React.FC<ProjectDrawerProps> = ({
           </>
         )}
       </aside>
+
+      {/* ── Printable A4 Project Fact Sheet (Hidden on screen, active on window.print()) ── */}
+      {project && (
+        <ProjectPrintDossier
+          project={project}
+          batchingPlants={batchingPlants}
+          faultLines={faultLines}
+          materialHubs={materialHubs}
+        />
+      )}
 
       {/* ── Lazy-Loaded 3D BIM Viewer Modal ── */}
       {isBimModalOpen && props && (

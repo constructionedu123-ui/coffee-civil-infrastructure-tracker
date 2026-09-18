@@ -334,6 +334,41 @@
   .print\:hidden {
     display: none !important;
   }
+
+  /* ── Printable Project Engineering Fact Sheet (Phase 21) ────────── */
+  #project-print-dossier {
+    display: block !important;
+    position: static !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: #ffffff !important;
+    color: #0f172a !important;
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+
+  #project-print-dossier table,
+  #project-print-dossier tr,
+  #project-print-dossier td {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+
+  /* Hide app containers when printing dossier */
+  #root > main,
+  #root > header,
+  #root > nav,
+  .leaflet-container {
+    display: none !important;
+  }
+}
+
+@media screen {
+  #project-print-dossier {
+    display: none !important;
+  }
 }
 
 /* ── Geospatial Measurement Tool (Phase 13) ─────────────────────────── */
