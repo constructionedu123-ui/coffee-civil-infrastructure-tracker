@@ -305,11 +305,11 @@ export const MixDesignSimulator: React.FC = () => {
           </button>
         </div>
 
-        {/* Module Content: Interactive Tab View on Screen, All 3 Modules cleanly paginated across pages in Print / PDF */}
-        <div className="space-y-6 print:space-y-0">
-          {/* Module 1: Sieve Analysis & Grading Curve */}
+        {/* Module Content: Interactive Tab View on Screen, Clean 2-Page Pagination in Print / PDF */}
+        <div className="space-y-6 print:space-y-3.5">
+          {/* Module 1: Sieve Analysis & Grading Curve (Page 1) */}
           <section
-            className={`bg-[#131b26] rounded-2xl border border-slate-800/80 shadow-2xl p-6 print:bg-white print:p-4 print:shadow-none print:border-slate-300 print:rounded-xl print-avoid-break ${
+            className={`bg-[#131b26] rounded-2xl border border-slate-800/80 shadow-2xl p-6 print:bg-white print:p-3 print:shadow-none print:border print:border-slate-300 print:rounded-xl print-avoid-break ${
               activeSubTab === 'all' || activeSubTab === 'sieve' ? 'block' : 'hidden print:block'
             }`}
           >
@@ -322,9 +322,9 @@ export const MixDesignSimulator: React.FC = () => {
             />
           </section>
 
-          {/* Module 2: Job Mix Formula Proportioning (SNI 7656 / ACI 211) */}
+          {/* Module 2: Job Mix Formula Proportioning (Page 1 - Follows Module 1) */}
           <section
-            className={`bg-[#131b26] rounded-2xl border border-slate-800/80 shadow-2xl p-6 print:bg-white print:p-4 print:shadow-none print:border-slate-300 print:rounded-xl print-page-break print-avoid-break ${
+            className={`bg-[#131b26] rounded-2xl border border-slate-800/80 shadow-2xl p-6 print:bg-white print:p-3 print:shadow-none print:border print:border-slate-300 print:rounded-xl print-avoid-break ${
               activeSubTab === 'all' || activeSubTab === 'jmf' ? 'block' : 'hidden print:block'
             }`}
           >
@@ -336,9 +336,9 @@ export const MixDesignSimulator: React.FC = () => {
             />
           </section>
 
-          {/* Module 3: Field Moisture Correction & Truck Batching */}
+          {/* Module 3: Field Moisture Correction & Truck Batching (Page 2 - Page Break Before) */}
           <section
-            className={`bg-[#131b26] rounded-2xl border border-slate-800/80 shadow-2xl p-6 print:bg-white print:p-4 print:shadow-none print:border-slate-300 print:rounded-xl print-page-break print-avoid-break ${
+            className={`bg-[#131b26] rounded-2xl border border-slate-800/80 shadow-2xl p-6 print:bg-white print:p-3.5 print:shadow-none print:border print:border-slate-300 print:rounded-xl print-page-break print-avoid-break ${
               activeSubTab === 'all' || activeSubTab === 'moisture' ? 'block' : 'hidden print:block'
             }`}
           >
@@ -350,14 +350,111 @@ export const MixDesignSimulator: React.FC = () => {
               batchingOutputs={batchingOutputs}
             />
           </section>
+
+          {/* Engineering Sign-Off Box (Page 2 Bottom) */}
+          <section
+            className={`bg-[#131b26] rounded-2xl border border-slate-800/80 shadow-2xl p-6 print:bg-white print:p-3 print:shadow-none print:border print:border-slate-300 print:rounded-xl print-avoid-break ${
+              activeSubTab === 'all' || activeSubTab === 'moisture' ? 'block' : 'hidden print:block'
+            }`}
+          >
+            <div className="flex flex-col sm:flex-row sm:items-center justify-between pb-2.5 border-b border-slate-800/80 print:border-slate-200 gap-2 mb-3">
+              <div>
+                <h3 className="text-sm font-bold text-slate-100 print:text-slate-900 tracking-tight">
+                  Lembar Pengesahan & Izin Pengecoran Lapangan (Engineering Sign-Off)
+                </h3>
+                <p className="text-xs text-slate-400 print:text-slate-500">
+                  Verifikasi Hasil Uji Campuran Laboratorium Beton & Persetujuan Job Mix Formula (JMF)
+                </p>
+              </div>
+              <span className="text-[10px] font-mono px-2.5 py-0.5 rounded-full bg-[#0c121a] text-slate-300 border border-slate-700 print:bg-slate-100 print:text-slate-700 print:border-slate-300 font-semibold self-start sm:self-auto">
+                SNI 7656:2012 / ASTM C39 / C136
+              </span>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-3 gap-3">
+              {/* Prepared by: QC Inspector */}
+              <div className="bg-[#0c121a] border border-slate-700/60 rounded-xl p-3 flex flex-col justify-between print:bg-white print:border print:border-slate-300 print:p-2">
+                <div>
+                  <div className="text-[10px] font-bold uppercase tracking-wider text-slate-400 print:text-slate-500">
+                    Dibuat Oleh (Prepared by):
+                  </div>
+                  <div className="text-xs font-bold text-slate-200 print:text-slate-900 mt-0.5">
+                    QC Inspector / Teknisi Lab Beton
+                  </div>
+                </div>
+                <div className="my-3 border-b border-dashed border-slate-700 print:border-slate-300 h-9 flex items-center justify-center text-[10px] text-slate-600 print:text-slate-400 italic">
+                  (Tanda Tangan & Cap)
+                </div>
+                <div className="space-y-1 text-[11px] text-slate-400 print:text-slate-600 font-mono">
+                  <div className="flex justify-between">
+                    <span>Nama:</span>
+                    <span className="border-b border-slate-700 print:border-slate-300 flex-1 ml-2 text-right">........................</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span>Tanggal:</span>
+                    <span className="border-b border-slate-700 print:border-slate-300 flex-1 ml-2 text-right">........................</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Checked by: Site Engineer */}
+              <div className="bg-[#0c121a] border border-slate-700/60 rounded-xl p-3 flex flex-col justify-between print:bg-white print:border print:border-slate-300 print:p-2">
+                <div>
+                  <div className="text-[10px] font-bold uppercase tracking-wider text-slate-400 print:text-slate-500">
+                    Diperiksa Oleh (Checked by):
+                  </div>
+                  <div className="text-xs font-bold text-slate-200 print:text-slate-900 mt-0.5">
+                    Site Engineer / QA-QC Manager
+                  </div>
+                </div>
+                <div className="my-3 border-b border-dashed border-slate-700 print:border-slate-300 h-9 flex items-center justify-center text-[10px] text-slate-600 print:text-slate-400 italic">
+                  (Tanda Tangan & Cap)
+                </div>
+                <div className="space-y-1 text-[11px] text-slate-400 print:text-slate-600 font-mono">
+                  <div className="flex justify-between">
+                    <span>Nama:</span>
+                    <span className="border-b border-slate-700 print:border-slate-300 flex-1 ml-2 text-right">........................</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span>Tanggal:</span>
+                    <span className="border-b border-slate-700 print:border-slate-300 flex-1 ml-2 text-right">........................</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Approved by: Supervision Consultant */}
+              <div className="bg-[#0c121a] border border-slate-700/60 rounded-xl p-3 flex flex-col justify-between print:bg-white print:border print:border-slate-300 print:p-2">
+                <div>
+                  <div className="text-[10px] font-bold uppercase tracking-wider text-slate-400 print:text-slate-500">
+                    Disetujui Oleh (Approved by):
+                  </div>
+                  <div className="text-xs font-bold text-slate-200 print:text-slate-900 mt-0.5">
+                    Supervision Consultant / Pengawas
+                  </div>
+                </div>
+                <div className="my-3 border-b border-dashed border-slate-700 print:border-slate-300 h-9 flex items-center justify-center text-[10px] text-slate-600 print:text-slate-400 italic">
+                  (Tanda Tangan & Cap)
+                </div>
+                <div className="space-y-1 text-[11px] text-slate-400 print:text-slate-600 font-mono">
+                  <div className="flex justify-between">
+                    <span>Nama:</span>
+                    <span className="border-b border-slate-700 print:border-slate-300 flex-1 ml-2 text-right">........................</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span>Tanggal:</span>
+                    <span className="border-b border-slate-700 print:border-slate-300 flex-1 ml-2 text-right">........................</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
         </div>
 
         {/* Footer info banner */}
-        <footer className="pt-6 border-t border-slate-800 text-center text-xs text-slate-500 print:mt-6 print:pt-4 print:border-t-2 print:border-slate-400 print:text-[10px]">
+        <footer className="pt-4 border-t border-slate-800 text-center text-xs text-slate-500 print:mt-3 print:pt-2 print:border-t print:border-slate-300 print:text-[9px]">
           <p>
             Coffee Civil Engineering Lab Suite • SNI 7656:2012 (Tata cara pemilihan proporsi campuran
-            beton normal) • ASTM C136 / C33 • Dirancang untuk Quality Control Teknisi Beton & Site
-            Engineer.
+            beton normal) • ASTM C136 / C33 • Quality Control Teknisi Beton, Site Engineer & Konsultan Pengawas.
           </p>
         </footer>
       </div>

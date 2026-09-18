@@ -143,13 +143,13 @@ export const SieveAnalysisModule: React.FC<SieveAnalysisModuleProps> = ({
   const fmStatus = useMemo(() => {
     const isOptimal = finenessModulus >= 2.3 && finenessModulus <= 3.1;
     let label = 'Memenuhi Spesifikasi (2.3 - 3.1)';
-    let colorClass = 'text-emerald-400 bg-emerald-950/60 border border-emerald-800/60';
+    let colorClass = 'text-emerald-400 bg-emerald-950/60 border border-emerald-800/60 print:bg-white print:text-emerald-700 print:border-emerald-600';
     if (finenessModulus < 2.3) {
       label = 'Terlalu Halus (FM < 2.3)';
-      colorClass = 'text-amber-400 bg-amber-950/60 border border-amber-800/60';
+      colorClass = 'text-amber-400 bg-amber-950/60 border border-amber-800/60 print:bg-white print:text-amber-700 print:border-amber-600';
     } else if (finenessModulus > 3.1) {
       label = 'Terlalu Kasar (FM > 3.1)';
-      colorClass = 'text-rose-400 bg-rose-950/60 border border-rose-800/60';
+      colorClass = 'text-rose-400 bg-rose-950/60 border border-rose-800/60 print:bg-white print:text-rose-700 print:border-rose-600';
     }
     return { isOptimal, label, colorClass };
   }, [finenessModulus]);
@@ -258,18 +258,18 @@ export const SieveAnalysisModule: React.FC<SieveAnalysisModuleProps> = ({
       )}
 
       {/* KPI Stats Bar (Dark Engineering Metric Cards) */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 print:grid-cols-3 print:gap-2 print:my-1.5">
         {/* Fineness Modulus KPI */}
-        <div className="bg-[#0c121a] rounded-xl border border-slate-700/60 p-4 hover:border-slate-600 transition shadow-lg flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+        <div className="bg-[#0c121a] rounded-xl border border-slate-700/60 p-4 hover:border-slate-600 transition shadow-lg flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 print:bg-white print:border print:border-slate-300 print:p-2 print:shadow-none">
           <div className="flex-1 min-w-0 pb-1">
-            <div className="text-[11px] uppercase tracking-wider text-slate-400 font-semibold flex items-center gap-1.5 break-words whitespace-normal leading-tight">
-              <TrendingUp className="w-3.5 h-3.5 text-sky-400 shrink-0" />
+            <div className="text-[11px] uppercase tracking-wider text-slate-400 font-semibold flex items-center gap-1.5 break-words whitespace-normal leading-tight print:text-slate-600 print:text-[10px]">
+              <TrendingUp className="w-3.5 h-3.5 text-sky-400 shrink-0 print:text-sky-700" />
               <span>Fineness Modulus (FM)</span>
             </div>
-            <div className="text-3xl font-extrabold text-white font-mono mt-1 leading-none">
+            <div className="text-3xl font-extrabold text-white font-mono mt-1 leading-none print:text-slate-900 print:text-xl">
               {finenessModulus.toFixed(2)}
             </div>
-            <div className="text-[11px] text-slate-400 mt-1.5 break-words whitespace-normal pb-0.5">Target Standar: 2.30 – 3.10</div>
+            <div className="text-[11px] text-slate-400 mt-1.5 break-words whitespace-normal pb-0.5 print:text-slate-500 print:text-[9px]">Target Standar: 2.30 – 3.10</div>
           </div>
           <div className={`px-2.5 py-1 rounded-full text-xs font-semibold shrink-0 text-center break-words whitespace-normal max-w-full ${fmStatus.colorClass}`}>
             {fmStatus.label}
@@ -277,15 +277,15 @@ export const SieveAnalysisModule: React.FC<SieveAnalysisModuleProps> = ({
         </div>
 
         {/* Envelope Compliance KPI */}
-        <div className="bg-[#0c121a] rounded-xl border border-slate-700/60 p-4 hover:border-slate-600 transition shadow-lg flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+        <div className="bg-[#0c121a] rounded-xl border border-slate-700/60 p-4 hover:border-slate-600 transition shadow-lg flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 print:bg-white print:border print:border-slate-300 print:p-2 print:shadow-none">
           <div className="flex-1 min-w-0 pb-1">
-            <div className="text-[11px] uppercase tracking-wider text-slate-400 font-semibold break-words whitespace-normal leading-tight">
+            <div className="text-[11px] uppercase tracking-wider text-slate-400 font-semibold break-words whitespace-normal leading-tight print:text-slate-600 print:text-[10px]">
               Kesesuaian Amplop Gradasi
             </div>
-            <div className="text-sm font-bold text-slate-100 mt-1 break-words whitespace-normal leading-snug">
+            <div className="text-sm font-bold text-slate-100 mt-1 break-words whitespace-normal leading-snug print:text-slate-900 print:text-xs">
               {selectedZone.name}
             </div>
-            <div className="text-[11px] text-slate-400 mt-1 break-words whitespace-normal pb-0.5">
+            <div className="text-[11px] text-slate-400 mt-1 break-words whitespace-normal pb-0.5 print:text-slate-500 print:text-[9px]">
               {envelopeCompliance.violations.length === 0
                 ? 'Semua titik ayakan dalam batas'
                 : `${envelopeCompliance.violations.length} titik ayakan di luar toleransi`}
@@ -293,13 +293,13 @@ export const SieveAnalysisModule: React.FC<SieveAnalysisModuleProps> = ({
           </div>
           <div className="shrink-0">
             {envelopeCompliance.isCompliant ? (
-              <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-950/60 border border-emerald-800/60 text-emerald-400 text-xs font-semibold whitespace-normal text-center">
-                <CheckCircle2 className="w-3.5 h-3.5 shrink-0" />
+              <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-emerald-950/60 border border-emerald-800/60 text-emerald-400 text-xs font-semibold whitespace-normal text-center print:bg-white print:border print:border-emerald-700 print:text-emerald-800 print:text-[10px] print:px-2 print:py-0.5">
+                <CheckCircle2 className="w-3.5 h-3.5 shrink-0 print:text-emerald-700" />
                 <span>LOLOS (PASS)</span>
               </div>
             ) : (
-              <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-rose-950/60 border border-rose-800/60 text-rose-400 text-xs font-semibold whitespace-normal text-center">
-                <AlertTriangle className="w-3.5 h-3.5 shrink-0" />
+              <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-rose-950/60 border border-rose-800/60 text-rose-400 text-xs font-semibold whitespace-normal text-center print:bg-white print:border print:border-rose-700 print:text-rose-800 print:text-[10px] print:px-2 print:py-0.5">
+                <AlertTriangle className="w-3.5 h-3.5 shrink-0 print:text-rose-700" />
                 <span>VIOLATION</span>
               </div>
             )}
@@ -307,20 +307,20 @@ export const SieveAnalysisModule: React.FC<SieveAnalysisModuleProps> = ({
         </div>
 
         {/* Total Sample Weight KPI */}
-        <div className="bg-[#0c121a] rounded-xl border border-slate-700/60 p-4 hover:border-slate-600 transition shadow-lg flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+        <div className="bg-[#0c121a] rounded-xl border border-slate-700/60 p-4 hover:border-slate-600 transition shadow-lg flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 print:bg-white print:border print:border-slate-300 print:p-2 print:shadow-none">
           <div className="flex-1 min-w-0 pb-1">
-            <div className="text-[11px] uppercase tracking-wider text-slate-400 font-semibold break-words whitespace-normal leading-tight">
+            <div className="text-[11px] uppercase tracking-wider text-slate-400 font-semibold break-words whitespace-normal leading-tight print:text-slate-600 print:text-[10px]">
               Total Massa Sampel
             </div>
-            <div className="text-3xl font-extrabold text-white font-mono mt-1 leading-none">
-              {totalWeight.toLocaleString('id-ID')} <span className="text-sm font-normal text-slate-400">gram</span>
+            <div className="text-3xl font-extrabold text-white font-mono mt-1 leading-none print:text-slate-900 print:text-xl">
+              {totalWeight.toLocaleString('id-ID')} <span className="text-sm font-normal text-slate-400 print:text-slate-600 print:text-xs">gram</span>
             </div>
-            <div className="text-[11px] text-slate-400 mt-1.5 break-words whitespace-normal pb-0.5">
+            <div className="text-[11px] text-slate-400 mt-1.5 break-words whitespace-normal pb-0.5 print:text-slate-500 print:text-[9px]">
               {sieves.length} fraksi saringan teruji
             </div>
           </div>
           <div className="shrink-0">
-            <span className="text-xs px-2.5 py-1 rounded-full bg-slate-800/80 text-slate-300 font-mono border border-slate-700">
+            <span className="text-xs px-2.5 py-1 rounded-full bg-slate-800/80 text-slate-300 font-mono border border-slate-700 print:bg-slate-50 print:text-slate-700 print:border-slate-300 print:text-[10px] print:px-2 print:py-0.5">
               Pan: {sieves.find((s) => s.id === 'sieve-pan')?.retainedWeightGrams || 0}g
             </span>
           </div>
@@ -328,24 +328,27 @@ export const SieveAnalysisModule: React.FC<SieveAnalysisModuleProps> = ({
       </div>
 
       {/* Main Grid: Semi-Log Chart & Data Input Table */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 pt-2">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 pt-2 print:gap-3 print:pt-1">
         {/* Left: Semi-Log Gradation Curve (7 cols) */}
-        <div className="lg:col-span-7 bg-[#0c121a] rounded-xl border border-slate-700/60 p-5 flex flex-col shadow-lg">
-          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4 pb-3 border-b border-slate-800/80">
+        <div className="lg:col-span-7 bg-[#0c121a] rounded-xl border border-slate-700/60 p-5 flex flex-col shadow-lg print:col-span-7 print:bg-white print:border print:border-slate-300 print:p-2.5 print:shadow-none">
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 mb-4 pb-3 border-b border-slate-800/80 print:mb-1.5 print:pb-1 print:border-slate-200">
             <div>
-              <h3 className="text-sm font-bold text-slate-100">
+              <h3 className="text-sm font-bold text-slate-100 print:text-slate-900 print:text-xs">
                 Kurva Distribusi Butiran Agregat (Semi-Log)
               </h3>
-              <p className="text-xs text-slate-400">
+              <p className="text-xs text-slate-400 print:text-slate-500 print:text-[10px]">
                 Ukuran Lubang Ayakan (µm, skala log) vs % Lolos Kumulatif (%)
               </p>
             </div>
 
             {/* Grading Zone Selector */}
             <div className="flex items-center gap-2">
-              <label htmlFor="grading-zone-select" className="text-xs text-slate-400 font-medium whitespace-nowrap">
+              <label htmlFor="grading-zone-select" className="text-xs text-slate-400 font-medium whitespace-nowrap print:text-slate-600 print:text-[10px]">
                 Amplop:
               </label>
+              <span className="hidden print:inline-block text-[10px] font-bold text-slate-900 border border-slate-300 px-2 py-0.5 rounded bg-slate-50">
+                {selectedZone.name}
+              </span>
               <select
                 id="grading-zone-select"
                 value={selectedZone.id}
@@ -353,7 +356,7 @@ export const SieveAnalysisModule: React.FC<SieveAnalysisModuleProps> = ({
                   const z = GRADING_ZONES.find((item) => item.id === e.target.value);
                   if (z) onSelectZone(z);
                 }}
-                className="bg-[#131b26] border border-slate-700 text-xs text-slate-200 rounded-lg px-2.5 py-1.5 focus:outline-none focus:border-sky-400 focus:ring-1 focus:ring-sky-400 shadow-sm font-medium"
+                className="bg-[#131b26] border border-slate-700 text-xs text-slate-200 rounded-lg px-2.5 py-1.5 focus:outline-none focus:border-sky-400 focus:ring-1 focus:ring-sky-400 shadow-sm font-medium print:hidden"
               >
                 {GRADING_ZONES.map((zone) => (
                   <option key={zone.id} value={zone.id} className="bg-[#131b26] text-slate-200">
@@ -365,7 +368,7 @@ export const SieveAnalysisModule: React.FC<SieveAnalysisModuleProps> = ({
           </div>
 
           {/* Chart Canvas */}
-          <div className="w-full h-80 sm:h-96">
+          <div className="w-full h-80 sm:h-96 print:h-44">
             <ResponsiveContainer width="100%" height="100%">
               <ComposedChart
                 data={chartData}
@@ -503,34 +506,34 @@ export const SieveAnalysisModule: React.FC<SieveAnalysisModuleProps> = ({
           </div>
 
           {/* Chart Legend & Explanation */}
-          <div className="flex flex-wrap items-center justify-between gap-3 text-xs text-slate-400 mt-2 pt-3 border-t border-slate-800/80">
-            <div className="flex items-center gap-4">
+          <div className="flex flex-wrap items-center justify-between gap-3 text-xs text-slate-400 mt-2 pt-3 border-t border-slate-800/80 print:mt-1 print:pt-1 print:border-slate-200 print:text-[9px]">
+            <div className="flex items-center gap-4 print:gap-3">
               <div className="flex items-center gap-1.5">
-                <span className="w-3 h-0.5 bg-sky-400 inline-block" />
-                <span className="text-slate-200 font-medium">Gradasi Sampel</span>
+                <span className="w-3 h-0.5 bg-sky-400 print:bg-sky-600 inline-block" />
+                <span className="text-slate-200 print:text-slate-800 font-medium">Gradasi Sampel</span>
               </div>
               <div className="flex items-center gap-1.5">
                 <span className="w-3 h-0.5 border-b border-dashed border-slate-500 inline-block" />
-                <span className="text-slate-400">Batas Toleransi (Min/Max)</span>
+                <span className="text-slate-400 print:text-slate-600">Batas Toleransi</span>
               </div>
               <div className="flex items-center gap-1.5">
-                <span className="w-2.5 h-2.5 rounded-full bg-rose-500 inline-block" />
-                <span className="text-rose-400 font-medium">Titik Melanggar</span>
+                <span className="w-2 h-2 rounded-full bg-rose-500 inline-block" />
+                <span className="text-rose-400 print:text-rose-700 font-medium">Melanggar</span>
               </div>
             </div>
-            <div className="text-[11px] text-slate-400 italic">
+            <div className="text-[11px] text-slate-400 print:text-slate-600 italic print:text-[9px]">
               {selectedZone.description}
             </div>
           </div>
         </div>
 
         {/* Right: Sieve Input & Calculations Table (5 cols) */}
-        <div className="lg:col-span-5 bg-[#0c121a] rounded-xl border border-slate-700/60 p-5 flex flex-col shadow-lg">
+        <div className="lg:col-span-5 bg-[#0c121a] rounded-xl border border-slate-700/60 p-5 flex flex-col shadow-lg print:col-span-5 print:bg-white print:border print:border-slate-300 print:p-2.5 print:shadow-none">
           {/* Table Header & Input Mode Switcher */}
-          <div className="flex items-center justify-between pb-3 mb-2 border-b border-slate-800/80">
+          <div className="flex items-center justify-between pb-3 mb-2 border-b border-slate-800/80 print:pb-1 print:mb-1 print:border-slate-200">
             <div>
-              <h3 className="text-sm font-bold text-slate-100">Tabel Saringan Agregat</h3>
-              <p className="text-xs text-slate-400">Input massa tertahan atau % lolos</p>
+              <h3 className="text-sm font-bold text-slate-100 print:text-slate-900 print:text-xs">Tabel Saringan Agregat</h3>
+              <p className="text-xs text-slate-400 print:text-slate-500 print:text-[10px]">Input massa tertahan atau % lolos</p>
             </div>
 
             <div className="flex items-center bg-slate-900 border border-slate-800 rounded-xl p-0.5 shadow-inner print:hidden">
@@ -561,20 +564,20 @@ export const SieveAnalysisModule: React.FC<SieveAnalysisModuleProps> = ({
           <div className="overflow-x-auto flex-1">
             <table className="w-full text-left text-xs">
               <thead>
-                <tr className="border-b border-slate-800 text-slate-400 font-semibold">
-                  <th className="py-2 pr-2">Ayakan</th>
-                  <th className="py-2 px-1 text-center">Bukaan</th>
+                <tr className="border-b border-slate-800 text-slate-400 font-semibold print:text-[9px] print:text-slate-600 print:border-slate-200">
+                  <th className="py-2 pr-2 print:py-1">Ayakan</th>
+                  <th className="py-2 px-1 text-center print:py-1">Bukaan</th>
                   {inputMode === 'weight' ? (
-                    <th className="py-2 px-1 text-right">Tertahan (g)</th>
+                    <th className="py-2 px-1 text-right print:py-1">Tertahan (g)</th>
                   ) : (
-                    <th className="py-2 px-1 text-right">% Lolos</th>
+                    <th className="py-2 px-1 text-right print:py-1">% Lolos</th>
                   )}
-                  <th className="py-2 px-1 text-right">% Tertahan</th>
-                  <th className="py-2 px-1 text-right">% Lolos</th>
-                  <th className="py-2 pl-2 text-center">Spek</th>
+                  <th className="py-2 px-1 text-right print:py-1">% Tertahan</th>
+                  <th className="py-2 px-1 text-right print:py-1">% Lolos</th>
+                  <th className="py-2 pl-2 text-center print:py-1">Spek</th>
                 </tr>
               </thead>
-              <tbody className="divide-y divide-slate-800/80 font-mono">
+              <tbody className="divide-y divide-slate-800/80 font-mono print:divide-slate-200">
                 {sieves.map((s) => {
                   const limits = selectedZone.limits[s.id];
                   const hasLimit = !!limits;
@@ -587,19 +590,19 @@ export const SieveAnalysisModule: React.FC<SieveAnalysisModuleProps> = ({
                     <tr
                       key={s.id}
                       className={`hover:bg-slate-800/40 transition ${
-                        isViolation ? 'bg-rose-950/25' : ''
+                        isViolation ? 'bg-rose-950/25 print:bg-rose-50' : ''
                       }`}
                     >
-                      <td className="py-2 pr-2 font-sans font-medium text-slate-200">
+                      <td className="py-2 pr-2 font-sans font-medium text-slate-200 print:py-0.5 print:text-[10px] print:text-slate-900">
                         {s.name}
                       </td>
-                      <td className="py-2 px-1 text-center text-slate-400 text-[11px]">
+                      <td className="py-2 px-1 text-center text-slate-400 text-[11px] print:py-0.5 print:text-[10px] print:text-slate-600">
                         {s.openingMm > 0 ? `${s.openingMm} mm` : '-'}
                       </td>
 
                       {/* Dynamic Editable Cell */}
                       {inputMode === 'weight' ? (
-                        <td className="py-1 px-1 text-right">
+                        <td className="py-1 px-1 text-right print:py-0.5">
                           <input
                             type="number"
                             min="0"
@@ -608,11 +611,11 @@ export const SieveAnalysisModule: React.FC<SieveAnalysisModuleProps> = ({
                             onChange={(e) =>
                               handleWeightChange(s.id, parseFloat(e.target.value) || 0)
                             }
-                            className="w-20 bg-[#131b26] border border-slate-700 rounded-md px-1.5 py-0.5 text-right text-white focus:outline-none focus:border-sky-400 focus:ring-1 focus:ring-sky-400 font-mono shadow-sm print:border-none print:shadow-none print:p-0 print:bg-transparent print:text-slate-900"
+                            className="w-20 bg-[#131b26] border border-slate-700 rounded-md px-1.5 py-0.5 text-right text-white focus:outline-none focus:border-sky-400 focus:ring-1 focus:ring-sky-400 font-mono shadow-sm print:border-none print:shadow-none print:p-0 print:text-right print:bg-transparent print:text-slate-900 print:text-[10px] print:w-12"
                           />
                         </td>
                       ) : (
-                        <td className="py-1 px-1 text-right">
+                        <td className="py-1 px-1 text-right print:py-0.5">
                           <input
                             type="number"
                             min="0"
@@ -622,30 +625,30 @@ export const SieveAnalysisModule: React.FC<SieveAnalysisModuleProps> = ({
                             onChange={(e) =>
                               handlePassingChange(s.id, parseFloat(e.target.value) || 0)
                             }
-                            className="w-16 bg-[#131b26] border border-slate-700 rounded-md px-1.5 py-0.5 text-right text-white focus:outline-none focus:border-sky-400 focus:ring-1 focus:ring-sky-400 font-mono shadow-sm print:border-none print:shadow-none print:p-0 print:bg-transparent print:text-slate-900"
+                            className="w-16 bg-[#131b26] border border-slate-700 rounded-md px-1.5 py-0.5 text-right text-white focus:outline-none focus:border-sky-400 focus:ring-1 focus:ring-sky-400 font-mono shadow-sm print:border-none print:shadow-none print:p-0 print:text-right print:bg-transparent print:text-slate-900 print:text-[10px] print:w-12"
                           />
                         </td>
                       )}
 
-                      <td className="py-2 px-1 text-right text-slate-400 text-[11px]">
+                      <td className="py-2 px-1 text-right text-slate-400 text-[11px] print:py-0.5 print:text-[10px] print:text-slate-700">
                         {s.cumulativePercentRetained?.toFixed(1) ?? '0.0'}%
                       </td>
                       <td
-                        className={`py-2 px-1 text-right font-bold text-[11px] ${
-                          isViolation ? 'text-rose-400' : 'text-sky-400'
+                        className={`py-2 px-1 text-right font-bold text-[11px] print:py-0.5 print:text-[10px] ${
+                          isViolation ? 'text-rose-400 print:text-rose-700' : 'text-sky-400 print:text-sky-700'
                         }`}
                       >
                         {s.cumulativePercentPassing.toFixed(1)}%
                       </td>
 
-                      <td className="py-2 pl-2 text-center text-[10px]">
+                      <td className="py-2 pl-2 text-center text-[10px] print:py-0.5 print:text-[9px]">
                         {hasLimit ? (
                           isViolation ? (
-                            <span className="text-rose-400 font-bold bg-rose-950/60 border border-rose-800/60 px-1.5 py-0.5 rounded-full">
+                            <span className="text-rose-400 font-bold bg-rose-950/60 border border-rose-800/60 px-1.5 py-0.5 rounded-full print:bg-white print:border print:border-rose-700 print:text-rose-800 print:px-1">
                               {limits.min}-{limits.max}
                             </span>
                           ) : (
-                            <span className="text-emerald-400 bg-emerald-950/60 border border-emerald-800/60 px-1.5 py-0.5 rounded-full font-medium">
+                            <span className="text-emerald-400 bg-emerald-950/60 border border-emerald-800/60 px-1.5 py-0.5 rounded-full font-medium print:bg-white print:border print:border-emerald-700 print:text-emerald-800 print:px-1">
                               OK
                             </span>
                           )
@@ -661,14 +664,14 @@ export const SieveAnalysisModule: React.FC<SieveAnalysisModuleProps> = ({
           </div>
 
           {/* Quick Reset / Summary Info */}
-          <div className="mt-3 pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs">
-            <div className="text-slate-400">
+          <div className="mt-3 pt-3 border-t border-slate-800/80 flex items-center justify-between text-xs print:mt-1.5 print:pt-1 print:border-slate-200 print:text-[10px]">
+            <div className="text-slate-400 print:text-slate-700">
               Total Sampel:{' '}
-              <strong className="text-white font-mono">{totalWeight} g</strong>
+              <strong className="text-white font-mono print:text-slate-900">{totalWeight} g</strong>
             </div>
             <button
               onClick={() => handleLoadPreset('natural_sand_zona2')}
-              className="flex items-center gap-1.5 text-slate-400 hover:text-slate-200 transition text-xs font-medium"
+              className="flex items-center gap-1.5 text-slate-400 hover:text-slate-200 transition text-xs font-medium print:hidden"
             >
               <RotateCcw className="w-3.5 h-3.5" />
               <span>Reset ke Zona 2</span>

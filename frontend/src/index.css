@@ -160,15 +160,15 @@
 }
 
 /* ==========================================================================
-   Print / PDF Layout Reset (Multi-Page Laboratory Report)
+   Print / PDF Layout Reset (Formal White Engineering Report)
    ========================================================================== */
 @media print {
   @page {
     size: A4 portrait;
-    margin: 10mm 12mm 12mm 12mm;
+    margin: 8mm 10mm 8mm 10mm;
   }
 
-  /* Root Container Print Reset: remove all height locks and overflow cutoffs */
+  /* Root Container Print Reset: force pure white canvas & dark text */
   html,
   body,
   #root,
@@ -179,11 +179,13 @@
     min-height: auto !important;
     max-height: none !important;
     overflow: visible !important;
-    background: white !important;
+    background-color: #ffffff !important;
+    background: #ffffff !important;
+    color: #0f172a !important;
     position: static !important;
   }
 
-  /* Retain exact background colors, chart lines, and borders in PDF output */
+  /* Global print color fidelity */
   *,
   *::before,
   *::after {
@@ -200,6 +202,100 @@
   .shadow-xl,
   .shadow-2xl {
     box-shadow: none !important;
+  }
+
+  /* Force all dark backgrounds inside simulator-container to clean white with crisp 1px borders */
+  .simulator-container [class*="bg-\\[\\#0"],
+  .simulator-container [class*="bg-\\[\\#1"],
+  .simulator-container [class*="bg-slate-900"],
+  .simulator-container [class*="bg-slate-800"] {
+    background-color: #ffffff !important;
+    color: #0f172a !important;
+    border-color: #e2e8f0 !important;
+  }
+
+  /* Status Badges in print: clean bordered tags with white backgrounds */
+  .simulator-container [class*="bg-emerald-950"],
+  .simulator-container [class*="bg-emerald-900"] {
+    background-color: #ffffff !important;
+    color: #15803d !important;
+    border: 1px solid #16a34a !important;
+  }
+
+  .simulator-container [class*="bg-sky-950"],
+  .simulator-container [class*="bg-sky-900"] {
+    background-color: #ffffff !important;
+    color: #0369a1 !important;
+    border: 1px solid #0284c7 !important;
+  }
+
+  .simulator-container [class*="bg-amber-950"],
+  .simulator-container [class*="bg-amber-900"] {
+    background-color: #ffffff !important;
+    color: #b45309 !important;
+    border: 1px solid #d97706 !important;
+  }
+
+  .simulator-container [class*="bg-rose-950"],
+  .simulator-container [class*="bg-rose-900"] {
+    background-color: #ffffff !important;
+    color: #b91c1c !important;
+    border: 1px solid #dc2626 !important;
+  }
+
+  /* Force metric text and inputs in print to high-contrast dark charcoal */
+  .simulator-container .text-white {
+    color: #0f172a !important;
+  }
+
+  .simulator-container .text-slate-100,
+  .simulator-container .text-slate-200,
+  .simulator-container .text-slate-300 {
+    color: #1e293b !important;
+  }
+
+  .simulator-container .text-slate-400,
+  .simulator-container .text-slate-500 {
+    color: #475569 !important;
+  }
+
+  /* Recharts Semi-Log Chart: crisp white background, light grid, dark axes */
+  .recharts-responsive-container,
+  .recharts-wrapper,
+  .recharts-surface {
+    background-color: #ffffff !important;
+    background: #ffffff !important;
+  }
+
+  .recharts-cartesian-grid line {
+    stroke: #e2e8f0 !important;
+    stroke-dasharray: 2 2 !important;
+  }
+
+  .recharts-cartesian-axis line,
+  .recharts-cartesian-axis path {
+    stroke: #475569 !important;
+    stroke-width: 1px !important;
+  }
+
+  .recharts-text,
+  .recharts-label,
+  .recharts-cartesian-axis-tick text {
+    fill: #0f172a !important;
+    color: #0f172a !important;
+    font-family: 'Plus Jakarta Sans', system-ui, sans-serif !important;
+    font-size: 9px !important;
+  }
+
+  /* S-curve chart line in print */
+  .recharts-line-curve[stroke="#38bdf8"] {
+    stroke: #0284c7 !important;
+    stroke-width: 2.5px !important;
+  }
+
+  .recharts-line-curve[stroke="#64748b"] {
+    stroke: #94a3b8 !important;
+    stroke-width: 1.5px !important;
   }
 
   /* Page break helpers */

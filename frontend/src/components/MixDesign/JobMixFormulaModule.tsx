@@ -49,19 +49,19 @@ export const JobMixFormulaModule: React.FC<JobMixFormulaModuleProps> = ({
   };
 
   return (
-    <div className="space-y-6 text-slate-100">
+    <div className="space-y-6 text-slate-100 print:space-y-2">
       {/* Top Banner */}
-      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-800/80">
+      <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 pb-4 border-b border-slate-800/80 print:pb-1.5 print:border-slate-200">
         <div>
           <div className="flex items-center gap-2.5">
-            <div className="w-8 h-8 rounded-xl bg-slate-800/80 border border-slate-700/80 flex items-center justify-center text-emerald-400 shadow-inner">
+            <div className="w-8 h-8 rounded-xl bg-slate-800/80 border border-slate-700/80 flex items-center justify-center text-emerald-400 shadow-inner print:bg-emerald-50 print:border-emerald-200 print:text-emerald-700">
               <Calculator className="w-4 h-4" />
             </div>
             <div>
-              <h2 className="text-base font-bold text-slate-100 tracking-tight">
+              <h2 className="text-base font-bold text-slate-100 tracking-tight print:text-slate-900 print:text-xs">
                 Module 2: Job Mix Formula (JMF) Proportioning Calculator
               </h2>
-              <p className="text-xs text-slate-400">
+              <p className="text-xs text-slate-400 print:text-slate-500 print:text-[10px]">
                 Standar SNI 7656:2012 / ACI 211.1 • Metode Volume Absolut (1 m³ Beton Segar SSD)
               </p>
             </div>
@@ -69,38 +69,38 @@ export const JobMixFormulaModule: React.FC<JobMixFormulaModuleProps> = ({
         </div>
 
         {/* Sync with Module 1 FM status */}
-        <div className="flex items-center gap-2 bg-[#0c121a] border border-slate-700/80 px-3.5 py-1.5 rounded-xl text-xs shadow-sm">
-          <Layers className="w-3.5 h-3.5 text-sky-400" />
-          <span className="text-slate-400 font-medium">FM Pasir dari Ayakan:</span>
-          <strong className="text-white font-mono font-bold">{finenessModulus.toFixed(2)}</strong>
+        <div className="flex items-center gap-2 bg-[#0c121a] border border-slate-700/80 px-3.5 py-1.5 rounded-xl text-xs shadow-sm print:bg-slate-50 print:border-slate-300 print:px-2 print:py-0.5 print:text-[10px]">
+          <Layers className="w-3.5 h-3.5 text-sky-400 print:text-sky-700" />
+          <span className="text-slate-400 font-medium print:text-slate-600">FM Pasir:</span>
+          <strong className="text-white font-mono font-bold print:text-slate-900">{finenessModulus.toFixed(2)}</strong>
         </div>
       </div>
 
       {/* Input Parameters Form & Outputs Grid */}
-      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 print:gap-3">
         {/* Left Column: Mix Design Inputs (5 cols) */}
-        <div className="lg:col-span-5 bg-[#0c121a] rounded-xl border border-slate-700/60 p-5 space-y-4 shadow-lg">
-          <h3 className="text-sm font-bold text-slate-100 flex items-center gap-2 border-b border-slate-800/80 pb-3">
-            <Scale className="w-4 h-4 text-emerald-400" />
+        <div className="lg:col-span-5 bg-[#0c121a] rounded-xl border border-slate-700/60 p-5 space-y-4 shadow-lg print:col-span-5 print:bg-white print:border print:border-slate-300 print:p-2.5 print:space-y-1.5 print:shadow-none">
+          <h3 className="text-sm font-bold text-slate-100 flex items-center gap-2 border-b border-slate-800/80 pb-3 print:pb-1 print:border-slate-200 print:text-xs print:text-slate-900">
+            <Scale className="w-4 h-4 text-emerald-400 print:text-emerald-700" />
             <span>Parameter Desain Campuran</span>
           </h3>
 
           {/* Target Strength: Dual Mode (f'c cylinder vs K cube) */}
-          <div className="space-y-2">
+          <div className="space-y-2 print:space-y-1">
             <div className="flex items-center justify-between">
-              <label htmlFor="target-strength-fc" className="text-xs font-semibold text-slate-300">
+              <label htmlFor="target-strength-fc" className="text-xs font-semibold text-slate-300 print:text-slate-700 print:text-[10px]">
                 Kuat Tekan Rencana (Target Strength):
               </label>
-              <div className="text-[11px] text-slate-400">Umur 28 Hari</div>
+              <div className="text-[11px] text-slate-400 print:text-slate-500 print:text-[9px]">Umur 28 Hari</div>
             </div>
 
             {/* Direct f'c vs K Mode Switcher */}
-            <div className="grid grid-cols-2 gap-3">
-              <div className="bg-[#131b26] border border-slate-700/80 rounded-xl p-3">
-                <div className="text-[10px] uppercase font-bold tracking-wider text-slate-400">
+            <div className="grid grid-cols-2 gap-3 print:gap-1.5">
+              <div className="bg-[#131b26] border border-slate-700/80 rounded-xl p-3 print:bg-slate-50 print:border print:border-slate-200 print:p-1.5">
+                <div className="text-[10px] uppercase font-bold tracking-wider text-slate-400 print:text-slate-600 print:text-[9px]">
                   Silinder f'c (MPa)
                 </div>
-                <div className="flex items-baseline gap-1 mt-1.5">
+                <div className="flex items-baseline gap-1 mt-1.5 print:mt-0.5">
                   <input
                     id="target-strength-fc"
                     type="number"
@@ -109,17 +109,17 @@ export const JobMixFormulaModule: React.FC<JobMixFormulaModuleProps> = ({
                     step="0.5"
                     value={inputs.targetStrengthMPa}
                     onChange={(e) => handleFcChange(parseFloat(e.target.value) || 20)}
-                    className="w-full bg-[#0c121a] border border-slate-700 rounded-lg px-2.5 py-1 text-sm font-mono font-bold text-white focus:outline-none focus:border-sky-400 focus:ring-1 focus:ring-sky-400 shadow-inner"
+                    className="w-full bg-[#0c121a] border border-slate-700 rounded-lg px-2.5 py-1 text-sm font-mono font-bold text-white focus:outline-none focus:border-sky-400 focus:ring-1 focus:ring-sky-400 shadow-inner print:bg-white print:border-slate-300 print:text-slate-900 print:py-0.5 print:text-xs"
                   />
-                  <span className="text-xs font-semibold text-slate-400">MPa</span>
+                  <span className="text-xs font-semibold text-slate-400 print:text-slate-600 print:text-[10px]">MPa</span>
                 </div>
               </div>
 
-              <div className="bg-[#131b26] border border-slate-700/80 rounded-xl p-3">
-                <div className="text-[10px] uppercase font-bold tracking-wider text-slate-400">
+              <div className="bg-[#131b26] border border-slate-700/80 rounded-xl p-3 print:bg-slate-50 print:border print:border-slate-200 print:p-1.5">
+                <div className="text-[10px] uppercase font-bold tracking-wider text-slate-400 print:text-slate-600 print:text-[9px]">
                   Kubus K (kg/cm²)
                 </div>
-                <div className="flex items-baseline gap-1 mt-1.5">
+                <div className="flex items-baseline gap-1 mt-1.5 print:mt-0.5">
                   <input
                     type="number"
                     min="100"
@@ -127,9 +127,9 @@ export const JobMixFormulaModule: React.FC<JobMixFormulaModuleProps> = ({
                     step="5"
                     value={inputs.kValue}
                     onChange={(e) => handleKChange(parseFloat(e.target.value) || 250)}
-                    className="w-full bg-[#0c121a] border border-slate-700 rounded-lg px-2.5 py-1 text-sm font-mono font-bold text-white focus:outline-none focus:border-sky-400 focus:ring-1 focus:ring-sky-400 shadow-inner"
+                    className="w-full bg-[#0c121a] border border-slate-700 rounded-lg px-2.5 py-1 text-sm font-mono font-bold text-white focus:outline-none focus:border-sky-400 focus:ring-1 focus:ring-sky-400 shadow-inner print:bg-white print:border-slate-300 print:text-slate-900 print:py-0.5 print:text-xs"
                   />
-                  <span className="text-xs font-semibold text-slate-400">kg/cm²</span>
+                  <span className="text-xs font-semibold text-slate-400 print:text-slate-600 print:text-[10px]">kg/cm²</span>
                 </div>
               </div>
             </div>
@@ -151,7 +151,7 @@ export const JobMixFormulaModule: React.FC<JobMixFormulaModuleProps> = ({
                 </button>
               ))}
             </div>
-            <p className="text-[11px] text-slate-400 italic">
+            <p className="text-[11px] text-slate-400 italic print:text-[9px] print:text-slate-500">
               Konversi SNI: f'c ≈ K × 0.083 × 0.981 (Silinder Ø15x30cm vs Kubus 15x15x15cm)
             </p>
           </div>
@@ -272,157 +272,156 @@ export const JobMixFormulaModule: React.FC<JobMixFormulaModuleProps> = ({
         </div>
 
         {/* Right Column: Mix Proportions Output & Volume Yield (7 cols) */}
-        {/* Right Column: Mix Proportions Output & Volume Yield (7 cols) */}
-        <div className="lg:col-span-7 bg-[#0c121a] rounded-xl border border-slate-700/60 p-5 flex flex-col justify-between space-y-5 shadow-lg">
+        <div className="lg:col-span-7 bg-[#0c121a] rounded-xl border border-slate-700/60 p-5 flex flex-col justify-between space-y-5 shadow-lg print:col-span-7 print:bg-white print:border print:border-slate-300 print:p-2.5 print:space-y-2 print:shadow-none">
           <div>
-            <div className="flex items-center justify-between border-b border-slate-800/80 pb-3">
-              <h3 className="text-sm font-bold text-slate-100 flex items-center gap-2">
-                <Droplets className="w-4 h-4 text-sky-400" />
+            <div className="flex items-center justify-between border-b border-slate-800/80 pb-3 print:pb-1 print:border-slate-200">
+              <h3 className="text-sm font-bold text-slate-100 flex items-center gap-2 print:text-xs print:text-slate-900">
+                <Droplets className="w-4 h-4 text-sky-400 print:text-sky-700" />
                 <span>Proporsi Campuran Teoritis (Per 1 m³ Beton SSD)</span>
               </h3>
-              <span className="text-xs font-mono text-emerald-400 font-bold bg-emerald-950/60 px-2.5 py-0.5 rounded-full border border-emerald-800/60">
+              <span className="text-xs font-mono text-emerald-400 font-bold bg-emerald-950/60 px-2.5 py-0.5 rounded-full border border-emerald-800/60 print:bg-white print:border print:border-emerald-700 print:text-emerald-800 print:text-[10px]">
                 1.000 m³ Yield
               </span>
             </div>
 
             {/* Key Calculated Indicators */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-4">
-              <div className="bg-[#131b26] border border-slate-700/80 rounded-xl p-3 shadow-inner flex flex-col justify-between">
-                <div className="text-[10px] uppercase tracking-wider text-slate-400 font-semibold break-words whitespace-normal leading-tight pb-0.5">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-4 print:grid-cols-4 print:gap-1.5 print:mt-1.5">
+              <div className="bg-[#131b26] border border-slate-700/80 rounded-xl p-3 shadow-inner flex flex-col justify-between print:bg-slate-50 print:border print:border-slate-200 print:p-1.5 print:shadow-none">
+                <div className="text-[10px] uppercase tracking-wider text-slate-400 font-semibold break-words whitespace-normal leading-tight pb-0.5 print:text-slate-600 print:text-[9px]">
                   Faktor Air Semen (w/c)
                 </div>
                 <div>
-                  <div className="text-xl font-mono font-extrabold text-sky-400 mt-1">
+                  <div className="text-xl font-mono font-extrabold text-sky-400 mt-1 print:text-sky-800 print:text-base">
                     {outputs.waterCementRatio.toFixed(3)}
                   </div>
-                  <div className="text-[11px] text-slate-400 mt-0.5 break-words whitespace-normal">Berdasarkan f'cr</div>
+                  <div className="text-[11px] text-slate-400 mt-0.5 break-words whitespace-normal print:text-slate-500 print:text-[9px]">Berdasarkan f'cr</div>
                 </div>
               </div>
 
-              <div className="bg-[#131b26] border border-slate-700/80 rounded-xl p-3 shadow-inner flex flex-col justify-between">
-                <div className="text-[10px] uppercase tracking-wider text-slate-400 font-semibold break-words whitespace-normal leading-tight pb-0.5">
+              <div className="bg-[#131b26] border border-slate-700/80 rounded-xl p-3 shadow-inner flex flex-col justify-between print:bg-slate-50 print:border print:border-slate-200 print:p-1.5 print:shadow-none">
+                <div className="text-[10px] uppercase tracking-wider text-slate-400 font-semibold break-words whitespace-normal leading-tight pb-0.5 print:text-slate-600 print:text-[9px]">
                   Target f'cr Rencana
                 </div>
                 <div>
-                  <div className="text-xl font-mono font-extrabold text-white mt-1">
-                    {outputs.targetRequiredStrengthMPa.toFixed(1)} <span className="text-xs font-normal text-slate-400">MPa</span>
+                  <div className="text-xl font-mono font-extrabold text-white mt-1 print:text-slate-900 print:text-base">
+                    {outputs.targetRequiredStrengthMPa.toFixed(1)} <span className="text-xs font-normal text-slate-400 print:text-slate-600 print:text-[10px]">MPa</span>
                   </div>
-                  <div className="text-[11px] text-slate-400 mt-0.5 break-words whitespace-normal">
+                  <div className="text-[11px] text-slate-400 mt-0.5 break-words whitespace-normal print:text-slate-500 print:text-[9px]">
                     Margin: +{outputs.marginOfSafetyMPa.toFixed(1)} MPa
                   </div>
                 </div>
               </div>
 
-              <div className="bg-[#131b26] border border-slate-700/80 rounded-xl p-3 shadow-inner flex flex-col justify-between">
-                <div className="text-[10px] uppercase tracking-wider text-slate-400 font-semibold break-words whitespace-normal leading-tight pb-0.5">
+              <div className="bg-[#131b26] border border-slate-700/80 rounded-xl p-3 shadow-inner flex flex-col justify-between print:bg-slate-50 print:border print:border-slate-200 print:p-1.5 print:shadow-none">
+                <div className="text-[10px] uppercase tracking-wider text-slate-400 font-semibold break-words whitespace-normal leading-tight pb-0.5 print:text-slate-600 print:text-[9px]">
                   Rasio Campuran
                 </div>
                 <div>
-                  <div className="text-xs font-mono font-bold text-white mt-1.5 break-words whitespace-normal">
+                  <div className="text-xs font-mono font-bold text-white mt-1.5 break-words whitespace-normal print:text-slate-900 print:text-[10px]">
                     1 : {outputs.mixRatio.sand.toFixed(2)} : {outputs.mixRatio.gravel.toFixed(2)}
                   </div>
-                  <div className="text-[10px] text-slate-400 mt-0.5 break-words whitespace-normal">
+                  <div className="text-[10px] text-slate-400 mt-0.5 break-words whitespace-normal print:text-slate-500 print:text-[9px]">
                     Semen : Pasir : Kerikil
                   </div>
                 </div>
               </div>
 
-              <div className="bg-[#131b26] border border-slate-700/80 rounded-xl p-3 shadow-inner flex flex-col justify-between">
-                <div className="text-[10px] uppercase tracking-wider text-slate-400 font-semibold break-words whitespace-normal leading-tight pb-0.5">
+              <div className="bg-[#131b26] border border-slate-700/80 rounded-xl p-3 shadow-inner flex flex-col justify-between print:bg-slate-50 print:border print:border-slate-200 print:p-1.5 print:shadow-none">
+                <div className="text-[10px] uppercase tracking-wider text-slate-400 font-semibold break-words whitespace-normal leading-tight pb-0.5 print:text-slate-600 print:text-[9px]">
                   Kerapatan Segar
                 </div>
                 <div>
-                  <div className="text-xl font-mono font-extrabold text-emerald-400 mt-1">
+                  <div className="text-xl font-mono font-extrabold text-emerald-400 mt-1 print:text-emerald-800 print:text-base">
                     {(
                       outputs.waterKg +
                       outputs.cementKg +
                       outputs.fineAggregateKg +
                       outputs.coarseAggregateKg
                     ).toFixed(0)}{' '}
-                    <span className="text-xs font-normal text-slate-400">kg/m³</span>
+                    <span className="text-xs font-normal text-slate-400 print:text-slate-600 print:text-[10px]">kg/m³</span>
                   </div>
-                  <div className="text-[11px] text-slate-400 mt-0.5 break-words whitespace-normal">Unit Weight</div>
+                  <div className="text-[11px] text-slate-400 mt-0.5 break-words whitespace-normal print:text-slate-500 print:text-[9px]">Unit Weight</div>
                 </div>
               </div>
             </div>
 
             {/* Ingredient Quantities Cards (1 m³) */}
-            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-4">
+            <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 mt-4 print:grid-cols-4 print:gap-1.5 print:mt-1.5">
               {/* Air / Water */}
-              <div className="bg-[#131b26] border border-sky-800/60 rounded-xl p-4 shadow-sm">
-                <div className="text-xs font-semibold text-sky-400 flex items-center justify-between">
-                  <span className="flex items-center gap-1.5"><Droplets className="w-3.5 h-3.5 text-sky-400" /> Air</span>
-                  <span className="bg-sky-950/60 text-sky-400 border border-sky-800/60 text-[10px] px-1.5 py-0.5 rounded-md font-mono">Water</span>
+              <div className="bg-[#131b26] border border-sky-800/60 rounded-xl p-4 shadow-sm print:bg-slate-50 print:border print:border-sky-300 print:p-1.5 print:shadow-none">
+                <div className="text-xs font-semibold text-sky-400 flex items-center justify-between print:text-sky-800 print:text-[10px]">
+                  <span className="flex items-center gap-1.5"><Droplets className="w-3.5 h-3.5 text-sky-400 print:text-sky-700" /> Air</span>
+                  <span className="bg-sky-950/60 text-sky-400 border border-sky-800/60 text-[10px] px-1.5 py-0.5 rounded-md font-mono print:bg-white print:border-sky-300 print:text-sky-800 print:text-[9px]">Water</span>
                 </div>
-                <div className="text-2xl font-mono font-extrabold text-white mt-2">
+                <div className="text-2xl font-mono font-extrabold text-white mt-2 print:text-slate-900 print:text-base print:mt-1">
                   {outputs.waterKg.toFixed(1)}{' '}
-                  <span className="text-xs font-normal text-slate-400">L</span>
+                  <span className="text-xs font-normal text-slate-400 print:text-slate-600 print:text-[10px]">L</span>
                 </div>
-                <div className="text-[11px] text-slate-400 mt-1 font-mono">
+                <div className="text-[11px] text-slate-400 mt-1 font-mono print:text-slate-500 print:text-[9px]">
                   Vol: {outputs.volumes.waterM3.toFixed(3)} m³
                 </div>
               </div>
 
               {/* Semen / Cement */}
-              <div className="bg-[#131b26] border border-slate-700 rounded-xl p-4 shadow-sm">
-                <div className="text-xs font-semibold text-slate-200 flex items-center justify-between">
-                  <span className="flex items-center gap-1.5"><Box className="w-3.5 h-3.5 text-slate-400" /> Semen</span>
-                  <span className="bg-slate-800 text-slate-300 border border-slate-700 text-[10px] px-1.5 py-0.5 rounded-md font-mono">Cement</span>
+              <div className="bg-[#131b26] border border-slate-700 rounded-xl p-4 shadow-sm print:bg-slate-50 print:border print:border-slate-300 print:p-1.5 print:shadow-none">
+                <div className="text-xs font-semibold text-slate-200 flex items-center justify-between print:text-slate-800 print:text-[10px]">
+                  <span className="flex items-center gap-1.5"><Box className="w-3.5 h-3.5 text-slate-400 print:text-slate-600" /> Semen</span>
+                  <span className="bg-slate-800 text-slate-300 border border-slate-700 text-[10px] px-1.5 py-0.5 rounded-md font-mono print:bg-white print:border-slate-300 print:text-slate-800 print:text-[9px]">Cement</span>
                 </div>
-                <div className="text-2xl font-mono font-extrabold text-white mt-2">
+                <div className="text-2xl font-mono font-extrabold text-white mt-2 print:text-slate-900 print:text-base print:mt-1">
                   {outputs.cementKg.toFixed(1)}{' '}
-                  <span className="text-xs font-normal text-slate-400">kg</span>
+                  <span className="text-xs font-normal text-slate-400 print:text-slate-600 print:text-[10px]">kg</span>
                 </div>
-                <div className="text-[11px] text-slate-400 mt-1 font-mono">
+                <div className="text-[11px] text-slate-400 mt-1 font-mono print:text-slate-500 print:text-[9px]">
                   ~{(outputs.cementKg / 50).toFixed(1)} zak 50kg
                 </div>
               </div>
 
               {/* Pasir / Fine Aggregate */}
-              <div className="bg-[#131b26] border border-amber-800/60 rounded-xl p-4 shadow-sm">
-                <div className="text-xs font-semibold text-amber-400 flex items-center justify-between">
-                  <span className="flex items-center gap-1.5"><Layers className="w-3.5 h-3.5 text-amber-400" /> Pasir</span>
-                  <span className="bg-amber-950/60 text-amber-400 border border-amber-800/60 text-[10px] px-1.5 py-0.5 rounded-md font-mono">Sand</span>
+              <div className="bg-[#131b26] border border-amber-800/60 rounded-xl p-4 shadow-sm print:bg-slate-50 print:border print:border-amber-300 print:p-1.5 print:shadow-none">
+                <div className="text-xs font-semibold text-amber-400 flex items-center justify-between print:text-amber-800 print:text-[10px]">
+                  <span className="flex items-center gap-1.5"><Layers className="w-3.5 h-3.5 text-amber-400 print:text-amber-700" /> Pasir</span>
+                  <span className="bg-amber-950/60 text-amber-400 border border-amber-800/60 text-[10px] px-1.5 py-0.5 rounded-md font-mono print:bg-white print:border-amber-300 print:text-amber-800 print:text-[9px]">Sand</span>
                 </div>
-                <div className="text-2xl font-mono font-extrabold text-white mt-2">
+                <div className="text-2xl font-mono font-extrabold text-white mt-2 print:text-slate-900 print:text-base print:mt-1">
                   {outputs.fineAggregateKg.toFixed(1)}{' '}
-                  <span className="text-xs font-normal text-slate-400">kg</span>
+                  <span className="text-xs font-normal text-slate-400 print:text-slate-600 print:text-[10px]">kg</span>
                 </div>
-                <div className="text-[11px] text-slate-400 mt-1 font-mono">
+                <div className="text-[11px] text-slate-400 mt-1 font-mono print:text-slate-500 print:text-[9px]">
                   Vol: {outputs.volumes.fineAggregateM3.toFixed(3)} m³
                 </div>
               </div>
 
               {/* Kerikil / Coarse Aggregate */}
-              <div className="bg-[#131b26] border border-emerald-800/60 rounded-xl p-4 shadow-sm">
-                <div className="text-xs font-semibold text-emerald-400 flex items-center justify-between">
-                  <span className="flex items-center gap-1.5"><Scale className="w-3.5 h-3.5 text-emerald-400" /> Kerikil</span>
-                  <span className="bg-emerald-950/60 text-emerald-400 border border-emerald-800/60 text-[10px] px-1.5 py-0.5 rounded-md font-mono">Split</span>
+              <div className="bg-[#131b26] border border-emerald-800/60 rounded-xl p-4 shadow-sm print:bg-slate-50 print:border print:border-emerald-300 print:p-1.5 print:shadow-none">
+                <div className="text-xs font-semibold text-emerald-400 flex items-center justify-between print:text-emerald-800 print:text-[10px]">
+                  <span className="flex items-center gap-1.5"><Scale className="w-3.5 h-3.5 text-emerald-400 print:text-emerald-700" /> Kerikil</span>
+                  <span className="bg-emerald-950/60 text-emerald-400 border border-emerald-800/60 text-[10px] px-1.5 py-0.5 rounded-md font-mono print:bg-white print:border-emerald-300 print:text-emerald-800 print:text-[9px]">Split</span>
                 </div>
-                <div className="text-2xl font-mono font-extrabold text-white mt-2">
+                <div className="text-2xl font-mono font-extrabold text-white mt-2 print:text-slate-900 print:text-base print:mt-1">
                   {outputs.coarseAggregateKg.toFixed(1)}{' '}
-                  <span className="text-xs font-normal text-slate-400">kg</span>
+                  <span className="text-xs font-normal text-slate-400 print:text-slate-600 print:text-[10px]">kg</span>
                 </div>
-                <div className="text-[11px] text-slate-400 mt-1 font-mono">
+                <div className="text-[11px] text-slate-400 mt-1 font-mono print:text-slate-500 print:text-[9px]">
                   Vol: {outputs.volumes.coarseAggregateM3.toFixed(3)} m³
                 </div>
               </div>
             </div>
 
             {/* Absolute Volume Breakdown Visualizer */}
-            <div className="mt-5 space-y-2">
-              <div className="flex items-center justify-between text-xs">
-                <span className="text-slate-300 font-semibold flex items-center gap-1.5">
-                  <Info className="w-3.5 h-3.5 text-sky-400" />
+            <div className="mt-5 space-y-2 print:mt-1.5 print:space-y-1">
+              <div className="flex items-center justify-between text-xs print:text-[10px]">
+                <span className="text-slate-300 font-semibold flex items-center gap-1.5 print:text-slate-800">
+                  <Info className="w-3.5 h-3.5 text-sky-400 print:text-sky-700" />
                   Distribusi Volume Absolut Total:
                 </span>
-                <span className="font-mono text-emerald-400 font-bold">
+                <span className="font-mono text-emerald-400 font-bold print:text-emerald-800">
                   {outputs.totalVolume.toFixed(3)} m³ (100.0%)
                 </span>
               </div>
 
               {/* Multi-segmented modern pastel progress bar */}
-              <div className="w-full h-5 bg-slate-900 rounded-lg overflow-hidden flex border border-slate-700/80">
+              <div className="w-full h-5 bg-slate-900 rounded-lg overflow-hidden flex border border-slate-700/80 print:h-3.5 print:border-slate-400">
                 {/* Cement */}
                 <div
                   style={{ width: `${(outputs.volumes.cementM3 / outputs.totalVolume) * 100}%` }}
@@ -471,7 +470,7 @@ export const JobMixFormulaModule: React.FC<JobMixFormulaModuleProps> = ({
               </div>
 
               {/* Legend bar */}
-              <div className="flex flex-wrap items-center justify-between text-[11px] text-slate-400 pt-1 font-mono">
+              <div className="flex flex-wrap items-center justify-between text-[11px] text-slate-400 pt-1 font-mono print:text-[9px] print:text-slate-600 print:pt-0.5">
                 <div className="flex items-center gap-1.5">
                   <span className="w-2.5 h-2.5 bg-slate-400 rounded-sm" /> Semen (
                   {((outputs.volumes.cementM3 / outputs.totalVolume) * 100).toFixed(1)}%)
@@ -496,14 +495,14 @@ export const JobMixFormulaModule: React.FC<JobMixFormulaModuleProps> = ({
             </div>
           </div>
 
-          <div className="bg-[#131b26] border border-slate-700/80 rounded-xl p-3 text-xs text-slate-300 flex items-center justify-between">
+          <div className="bg-[#131b26] border border-slate-700/80 rounded-xl p-3 text-xs text-slate-300 flex items-center justify-between print:bg-slate-50 print:border print:border-slate-300 print:p-1.5 print:text-[10px] print:text-slate-700">
             <div className="flex items-center gap-2">
-              <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0" />
+              <CheckCircle2 className="w-4 h-4 text-emerald-400 shrink-0 print:text-emerald-700" />
               <span>
                 Proporsi campuran SSD siap diaplikasikan untuk koreksi kadar air lapangan pada Module 3.
               </span>
             </div>
-            <span className="text-[11px] text-slate-400 font-medium">SNI 7656:2012</span>
+            <span className="text-[11px] text-slate-400 font-medium print:text-slate-600">SNI 7656:2012</span>
           </div>
         </div>
       </div>
