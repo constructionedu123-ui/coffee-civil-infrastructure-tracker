@@ -38,6 +38,7 @@ CREATE TABLE IF NOT EXISTS projects (
     latitude        REAL,
     longitude       REAL,
     geocode_method  TEXT DEFAULT 'unresolved',
+    is_national     BOOLEAN DEFAULT 0,
     source_url      TEXT NOT NULL,
     source_name     TEXT NOT NULL,
     scraped_at      TEXT NOT NULL,
@@ -92,6 +93,8 @@ def init_db(db_path: Path = DB_PATH) -> None:
             conn.execute("ALTER TABLE projects ADD COLUMN bim_viewer_url TEXT;")
         if "bim_uuid" not in existing_cols:
             conn.execute("ALTER TABLE projects ADD COLUMN bim_uuid TEXT;")
+        if "is_national" not in existing_cols:
+            conn.execute("ALTER TABLE projects ADD COLUMN is_national BOOLEAN DEFAULT 0;")
     log.info("Database initialised at %s", db_path)
 
 
@@ -105,12 +108,12 @@ def upsert_project(record: dict, db_path: Path = DB_PATH) -> None:
         project_id, project_name, category, status, budget_idr, budget_raw,
         contractor, funding_scheme, pjpk, unor, balai, fiscal_year, progress,
         bim_viewer_url, bim_uuid, province, regency, latitude, longitude, geocode_method,
-        source_url, source_name, scraped_at
+        is_national, source_url, source_name, scraped_at
     ) VALUES (
         :project_id, :project_name, :category, :status, :budget_idr, :budget_raw,
         :contractor, :funding_scheme, :pjpk, :unor, :balai, :fiscal_year, :progress,
         :bim_viewer_url, :bim_uuid, :province, :regency, :latitude, :longitude, :geocode_method,
-        :source_url, :source_name, :scraped_at
+        :is_national, :source_url, :source_name, :scraped_at
     )
     ON CONFLICT(project_id) DO UPDATE SET
         project_name   = excluded.project_name,
@@ -132,6 +135,7 @@ def upsert_project(record: dict, db_path: Path = DB_PATH) -> None:
         latitude       = excluded.latitude,
         longitude      = excluded.longitude,
         geocode_method = excluded.geocode_method,
+        is_national    = excluded.is_national,
         source_url     = excluded.source_url,
         scraped_at     = excluded.scraped_at,
         updated_at     = datetime('now')
@@ -145,6 +149,7 @@ def upsert_project(record: dict, db_path: Path = DB_PATH) -> None:
     record.setdefault("progress", None)
     record.setdefault("bim_viewer_url", None)
     record.setdefault("bim_uuid", None)
+    record.setdefault("is_national", False)
     with _connect(db_path) as conn:
         conn.execute(sql, record)
 
@@ -163,18 +168,19 @@ def upsert_many(records: list[dict], db_path: Path = DB_PATH) -> int:
             rec.setdefault("progress", None)
             rec.setdefault("bim_viewer_url", None)
             rec.setdefault("bim_uuid", None)
+            rec.setdefault("is_national", False)
             conn.execute("""
                 INSERT INTO projects (
                     project_id, project_name, category, status, budget_idr, budget_raw,
                     contractor, funding_scheme, pjpk, unor, balai, fiscal_year, progress,
                     bim_viewer_url, bim_uuid, province, regency, latitude, longitude, geocode_method,
-                    source_url, source_name, scraped_at
+                    is_national, source_url, source_name, scraped_at
                 ) VALUES (
                     :project_id, :project_name, :category, :status,
                     :budget_idr, :budget_raw, :contractor, :funding_scheme, :pjpk,
                     :unor, :balai, :fiscal_year, :progress, :bim_viewer_url, :bim_uuid,
                     :province, :regency, :latitude, :longitude, :geocode_method,
-                    :source_url, :source_name, :scraped_at
+                    :is_national, :source_url, :source_name, :scraped_at
                 )
                 ON CONFLICT(project_id) DO UPDATE SET
                     project_name   = excluded.project_name,
@@ -196,6 +202,7 @@ def upsert_many(records: list[dict], db_path: Path = DB_PATH) -> int:
                     latitude       = excluded.latitude,
                     longitude      = excluded.longitude,
                     geocode_method = excluded.geocode_method,
+                    is_national    = excluded.is_national,
                     source_url     = excluded.source_url,
                     scraped_at     = excluded.scraped_at,
                     updated_at     = datetime('now')

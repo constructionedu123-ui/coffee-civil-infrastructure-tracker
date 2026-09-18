@@ -55,6 +55,7 @@ class ProjectRecord(BaseModel):
     latitude: Optional[float] = None
     longitude: Optional[float] = None
     geocode_method: GeocodeMethodType = "unresolved"
+    is_national: Optional[bool] = False
 
     # ── Meta ─────────────────────────────────────────────────────────────────
     scraped_at: datetime = datetime.utcnow()

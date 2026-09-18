@@ -89,13 +89,14 @@ def _enrich_and_validate(raw: dict) -> dict | None:
             project_name = raw.get("project_name", "")
             lat, lon, method = geocode(project_name)
 
-        # Fallback for 'Nasional' / 'Lintas Provinsi' / Multi-province entries -> central Indonesia
+        # Fallback for 'Nasional' / 'Lintas Provinsi' / Multi-province entries -> central administrative agency in Jakarta
         if method == "unresolved":
             if any(k in combined for k in ["nasional", "lintas provinsi", "lintas-provinsi", "lintas pulau", "hvdc", "indonesia"]):
-                lat, lon = -2.5489, 118.0149
+                lat, lon = -6.2383, 106.8016
                 method = "national_fallback"
-                if not raw.get("province"):
-                    raw["province"] = "Nasional"
+                raw["province"] = "DKI Jakarta"
+                raw["regency"] = "Nasional / Multi-Provinsi"
+                raw["is_national"] = True
 
     if not raw.get("province"):
         name_l = (raw.get("project_name") or "").lower()
@@ -108,9 +109,26 @@ def _enrich_and_validate(raw: dict) -> dict | None:
         elif "sulawesi" in name_l:
             raw["province"] = "Sulawesi (Lintas Provinsi)"
         elif method == "national_fallback":
-            raw["province"] = "Nasional"
+            raw["province"] = "DKI Jakarta"
+            raw["regency"] = "Nasional / Multi-Provinsi"
+            raw["is_national"] = True
         elif method in ("hardcoded", "province_fallback"):
             raw["province"] = "Lintas Provinsi"
+
+    # Special Bias: KSPN 10 Destinasi Prioritas & National Programs
+    if any(k in combined for k in ["kspn prioritas", "10 kawasan strategis pariwisata nasional", "jargas nasional", "bantuan rumah swadaya"]):
+        lat, lon = -6.2383, 106.8016
+        method = "national_fallback"
+        raw["province"] = "DKI Jakarta"
+        raw["regency"] = "Nasional / Multi-Provinsi"
+        raw["is_national"] = True
+
+    # Special Bias: Jalan Tol Cisumdawu (Sumedang, Jawa Barat)
+    if "cileunyi" in combined and "dawuan" in combined:
+        lat, lon = -6.8584, 107.9255
+        method = "exact_kabupaten"
+        raw["province"] = "Jawa Barat"
+        raw["regency"] = "Kabupaten Sumedang"
 
     # Special Bias: DI Lhok Guci placed specifically on Aceh Barat mainland
     if "lhok guci" in combined:
@@ -132,13 +150,25 @@ def _enrich_and_validate(raw: dict) -> dict | None:
     loc_lower = (raw.get("location_text") or "").lower()
     check_str = f"{prov_lower} {name_lower} {loc_lower}"
 
-    if any(k in check_str for k in [
+    # Guard against flipping southern/Java/National projects to positive latitude
+    is_southern = any(sp in prov_lower for sp in [
+        "jawa", "banten", "jakarta", "dki", "yogyakarta", "diy", "bali",
+        "nusa tenggara", "ntb", "ntt", "lampung", "bengkulu", "sumatera selatan",
+        "sumsel", "jambi", "kalimantan selatan", "kalsel", "sulawesi selatan",
+        "sulsel", "sulawesi tenggara", "sultra"
+    ]) or raw.get("is_national")
+
+    if not is_southern and any(k in check_str for k in [
         "aceh", "sumatera utara", "sumut", "north sumatra", "medan", "binjai", "langkat", "langsa",
         "riau", "kepri", "batam", "kalimantan utara", "kaltara", "sulawesi utara", "sulut"
     ]):
         if lat is not None and lat < 0:
             log.info("Sanitizing negative latitude for northern project '%s': %f -> %f", raw.get("project_name"), lat, abs(lat))
             lat = abs(lat)
+
+    if is_southern and lat is not None and lat > 0:
+        log.info("Fixing accidental positive latitude for southern project '%s': %f -> %f", raw.get("project_name"), lat, -abs(lat))
+        lat = -abs(lat)
 
     raw["latitude"] = lat
     raw["longitude"] = lon
@@ -168,6 +198,7 @@ def _enrich_and_validate(raw: dict) -> dict | None:
             latitude=lat,
             longitude=lon,
             geocode_method=method,
+            is_national=raw.get("is_national", False),
         )
     except Exception as exc:
         log.warning("Validation failed for '%s': %s", raw.get("project_name"), exc)

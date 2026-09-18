@@ -36,6 +36,7 @@ export interface ProjectProperties {
   province: string | null;
   regency: string | null;
   geocode_method: GeocodeMethod;
+  is_national?: boolean | null;
   source_url: string;
   source_name: 'KPPIP' | 'BPJT' | 'Kementerian PU (BIM)' | string;
   scraped_at: string;

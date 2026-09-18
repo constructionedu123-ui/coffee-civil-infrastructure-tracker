@@ -35,15 +35,28 @@ HARDCODED: dict[str, tuple[float, float]] = {
     "batam": (1.0784, 104.0207),
     "dki jakarta": (-6.2088, 106.8456),
     "jakarta": (-6.2088, 106.8456),
-    "indonesia": (-2.5489, 118.0149),
-    # National / Lintas Provinsi central Indonesia fallback
-    "nasional": (-2.5489, 118.0149),
-    "lintas provinsi": (-2.5489, 118.0149),
-    "lintas-provinsi": (-2.5489, 118.0149),
-    "lintas wilayah": (-2.5489, 118.0149),
-    "lintas pulau": (-2.5489, 118.0149),
-    "multi provinsi": (-2.5489, 118.0149),
-    "seluruh indonesia": (-2.5489, 118.0149),
+    "indonesia": (-6.2383, 106.8016),
+    # National / Lintas Provinsi central administering agency (Kementerian PUPR/Kemenhub Pattimura, DKI Jakarta)
+    "nasional": (-6.2383, 106.8016),
+    "lintas provinsi": (-6.2383, 106.8016),
+    "lintas-provinsi": (-6.2383, 106.8016),
+    "lintas wilayah": (-6.2383, 106.8016),
+    "lintas pulau": (-6.2383, 106.8016),
+    "multi provinsi": (-6.2383, 106.8016),
+    "seluruh indonesia": (-6.2383, 106.8016),
+    # National Priority Programs (KSPN, Palapa Ring, Jargas, BSPS)
+    "kspn": (-6.2383, 106.8016),
+    "10 kawasan strategis pariwisata nasional": (-6.2383, 106.8016),
+    "kspn prioritas": (-6.2383, 106.8016),
+    "palapa ring": (-6.2383, 106.8016),
+    "jargas nasional": (-6.2383, 106.8016),
+    "jaringan gas kota": (-6.2383, 106.8016),
+    "bantuan rumah swadaya": (-6.2383, 106.8016),
+    # Toll road corridors
+    "cileunyi - sumedang - dawuan": (-6.8584, 107.9255),
+    "cileunyi – sumedang – dawuan": (-6.8584, 107.9255),
+    "cisumdawu": (-6.8584, 107.9255),
+    "tol cisumdawu": (-6.8584, 107.9255),
     # National power / transmission projects
     "central west java transmission": (-6.9000, 107.6000),  # Central-West Java 500kV approx
     "central ? west java": (-6.9000, 107.6000),

@@ -66,8 +66,10 @@ export const ProjectDrawer: React.FC<ProjectDrawerProps> = ({
     : null;
 
   const isNational =
+    Boolean(props?.is_national) ||
     props?.province === 'Lintas Provinsi' ||
     props?.province === 'Nasional' ||
+    Boolean(props?.regency?.includes('Nasional')) ||
     props?.geocode_method === 'national_fallback';
 
   const coords = project ? getProjectCoordinates(project.geometry) : [0, 0];
@@ -439,6 +441,15 @@ export const ProjectDrawer: React.FC<ProjectDrawerProps> = ({
                     </span>
                   </div>
                 </div>
+
+                {isNational && (
+                  <div className="flex items-start gap-2 p-2.5 rounded bg-blue-950/40 border border-blue-800/40 text-blue-300 text-[11px] leading-relaxed">
+                    <span className="text-sm shrink-0">🏛️</span>
+                    <span>
+                      <strong className="text-white font-medium">Program Strategis Multi-Regional / Nasional:</strong> Koordinat dijangkarkan pada kementerian pembina pusat di DKI Jakarta (Kementerian PUPR Pattimura).
+                    </span>
+                  </div>
+                )}
 
                 <div className="flex items-center justify-between">
                   <span className="font-mono tabular-nums text-[11px] text-neutral-400">
