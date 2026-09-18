@@ -6,11 +6,13 @@ import { CATEGORY_CONFIG } from '../../constants/categories';
 interface MapLegendProps {
   showBatchingPlants?: boolean;
   showSupplyBuffers?: boolean;
+  showFaultLines?: boolean;
 }
 
 export const MapLegend: React.FC<MapLegendProps> = ({
   showBatchingPlants = false,
   showSupplyBuffers = false,
+  showFaultLines = false,
 }) => {
   const [isExpanded, setIsExpanded] = useState(true);
   const categories: ProjectCategory[] = ['Transport', 'Energy', 'Water', 'Housing', 'IKN'];
@@ -78,6 +80,13 @@ export const MapLegend: React.FC<MapLegendProps> = ({
                   <span>30 km Max Retarded Limit</span>
                 </div>
               </>
+            )}
+
+            {showFaultLines && (
+              <div className="flex items-center gap-2 text-neutral-300 text-[11px] pt-1 border-t border-neutral-800/60">
+                <div className="w-4 h-1 rounded bg-rose-500 shadow-[0_0_6px_#ef4444] shrink-0" />
+                <span>Sesar Aktif (PuSGeN)</span>
+              </div>
             )}
           </div>
         </div>

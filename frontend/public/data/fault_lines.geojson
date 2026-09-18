@@ -1,0 +1,1076 @@
+{
+  "type": "FeatureCollection",
+  "metadata": {
+    "title": "Peta Sesar Aktif Indonesia (PuSGeN / Badan Geologi)",
+    "source": "Pusat Studi Gempa Nasional (PuSGeN) 2017 & Badan Geologi Kementerian ESDM",
+    "total_fault_lines": 29
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "id": "fault-001",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            107.72,
+            -6.83
+          ],
+          [
+            107.65,
+            -6.82
+          ],
+          [
+            107.61,
+            -6.81
+          ],
+          [
+            107.54,
+            -6.8
+          ],
+          [
+            107.45,
+            -6.8
+          ]
+        ]
+      },
+      "properties": {
+        "id": "fault-001",
+        "name": "Sesar Lembang",
+        "island": "Jawa",
+        "slip_rate_mm_year": 4.0,
+        "fault_type": "Strike-Slip (Sinistral)",
+        "source": "PuSGeN / Badan Geologi",
+        "description": "Patahan aktif membentang 29 km di utara Cekungan Bandung dari Gunung Manglayang hingga Cisarua."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "fault-002",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            106.52,
+            -7.03
+          ],
+          [
+            106.7,
+            -6.98
+          ],
+          [
+            106.85,
+            -6.95
+          ],
+          [
+            106.92,
+            -6.92
+          ],
+          [
+            107.03,
+            -6.88
+          ],
+          [
+            107.13,
+            -6.84
+          ],
+          [
+            107.25,
+            -6.82
+          ],
+          [
+            107.35,
+            -6.81
+          ]
+        ]
+      },
+      "properties": {
+        "id": "fault-002",
+        "name": "Sesar Cimandiri",
+        "island": "Jawa",
+        "slip_rate_mm_year": 4.0,
+        "fault_type": "Strike-Slip (Sinistral)",
+        "source": "PuSGeN / Badan Geologi",
+        "description": "Membentang ~100 km dari Teluk Pelabuhan Ratu, melewati Sukabumi dan Cianjur hingga Padalarang."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "fault-003",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            108.35,
+            -6.88
+          ],
+          [
+            108.05,
+            -6.75
+          ],
+          [
+            107.6,
+            -6.55
+          ],
+          [
+            107.25,
+            -6.45
+          ],
+          [
+            106.9,
+            -6.38
+          ],
+          [
+            106.75,
+            -6.35
+          ]
+        ]
+      },
+      "properties": {
+        "id": "fault-003",
+        "name": "Sesar Baribis",
+        "island": "Jawa",
+        "slip_rate_mm_year": 5.0,
+        "fault_type": "Thrust (Naik)",
+        "source": "PuSGeN / Badan Geologi",
+        "description": "Jalur sesar naik busur belakang membentang dari Majalengka, Subang, Purwakarta hingga selatan Jakarta."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "fault-004",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            110.45,
+            -7.05
+          ],
+          [
+            110.95,
+            -7.1
+          ],
+          [
+            111.45,
+            -7.35
+          ],
+          [
+            112.0,
+            -7.42
+          ],
+          [
+            112.4,
+            -7.43
+          ],
+          [
+            112.75,
+            -7.45
+          ]
+        ]
+      },
+      "properties": {
+        "id": "fault-004",
+        "name": "Sesar Kendeng",
+        "island": "Jawa",
+        "slip_rate_mm_year": 5.0,
+        "fault_type": "Thrust (Naik)",
+        "source": "PuSGeN / Badan Geologi",
+        "description": "Zona sesar lipatan dan patahan naik melintang dari Semarang, Grobogan, Ngawi hingga Surabaya."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "fault-005",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            110.51,
+            -7.74
+          ],
+          [
+            110.43,
+            -7.86
+          ],
+          [
+            110.36,
+            -7.94
+          ],
+          [
+            110.29,
+            -8.02
+          ]
+        ]
+      },
+      "properties": {
+        "id": "fault-005",
+        "name": "Sesar Opak",
+        "island": "Jawa",
+        "slip_rate_mm_year": 2.4,
+        "fault_type": "Strike-Slip (Sinistral)",
+        "source": "PuSGeN / Badan Geologi",
+        "description": "Patahan aktif sepanjang lembah Sungai Opak dari Prambanan hingga muara pantai Parangtritis."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "fault-006",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            112.8,
+            -7.65
+          ],
+          [
+            113.05,
+            -7.7
+          ],
+          [
+            113.35,
+            -7.75
+          ]
+        ]
+      },
+      "properties": {
+        "id": "fault-006",
+        "name": "Sesar Pasuruan - Probolinggo",
+        "island": "Jawa",
+        "slip_rate_mm_year": 2.0,
+        "fault_type": "Thrust (Naik)",
+        "source": "PuSGeN / Badan Geologi",
+        "description": "Segmen sesar aktif Jawa Timur pesisir utara Selat Madura."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "fault-007",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            95.3,
+            5.75
+          ],
+          [
+            95.5,
+            5.55
+          ],
+          [
+            95.75,
+            5.25
+          ],
+          [
+            96.0,
+            4.9
+          ]
+        ]
+      },
+      "properties": {
+        "id": "fault-007",
+        "name": "Sesar Semangko - Segmen Seulimeum & Aceh",
+        "island": "Sumatera",
+        "slip_rate_mm_year": 15.0,
+        "fault_type": "Strike-Slip (Dextral)",
+        "source": "PuSGeN / Badan Geologi",
+        "description": "Ujung utara Patahan Besar Sumatera membelah lembah Banda Aceh dan Jantho."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "fault-008",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            96.7,
+            4.2
+          ],
+          [
+            97.1,
+            3.75
+          ],
+          [
+            97.45,
+            3.35
+          ],
+          [
+            97.75,
+            3.0
+          ]
+        ]
+      },
+      "properties": {
+        "id": "fault-008",
+        "name": "Sesar Semangko - Segmen Tripa",
+        "island": "Sumatera",
+        "slip_rate_mm_year": 20.0,
+        "fault_type": "Strike-Slip (Dextral)",
+        "source": "PuSGeN / Badan Geologi",
+        "description": "Segmen rawa Tripa & Gayo Lues di selatan Taman Nasional Gunung Leuser."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "fault-009",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            98.15,
+            2.7
+          ],
+          [
+            98.5,
+            2.3
+          ],
+          [
+            98.85,
+            1.85
+          ],
+          [
+            99.2,
+            1.45
+          ]
+        ]
+      },
+      "properties": {
+        "id": "fault-009",
+        "name": "Sesar Semangko - Segmen Renun & Toru",
+        "island": "Sumatera",
+        "slip_rate_mm_year": 23.0,
+        "fault_type": "Strike-Slip (Dextral)",
+        "source": "PuSGeN / Badan Geologi",
+        "description": "Segmen aktif di sebelah barat Danau Toba dan lembah Batang Toru."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "fault-010",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            99.3,
+            1.35
+          ],
+          [
+            99.65,
+            0.9
+          ],
+          [
+            99.95,
+            0.5
+          ],
+          [
+            100.15,
+            0.15
+          ]
+        ]
+      },
+      "properties": {
+        "id": "fault-010",
+        "name": "Sesar Semangko - Segmen Angkola & Barumun",
+        "island": "Sumatera",
+        "slip_rate_mm_year": 24.0,
+        "fault_type": "Strike-Slip (Dextral)",
+        "source": "PuSGeN / Badan Geologi",
+        "description": "Segmen aktif perbatasan Sumatera Utara dan Sumatera Barat melewati Padang Sidempuan."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "fault-011",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            100.15,
+            0.15
+          ],
+          [
+            100.35,
+            -0.3
+          ],
+          [
+            100.55,
+            -0.65
+          ],
+          [
+            100.75,
+            -0.95
+          ]
+        ]
+      },
+      "properties": {
+        "id": "fault-011",
+        "name": "Sesar Semangko - Segmen Sianok",
+        "island": "Sumatera",
+        "slip_rate_mm_year": 12.0,
+        "fault_type": "Strike-Slip (Dextral)",
+        "source": "PuSGeN / Badan Geologi",
+        "description": "Membentuk Ngarai Sianok, Danau Singkarak, melintasi Bukittinggi dan Padang Panjang."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "fault-012",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            100.75,
+            -0.95
+          ],
+          [
+            101.1,
+            -1.45
+          ],
+          [
+            101.4,
+            -1.95
+          ],
+          [
+            101.75,
+            -2.45
+          ]
+        ]
+      },
+      "properties": {
+        "id": "fault-012",
+        "name": "Sesar Semangko - Segmen Suliti & Siulak",
+        "island": "Sumatera",
+        "slip_rate_mm_year": 14.0,
+        "fault_type": "Strike-Slip (Dextral)",
+        "source": "PuSGeN / Badan Geologi",
+        "description": "Melintasi Lembah Kerinci, kaki Gunung Kerinci dan Danau Kerinci."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "fault-013",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            101.75,
+            -2.45
+          ],
+          [
+            102.15,
+            -2.95
+          ],
+          [
+            102.55,
+            -3.5
+          ],
+          [
+            102.95,
+            -4.0
+          ]
+        ]
+      },
+      "properties": {
+        "id": "fault-013",
+        "name": "Sesar Semangko - Segmen Dikit & Musi",
+        "island": "Sumatera",
+        "slip_rate_mm_year": 12.0,
+        "fault_type": "Strike-Slip (Dextral)",
+        "source": "PuSGeN / Badan Geologi",
+        "description": "Segmen di Bengkulu utara dan hulu Sungai Musi perbatasan Sumsel-Bengkulu."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "fault-014",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            102.95,
+            -4.0
+          ],
+          [
+            103.45,
+            -4.6
+          ],
+          [
+            103.95,
+            -5.05
+          ],
+          [
+            104.3,
+            -5.35
+          ]
+        ]
+      },
+      "properties": {
+        "id": "fault-014",
+        "name": "Sesar Semangko - Segmen Manna & Kumering",
+        "island": "Sumatera",
+        "slip_rate_mm_year": 11.0,
+        "fault_type": "Strike-Slip (Dextral)",
+        "source": "PuSGeN / Badan Geologi",
+        "description": "Segmen di Danau Ranau dan perbatasan Lampung barat."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "fault-015",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            104.3,
+            -5.35
+          ],
+          [
+            104.55,
+            -5.65
+          ],
+          [
+            104.85,
+            -5.95
+          ],
+          [
+            105.1,
+            -6.15
+          ]
+        ]
+      },
+      "properties": {
+        "id": "fault-015",
+        "name": "Sesar Semangko - Segmen Semangko (Teluk Semangko)",
+        "island": "Sumatera",
+        "slip_rate_mm_year": 10.0,
+        "fault_type": "Strike-Slip (Dextral)",
+        "source": "PuSGeN / Badan Geologi",
+        "description": "Segmen selatan Patahan Sumatera bermuara ke Teluk Semangko dan Selat Sunda."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "fault-016",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            119.75,
+            -0.3
+          ],
+          [
+            119.82,
+            -0.65
+          ],
+          [
+            119.86,
+            -0.89
+          ],
+          [
+            119.98,
+            -1.35
+          ],
+          [
+            120.2,
+            -1.85
+          ],
+          [
+            120.5,
+            -2.35
+          ],
+          [
+            120.65,
+            -2.6
+          ]
+        ]
+      },
+      "properties": {
+        "id": "fault-016",
+        "name": "Sesar Palu-Koro",
+        "island": "Sulawesi",
+        "slip_rate_mm_year": 42.0,
+        "fault_type": "Strike-Slip (Sinistral)",
+        "source": "PuSGeN / Badan Geologi",
+        "description": "Salah satu sesar geser teraktif di dunia; membelah Kota Palu, lembah Kulawi hingga Danau Poso."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "fault-017",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            120.65,
+            -2.6
+          ],
+          [
+            121.15,
+            -2.55
+          ],
+          [
+            121.75,
+            -2.6
+          ],
+          [
+            122.25,
+            -2.75
+          ],
+          [
+            122.65,
+            -2.85
+          ]
+        ]
+      },
+      "properties": {
+        "id": "fault-017",
+        "name": "Sesar Matano",
+        "island": "Sulawesi",
+        "slip_rate_mm_year": 20.0,
+        "fault_type": "Strike-Slip (Sinistral)",
+        "source": "PuSGeN / Badan Geologi",
+        "description": "Menghubungkan Sesar Palu-Koro ke Laut Banda melalui Danau Matano dan Sorowako."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "fault-018",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            121.45,
+            -3.25
+          ],
+          [
+            121.85,
+            -3.55
+          ],
+          [
+            122.25,
+            -3.85
+          ],
+          [
+            122.65,
+            -4.1
+          ],
+          [
+            123.0,
+            -4.35
+          ]
+        ]
+      },
+      "properties": {
+        "id": "fault-018",
+        "name": "Sesar Lawanopo",
+        "island": "Sulawesi",
+        "slip_rate_mm_year": 6.0,
+        "fault_type": "Strike-Slip (Sinistral)",
+        "source": "PuSGeN / Badan Geologi",
+        "description": "Membentang tenggara dari Danau Towuti melewati Kendari hingga Teluk Tolo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "fault-019",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            119.85,
+            -3.8
+          ],
+          [
+            119.95,
+            -4.2
+          ],
+          [
+            120.08,
+            -4.65
+          ],
+          [
+            120.18,
+            -5.1
+          ],
+          [
+            120.25,
+            -5.45
+          ]
+        ]
+      },
+      "properties": {
+        "id": "fault-019",
+        "name": "Sesar Walanae",
+        "island": "Sulawesi",
+        "slip_rate_mm_year": 7.0,
+        "fault_type": "Strike-Slip / Normal",
+        "source": "PuSGeN / Badan Geologi",
+        "description": "Membelah Sulawesi Selatan dari utara Danau Tempe ke selatan melewati Bone hingga Bulukumba."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "fault-020",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            122.45,
+            1.1
+          ],
+          [
+            122.85,
+            0.75
+          ],
+          [
+            123.1,
+            0.5
+          ],
+          [
+            123.45,
+            0.15
+          ]
+        ]
+      },
+      "properties": {
+        "id": "fault-020",
+        "name": "Sesar Gorontalo",
+        "island": "Sulawesi",
+        "slip_rate_mm_year": 11.0,
+        "fault_type": "Strike-Slip (Dextral)",
+        "source": "PuSGeN / Badan Geologi",
+        "description": "Melintang di lengan utara Sulawesi melintasi pesisir Teluk Tomini dan Gorontalo."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "fault-021",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            114.7,
+            -7.8
+          ],
+          [
+            115.3,
+            -7.85
+          ],
+          [
+            116.0,
+            -7.95
+          ],
+          [
+            116.7,
+            -8.05
+          ]
+        ]
+      },
+      "properties": {
+        "id": "fault-021",
+        "name": "Sesar Naik Busur Belakang Bali-Lombok (Flores Thrust)",
+        "island": "Bali-Nusa Tenggara",
+        "slip_rate_mm_year": 12.0,
+        "fault_type": "Thrust (Naik)",
+        "source": "PuSGeN / Badan Geologi",
+        "description": "Zona tunjaman balik di utara Bali dan Lombok, sumber utama gempa bumi Lombok 2018."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "fault-022",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            116.7,
+            -8.05
+          ],
+          [
+            117.5,
+            -8.1
+          ],
+          [
+            118.3,
+            -8.15
+          ],
+          [
+            119.1,
+            -8.15
+          ]
+        ]
+      },
+      "properties": {
+        "id": "fault-022",
+        "name": "Sesar Naik Busur Belakang Sumbawa (Flores Thrust)",
+        "island": "Bali-Nusa Tenggara",
+        "slip_rate_mm_year": 14.0,
+        "fault_type": "Thrust (Naik)",
+        "source": "PuSGeN / Badan Geologi",
+        "description": "Zona sesar naik utara Pulau Sumbawa dan Teluk Saleh."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "fault-023",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            119.1,
+            -8.15
+          ],
+          [
+            120.2,
+            -8.1
+          ],
+          [
+            121.5,
+            -8.1
+          ],
+          [
+            122.8,
+            -8.1
+          ],
+          [
+            124.0,
+            -8.15
+          ],
+          [
+            125.1,
+            -8.2
+          ]
+        ]
+      },
+      "properties": {
+        "id": "fault-023",
+        "name": "Sesar Naik Busur Belakang Flores-Alor (Flores Thrust)",
+        "island": "Bali-Nusa Tenggara",
+        "slip_rate_mm_year": 15.0,
+        "fault_type": "Thrust (Naik)",
+        "source": "PuSGeN / Badan Geologi",
+        "description": "Lanjutan zona tunjaman balik utara Flores, Lembata hingga Kepulauan Alor."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "fault-024",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            132.2,
+            -0.75
+          ],
+          [
+            131.25,
+            -0.85
+          ],
+          [
+            130.0,
+            -1.1
+          ],
+          [
+            128.5,
+            -1.45
+          ],
+          [
+            127.0,
+            -1.65
+          ],
+          [
+            125.5,
+            -1.8
+          ]
+        ]
+      },
+      "properties": {
+        "id": "fault-024",
+        "name": "Sesar Sorong",
+        "island": "Papua / Maluku",
+        "slip_rate_mm_year": 28.0,
+        "fault_type": "Strike-Slip (Sinistral)",
+        "source": "PuSGeN / Badan Geologi",
+        "description": "Megashear batas lempeng utama Pasifik-Australia membentang dari Sorong ke barat menuju Maluku Utara."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "fault-025",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            134.5,
+            -1.65
+          ],
+          [
+            135.4,
+            -1.72
+          ],
+          [
+            136.3,
+            -1.78
+          ],
+          [
+            137.2,
+            -1.85
+          ],
+          [
+            138.1,
+            -1.95
+          ]
+        ]
+      },
+      "properties": {
+        "id": "fault-025",
+        "name": "Sesar Yapen",
+        "island": "Papua",
+        "slip_rate_mm_year": 22.0,
+        "fault_type": "Strike-Slip (Sinistral)",
+        "source": "PuSGeN / Badan Geologi",
+        "description": "Patahan geser aktif di utara Papua sepanjang Pulau Yapen dan Teluk Cendrawasih."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "fault-026",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            133.3,
+            -3.95
+          ],
+          [
+            134.2,
+            -3.9
+          ],
+          [
+            135.1,
+            -3.85
+          ],
+          [
+            136.0,
+            -3.78
+          ],
+          [
+            136.9,
+            -3.72
+          ]
+        ]
+      },
+      "properties": {
+        "id": "fault-026",
+        "name": "Sesar Tarera-Aiduna",
+        "island": "Papua",
+        "slip_rate_mm_year": 18.0,
+        "fault_type": "Strike-Slip (Sinistral)",
+        "source": "PuSGeN / Badan Geologi",
+        "description": "Sesar aktif berarah barat-timur di leher burung Papua membatasi Pegunungan Tengah dengan Laut Arafura."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "fault-027",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            134.05,
+            -0.8
+          ],
+          [
+            134.15,
+            -1.25
+          ],
+          [
+            134.25,
+            -1.7
+          ],
+          [
+            134.35,
+            -2.15
+          ]
+        ]
+      },
+      "properties": {
+        "id": "fault-027",
+        "name": "Sesar Ransiki",
+        "island": "Papua",
+        "slip_rate_mm_year": 11.0,
+        "fault_type": "Strike-Slip (Sinistral)",
+        "source": "PuSGeN / Badan Geologi",
+        "description": "Patahan aktif di timur Semenanjung Kepala Burung dari Manokwari ke selatan Teluk Bintuni."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "fault-028",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            115.0,
+            -2.55
+          ],
+          [
+            115.2,
+            -3.1
+          ],
+          [
+            115.4,
+            -3.65
+          ],
+          [
+            115.55,
+            -4.0
+          ]
+        ]
+      },
+      "properties": {
+        "id": "fault-028",
+        "name": "Sesar Meratus",
+        "island": "Kalimantan",
+        "slip_rate_mm_year": 0.5,
+        "fault_type": "Thrust / Reverse",
+        "source": "PuSGeN / Badan Geologi",
+        "description": "Zona sesar naik Pegunungan Meratus di Kalimantan Selatan."
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "fault-029",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            117.15,
+            1.15
+          ],
+          [
+            117.75,
+            1.0
+          ],
+          [
+            118.35,
+            0.9
+          ],
+          [
+            118.95,
+            0.8
+          ]
+        ]
+      },
+      "properties": {
+        "id": "fault-029",
+        "name": "Sesar Mangkalihat",
+        "island": "Kalimantan",
+        "slip_rate_mm_year": 1.5,
+        "fault_type": "Strike-Slip (Sinistral)",
+        "source": "PuSGeN / Badan Geologi",
+        "description": "Sesar geser Semenanjung Mangkalihat, Kalimantan Timur / utara Selat Makassar."
+      }
+    }
+  ]
+}

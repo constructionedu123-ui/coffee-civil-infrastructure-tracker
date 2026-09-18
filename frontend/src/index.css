@@ -94,6 +94,21 @@
   border-top-color: #334155 !important;
 }
 
+/* Custom Active Fault Line Tooltip */
+.leaflet-tooltip.custom-fault-tooltip {
+  background: #0f172a !important;
+  color: #f1f5f9 !important;
+  border: 1px solid #ef4444 !important;
+  border-radius: 6px !important;
+  box-shadow: 0 4px 16px rgba(239, 68, 68, 0.25) !important;
+  padding: 6px 10px !important;
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif !important;
+}
+
+.leaflet-tooltip-top.custom-fault-tooltip:before {
+  border-top-color: #ef4444 !important;
+}
+
 /* Custom scrollbar */
 ::-webkit-scrollbar {
   width: 5px;

@@ -4,6 +4,7 @@ import 'leaflet.markercluster';
 import 'leaflet.markercluster/dist/MarkerCluster.css';
 import { ProjectFeature } from '../../types/project';
 import { BatchingPlantFeature } from '../../types/batchingPlant';
+import { FaultLineFeature } from '../../types/faultLine';
 import { createProjectIcon } from './ProjectMarker';
 import { createBatchingPlantIcon } from './BatchingPlantMarker';
 import { CATEGORY_CONFIG, STATUS_CONFIG } from '../../constants/categories';
@@ -24,6 +25,8 @@ interface InfrastructureMapProps {
   batchingPlants?: BatchingPlantFeature[];
   showBatchingPlants?: boolean;
   showSupplyBuffers?: boolean;
+  faultLines?: FaultLineFeature[];
+  showFaultLines?: boolean;
 }
 
 export const InfrastructureMap: React.FC<InfrastructureMapProps> = ({
@@ -36,6 +39,8 @@ export const InfrastructureMap: React.FC<InfrastructureMapProps> = ({
   batchingPlants = [],
   showBatchingPlants = false,
   showSupplyBuffers = false,
+  faultLines = [],
+  showFaultLines = true,
 }) => {
   const mapContainerRef = useRef<HTMLDivElement>(null);
   const mapInstanceRef = useRef<L.Map | null>(null);
@@ -43,6 +48,7 @@ export const InfrastructureMap: React.FC<InfrastructureMapProps> = ({
   const polylineLayerRef = useRef<L.FeatureGroup | null>(null);
   const supplyBufferLayerRef = useRef<L.FeatureGroup | null>(null);
   const batchingPlantLayerRef = useRef<L.FeatureGroup | null>(null);
+  const faultLineLayerRef = useRef<L.FeatureGroup | null>(null);
   const baseTileLayerRef = useRef<L.TileLayer | null>(null);
   const refTileLayerRef = useRef<L.TileLayer | null>(null);
 
@@ -103,6 +109,10 @@ export const InfrastructureMap: React.FC<InfrastructureMapProps> = ({
     const polylineLayer = L.featureGroup().addTo(map);
     polylineLayerRef.current = polylineLayer;
 
+    // Dedicated FeatureGroup for Indonesian active fault lines overlay (PuSGeN)
+    const faultLineLayer = L.featureGroup().addTo(map);
+    faultLineLayerRef.current = faultLineLayer;
+
     mapInstanceRef.current = map;
 
     return () => {
@@ -110,12 +120,14 @@ export const InfrastructureMap: React.FC<InfrastructureMapProps> = ({
       polylineLayer.clearLayers();
       supplyBufferLayer.clearLayers();
       batchingPlantLayer.clearLayers();
+      faultLineLayer.clearLayers();
       map.remove();
       mapInstanceRef.current = null;
       clusterGroupRef.current = null;
       polylineLayerRef.current = null;
       supplyBufferLayerRef.current = null;
       batchingPlantLayerRef.current = null;
+      faultLineLayerRef.current = null;
     };
   }, []);
 
@@ -448,6 +460,73 @@ export const InfrastructureMap: React.FC<InfrastructureMapProps> = ({
       marker.addTo(plantLayer);
     });
   }, [batchingPlants, showBatchingPlants, showSupplyBuffers]);
+
+  // Update Indonesian Active Fault Lines Overlay (PuSGeN / Badan Geologi)
+  useEffect(() => {
+    const faultLayer = faultLineLayerRef.current;
+    if (!faultLayer) return;
+
+    faultLayer.clearLayers();
+    if (!showFaultLines || !faultLines || faultLines.length === 0) return;
+
+    faultLines.forEach((feature) => {
+      const coords = feature.geometry.coordinates;
+      if (!coords || coords.length === 0) return;
+
+      // Leaflet requires [lat, lon] pairs
+      const latLngs: L.LatLngExpression[] = coords.map(([lon, lat]) => [lat, lon]);
+
+      // Subtle glowing red underlay
+      const glowPolyline = L.polyline(latLngs, {
+        color: '#EF4444',
+        weight: 6,
+        opacity: 0.35,
+        lineCap: 'round',
+        lineJoin: 'round',
+        interactive: false,
+      });
+      faultLayer.addLayer(glowPolyline);
+
+      // Sharp primary active fault polyline
+      const faultPolyline = L.polyline(latLngs, {
+        color: '#EF4444',
+        weight: 2.5,
+        opacity: 0.92,
+        lineCap: 'round',
+        lineJoin: 'round',
+      });
+
+      // Hover tooltip: Fault Name, Slip Rate, Mechanism
+      const p = feature.properties;
+      const tooltipHtml = `
+        <div style="font-family: 'Plus Jakarta Sans', system-ui, sans-serif; min-width: 200px; padding: 2px;">
+          <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 3px;">
+            <div style="display: flex; align-items: center; gap: 5px;">
+              <span style="display: inline-block; width: 7px; height: 7px; border-radius: 50%; background-color: #EF4444; box-shadow: 0 0 6px #EF4444;"></span>
+              <strong style="font-size: 12px; color: #ffffff; line-height: 1.2;">${p.name}</strong>
+            </div>
+            <span style="font-size: 9px; font-weight: 700; color: #ef4444; background: rgba(239, 68, 68, 0.15); border: 1px solid rgba(239, 68, 68, 0.4); padding: 1px 4px; rounded: 3px; font-family: monospace;">
+              ${p.island}
+            </span>
+          </div>
+          <div style="font-size: 11px; color: #cbd5e1; border-top: 1px solid #334155; padding-top: 4px; margin-top: 2px; line-height: 1.4;">
+            <div>Mekanisme: <span style="color: #fca5a5; font-weight: 600;">${p.fault_type}</span></div>
+            <div>Slip Rate: <span style="color: #fef08a; font-weight: 700; font-family: monospace;">${p.slip_rate_mm_year} mm/tahun</span></div>
+            <div style="color: #94a3b8; font-size: 9px; margin-top: 2px;">Sumber: ${p.source}</div>
+          </div>
+        </div>
+      `;
+
+      faultPolyline.bindTooltip(tooltipHtml, {
+        direction: 'top',
+        sticky: true,
+        className: 'custom-fault-tooltip',
+        opacity: 0.98,
+      });
+
+      faultLayer.addLayer(faultPolyline);
+    });
+  }, [faultLines, showFaultLines]);
 
   // Handle Fly-To coordinates (from project list / marker click)
 

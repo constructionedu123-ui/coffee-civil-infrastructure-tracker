@@ -2,7 +2,9 @@ import React, { useEffect, useMemo, useState, Suspense, lazy } from 'react';
 import { ExternalLink, X } from 'lucide-react';
 import { ProjectFeature, getProjectCoordinates } from '../types/project';
 import { BatchingPlantFeature } from '../types/batchingPlant';
+import { FaultLineFeature } from '../types/faultLine';
 import { findNearestBatchingPlants } from '../utils/logistics';
+import { findNearestFaultLine } from '../utils/seismic';
 import { CATEGORY_CONFIG, STATUS_CONFIG } from '../constants/categories';
 import { formatBudget, formatDate } from '../utils/formatters';
 
@@ -13,6 +15,7 @@ interface ProjectDrawerProps {
   onClose: () => void;
   onZoomTo: (coords: [number, number]) => void;
   batchingPlants?: BatchingPlantFeature[];
+  faultLines?: FaultLineFeature[];
 }
 
 
@@ -39,6 +42,7 @@ export const ProjectDrawer: React.FC<ProjectDrawerProps> = ({
   onClose,
   onZoomTo,
   batchingPlants = [],
+  faultLines = [],
 }) => {
   const [isBimModalOpen, setIsBimModalOpen] = useState(false);
 
@@ -81,6 +85,12 @@ export const ProjectDrawer: React.FC<ProjectDrawerProps> = ({
   }, [project, lat, lon, batchingPlants]);
 
   const nearestPlant = nearbyPlants[0] || null;
+
+  // Nearest active fault line calculation (PuSGeN / SNI 1726 seismic proximity)
+  const nearestFault = useMemo(() => {
+    if (!project || !faultLines || faultLines.length === 0) return null;
+    return findNearestFaultLine(lat, lon, faultLines);
+  }, [project, lat, lon, faultLines]);
 
 
 
@@ -479,7 +489,73 @@ export const ProjectDrawer: React.FC<ProjectDrawerProps> = ({
                 )}
               </section>
 
-              {/* 7. Audit Metadata */}
+              {/* 7. Geotechnical & Seismic Fault Proximity */}
+              <section className="bg-neutral-900/60 border border-neutral-800 rounded-lg p-4 space-y-3">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-1.5">
+                    <span className="text-sm">⚡</span>
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-neutral-300">
+                      Geotechnical & Seismic Proximity
+                    </span>
+                  </div>
+                  <span className="text-[9px] font-mono px-2 py-0.5 rounded bg-neutral-800 text-neutral-400 border border-neutral-700">
+                    PuSGeN / SNI 1726
+                  </span>
+                </div>
+
+                {nearestFault ? (
+                  <div className="space-y-2.5">
+                    {/* Nearest Fault Card */}
+                    <div className="p-3 rounded-lg bg-neutral-950/80 border border-neutral-800 space-y-2">
+                      <div className="flex items-start justify-between gap-2">
+                        <div>
+                          <span className="text-[9px] uppercase font-bold text-neutral-500 tracking-wider block">
+                            Nearest Active Geological Fault
+                          </span>
+                          <div className="text-[13px] font-bold text-neutral-100 leading-snug">
+                            {nearestFault.fault.properties.name}
+                          </div>
+                          <div className="text-[11px] text-neutral-400 mt-0.5">
+                            Wilayah: <span className="text-neutral-300 font-semibold">{nearestFault.fault.properties.island}</span> • Mekanisme: <span className="text-neutral-300 font-medium">{nearestFault.fault.properties.fault_type}</span>
+                          </div>
+                        </div>
+                        <div className="text-right shrink-0">
+                          <div className="text-lg font-bold font-mono text-white tabular-nums">
+                            {nearestFault.distanceKm.toFixed(1)} km
+                          </div>
+                          <span className="text-[9px] text-neutral-500 uppercase font-mono block">Fault Distance</span>
+                        </div>
+                      </div>
+
+                      <div className="flex items-center justify-between pt-1.5 border-t border-neutral-800/80 text-[10px] text-neutral-400">
+                        <span>Slip Rate: <strong className="text-amber-300 font-mono">{nearestFault.fault.properties.slip_rate_mm_year} mm/year</strong></span>
+                        <span className="text-neutral-500">•</span>
+                        <span className="truncate max-w-[170px]">Data: {nearestFault.fault.properties.source}</span>
+                      </div>
+                    </div>
+
+                    {/* Seismic Alert Level Banner */}
+                    <div className={`p-3 rounded-lg border ${nearestFault.badgeClass} space-y-1.5`}>
+                      <div className="flex items-center gap-2 font-bold text-xs">
+                        <span>{nearestFault.alertText}</span>
+                      </div>
+                      <p className="text-[11px] leading-relaxed opacity-90">
+                        {nearestFault.alertLevel === 'high'
+                          ? 'Project site sits directly within the active fault rupture influence zone. Structural design requires response spectrum analysis (RSA), site-specific ground motion assessment (SSGMA), and high ductility detailing per SNI 1726.'
+                          : nearestFault.alertLevel === 'moderate'
+                          ? 'Intermediate distance from major mapped active fault. Verify local site amplification factor (Soil Class SD/SE/SF) and ensure standard seismic detailing.'
+                          : 'Low proximity risk to mapped major onshore active fault ruptures. Standard seismic design coefficients apply based on regional hazard maps.'}
+                      </p>
+                    </div>
+                  </div>
+                ) : (
+                  <div className="text-neutral-500 text-xs py-2">
+                    Calculating nearest active fault lines...
+                  </div>
+                )}
+              </section>
+
+              {/* 8. Audit Metadata */}
               <div className="px-1 pb-1 space-y-1 text-[10px] text-neutral-500 font-mono border-t border-neutral-800/60 pt-2">
                 <div className="flex items-center justify-between">
                   <span>Source Registry:</span>

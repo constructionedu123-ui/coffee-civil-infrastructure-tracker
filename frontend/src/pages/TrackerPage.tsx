@@ -10,6 +10,10 @@ import {
   BatchingPlantFeature,
   BatchingPlantFeatureCollection,
 } from '../types/batchingPlant';
+import {
+  FaultLineFeature,
+  FaultLineFeatureCollection,
+} from '../types/faultLine';
 import { Header } from '../components/Header';
 import { KPICards } from '../components/KPICards';
 import { FilterBar } from '../components/FilterBar';
@@ -27,8 +31,10 @@ import { Loader2, AlertTriangle } from 'lucide-react';
 export const TrackerPage: React.FC = () => {
   const [allProjects, setAllProjects] = useState<ProjectFeature[]>([]);
   const [batchingPlants, setBatchingPlants] = useState<BatchingPlantFeature[]>([]);
+  const [faultLines, setFaultLines] = useState<FaultLineFeature[]>([]);
   const [showBatchingPlants, setShowBatchingPlants] = useState<boolean>(true);
   const [showSupplyBuffers, setShowSupplyBuffers] = useState<boolean>(false);
+  const [showFaultLines, setShowFaultLines] = useState<boolean>(true);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -63,9 +69,10 @@ export const TrackerPage: React.FC = () => {
     async function loadData() {
       try {
         setLoading(true);
-        const [resProjects, resPlants] = await Promise.all([
+        const [resProjects, resPlants, resFaults] = await Promise.all([
           fetch('/data/projects.geojson'),
           fetch('/data/batching_plants.geojson'),
+          fetch('/data/fault_lines.geojson'),
         ]);
 
         if (!resProjects.ok) {
@@ -77,6 +84,11 @@ export const TrackerPage: React.FC = () => {
         if (resPlants.ok) {
           const dataPlants: BatchingPlantFeatureCollection = await resPlants.json();
           setBatchingPlants(dataPlants.features || []);
+        }
+
+        if (resFaults.ok) {
+          const dataFaults: FaultLineFeatureCollection = await resFaults.json();
+          setFaultLines(dataFaults.features || []);
         }
         setError(null);
       } catch (err: any) {
@@ -262,6 +274,8 @@ export const TrackerPage: React.FC = () => {
             return next;
           });
         }}
+        showFaultLines={showFaultLines}
+        onToggleFaultLines={() => setShowFaultLines((prev) => !prev)}
       />
 
       {/* Map & Overlays or Table View Container */}
@@ -279,6 +293,8 @@ export const TrackerPage: React.FC = () => {
               batchingPlants={batchingPlants}
               showBatchingPlants={showBatchingPlants}
               showSupplyBuffers={showSupplyBuffers}
+              faultLines={faultLines}
+              showFaultLines={showFaultLines}
             />
 
             {/* Collapsible Project Directory List (Left) */}
@@ -294,6 +310,7 @@ export const TrackerPage: React.FC = () => {
             <MapLegend
               showBatchingPlants={showBatchingPlants}
               showSupplyBuffers={showSupplyBuffers}
+              showFaultLines={showFaultLines}
             />
           </>
         ) : (
@@ -326,6 +343,7 @@ export const TrackerPage: React.FC = () => {
           setFlyToCoords(coords);
         }}
         batchingPlants={batchingPlants}
+        faultLines={faultLines}
       />
     </div>
   );
