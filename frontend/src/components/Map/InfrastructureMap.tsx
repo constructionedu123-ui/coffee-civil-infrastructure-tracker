@@ -38,6 +38,14 @@ interface InfrastructureMapProps {
     facade: boolean;
     batching: boolean;
   };
+  opportunityFinder?: {
+    isOpen: boolean;
+    center: [number, number] | null;
+    radiusKm: number;
+    isPickingLocation: boolean;
+    onPickLocation: (coords: [number, number]) => void;
+  };
+  onMapReady?: (map: L.Map) => void;
 }
 
 export const InfrastructureMap: React.FC<InfrastructureMapProps> = ({
@@ -54,6 +62,8 @@ export const InfrastructureMap: React.FC<InfrastructureMapProps> = ({
   showFaultLines = true,
   materialHubs = [],
   showMaterialHubs,
+  opportunityFinder,
+  onMapReady,
 }) => {
   const mapContainerRef = useRef<HTMLDivElement>(null);
   const mapInstanceRef = useRef<L.Map | null>(null);
@@ -63,6 +73,7 @@ export const InfrastructureMap: React.FC<InfrastructureMapProps> = ({
   const batchingPlantLayerRef = useRef<L.FeatureGroup | null>(null);
   const faultLineLayerRef = useRef<L.FeatureGroup | null>(null);
   const materialHubLayerRef = useRef<L.FeatureGroup | null>(null);
+  const opportunityLayerRef = useRef<L.FeatureGroup | null>(null);
   const baseTileLayerRef = useRef<L.TileLayer | null>(null);
   const refTileLayerRef = useRef<L.TileLayer | null>(null);
   const [mapReady, setMapReady] = useState<L.Map | null>(null);
@@ -98,10 +109,9 @@ export const InfrastructureMap: React.FC<InfrastructureMapProps> = ({
       iconCreateFunction: (cluster) => {
         const count = cluster.getChildCount();
         return L.divIcon({
-          html: `<div class="custom-cluster-badge"><span>${count}</span></div>`,
-          className: 'custom-cluster-wrapper',
-          iconSize: L.point(28, 28),
-          iconAnchor: L.point(14, 14),
+          html: `<div class="custom-cluster-icon"><span>${count}</span></div>`,
+          className: 'marker-cluster-custom',
+          iconSize: L.point(36, 36),
         });
       },
     });
@@ -109,11 +119,11 @@ export const InfrastructureMap: React.FC<InfrastructureMapProps> = ({
     map.addLayer(clusterGroup);
     clusterGroupRef.current = clusterGroup;
 
-    // Dedicated FeatureGroup for spatial concrete delivery buffers (rendered under markers)
+    // Dedicated FeatureGroup for 90-minute concrete supply buffers (15km & 30km)
     const supplyBufferLayer = L.featureGroup().addTo(map);
     supplyBufferLayerRef.current = supplyBufferLayer;
 
-    // Dedicated FeatureGroup for batching plant pins
+    // Dedicated FeatureGroup for commercial batching plants & precast facilities
     const batchingPlantLayer = L.featureGroup().addTo(map);
     batchingPlantLayerRef.current = batchingPlantLayer;
 
@@ -129,8 +139,13 @@ export const InfrastructureMap: React.FC<InfrastructureMapProps> = ({
     const faultLineLayer = L.featureGroup().addTo(map);
     faultLineLayerRef.current = faultLineLayer;
 
+    // Dedicated FeatureGroup for Site Radius Opportunity Finder
+    const opportunityLayer = L.featureGroup().addTo(map);
+    opportunityLayerRef.current = opportunityLayer;
+
     mapInstanceRef.current = map;
     setMapReady(map);
+    onMapReady?.(map);
 
     return () => {
       clusterGroup.clearLayers();
@@ -139,6 +154,7 @@ export const InfrastructureMap: React.FC<InfrastructureMapProps> = ({
       batchingPlantLayer.clearLayers();
       materialHubLayer.clearLayers();
       faultLineLayer.clearLayers();
+      opportunityLayer.clearLayers();
       map.remove();
       mapInstanceRef.current = null;
       setMapReady(null);
@@ -148,6 +164,7 @@ export const InfrastructureMap: React.FC<InfrastructureMapProps> = ({
       batchingPlantLayerRef.current = null;
       materialHubLayerRef.current = null;
       faultLineLayerRef.current = null;
+      opportunityLayerRef.current = null;
     };
   }, []);
 
@@ -671,6 +688,115 @@ export const InfrastructureMap: React.FC<InfrastructureMapProps> = ({
     map.flyTo(IKN_CENTER, IKN_ZOOM, { duration: 1.6, easeLinearity: 0.2 });
   }, [focusIKNCounter]);
 
+  // Render Opportunity Finder Radius Circle & Center Target Marker
+  useEffect(() => {
+    const map = mapInstanceRef.current;
+    const layer = opportunityLayerRef.current;
+    if (!map || !layer) return;
+
+    layer.clearLayers();
+
+    if (!opportunityFinder?.isOpen || !opportunityFinder.center) {
+      return;
+    }
+
+    const [centerLat, centerLon] = opportunityFinder.center;
+
+    // Glowing buffer circle
+    const circle = L.circle([centerLat, centerLon], {
+      radius: opportunityFinder.radiusKm * 1000,
+      color: '#3B82F6',
+      weight: 2,
+      fillColor: '#3B82F6',
+      fillOpacity: 0.08,
+      dashArray: '4, 4',
+      interactive: false,
+    });
+    layer.addLayer(circle);
+
+    // Target Icon Center Marker
+    const targetIcon = L.divIcon({
+      className: 'opportunity-target-icon',
+      html: `
+        <div style="
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          width: 36px;
+          height: 36px;
+          border-radius: 50%;
+          background: rgba(15, 20, 28, 0.95);
+          border: 2px solid #3B82F6;
+          box-shadow: 0 0 18px rgba(59, 130, 246, 0.7), 0 4px 6px -1px rgba(0,0,0,0.5);
+          font-size: 18px;
+          cursor: pointer;
+        ">
+          🎯
+        </div>
+      `,
+      iconSize: [36, 36],
+      iconAnchor: [18, 18],
+    });
+
+    const marker = L.marker([centerLat, centerLon], {
+      icon: targetIcon,
+      zIndexOffset: 1200,
+    });
+
+    marker.bindPopup(`
+      <div style="font-family: sans-serif; font-size: 12px; color: #f1f5f9; padding: 4px; min-width: 160px;">
+        <div style="display:flex; align-items:center; gap: 6px;">
+          <span style="font-size: 15px;">🎯</span>
+          <strong style="color: #60A5FA; font-size: 13px;">Pusat Radar Vendor</strong>
+        </div>
+        <div style="margin-top: 6px; color: #94a3b8; font-size: 11px;">
+          Radius Jangkauan: <span style="color: #fff; font-weight: bold;">${opportunityFinder.radiusKm} km</span>
+        </div>
+        <div style="font-size: 10px; color: #64748b; font-family: monospace; margin-top: 3px;">
+          ${centerLat.toFixed(5)}, ${centerLon.toFixed(5)}
+        </div>
+      </div>
+    `, {
+      className: 'custom-map-popup',
+      offset: [0, -12],
+    });
+
+    layer.addLayer(marker);
+  }, [
+    opportunityFinder?.isOpen,
+    opportunityFinder?.center?.[0],
+    opportunityFinder?.center?.[1],
+    opportunityFinder?.radiusKm,
+  ]);
+
+  // Handle "Klik Peta" to drop target center pin
+  useEffect(() => {
+    const map = mapInstanceRef.current;
+    if (!map) return;
+
+    if (!opportunityFinder?.isOpen || !opportunityFinder.isPickingLocation) {
+      return;
+    }
+
+    const container = map.getContainer();
+    const originalCursor = container.style.cursor;
+    container.style.cursor = 'crosshair';
+
+    const handleMapClick = (e: L.LeafletMouseEvent) => {
+      opportunityFinder.onPickLocation([e.latlng.lat, e.latlng.lng]);
+    };
+
+    map.on('click', handleMapClick);
+
+    return () => {
+      map.off('click', handleMapClick);
+      container.style.cursor = originalCursor;
+    };
+  }, [
+    opportunityFinder?.isOpen,
+    opportunityFinder?.isPickingLocation,
+    opportunityFinder?.onPickLocation,
+  ]);
 
   return (
     <div className={`relative w-full h-full ${basemap === 'satellite' ? 'is-satellite' : ''}`}>

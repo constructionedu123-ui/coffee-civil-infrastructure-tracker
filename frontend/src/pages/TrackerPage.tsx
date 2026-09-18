@@ -28,6 +28,7 @@ import { ProjectList } from '../components/ProjectList';
 import { ProjectTable } from '../components/ProjectTable';
 import { AnalyticsDrawer } from '../components/AnalyticsDrawer';
 import { SubmitProjectModal } from '../components/SubmitProjectModal';
+import { RadiusOpportunityFinder, OpportunityPreset } from '../components/RadiusOpportunityFinder';
 import { exportAsGeoJSON, exportAsCSV } from '../utils/export';
 import { projectMatchesContractor } from '../utils/contractorMatcher';
 import { getRegionForProvince } from '../utils/geo';
@@ -59,6 +60,14 @@ export const TrackerPage: React.FC = () => {
   const [isAnalyticsOpen, setIsAnalyticsOpen] = useState<boolean>(false);
   const [isSubmitModalOpen, setIsSubmitModalOpen] = useState<boolean>(false);
   const [selectedContractor, setSelectedContractor] = useState<string | null>(null);
+
+  // Radius Opportunity & Vendor Lead Finder States
+  const [isOpportunityFinderOpen, setIsOpportunityFinderOpen] = useState<boolean>(false);
+  const [opportunityCenter, setOpportunityCenter] = useState<[number, number] | null>(null);
+  const [opportunityRadiusKm, setOpportunityRadiusKm] = useState<number>(25);
+  const [isPickingOpportunityCenter, setIsPickingOpportunityCenter] = useState<boolean>(false);
+  const [opportunityPresetName, setOpportunityPresetName] = useState<string>('jabodetabek');
+  const [mapInstance, setMapInstance] = useState<L.Map | null>(null);
 
   // Filter States
   const [searchQuery, setSearchQuery] = useState<string>('');
@@ -186,8 +195,46 @@ export const TrackerPage: React.FC = () => {
     setAllProjects((prev) => [newProject, ...prev]);
     setSelectedProject(newProject);
     const coords = getProjectCoordinates(newProject.geometry);
-    setActiveView('map');
     setFlyToCoords([coords[1], coords[0]]);
+  };
+
+  // Toggle Opportunity Finder
+  const handleToggleOpportunityFinder = () => {
+    setIsOpportunityFinderOpen((prev) => {
+      const next = !prev;
+      if (next) {
+        setActiveView('map');
+        if (!opportunityCenter) {
+          if (mapInstance) {
+            const c = mapInstance.getCenter();
+            setOpportunityCenter([c.lat, c.lng]);
+          } else {
+            setOpportunityCenter([-6.2088, 106.8456]);
+          }
+        }
+      } else {
+        setIsPickingOpportunityCenter(false);
+      }
+      return next;
+    });
+  };
+
+  // Select Quick City / Corridor Preset
+  const handleSelectOpportunityPreset = (preset: OpportunityPreset) => {
+    setOpportunityCenter(preset.coords);
+    setOpportunityPresetName(preset.name);
+    setIsPickingOpportunityCenter(false);
+    setActiveView('map');
+    if (mapInstance) {
+      mapInstance.flyTo(preset.coords, preset.zoom, { duration: 1.2 });
+    }
+  };
+
+  // Pick Center Location by Clicking on the Map
+  const handlePickOpportunityLocation = (coords: [number, number]) => {
+    setOpportunityCenter(coords);
+    setOpportunityPresetName('custom');
+    setIsPickingOpportunityCenter(false);
   };
 
   // Filter projects by Search, Category, Status, Region, and Contractor
@@ -296,6 +343,8 @@ export const TrackerPage: React.FC = () => {
         isAnalyticsOpen={isAnalyticsOpen}
         onToggleAnalytics={() => setIsAnalyticsOpen((prev) => !prev)}
         onOpenSubmitModal={() => setIsSubmitModalOpen(true)}
+        isOpportunityFinderOpen={isOpportunityFinderOpen}
+        onToggleOpportunityFinder={handleToggleOpportunityFinder}
       />
 
       {/* KPI Cards */}
@@ -362,6 +411,14 @@ export const TrackerPage: React.FC = () => {
               showFaultLines={showFaultLines}
               materialHubs={materialHubs}
               showMaterialHubs={materialFilters}
+              opportunityFinder={{
+                isOpen: isOpportunityFinderOpen,
+                center: opportunityCenter,
+                radiusKm: opportunityRadiusKm,
+                isPickingLocation: isPickingOpportunityCenter,
+                onPickLocation: handlePickOpportunityLocation,
+              }}
+              onMapReady={(map) => setMapInstance(map)}
             />
 
             {/* Collapsible Project Directory List (Left) */}
@@ -426,6 +483,27 @@ export const TrackerPage: React.FC = () => {
         isOpen={isSubmitModalOpen}
         onClose={() => setIsSubmitModalOpen(false)}
         onProjectSubmitted={handleProjectSubmitted}
+      />
+
+      {/* Site Radius Opportunity & Vendor Lead Finder Panel */}
+      <RadiusOpportunityFinder
+        isOpen={isOpportunityFinderOpen}
+        onClose={() => setIsOpportunityFinderOpen(false)}
+        allProjects={allProjects}
+        center={opportunityCenter}
+        radiusKm={opportunityRadiusKm}
+        onChangeRadius={setOpportunityRadiusKm}
+        isPickingLocation={isPickingOpportunityCenter}
+        onTogglePickLocation={() => setIsPickingOpportunityCenter((prev) => !prev)}
+        presetName={opportunityPresetName}
+        onSelectPreset={handleSelectOpportunityPreset}
+        onSelectProject={(proj) => {
+          handleSelectProject(proj);
+        }}
+        onFlyToProject={(coords) => {
+          setActiveView('map');
+          setFlyToCoords(coords);
+        }}
       />
     </div>
   );

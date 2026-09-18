@@ -26,6 +26,8 @@ interface HeaderProps {
   isAnalyticsOpen: boolean;
   onToggleAnalytics: () => void;
   onOpenSubmitModal?: () => void;
+  isOpportunityFinderOpen?: boolean;
+  onToggleOpportunityFinder?: () => void;
 }
 
 export const Header: React.FC<HeaderProps> = ({
@@ -42,6 +44,8 @@ export const Header: React.FC<HeaderProps> = ({
   isAnalyticsOpen,
   onToggleAnalytics,
   onOpenSubmitModal,
+  isOpportunityFinderOpen,
+  onToggleOpportunityFinder,
 }) => {
   const [isExportOpen, setIsExportOpen] = useState(false);
   const exportRef = useRef<HTMLDivElement>(null);
@@ -146,6 +150,22 @@ export const Header: React.FC<HeaderProps> = ({
             <span>Table</span>
           </button>
         </div>
+
+        {/* Radius Opportunity Finder Button */}
+        {onToggleOpportunityFinder && (
+          <button
+            onClick={onToggleOpportunityFinder}
+            className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-md border text-xs font-semibold transition-all shrink-0 ${
+              isOpportunityFinderOpen
+                ? 'bg-blue-600 text-white border-blue-400 shadow-sm shadow-blue-900/30'
+                : 'bg-neutral-900 hover:bg-neutral-800 text-neutral-300 hover:text-white border-neutral-800'
+            }`}
+            title="Cari Peluang Proyek dalam Radius Fasilitas (Vendor & Contractor Leads)"
+          >
+            <span className="text-sm leading-none">🎯</span>
+            <span className="hidden sm:inline font-medium">Cari Peluang</span>
+          </button>
+        )}
 
         {/* Analytics Toggle Button */}
         <button
