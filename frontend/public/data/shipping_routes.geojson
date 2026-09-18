@@ -1,0 +1,387 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            112.738,
+            -7.195
+          ],
+          [
+            112.78,
+            -7.05
+          ],
+          [
+            113.1,
+            -6.85
+          ],
+          [
+            113.8,
+            -6.5
+          ],
+          [
+            115.0,
+            -5.5
+          ],
+          [
+            116.5,
+            -3.5
+          ],
+          [
+            117.2,
+            -1.8
+          ],
+          [
+            117.05,
+            -1.35
+          ],
+          [
+            116.825,
+            -1.22
+          ]
+        ]
+      },
+      "properties": {
+        "id": "route-ikn-surabaya",
+        "name": "Koridor Semen & Baja IKN",
+        "corridor": "Surabaya (Tj Perak) ➔ Balikpapan / IKN (Kariangau)",
+        "origin": "Pelabuhan Tanjung Perak & Gresik/Tuban",
+        "destination": "Pelabuhan Kariangau & Dermaga Sepaku (IKN)",
+        "cargo": "Semen Curah (SIG Tuban), Baja Krakatau, Tiang Pancang Precast",
+        "vessel_type": "Kapal Curah Semen & Tongkang 300ft",
+        "transit_time": "48–60 Jam (Selat Makassar)",
+        "frequency": "Harian (3–5 Tongkang / Hari)",
+        "primary_material": "Semen & Precast",
+        "color": "#06B6D4",
+        "description": "Jalur arteri utama logistik IKN untuk struktur beton masif gedung pemerintahan KIPP dan jalan tol IKN."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            119.825,
+            -0.825
+          ],
+          [
+            119.75,
+            -0.65
+          ],
+          [
+            118.8,
+            -0.85
+          ],
+          [
+            117.8,
+            -1.05
+          ],
+          [
+            116.95,
+            -1.15
+          ],
+          [
+            116.782,
+            -1.045
+          ]
+        ]
+      },
+      "properties": {
+        "id": "route-ikn-palu",
+        "name": "Jalur Pasir Silika & Agregat Palu - IKN",
+        "corridor": "Teluk Palu (Watusampu) ➔ IKN Sepaku (Kaltim)",
+        "origin": "Dermaga Khusus Quarry Watusampu (Donggala/Palu)",
+        "destination": "Dermaga Logistik IKN Sepaku",
+        "cargo": "Pasir Agregat Beton Mutu Tinggi & Batu Split Keras",
+        "vessel_type": "Tongkang 300ft (7.500–10.000 DWT) + Tugboat",
+        "transit_time": "14–18 Jam",
+        "frequency": "Intensif (6–10 Tongkang / Hari)",
+        "primary_material": "Pasir & Agregat",
+        "color": "#06B6D4",
+        "description": "Jalur suplai vital agregat dan pasir mutu tinggi nonstop untuk batching plant Istana Negara, Kemenko, dan Tol IKN."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            106.04,
+            -5.99
+          ],
+          [
+            106.885,
+            -6.102
+          ],
+          [
+            106.5,
+            -5.6
+          ],
+          [
+            106.0,
+            -4.5
+          ],
+          [
+            105.5,
+            -2.8
+          ],
+          [
+            105.1,
+            -1.5
+          ],
+          [
+            104.1,
+            1.155
+          ],
+          [
+            102.8,
+            1.8
+          ],
+          [
+            101.0,
+            2.8
+          ],
+          [
+            99.5,
+            3.5
+          ],
+          [
+            98.7,
+            3.78
+          ]
+        ]
+      },
+      "properties": {
+        "id": "route-krakatau-sumatera",
+        "name": "Koridor Baja Krakatau Sumatera & Batam",
+        "corridor": "Cilegon / Tj Priok ➔ Batam ➔ Belawan (Medan)",
+        "origin": "Pelabuhan Ciwandan (Cilegon) & Tanjung Priok",
+        "destination": "Pelabuhan Batu Ampar (Batam) & Belawan (Medan)",
+        "cargo": "Baja Krakatau POSCO, Baja H-Beam, Wire Rod, Geotekstil",
+        "vessel_type": "Kapal Kontainer & Kargo Curah (General Cargo)",
+        "transit_time": "3–4 Hari",
+        "frequency": "3x Seminggu",
+        "primary_material": "Baja Konstruksi",
+        "color": "#06B6D4",
+        "description": "Distribusi baja struktural dari Cilegon ke proyek Tol Trans Sumatera, KEK Sei Mangkei, dan kampus data center Batam."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            112.738,
+            -7.195
+          ],
+          [
+            114.5,
+            -7.5
+          ],
+          [
+            116.5,
+            -7.2
+          ],
+          [
+            118.5,
+            -6.5
+          ],
+          [
+            119.4,
+            -5.1
+          ],
+          [
+            120.5,
+            -5.7
+          ],
+          [
+            122.5,
+            -5.5
+          ],
+          [
+            125.0,
+            -4.5
+          ],
+          [
+            128.0,
+            -3.2
+          ],
+          [
+            130.5,
+            -2.0
+          ],
+          [
+            131.24,
+            -0.88
+          ]
+        ]
+      },
+      "properties": {
+        "id": "route-tol-laut-timur",
+        "name": "Jalur Tol Laut Logistik Indonesia Timur",
+        "corridor": "Surabaya ➔ Makassar ➔ Sorong (Papua Barat Daya)",
+        "origin": "Pelabuhan Tanjung Perak & Biringkassi (Makassar)",
+        "destination": "Pelabuhan Makassar & Pelabuhan Sorong (Arar)",
+        "cargo": "Semen (Tonasa/Gresik), Baja Tulangan, Aspal Curah, Alat Berat",
+        "vessel_type": "Kapal Tol Laut Logistik / Pelni Kargo / LCT",
+        "transit_time": "5–7 Hari",
+        "frequency": "Mingguan (Weekly Scheduled)",
+        "primary_material": "Semen & Aspal",
+        "color": "#06B6D4",
+        "description": "Menopang pembangunan strategis kawasan timur Indonesia, smelter nikel Papua-Maluku, dan jalan Trans Papua."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            112.738,
+            -7.195
+          ],
+          [
+            114.8,
+            -7.8
+          ],
+          [
+            116.05,
+            -8.72
+          ],
+          [
+            117.8,
+            -9.2
+          ],
+          [
+            120.0,
+            -9.5
+          ],
+          [
+            122.0,
+            -9.8
+          ],
+          [
+            123.53,
+            -10.18
+          ]
+        ]
+      },
+      "properties": {
+        "id": "route-nusa-tenggara",
+        "name": "Jalur Logistik Nusa Tenggara",
+        "corridor": "Surabaya ➔ Lembar (Lombok) ➔ Tenau (Kupang)",
+        "origin": "Pelabuhan Tanjung Perak (Surabaya)",
+        "destination": "Pelabuhan Lembar (NTB) & Pelabuhan Tenau (NTT)",
+        "cargo": "Material Konstruksi Umum, Struktur Baja Jembatan, Semen Zak",
+        "vessel_type": "Kapal Ro-Ro, Kargo Curah & Tongkang",
+        "transit_time": "2–3 Hari",
+        "frequency": "2x Seminggu",
+        "primary_material": "Material Umum & Baja",
+        "color": "#06B6D4",
+        "description": "Suplai material proyek bendungan (Kolhua, Temef), penataan KSPN Labuan Bajo, dan jalan sabuk perbatasan NTT."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            103.42,
+            1.05
+          ],
+          [
+            103.65,
+            0.6
+          ],
+          [
+            104.8,
+            -0.3
+          ],
+          [
+            105.1,
+            -1.5
+          ],
+          [
+            105.6,
+            -2.8
+          ],
+          [
+            106.0,
+            -4.5
+          ],
+          [
+            106.04,
+            -5.99
+          ],
+          [
+            106.885,
+            -6.102
+          ]
+        ]
+      },
+      "properties": {
+        "id": "route-karimun-jawa",
+        "name": "Jalur Granit & Agregat Kasar Karimun - Jawa",
+        "corridor": "Kepulauan Karimun (Kepri) ➔ Bojonegara & Tj Priok",
+        "origin": "Dermaga Khusus Quarry Karimun (Kepri)",
+        "destination": "Pelabuhan Bojonegara (Banten) & Tanjung Priok (DKI Jakarta)",
+        "cargo": "Batu Granit Pecah, Pasir Laut Reklamasi, Agregat Kasar Pondasi",
+        "vessel_type": "Tongkang Jumbo 330ft (10.000–12.000 DWT)",
+        "transit_time": "36–48 Jam",
+        "frequency": "Harian (4–6 Tongkang / Hari)",
+        "primary_material": "Batu Granit & Agregat",
+        "color": "#06B6D4",
+        "description": "Sumber utama batu granit keras dan tanggul laut pemecah gelombang NCICD Jakarta serta proyek jalan tol Pantura."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            119.52,
+            -4.79
+          ],
+          [
+            118.8,
+            -4.5
+          ],
+          [
+            118.0,
+            -3.2
+          ],
+          [
+            117.5,
+            -1.8
+          ],
+          [
+            116.825,
+            -1.22
+          ]
+        ]
+      },
+      "properties": {
+        "id": "route-tonasa-kalimantan",
+        "name": "Koridor Semen Tonasa Sulawesi - Kalimantan",
+        "corridor": "Biringkassi (Pangkep) ➔ Balikpapan (Kariangau)",
+        "origin": "Pelabuhan Biringkassi (PT Semen Tonasa, Pangkep)",
+        "destination": "Pelabuhan Semen Kariangau (Balikpapan)",
+        "cargo": "Semen Curah Pneumatic & Semen Kantong (PCC/OPC Type I & V)",
+        "vessel_type": "Kapal Semen Khusus (Cement Carrier) & Self-Propelled Barge",
+        "transit_time": "24–30 Jam",
+        "frequency": "3x Seminggu",
+        "primary_material": "Semen Curah",
+        "color": "#06B6D4",
+        "description": "Penyangga stabilitas pasokan semen IKN dan Kalimantan Timur langsung dari pabrik Semen Tonasa Sulawesi Selatan."
+      }
+    }
+  ]
+}

@@ -33,6 +33,8 @@ interface FilterBarProps {
   onToggleSupplyBuffers?: () => void;
   showFaultLines?: boolean;
   onToggleFaultLines?: () => void;
+  showMaritimeRoutes?: boolean;
+  onToggleMaritimeRoutes?: () => void;
   materialFilters?: MaterialHubFilterState;
   onToggleMaterialFilter?: (key: keyof MaterialHubFilterState) => void;
   onSetAllMaterialFilters?: (val: boolean) => void;
@@ -58,6 +60,8 @@ export const FilterBar: React.FC<FilterBarProps> = ({
   onToggleSupplyBuffers,
   showFaultLines = true,
   onToggleFaultLines,
+  showMaritimeRoutes = true,
+  onToggleMaritimeRoutes,
   materialFilters,
   onToggleMaterialFilter,
   onSetAllMaterialFilters,
@@ -442,6 +446,22 @@ export const FilterBar: React.FC<FilterBarProps> = ({
             title="Toggle Indonesian Active Geological Fault Lines Overlay (PuSGeN / Badan Geologi)"
           >
             <span>⚡</span> Sesar Aktif
+          </button>
+        )}
+
+        {/* Inter-Island Maritime Freight Logistics Layer Toggle (Tol Laut Material) */}
+        {onToggleMaritimeRoutes && (
+          <button
+            type="button"
+            onClick={onToggleMaritimeRoutes}
+            className={`flex items-center gap-1.5 px-2.5 py-1 rounded-md border text-[11px] font-semibold transition-colors whitespace-nowrap ${
+              showMaritimeRoutes
+                ? "bg-cyan-500/20 text-cyan-300 border-cyan-500/80 shadow-sm shadow-cyan-500/10"
+                : "bg-neutral-900 border-neutral-800 text-neutral-400 hover:text-neutral-200 hover:border-neutral-700"
+            }`}
+            title="Toggle Inter-Island Maritime Construction Logistics Network (Tol Laut Material, Rute Tongkang & Kapal Curah)"
+          >
+            <span>🚢</span> Logistik Maritim
           </button>
         )}
 

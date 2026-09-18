@@ -29,6 +29,12 @@ import { ProjectTable } from '../components/ProjectTable';
 import { AnalyticsDrawer } from '../components/AnalyticsDrawer';
 import { SubmitProjectModal } from '../components/SubmitProjectModal';
 import { RadiusOpportunityFinder, OpportunityPreset } from '../components/RadiusOpportunityFinder';
+import {
+  ShippingRouteFeature,
+  ShippingRouteFeatureCollection,
+  PortHubFeature,
+  PortHubFeatureCollection,
+} from '../types/maritimeLogistics';
 import { exportAsGeoJSON, exportAsCSV } from '../utils/export';
 import { projectMatchesContractor } from '../utils/contractorMatcher';
 import { getRegionForProvince } from '../utils/geo';
@@ -39,8 +45,11 @@ export const TrackerPage: React.FC = () => {
   const [batchingPlants, setBatchingPlants] = useState<BatchingPlantFeature[]>([]);
   const [faultLines, setFaultLines] = useState<FaultLineFeature[]>([]);
   const [materialHubs, setMaterialHubs] = useState<MaterialHubFeature[]>([]);
+  const [shippingRoutes, setShippingRoutes] = useState<ShippingRouteFeature[]>([]);
+  const [portHubs, setPortHubs] = useState<PortHubFeature[]>([]);
   const [showSupplyBuffers, setShowSupplyBuffers] = useState<boolean>(false);
   const [showFaultLines, setShowFaultLines] = useState<boolean>(true);
+  const [showMaritimeRoutes, setShowMaritimeRoutes] = useState<boolean>(true);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -94,11 +103,13 @@ export const TrackerPage: React.FC = () => {
     async function loadData() {
       try {
         setLoading(true);
-        const [resProjects, resPlants, resFaults, resHubs] = await Promise.all([
+        const [resProjects, resPlants, resFaults, resHubs, resRoutes, resPorts] = await Promise.all([
           fetch('/data/projects.geojson'),
           fetch('/data/batching_plants.geojson'),
           fetch('/data/fault_lines.geojson'),
           fetch('/data/material_hubs.geojson'),
+          fetch('/data/shipping_routes.geojson'),
+          fetch('/data/port_hubs.geojson'),
         ]);
 
         if (!resProjects.ok) {
@@ -132,6 +143,16 @@ export const TrackerPage: React.FC = () => {
         if (resHubs.ok) {
           const dataHubs: MaterialHubFeatureCollection = await resHubs.json();
           setMaterialHubs(dataHubs.features || []);
+        }
+
+        if (resRoutes.ok) {
+          const dataRoutes: ShippingRouteFeatureCollection = await resRoutes.json();
+          setShippingRoutes(dataRoutes.features || []);
+        }
+
+        if (resPorts.ok) {
+          const dataPorts: PortHubFeatureCollection = await resPorts.json();
+          setPortHubs(dataPorts.features || []);
         }
 
         setError(null);
@@ -400,6 +421,8 @@ export const TrackerPage: React.FC = () => {
         }}
         showFaultLines={showFaultLines}
         onToggleFaultLines={() => setShowFaultLines((prev) => !prev)}
+        showMaritimeRoutes={showMaritimeRoutes}
+        onToggleMaritimeRoutes={() => setShowMaritimeRoutes((prev) => !prev)}
       />
 
       {/* Map & Overlays or Table View Container */}
@@ -419,6 +442,9 @@ export const TrackerPage: React.FC = () => {
               showSupplyBuffers={showSupplyBuffers}
               faultLines={faultLines}
               showFaultLines={showFaultLines}
+              shippingRoutes={shippingRoutes}
+              portHubs={portHubs}
+              showMaritimeRoutes={showMaritimeRoutes}
               materialHubs={materialHubs}
               showMaterialHubs={materialFilters}
               opportunityFinder={{
@@ -445,6 +471,7 @@ export const TrackerPage: React.FC = () => {
               showBatchingPlants={materialFilters.batching}
               showSupplyBuffers={showSupplyBuffers}
               showFaultLines={showFaultLines}
+              showMaritimeRoutes={showMaritimeRoutes}
               showQuarries={materialFilters.quarry}
               showSteelMills={materialFilters.steel}
               showCementPlants={materialFilters.cement}

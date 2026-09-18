@@ -6,6 +6,7 @@ import { ProjectFeature } from '../../types/project';
 import { BatchingPlantFeature } from '../../types/batchingPlant';
 import { FaultLineFeature } from '../../types/faultLine';
 import { MaterialHubFeature } from '../../types/materialHub';
+import { ShippingRouteFeature, PortHubFeature } from '../../types/maritimeLogistics';
 import { createProjectIcon } from './ProjectMarker';
 import { createBatchingPlantIcon } from './BatchingPlantMarker';
 import { createMaterialHubIcon, MATERIAL_HUB_CONFIG } from './MaterialHubMarker';
@@ -30,6 +31,9 @@ interface InfrastructureMapProps {
   showSupplyBuffers?: boolean;
   faultLines?: FaultLineFeature[];
   showFaultLines?: boolean;
+  shippingRoutes?: ShippingRouteFeature[];
+  portHubs?: PortHubFeature[];
+  showMaritimeRoutes?: boolean;
   materialHubs?: MaterialHubFeature[];
   showMaterialHubs?: {
     quarry: boolean;
@@ -60,6 +64,9 @@ export const InfrastructureMap: React.FC<InfrastructureMapProps> = ({
   showSupplyBuffers = false,
   faultLines = [],
   showFaultLines = true,
+  shippingRoutes = [],
+  portHubs = [],
+  showMaritimeRoutes = true,
   materialHubs = [],
   showMaterialHubs,
   opportunityFinder,
@@ -73,6 +80,7 @@ export const InfrastructureMap: React.FC<InfrastructureMapProps> = ({
   const batchingPlantLayerRef = useRef<L.FeatureGroup | null>(null);
   const faultLineLayerRef = useRef<L.FeatureGroup | null>(null);
   const materialHubLayerRef = useRef<L.FeatureGroup | null>(null);
+  const maritimeLayerRef = useRef<L.FeatureGroup | null>(null);
   const opportunityLayerRef = useRef<L.FeatureGroup | null>(null);
   const baseTileLayerRef = useRef<L.TileLayer | null>(null);
   const refTileLayerRef = useRef<L.TileLayer | null>(null);
@@ -139,6 +147,10 @@ export const InfrastructureMap: React.FC<InfrastructureMapProps> = ({
     const faultLineLayer = L.featureGroup().addTo(map);
     faultLineLayerRef.current = faultLineLayer;
 
+    // Dedicated FeatureGroup for Maritime Freight Logistics Network (Tol Laut Material)
+    const maritimeLayer = L.featureGroup().addTo(map);
+    maritimeLayerRef.current = maritimeLayer;
+
     // Dedicated FeatureGroup for Site Radius Opportunity Finder
     const opportunityLayer = L.featureGroup().addTo(map);
     opportunityLayerRef.current = opportunityLayer;
@@ -154,6 +166,7 @@ export const InfrastructureMap: React.FC<InfrastructureMapProps> = ({
       batchingPlantLayer.clearLayers();
       materialHubLayer.clearLayers();
       faultLineLayer.clearLayers();
+      maritimeLayer.clearLayers();
       opportunityLayer.clearLayers();
       map.remove();
       mapInstanceRef.current = null;
@@ -164,6 +177,7 @@ export const InfrastructureMap: React.FC<InfrastructureMapProps> = ({
       batchingPlantLayerRef.current = null;
       materialHubLayerRef.current = null;
       faultLineLayerRef.current = null;
+      maritimeLayerRef.current = null;
       opportunityLayerRef.current = null;
     };
   }, []);
@@ -665,6 +679,184 @@ export const InfrastructureMap: React.FC<InfrastructureMapProps> = ({
       hubLayer.addLayer(marker);
     });
   }, [materialHubs, showMaterialHubs]);
+
+  // Render Inter-Island Maritime Freight Logistics Network (Tol Laut Material)
+  useEffect(() => {
+    const layer = maritimeLayerRef.current;
+    if (!layer) return;
+
+    layer.clearLayers();
+    if (!showMaritimeRoutes) return;
+
+    // 1. Render Shipping Corridors (Curved nautical LineStrings)
+    if (shippingRoutes && shippingRoutes.length > 0) {
+      shippingRoutes.forEach((route) => {
+        const coords = route.geometry.coordinates;
+        if (!coords || coords.length === 0) return;
+
+        // Leaflet takes [lat, lon]
+        const latLngs: L.LatLngExpression[] = coords.map(([lon, lat]) => [lat, lon]);
+
+        // Glowing underlay casing
+        const glowLine = L.polyline(latLngs, {
+          color: '#0891b2',
+          weight: 6,
+          opacity: 0.25,
+          lineCap: 'round',
+          lineJoin: 'round',
+          interactive: false,
+        });
+        layer.addLayer(glowLine);
+
+        // Nautical dashed line: color #06B6D4, weight 2.5, dashArray '6, 8', opacity 0.85
+        const shippingLine = L.polyline(latLngs, {
+          color: '#06B6D4',
+          weight: 2.5,
+          dashArray: '6, 8',
+          opacity: 0.85,
+          lineCap: 'round',
+          lineJoin: 'round',
+        });
+
+        // Hover tooltip
+        const p = route.properties;
+        const tooltipHtml = `
+          <div style="font-family: 'Plus Jakarta Sans', system-ui, sans-serif; font-size: 11px; padding: 2px;">
+            <div style="display: flex; align-items: center; gap: 5px; margin-bottom: 2px;">
+              <span style="font-size: 13px;">🚢</span>
+              <strong style="font-size: 12px; color: #38bdf8; line-height: 1.2;">${p.name}</strong>
+            </div>
+            <div style="font-size: 10px; color: #94a3b8; margin-bottom: 3px;">
+              ${p.corridor}
+            </div>
+            <div style="font-size: 10.5px; color: #f1f5f9; border-top: 1px solid #334155; padding-top: 3px;">
+              📦 Muatan: <strong style="color: #67e8f9;">${p.cargo}</strong>
+            </div>
+            <div style="font-size: 10px; color: #fde047; font-family: monospace; margin-top: 2px;">
+              ⏱️ Waktu Tempuh: ${p.transit_time}
+            </div>
+          </div>
+        `;
+        shippingLine.bindTooltip(tooltipHtml, {
+          sticky: true,
+          className: 'custom-map-tooltip',
+          opacity: 0.98,
+        });
+
+        // Detailed interactive popup
+        const popupHtml = `
+          <div style="font-family: 'Plus Jakarta Sans', system-ui, sans-serif; min-width: 270px; max-width: 320px; padding: 4px;">
+            <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 6px;">
+              <div style="display: flex; align-items: center; gap: 6px;">
+                <span style="font-size: 16px;">🚢</span>
+                <strong style="font-size: 13px; color: #38bdf8; font-weight: 700; line-height: 1.2;">${p.name}</strong>
+              </div>
+              <span style="font-size: 9px; font-weight: 700; color: #06b6d4; background: rgba(6, 182, 212, 0.15); border: 1px solid rgba(6, 182, 212, 0.4); padding: 2px 6px; border-radius: 4px; font-family: monospace; white-space: nowrap;">
+                ${p.primary_material}
+              </span>
+            </div>
+            
+            <div style="font-size: 11px; font-weight: 600; color: #e2e8f0; background: rgba(15, 23, 42, 0.6); padding: 5px 8px; border-radius: 6px; border: 1px solid rgba(51, 65, 85, 0.6); margin-bottom: 8px;">
+              📍 ${p.corridor}
+            </div>
+
+            <div style="display: flex; flex-direction: column; gap: 5px; font-size: 11px; color: #cbd5e1; border-top: 1px solid #334155; padding-top: 6px;">
+              <div><span style="color: #94a3b8;">📦 Muatan Material:</span> <strong style="color: #f1f5f9;">${p.cargo}</strong></div>
+              <div><span style="color: #94a3b8;">⚓ Armada Kapal:</span> <strong style="color: #a5f3fc;">${p.vessel_type}</strong></div>
+              <div style="display: flex; justify-content: space-between; gap: 8px;">
+                <span><span style="color: #94a3b8;">⏱️ Transit:</span> <strong style="color: #fde047; font-family: monospace;">${p.transit_time}</strong></span>
+                <span><span style="color: #94a3b8;">🔄 Frekuensi:</span> <strong style="color: #86efac;">${p.frequency}</strong></span>
+              </div>
+            </div>
+
+            <div style="font-size: 10.5px; color: #94a3b8; line-height: 1.4; margin-top: 8px; padding-top: 6px; border-top: 1px dashed #334155;">
+              ℹ️ ${p.description}
+            </div>
+          </div>
+        `;
+        shippingLine.bindPopup(popupHtml, {
+          className: 'custom-map-popup',
+          maxWidth: 340,
+        });
+
+        layer.addLayer(shippingLine);
+      });
+    }
+
+    // 2. Render Port Hubs (Point features with anchor badge)
+    if (portHubs && portHubs.length > 0) {
+      portHubs.forEach((hub) => {
+        const [lon, lat] = hub.geometry.coordinates;
+        const p = hub.properties;
+
+        const portIcon = L.divIcon({
+          className: 'port-hub-icon',
+          html: `
+            <div style="
+              width: 24px;
+              height: 24px;
+              border-radius: 50%;
+              background: #0891b2;
+              border: 2px solid #22d3ee;
+              box-shadow: 0 0 10px rgba(6, 182, 212, 0.7);
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              font-size: 11px;
+              color: white;
+              cursor: pointer;
+              transition: transform 0.15s ease;
+            " title="${p.name}">⚓</div>
+          `,
+          iconSize: [24, 24],
+          iconAnchor: [12, 12],
+          popupAnchor: [0, -12],
+        });
+
+        const marker = L.marker([lat, lon], { icon: portIcon });
+
+        const tooltipHtml = `
+          <div style="font-family: 'Plus Jakarta Sans', system-ui, sans-serif; font-size: 11px;">
+            <div style="display: flex; align-items: center; gap: 4px;">
+              <span>⚓</span>
+              <strong style="color: #ffffff;">${p.name}</strong>
+            </div>
+            <div style="font-size: 10px; color: #67e8f9; margin-top: 1px;">${p.port_type}</div>
+          </div>
+        `;
+        marker.bindTooltip(tooltipHtml, {
+          direction: 'top',
+          className: 'custom-map-tooltip',
+          opacity: 0.98,
+        });
+
+        const popupHtml = `
+          <div style="font-family: 'Plus Jakarta Sans', system-ui, sans-serif; min-width: 230px; padding: 3px;">
+            <div style="display: flex; align-items: center; gap: 6px; margin-bottom: 4px;">
+              <span style="font-size: 15px;">⚓</span>
+              <div>
+                <strong style="font-size: 12px; color: #ffffff;">${p.name}</strong>
+                <div style="font-size: 10px; color: #94a3b8;">${p.city}</div>
+              </div>
+            </div>
+            <div style="font-size: 11px; color: #cbd5e1; border-top: 1px solid #334155; padding-top: 5px; margin-top: 4px; line-height: 1.4;">
+              <div>Tipe: <span style="color: #38bdf8; font-weight: 600;">${p.port_type}</span></div>
+              <div>Fokus Kargo: <span style="color: #f1f5f9; font-weight: 600;">${p.cargo_focus}</span></div>
+              <div style="margin-top: 4px; font-size: 10px; color: #94a3b8;">
+                Rute Tol Laut: <span style="color: #06b6d4;">${p.key_routes.join(', ')}</span>
+              </div>
+            </div>
+          </div>
+        `;
+        marker.bindPopup(popupHtml, {
+          className: 'custom-map-popup',
+          maxWidth: 280,
+        });
+
+        layer.addLayer(marker);
+      });
+    }
+  }, [shippingRoutes, portHubs, showMaritimeRoutes]);
 
   // Handle Fly-To coordinates (from project list / marker click)
 

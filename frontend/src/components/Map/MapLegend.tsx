@@ -11,6 +11,7 @@ interface MapLegendProps {
   showSteelMills?: boolean;
   showCementPlants?: boolean;
   showFacadePlants?: boolean;
+  showMaritimeRoutes?: boolean;
 }
 
 export const MapLegend: React.FC<MapLegendProps> = ({
@@ -21,6 +22,7 @@ export const MapLegend: React.FC<MapLegendProps> = ({
   showSteelMills = false,
   showCementPlants = false,
   showFacadePlants = false,
+  showMaritimeRoutes = false,
 }) => {
   const [isExpanded, setIsExpanded] = useState(true);
   const categories: ProjectCategory[] = ['Transport', 'Energy', 'Water', 'Housing', 'IKN', 'Commercial & Private'];
@@ -132,6 +134,21 @@ export const MapLegend: React.FC<MapLegendProps> = ({
                 <div className="w-4 h-1 rounded bg-rose-500 shadow-[0_0_6px_#ef4444] shrink-0" />
                 <span>Sesar Aktif (PuSGeN)</span>
               </div>
+            )}
+
+            {showMaritimeRoutes && (
+              <>
+                <div className="flex items-center gap-2 text-neutral-300 text-[11px] pt-1 border-t border-neutral-800/60">
+                  <div className="w-4 h-0.5 border-t-2 border-dashed border-cyan-400 shrink-0 shadow-[0_0_6px_#06b6d4]" />
+                  <span>Tol Laut Material (Rute Kapal)</span>
+                </div>
+                <div className="flex items-center gap-2 text-neutral-300 text-[11px]">
+                  <div className="w-3.5 h-3.5 rounded-full bg-cyan-950 border border-cyan-400 flex items-center justify-center text-[9px] shrink-0 text-cyan-200">
+                    ⚓
+                  </div>
+                  <span>Pelabuhan / Terminal Logistik</span>
+                </div>
+              </>
             )}
           </div>
         </div>

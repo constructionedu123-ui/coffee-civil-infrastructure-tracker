@@ -1,0 +1,264 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          106.885,
+          -6.102
+        ]
+      },
+      "properties": {
+        "id": "port-tj-priok",
+        "name": "Pelabuhan Tanjung Priok",
+        "city": "DKI Jakarta",
+        "port_type": "Hub Utama Nasional",
+        "cargo_focus": "Baja Krakatau, Kontainer Material, Alat Berat",
+        "status": "Operasional Utama",
+        "key_routes": [
+          "Baja Krakatau Sumatera",
+          "Granit Karimun - Jawa"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          112.738,
+          -7.195
+        ]
+      },
+      "properties": {
+        "id": "port-tj-perak",
+        "name": "Pelabuhan Tanjung Perak",
+        "city": "Surabaya, Jawa Timur",
+        "port_type": "Hub Utama Tol Laut",
+        "cargo_focus": "Semen Curah (Tuban/Gresik), Precast, Besi Beton, Tol Laut",
+        "status": "Operasional Utama",
+        "key_routes": [
+          "Koridor Semen & Baja IKN",
+          "Jalur Tol Laut Indonesia Timur",
+          "Jalur Nusa Tenggara"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          106.04,
+          -5.99
+        ]
+      },
+      "properties": {
+        "id": "port-ciwandan-bojonegara",
+        "name": "Pelabuhan Ciwandan / Bojonegara",
+        "city": "Cilegon, Banten",
+        "port_type": "Terminal Khusus Baja & Agregat",
+        "cargo_focus": "Baja Krakatau Steel & POSCO, Agregat Batu Andesit",
+        "status": "Operasional",
+        "key_routes": [
+          "Koridor Baja Krakatau Sumatera",
+          "Granit Karimun - Jawa"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.825,
+          -1.22
+        ]
+      },
+      "properties": {
+        "id": "port-kariangau",
+        "name": "Kariangau Interport Balikpapan",
+        "city": "Balikpapan, Kalimantan Timur",
+        "port_type": "Gateway Logistik Konstruksi IKN",
+        "cargo_focus": "Semen Curah, Rangka Baja, Tiang Pancang, Pasir Beton",
+        "status": "Operasional Utama IKN",
+        "key_routes": [
+          "Koridor Semen & Baja IKN",
+          "Semen Tonasa Sulawesi",
+          "Pasir Palu - IKN"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.782,
+          -1.045
+        ]
+      },
+      "properties": {
+        "id": "port-dermaga-sepaku",
+        "name": "Dermaga Logistik IKN Sepaku",
+        "city": "Penajam Paser Utara, Kaltim",
+        "port_type": "Dermaga Khusus KIPP IKN",
+        "cargo_focus": "Pasir Palu, Batu Split, Semen Kantong",
+        "status": "Operasional Khusus IKN",
+        "key_routes": [
+          "Jalur Pasir Silika & Agregat Palu - IKN"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          119.825,
+          -0.825
+        ]
+      },
+      "properties": {
+        "id": "port-watusampu-donggala",
+        "name": "Pelabuhan Quarry Watusampu (Teluk Palu)",
+        "city": "Donggala / Palu, Sulawesi Tengah",
+        "port_type": "Terminal Tambang Pasir Agregat",
+        "cargo_focus": "Pasir Silika Beton & Batu Split Keras",
+        "status": "Operasional Tambang",
+        "key_routes": [
+          "Jalur Pasir Silika & Agregat Palu - IKN"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          98.7,
+          3.78
+        ]
+      },
+      "properties": {
+        "id": "port-belawan",
+        "name": "Pelabuhan Belawan",
+        "city": "Medan, Sumatera Utara",
+        "port_type": "Hub Gateway Sumatera Utara",
+        "cargo_focus": "Baja Konstruksi, Aspal, Semen Andalas",
+        "status": "Operasional",
+        "key_routes": [
+          "Koridor Baja Krakatau Sumatera"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          104.005,
+          1.155
+        ]
+      },
+      "properties": {
+        "id": "port-batu-ampar",
+        "name": "Pelabuhan Batu Ampar",
+        "city": "Batam, Kepulauan Riau",
+        "port_type": "Hub Logistik Industri & Data Center",
+        "cargo_focus": "Baja Struktur, Fasad Kaca, Precast Moduler",
+        "status": "Operasional",
+        "key_routes": [
+          "Koridor Baja Krakatau Sumatera"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          119.52,
+          -4.79
+        ]
+      },
+      "properties": {
+        "id": "port-biringkassi",
+        "name": "Pelabuhan Khusus Biringkassi (Semen Tonasa)",
+        "city": "Pangkep, Sulawesi Selatan",
+        "port_type": "Terminal Khusus Semen Curah",
+        "cargo_focus": "Semen Portland Curah & Zak (PT Semen Tonasa)",
+        "status": "Operasional Khusus",
+        "key_routes": [
+          "Koridor Semen Tonasa Sulawesi - Kalimantan",
+          "Jalur Tol Laut Indonesia Timur"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          131.24,
+          -0.88
+        ]
+      },
+      "properties": {
+        "id": "port-sorong-arar",
+        "name": "Pelabuhan Arar / Klalin Sorong",
+        "city": "Sorong, Papua Barat Daya",
+        "port_type": "Hub Logistik Tol Laut Papua",
+        "cargo_focus": "Semen, Baja Tulangan, Alat Berat Proyek",
+        "status": "Operasional",
+        "key_routes": [
+          "Jalur Tol Laut Logistik Indonesia Timur"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          123.53,
+          -10.18
+        ]
+      },
+      "properties": {
+        "id": "port-tenau",
+        "name": "Pelabuhan Tenau",
+        "city": "Kupang, Nusa Tenggara Timur",
+        "port_type": "Hub Logistik NTT",
+        "cargo_focus": "Material Konstruksi, Semen Kupang, Baja",
+        "status": "Operasional",
+        "key_routes": [
+          "Jalur Logistik Nusa Tenggara"
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          103.42,
+          1.05
+        ]
+      },
+      "properties": {
+        "id": "port-karimun-quarry",
+        "name": "Dermaga Khusus Granit Karimun",
+        "city": "Karimun, Kepulauan Riau",
+        "port_type": "Terminal Tambang Granit & Pasir Laut",
+        "cargo_focus": "Batu Granit Pecah, Agregat Pondasi Laut",
+        "status": "Operasional Tambang",
+        "key_routes": [
+          "Jalur Granit & Agregat Kasar Karimun - Jawa"
+        ]
+      }
+    }
+  ]
+}
