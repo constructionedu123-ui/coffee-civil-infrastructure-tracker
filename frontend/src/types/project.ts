@@ -18,12 +18,18 @@ export interface ProjectProperties {
   budget_raw: string | null;
   funding_scheme?: string | null;
   pjpk?: string | null;
+  unor?: string | null;
+  balai?: string | null;
+  fiscal_year?: string | null;
+  progress?: number | null;
+  bim_viewer_url?: string | null;
+  bim_uuid?: string | null;
   contractor: string | null;
   province: string | null;
   regency: string | null;
   geocode_method: GeocodeMethod;
   source_url: string;
-  source_name: 'KPPIP' | 'BPJT';
+  source_name: 'KPPIP' | 'BPJT' | 'Kementerian PU (BIM)' | string;
   scraped_at: string;
 }
 

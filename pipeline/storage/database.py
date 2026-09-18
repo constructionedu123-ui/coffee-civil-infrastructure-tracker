@@ -27,6 +27,12 @@ CREATE TABLE IF NOT EXISTS projects (
     contractor      TEXT,
     funding_scheme  TEXT,
     pjpk            TEXT,
+    unor            TEXT,
+    balai           TEXT,
+    fiscal_year     TEXT,
+    progress        REAL,
+    bim_viewer_url  TEXT,
+    bim_uuid        TEXT,
     province        TEXT,
     regency         TEXT,
     latitude        REAL,
@@ -74,6 +80,18 @@ def init_db(db_path: Path = DB_PATH) -> None:
             conn.execute("ALTER TABLE projects ADD COLUMN funding_scheme TEXT;")
         if "pjpk" not in existing_cols:
             conn.execute("ALTER TABLE projects ADD COLUMN pjpk TEXT;")
+        if "unor" not in existing_cols:
+            conn.execute("ALTER TABLE projects ADD COLUMN unor TEXT;")
+        if "balai" not in existing_cols:
+            conn.execute("ALTER TABLE projects ADD COLUMN balai TEXT;")
+        if "fiscal_year" not in existing_cols:
+            conn.execute("ALTER TABLE projects ADD COLUMN fiscal_year TEXT;")
+        if "progress" not in existing_cols:
+            conn.execute("ALTER TABLE projects ADD COLUMN progress REAL;")
+        if "bim_viewer_url" not in existing_cols:
+            conn.execute("ALTER TABLE projects ADD COLUMN bim_viewer_url TEXT;")
+        if "bim_uuid" not in existing_cols:
+            conn.execute("ALTER TABLE projects ADD COLUMN bim_uuid TEXT;")
     log.info("Database initialised at %s", db_path)
 
 
@@ -85,11 +103,13 @@ def upsert_project(record: dict, db_path: Path = DB_PATH) -> None:
     sql = """
     INSERT INTO projects (
         project_id, project_name, category, status, budget_idr, budget_raw,
-        contractor, funding_scheme, pjpk, province, regency, latitude, longitude, geocode_method,
+        contractor, funding_scheme, pjpk, unor, balai, fiscal_year, progress,
+        bim_viewer_url, bim_uuid, province, regency, latitude, longitude, geocode_method,
         source_url, source_name, scraped_at
     ) VALUES (
         :project_id, :project_name, :category, :status, :budget_idr, :budget_raw,
-        :contractor, :funding_scheme, :pjpk, :province, :regency, :latitude, :longitude, :geocode_method,
+        :contractor, :funding_scheme, :pjpk, :unor, :balai, :fiscal_year, :progress,
+        :bim_viewer_url, :bim_uuid, :province, :regency, :latitude, :longitude, :geocode_method,
         :source_url, :source_name, :scraped_at
     )
     ON CONFLICT(project_id) DO UPDATE SET
@@ -101,6 +121,12 @@ def upsert_project(record: dict, db_path: Path = DB_PATH) -> None:
         contractor     = excluded.contractor,
         funding_scheme = excluded.funding_scheme,
         pjpk           = excluded.pjpk,
+        unor           = excluded.unor,
+        balai          = excluded.balai,
+        fiscal_year    = excluded.fiscal_year,
+        progress       = excluded.progress,
+        bim_viewer_url = excluded.bim_viewer_url,
+        bim_uuid       = excluded.bim_uuid,
         province       = excluded.province,
         regency        = excluded.regency,
         latitude       = excluded.latitude,
@@ -113,6 +139,12 @@ def upsert_project(record: dict, db_path: Path = DB_PATH) -> None:
     record.setdefault("scraped_at", datetime.utcnow().isoformat())
     record.setdefault("funding_scheme", None)
     record.setdefault("pjpk", None)
+    record.setdefault("unor", None)
+    record.setdefault("balai", None)
+    record.setdefault("fiscal_year", None)
+    record.setdefault("progress", None)
+    record.setdefault("bim_viewer_url", None)
+    record.setdefault("bim_uuid", None)
     with _connect(db_path) as conn:
         conn.execute(sql, record)
 
@@ -125,15 +157,23 @@ def upsert_many(records: list[dict], db_path: Path = DB_PATH) -> int:
             rec.setdefault("scraped_at", datetime.utcnow().isoformat())
             rec.setdefault("funding_scheme", None)
             rec.setdefault("pjpk", None)
+            rec.setdefault("unor", None)
+            rec.setdefault("balai", None)
+            rec.setdefault("fiscal_year", None)
+            rec.setdefault("progress", None)
+            rec.setdefault("bim_viewer_url", None)
+            rec.setdefault("bim_uuid", None)
             conn.execute("""
                 INSERT INTO projects (
                     project_id, project_name, category, status, budget_idr, budget_raw,
-                    contractor, funding_scheme, pjpk, province, regency, latitude, longitude, geocode_method,
+                    contractor, funding_scheme, pjpk, unor, balai, fiscal_year, progress,
+                    bim_viewer_url, bim_uuid, province, regency, latitude, longitude, geocode_method,
                     source_url, source_name, scraped_at
                 ) VALUES (
                     :project_id, :project_name, :category, :status,
-                    :budget_idr, :budget_raw, :contractor, :funding_scheme, :pjpk, :province, :regency,
-                    :latitude, :longitude, :geocode_method,
+                    :budget_idr, :budget_raw, :contractor, :funding_scheme, :pjpk,
+                    :unor, :balai, :fiscal_year, :progress, :bim_viewer_url, :bim_uuid,
+                    :province, :regency, :latitude, :longitude, :geocode_method,
                     :source_url, :source_name, :scraped_at
                 )
                 ON CONFLICT(project_id) DO UPDATE SET
@@ -145,6 +185,12 @@ def upsert_many(records: list[dict], db_path: Path = DB_PATH) -> int:
                     contractor     = excluded.contractor,
                     funding_scheme = excluded.funding_scheme,
                     pjpk           = excluded.pjpk,
+                    unor           = excluded.unor,
+                    balai          = excluded.balai,
+                    fiscal_year    = excluded.fiscal_year,
+                    progress       = excluded.progress,
+                    bim_viewer_url = excluded.bim_viewer_url,
+                    bim_uuid       = excluded.bim_uuid,
                     province       = excluded.province,
                     regency        = excluded.regency,
                     latitude       = excluded.latitude,

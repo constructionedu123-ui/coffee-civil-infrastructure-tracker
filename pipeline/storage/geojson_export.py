@@ -72,6 +72,13 @@ def export_geojson(
         json.dump(geojson, f, ensure_ascii=False, indent=2, default=str)
     log.info("GeoJSON written: %d features → %s", len(features), output_path)
 
+    # Also mirror to frontend/public/data/projects.geojson
+    frontend_path = output_path.parent.parent / "frontend" / "public" / "data" / "projects.geojson"
+    if frontend_path.parent.exists():
+        with frontend_path.open("w", encoding="utf-8") as f:
+            json.dump(geojson, f, ensure_ascii=False, indent=2, default=str)
+        log.info("Mirrored GeoJSON → %s", frontend_path)
+
     # ── Write unresolved CSV ──────────────────────────────────────────────────
     if unresolved:
         unresolved_csv.parent.mkdir(parents=True, exist_ok=True)

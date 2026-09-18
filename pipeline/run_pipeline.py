@@ -223,6 +223,26 @@ def run_bpjt(db_path: Path) -> int:
     return count
 
 
+def run_pu_bim(db_path: Path) -> int:
+    from pipeline.scrapers.pu_bim import PUBIMScraper
+
+    log.info("=== Scraping Kementerian PU (BIM) ===")
+    scraper = PUBIMScraper(max_workers=12)
+    records = scraper.scrape()
+    log.info("PU BIM: %d records scraped", len(records))
+
+    db_records = []
+    for rec in records:
+        r = rec.model_dump()
+        r["project_id"] = rec.project_id
+        r["scraped_at"] = rec.scraped_at.isoformat()
+        db_records.append(r)
+
+    count = upsert_many(db_records, db_path=db_path)
+    log.info("PU BIM: %d records written to DB", count)
+    return count
+
+
 # ── Main ──────────────────────────────────────────────────────────────────────
 
 def main() -> None:
@@ -231,7 +251,7 @@ def main() -> None:
     )
     parser.add_argument(
         "--source",
-        choices=["kppip", "bpjt", "all"],
+        choices=["kppip", "bpjt", "pu_bim", "all"],
         default="all",
         help="Which source to scrape (default: all)",
     )
@@ -268,6 +288,8 @@ def main() -> None:
             total += run_kppip(args.db)
         if args.source in ("bpjt", "all"):
             total += run_bpjt(args.db)
+        if args.source in ("pu_bim", "all"):
+            total += run_pu_bim(args.db)
         log.info("Total records stored: %d", total)
 
     if not args.no_export:

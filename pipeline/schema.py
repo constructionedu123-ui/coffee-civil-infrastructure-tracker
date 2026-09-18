@@ -26,7 +26,7 @@ class ProjectRecord(BaseModel):
     # ── Identity ────────────────────────────────────────────────────────────
     project_name: str
     source_url: str
-    source_name: Literal["KPPIP", "BPJT"]
+    source_name: Literal["KPPIP", "BPJT", "Kementerian PU (BIM)"] | str
 
     # ── Classification ───────────────────────────────────────────────────────
     category: CategoryType = "Transport"
@@ -37,9 +37,17 @@ class ProjectRecord(BaseModel):
     budget_raw: Optional[str] = None            # original text before parsing
     funding_scheme: Optional[str] = None        # APBN, KPBU, Swasta, Penugasan BUMN
 
-    # ── Parties ─────────────────────────────────────────────────────────────
+    # ── Parties & Ministry ───────────────────────────────────────────────────
     contractor: Optional[str] = None
     pjpk: Optional[str] = None                  # Penanggung Jawab Proyek Kerjasama / Kementerian Terkait
+    unor: Optional[str] = None                  # Unit Organisasi (Bina Marga, SDA, Cipta Karya)
+    balai: Optional[str] = None                 # Balai Wilayah / Balai Besar
+    fiscal_year: Optional[str] = None           # Tahun Anggaran
+    progress: Optional[float] = None            # Physical progress percentage (0 - 100)
+
+    # ── BIM (Building Information Modeling) ──────────────────────────────────
+    bim_viewer_url: Optional[str] = None        # Direct Autodesk 3D viewer link
+    bim_uuid: Optional[str] = None              # PU BIM internal package UUID
 
     # ── Location ────────────────────────────────────────────────────────────
     province: Optional[str] = None

@@ -191,6 +191,21 @@ export const ProjectDrawer: React.FC<ProjectDrawerProps> = ({
               <h2 className="text-lg font-bold text-neutral-100 leading-snug tracking-tight">
                 {props.project_name}
               </h2>
+
+              {/* 3D BIM Model badge if available */}
+              {props.bim_viewer_url && (
+                <div className="mt-2.5">
+                  <a
+                    href={props.bim_viewer_url}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white font-bold text-xs shadow-lg shadow-cyan-600/25 border border-cyan-400/40 transition-all transform hover:scale-[1.02]"
+                  >
+                    <span>🧊 Open 3D BIM Model</span>
+                    <ExternalLink className="w-3.5 h-3.5 text-cyan-200" />
+                  </a>
+                </div>
+              )}
             </div>
 
             {/* ── Scrollable body ── */}
@@ -264,7 +279,7 @@ export const ProjectDrawer: React.FC<ProjectDrawerProps> = ({
                 </div>
               </section>
 
-              {/* 3. Responsible Agency / PJPK */}
+              {/* 3. Responsible Agency / PJPK & Ministry */}
               <section className="bg-neutral-900/60 border border-neutral-800 rounded-lg p-4 space-y-2">
                 <span className="text-[10px] font-bold uppercase tracking-wider text-neutral-400">
                   Responsible Agency / PJPK
@@ -272,6 +287,34 @@ export const ProjectDrawer: React.FC<ProjectDrawerProps> = ({
                 <h3 className="font-bold text-neutral-100 text-sm leading-snug">
                   {props.pjpk || 'Kementerian PUPR / Lembaga Terkait'}
                 </h3>
+                {(props.unor || props.balai || (props.fiscal_year && props.fiscal_year !== 'NULL') || (props.progress !== null && props.progress !== undefined)) && (
+                  <div className="pt-2 border-t border-neutral-800/80 space-y-1.5 text-[11px]">
+                    {props.unor && (
+                      <div className="flex items-center justify-between">
+                        <span className="text-neutral-400">Unit Organisasi (Unor):</span>
+                        <span className="text-neutral-200 font-semibold">{props.unor}</span>
+                      </div>
+                    )}
+                    {props.balai && (
+                      <div className="flex items-center justify-between">
+                        <span className="text-neutral-400">Balai Kerja:</span>
+                        <span className="text-neutral-200 font-semibold">{props.balai}</span>
+                      </div>
+                    )}
+                    {props.fiscal_year && props.fiscal_year !== 'NULL' && (
+                      <div className="flex items-center justify-between">
+                        <span className="text-neutral-400">Tahun Anggaran:</span>
+                        <span className="text-neutral-300 font-mono">{props.fiscal_year}</span>
+                      </div>
+                    )}
+                    {props.progress !== null && props.progress !== undefined && (
+                      <div className="flex items-center justify-between">
+                        <span className="text-neutral-400">Progres Fisik:</span>
+                        <span className="text-cyan-400 font-mono font-bold">{props.progress}%</span>
+                      </div>
+                    )}
+                  </div>
+                )}
                 <p className="text-[10px] text-neutral-500">
                   Sector regulating ministry and project contracting authority
                 </p>
@@ -442,6 +485,18 @@ export const ProjectDrawer: React.FC<ProjectDrawerProps> = ({
 
             {/* ── Pinned Action Bar ── */}
             <div className="shrink-0 px-5 py-4 border-t border-neutral-800 bg-[#0f141c] space-y-2">
+              {props.bim_viewer_url && (
+                <a
+                  href={props.bim_viewer_url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="w-full py-2.5 px-4 rounded-md bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white font-bold text-xs flex items-center justify-center gap-2 shadow-lg shadow-cyan-600/30 border border-cyan-400/40 transition-all transform hover:scale-[1.01]"
+                >
+                  <span>🧊 Open 3D BIM Model (Kementerian PU)</span>
+                  <ExternalLink className="w-3.5 h-3.5 shrink-0 text-cyan-200" />
+                </a>
+              )}
+
               <a
                 href={props.source_url}
                 target="_blank"
