@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect, useMemo, useRef } from 'react';
 import {
   ProjectFeature,
   ProjectCategory,
@@ -218,6 +218,103 @@ export const TrackerPage: React.FC = () => {
     const coords = getProjectCoordinates(newProject.geometry);
     setFlyToCoords([coords[1], coords[0]]);
   };
+
+  // Deep-Link Initial Load: check if ?project= parameter exists in URL
+  const initialDeepLinkHandled = useRef<boolean>(false);
+
+  useEffect(() => {
+    if (initialDeepLinkHandled.current || allProjects.length === 0) return;
+
+    if (typeof window === 'undefined') return;
+    const searchParams = new URLSearchParams(window.location.search);
+    const projectParam = searchParams.get('project');
+    if (!projectParam) return;
+
+    initialDeepLinkHandled.current = true;
+    const target = decodeURIComponent(projectParam).trim().toLowerCase();
+
+    // 1. Match by id or project_id property or project_name
+    let matched = allProjects.find((p) => {
+      const id = String((p as any).id || p.properties.project_id || '').trim().toLowerCase();
+      const name = String(p.properties.project_name || '').trim().toLowerCase();
+      return id === target || name === target;
+    });
+
+    // 2. Fallback: fuzzy/partial match
+    if (!matched) {
+      matched = allProjects.find((p) => {
+        const name = String(p.properties.project_name || '').trim().toLowerCase();
+        return name.includes(target) || target.includes(name);
+      });
+    }
+
+    if (matched) {
+      setActiveView('map');
+      setSelectedProject(matched);
+      const coords = getProjectCoordinates(matched.geometry);
+      // Automatically fly the map camera to that project's coordinates
+      setFlyToCoords([coords[1], coords[0]]);
+      if (mapInstance) {
+        mapInstance.flyTo([coords[1], coords[0]], 12, { duration: 1.4 });
+      }
+    }
+  }, [allProjects, mapInstance]);
+
+  // Synchronize ?project= URL query param with selectedProject
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+
+    const url = new URL(window.location.href);
+    if (selectedProject) {
+      const projIdentifier =
+        (selectedProject as any).id ||
+        selectedProject.properties.project_id ||
+        selectedProject.properties.project_name;
+      url.searchParams.set('project', String(projIdentifier));
+      window.history.replaceState(null, '', `${url.pathname}${url.search}${url.hash}`);
+    } else {
+      if (url.searchParams.has('project')) {
+        url.searchParams.delete('project');
+        const cleanSearch = url.searchParams.toString();
+        const newUrl = cleanSearch
+          ? `${url.pathname}?${cleanSearch}${url.hash}`
+          : `${url.pathname}${url.hash}`;
+        window.history.replaceState(null, '', newUrl);
+      }
+    }
+  }, [selectedProject]);
+
+  // Handle browser back / forward navigation (popstate)
+  useEffect(() => {
+    const handlePopState = () => {
+      const params = new URLSearchParams(window.location.search);
+      const projectParam = params.get('project');
+      if (!projectParam) {
+        setSelectedProject(null);
+      } else if (allProjects.length > 0) {
+        const target = decodeURIComponent(projectParam).trim().toLowerCase();
+        const matched =
+          allProjects.find((p) => {
+            const id = String((p as any).id || p.properties.project_id || '').trim().toLowerCase();
+            const name = String(p.properties.project_name || '').trim().toLowerCase();
+            return id === target || name === target;
+          }) ||
+          allProjects.find((p) => {
+            const name = String(p.properties.project_name || '').trim().toLowerCase();
+            return name.includes(target) || target.includes(name);
+          });
+        if (matched) {
+          setActiveView('map');
+          setSelectedProject(matched);
+          const coords = getProjectCoordinates(matched.geometry);
+          setFlyToCoords([coords[1], coords[0]]);
+        }
+      }
+    };
+
+    window.addEventListener('popstate', handlePopState);
+    return () => window.removeEventListener('popstate', handlePopState);
+  }, [allProjects]);
 
   // Toggle Opportunity Finder
   const handleToggleOpportunityFinder = () => {

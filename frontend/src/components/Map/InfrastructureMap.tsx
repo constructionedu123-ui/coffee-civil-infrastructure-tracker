@@ -865,12 +865,12 @@ export const InfrastructureMap: React.FC<InfrastructureMapProps> = ({
     if (!map || !flyToCoords) return;
 
     const currentZoom = map.getZoom();
-    const targetZoom = Math.max(currentZoom, 8);
+    const targetZoom = Math.max(currentZoom, 12);
     map.flyTo(flyToCoords, targetZoom, {
       duration: 1.2,
       easeLinearity: 0.25,
     });
-  }, [flyToCoords]);
+  }, [flyToCoords, mapReady]);
 
   // Handle "Focus IKN Nusantara" camera preset
   useEffect(() => {
