@@ -162,7 +162,7 @@ def normalise_status(text: Optional[str]) -> str:
     """
     Map a raw status/description string to a canonical status enum value.
 
-    Returns one of: "Planning", "Construction", "Operational", "Completed", "Unknown"
+    Returns one of: "Tender & Transaksi", "Planning", "Construction", "Operational", "Completed", "Unknown"
     """
     if not text:
         return "Unknown"

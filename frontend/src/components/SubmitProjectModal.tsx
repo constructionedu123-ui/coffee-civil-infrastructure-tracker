@@ -411,9 +411,11 @@ export const SubmitProjectModal: React.FC<SubmitProjectModalProps> = ({
                   onChange={(e) => setStatus(e.target.value as ProjectStatus)}
                   className="w-full bg-neutral-900 border border-neutral-800 focus:border-violet-500 rounded-md px-3 py-2 text-xs text-neutral-100 focus:outline-none cursor-pointer"
                 >
+                  <option value="Tender & Transaksi">Tender & Transaksi (Lelang / Pengadaan)</option>
                   <option value="Construction">Under Construction (Sedang Konstruksi)</option>
-                  <option value="Planning">Planning & Prep (Perencanaan / Tender)</option>
-                  <option value="Completed">Completed / Operational (Selesai)</option>
+                  <option value="Planning">Planning & Prep (Perencanaan & Studi)</option>
+                  <option value="Operational">Operational (Beroperasi)</option>
+                  <option value="Completed">Completed (Selesai Konstruksi)</option>
                 </select>
               </div>
 

@@ -75,6 +75,10 @@ BPJT_MAX_NEWS_PAGES = 5         # number of news pages to scrape for progress da
 
 # ── Status normalisation map ──────────────────────────────────────────────────
 STATUS_KEYWORDS: dict[str, str] = {
+    "transaksi": "Tender & Transaksi",
+    "lelang": "Tender & Transaksi",
+    "pengadaan": "Tender & Transaksi",
+    "tender": "Tender & Transaksi",
     "beroperasi": "Operational",
     "operasional": "Operational",
     "selesai": "Completed",
@@ -84,9 +88,7 @@ STATUS_KEYWORDS: dict[str, str] = {
     "dibangun": "Construction",
     "persiapan": "Planning",
     "penyiapan": "Planning",
-    "transaksi": "Planning",
     "studi": "Planning",
     "perencanaan": "Planning",
     "kajian": "Planning",
-    "pengadaan": "Planning",
 }

@@ -1,6 +1,14 @@
 export type ProjectCategory = 'Transport' | 'Energy' | 'Water' | 'Housing' | 'IKN' | 'Commercial & Private';
 
-export type ProjectStatus = 'Planning' | 'Construction' | 'Operational' | 'Completed' | 'Unknown';
+export type ProjectStatus =
+  | 'Tender & Transaksi'
+  | 'Construction'
+  | 'Planning'
+  | 'Operational'
+  | 'Completed'
+  | 'Under Construction'
+  | 'Planning & Prep'
+  | 'Unknown';
 
 export type GeocodeMethod =
   | 'exact_kabupaten'

@@ -65,10 +65,11 @@ export const FilterBar: React.FC<FilterBarProps> = ({
   const categories: ProjectCategory[] = ["Transport", "Energy", "Water", "Housing", "IKN", "Commercial & Private"];
   const statusOptions: (ProjectStatus | "All")[] = [
     "All",
+    "Tender & Transaksi",
     "Construction",
+    "Planning",
     "Operational",
     "Completed",
-    "Planning",
   ];
 
   const [isMaterialDropdownOpen, setIsMaterialDropdownOpen] = useState(false);
@@ -196,18 +197,28 @@ export const FilterBar: React.FC<FilterBarProps> = ({
         </div>
 
         {/* Status Dropdown */}
-        <div className="flex items-center gap-1">
+        <div className="flex items-center gap-1.5">
           <span className="text-neutral-500 text-[10px] uppercase font-semibold hidden sm:inline">
             Status:
           </span>
           <select
             value={selectedStatus}
             onChange={(e) => onSelectStatus(e.target.value as ProjectStatus | "All")}
-            className="bg-neutral-900 text-neutral-200 border border-neutral-800 rounded px-2.5 py-1 text-xs focus:outline-none focus:border-neutral-700"
+            className={`border rounded px-2.5 py-1 text-xs focus:outline-none transition-colors font-medium cursor-pointer ${
+              selectedStatus === 'Tender & Transaksi'
+                ? 'text-amber-300 border-amber-500/60 bg-amber-950/30'
+                : selectedStatus !== 'All'
+                ? 'bg-neutral-900 text-neutral-100 border-neutral-700'
+                : 'bg-neutral-900 text-neutral-300 border-neutral-800 focus:border-neutral-700'
+            }`}
           >
             {statusOptions.map((status) => (
               <option key={status} value={status}>
-                {status === "All" ? "All Status" : STATUS_CONFIG[status]?.label || status}
+                {status === "All"
+                  ? "All Status"
+                  : status === "Tender & Transaksi"
+                  ? "🟡 Tender & Transaksi"
+                  : STATUS_CONFIG[status]?.label || status}
               </option>
             ))}
           </select>

@@ -71,25 +71,40 @@ export const STATUS_CONFIG: Record<
   ProjectStatus,
   { label: string; badgeClass: string; dotClass: string }
 > = {
-  Completed: {
-    label: 'Completed',
-    badgeClass: 'bg-emerald-950/40 text-emerald-300 border-emerald-800/40',
-    dotClass: 'bg-emerald-400',
+  'Tender & Transaksi': {
+    label: 'Tender & Transaksi',
+    badgeClass: 'bg-amber-500/20 text-amber-300 border-amber-500/50',
+    dotClass: 'bg-amber-400',
+  },
+  Construction: {
+    label: 'Under Construction',
+    badgeClass: 'bg-orange-950/40 text-orange-300 border-orange-800/40',
+    dotClass: 'bg-orange-400',
+  },
+  'Under Construction': {
+    label: 'Under Construction',
+    badgeClass: 'bg-orange-950/40 text-orange-300 border-orange-800/40',
+    dotClass: 'bg-orange-400',
+  },
+  Planning: {
+    label: 'Planning & Prep',
+    badgeClass: 'bg-blue-950/40 text-blue-300 border-blue-800/40',
+    dotClass: 'bg-blue-400',
+  },
+  'Planning & Prep': {
+    label: 'Planning & Prep',
+    badgeClass: 'bg-blue-950/40 text-blue-300 border-blue-800/40',
+    dotClass: 'bg-blue-400',
   },
   Operational: {
     label: 'Operational',
     badgeClass: 'bg-emerald-950/40 text-emerald-300 border-emerald-800/40',
     dotClass: 'bg-emerald-400',
   },
-  Construction: {
-    label: 'Under Construction',
-    badgeClass: 'bg-amber-950/40 text-amber-300 border-amber-800/40',
-    dotClass: 'bg-amber-400',
-  },
-  Planning: {
-    label: 'Planning & Prep',
-    badgeClass: 'bg-blue-950/40 text-blue-300 border-blue-800/40',
-    dotClass: 'bg-blue-400',
+  Completed: {
+    label: 'Completed',
+    badgeClass: 'bg-emerald-950/40 text-emerald-300 border-emerald-800/40',
+    dotClass: 'bg-emerald-400',
   },
   Unknown: {
     label: 'In Review',

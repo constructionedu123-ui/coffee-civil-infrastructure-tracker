@@ -13,7 +13,7 @@ from pydantic import BaseModel, computed_field, field_validator
 
 
 CategoryType = Literal["Transport", "Water", "Energy", "Housing", "IKN"]
-StatusType = Literal["Planning", "Construction", "Operational", "Completed", "Unknown"]
+StatusType = Literal["Tender & Transaksi", "Planning", "Construction", "Operational", "Completed", "Unknown"]
 GeocodeMethodType = Literal[
     "exact_kabupaten", "province_fallback", "hardcoded", "national_fallback", "unresolved"
 ]

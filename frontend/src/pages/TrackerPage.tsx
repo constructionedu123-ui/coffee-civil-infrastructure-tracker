@@ -266,8 +266,18 @@ export const TrackerPage: React.FC = () => {
       }
 
       // Status Filter
-      if (selectedStatus !== 'All' && props.status !== selectedStatus) {
-        return false;
+      if (selectedStatus !== 'All') {
+        const matchesStatus =
+          props.status === selectedStatus ||
+          (selectedStatus === 'Tender & Transaksi' &&
+            (props.status === 'Tender & Transaksi' ||
+              (props.status as string) === 'Tender' ||
+              (props.status as string) === 'Transaksi')) ||
+          (selectedStatus === 'Construction' && props.status === 'Under Construction') ||
+          (selectedStatus === 'Planning' && props.status === 'Planning & Prep');
+        if (!matchesStatus) {
+          return false;
+        }
       }
 
       // Region Filter

@@ -111,6 +111,7 @@ export const RadiusOpportunityFinder: React.FC<RadiusOpportunityFinderProps> = (
       list = list.filter(
         (item) =>
           item.project.properties.status === 'Construction' ||
+          item.project.properties.status === 'Tender & Transaksi' ||
           item.project.properties.status === 'Planning'
       );
     }
