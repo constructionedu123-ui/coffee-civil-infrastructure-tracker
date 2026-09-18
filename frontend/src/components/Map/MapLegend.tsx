@@ -7,18 +7,26 @@ interface MapLegendProps {
   showBatchingPlants?: boolean;
   showSupplyBuffers?: boolean;
   showFaultLines?: boolean;
+  showQuarries?: boolean;
+  showSteelMills?: boolean;
+  showCementPlants?: boolean;
+  showFacadePlants?: boolean;
 }
 
 export const MapLegend: React.FC<MapLegendProps> = ({
   showBatchingPlants = false,
   showSupplyBuffers = false,
   showFaultLines = false,
+  showQuarries = false,
+  showSteelMills = false,
+  showCementPlants = false,
+  showFacadePlants = false,
 }) => {
   const [isExpanded, setIsExpanded] = useState(true);
   const categories: ProjectCategory[] = ['Transport', 'Energy', 'Water', 'Housing', 'IKN', 'Commercial & Private'];
 
   return (
-    <div className="absolute right-4 bottom-6 z-20 bg-neutral-900/95 border border-neutral-800 rounded-lg shadow-lg overflow-hidden text-xs w-56">
+    <div className="absolute right-4 bottom-6 z-20 bg-neutral-900/95 border border-neutral-800 rounded-lg shadow-lg overflow-hidden text-xs w-60">
       <button
         onClick={() => setIsExpanded(!isExpanded)}
         className="w-full px-3 py-2 flex items-center justify-between text-neutral-300 hover:text-white bg-neutral-800/80 transition-colors"
@@ -60,10 +68,47 @@ export const MapLegend: React.FC<MapLegendProps> = ({
               <span>National Corridor Scope</span>
             </div>
 
+            {/* Material Supply Chain Hubs */}
+            {showQuarries && (
+              <div className="flex items-center gap-2 text-neutral-300 text-[11px] pt-1 border-t border-neutral-800/60">
+                <div className="w-3.5 h-3.5 rounded bg-neutral-900 border border-amber-500 flex items-center justify-center text-[9px] shrink-0">
+                  ⛰️
+                </div>
+                <span>Quarry Pasir & Agregat</span>
+              </div>
+            )}
+
+            {showSteelMills && (
+              <div className="flex items-center gap-2 text-neutral-300 text-[11px] pt-1 border-t border-neutral-800/60">
+                <div className="w-3.5 h-3.5 rounded bg-neutral-900 border border-cyan-500 flex items-center justify-center text-[9px] shrink-0">
+                  🔩
+                </div>
+                <span>Pabrik Baja Konstruksi</span>
+              </div>
+            )}
+
+            {showCementPlants && (
+              <div className="flex items-center gap-2 text-neutral-300 text-[11px] pt-1 border-t border-neutral-800/60">
+                <div className="w-3.5 h-3.5 rounded bg-neutral-900 border border-rose-500 flex items-center justify-center text-[9px] shrink-0">
+                  🧱
+                </div>
+                <span>Pabrik Semen Terpadu</span>
+              </div>
+            )}
+
+            {showFacadePlants && (
+              <div className="flex items-center gap-2 text-neutral-300 text-[11px] pt-1 border-t border-neutral-800/60">
+                <div className="w-3.5 h-3.5 rounded bg-neutral-900 border border-emerald-500 flex items-center justify-center text-[9px] shrink-0">
+                  🪟
+                </div>
+                <span>Fasad & Kaca Arsitektur</span>
+              </div>
+            )}
+
             {showBatchingPlants && (
               <div className="flex items-center gap-2 text-neutral-300 text-[11px] pt-1 border-t border-neutral-800/60">
                 <div className="w-3.5 h-3.5 rounded bg-neutral-900 border border-amber-500 flex items-center justify-center text-[9px] shrink-0">
-                  🏭
+                  🏗️
                 </div>
                 <span>Batching Plant / Precast</span>
               </div>
@@ -94,5 +139,3 @@ export const MapLegend: React.FC<MapLegendProps> = ({
     </div>
   );
 };
-
-

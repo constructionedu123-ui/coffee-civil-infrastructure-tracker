@@ -5,8 +5,10 @@ import 'leaflet.markercluster/dist/MarkerCluster.css';
 import { ProjectFeature } from '../../types/project';
 import { BatchingPlantFeature } from '../../types/batchingPlant';
 import { FaultLineFeature } from '../../types/faultLine';
+import { MaterialHubFeature } from '../../types/materialHub';
 import { createProjectIcon } from './ProjectMarker';
 import { createBatchingPlantIcon } from './BatchingPlantMarker';
+import { createMaterialHubIcon, MATERIAL_HUB_CONFIG } from './MaterialHubMarker';
 import { MeasureTool } from './MeasureTool';
 import { CATEGORY_CONFIG, STATUS_CONFIG } from '../../constants/categories';
 import { formatBudget } from '../../utils/formatters';
@@ -28,6 +30,14 @@ interface InfrastructureMapProps {
   showSupplyBuffers?: boolean;
   faultLines?: FaultLineFeature[];
   showFaultLines?: boolean;
+  materialHubs?: MaterialHubFeature[];
+  showMaterialHubs?: {
+    quarry: boolean;
+    steel: boolean;
+    cement: boolean;
+    facade: boolean;
+    batching: boolean;
+  };
 }
 
 export const InfrastructureMap: React.FC<InfrastructureMapProps> = ({
@@ -42,6 +52,8 @@ export const InfrastructureMap: React.FC<InfrastructureMapProps> = ({
   showSupplyBuffers = false,
   faultLines = [],
   showFaultLines = true,
+  materialHubs = [],
+  showMaterialHubs,
 }) => {
   const mapContainerRef = useRef<HTMLDivElement>(null);
   const mapInstanceRef = useRef<L.Map | null>(null);
@@ -50,6 +62,7 @@ export const InfrastructureMap: React.FC<InfrastructureMapProps> = ({
   const supplyBufferLayerRef = useRef<L.FeatureGroup | null>(null);
   const batchingPlantLayerRef = useRef<L.FeatureGroup | null>(null);
   const faultLineLayerRef = useRef<L.FeatureGroup | null>(null);
+  const materialHubLayerRef = useRef<L.FeatureGroup | null>(null);
   const baseTileLayerRef = useRef<L.TileLayer | null>(null);
   const refTileLayerRef = useRef<L.TileLayer | null>(null);
   const [mapReady, setMapReady] = useState<L.Map | null>(null);
@@ -104,6 +117,10 @@ export const InfrastructureMap: React.FC<InfrastructureMapProps> = ({
     const batchingPlantLayer = L.featureGroup().addTo(map);
     batchingPlantLayerRef.current = batchingPlantLayer;
 
+    // Dedicated FeatureGroup for construction material supply hubs (Quarry, Steel, Cement, Facade)
+    const materialHubLayer = L.featureGroup().addTo(map);
+    materialHubLayerRef.current = materialHubLayer;
+
     // Dedicated FeatureGroup for linear alignments (LineString / MultiLineString)
     const polylineLayer = L.featureGroup().addTo(map);
     polylineLayerRef.current = polylineLayer;
@@ -120,6 +137,7 @@ export const InfrastructureMap: React.FC<InfrastructureMapProps> = ({
       polylineLayer.clearLayers();
       supplyBufferLayer.clearLayers();
       batchingPlantLayer.clearLayers();
+      materialHubLayer.clearLayers();
       faultLineLayer.clearLayers();
       map.remove();
       mapInstanceRef.current = null;
@@ -128,6 +146,7 @@ export const InfrastructureMap: React.FC<InfrastructureMapProps> = ({
       polylineLayerRef.current = null;
       supplyBufferLayerRef.current = null;
       batchingPlantLayerRef.current = null;
+      materialHubLayerRef.current = null;
       faultLineLayerRef.current = null;
     };
   }, []);
@@ -528,6 +547,107 @@ export const InfrastructureMap: React.FC<InfrastructureMapProps> = ({
       faultLayer.addLayer(faultPolyline);
     });
   }, [faultLines, showFaultLines]);
+
+  // Render Material Supply Chain Hubs (Quarry, Steel, Cement, Facade)
+  useEffect(() => {
+    const hubLayer = materialHubLayerRef.current;
+    if (!hubLayer) return;
+
+    hubLayer.clearLayers();
+
+    if (!materialHubs || materialHubs.length === 0) return;
+
+    materialHubs.forEach((hub) => {
+      const p = hub.properties;
+
+      // Filter check based on showMaterialHubs state
+      if (p.hub_type === 'Quarry (Pasir & Agregat)' && showMaterialHubs && !showMaterialHubs.quarry) return;
+      if (p.hub_type === 'Baja Konstruksi (Steel Mills)' && showMaterialHubs && !showMaterialHubs.steel) return;
+      if (p.hub_type === 'Pabrik Semen Terpadu' && showMaterialHubs && !showMaterialHubs.cement) return;
+      if (p.hub_type === 'Fasad & Kaca (Architectural Facade)' && showMaterialHubs && !showMaterialHubs.facade) return;
+
+      const [lon, lat] = hub.geometry.coordinates;
+      const icon = createMaterialHubIcon(p);
+      const marker = L.marker([lat, lon], { icon });
+
+      const cfg = MATERIAL_HUB_CONFIG[p.hub_type] || MATERIAL_HUB_CONFIG['Quarry (Pasir & Agregat)'];
+
+      const tooltipHtml = `
+        <div style="font-family: 'Plus Jakarta Sans', system-ui, sans-serif; padding: 2px;">
+          <div style="display: flex; align-items: center; gap: 6px; margin-bottom: 2px;">
+            <span style="font-size: 9px; font-weight: 700; text-transform: uppercase; color: ${cfg.color};">
+              ${cfg.emoji} ${cfg.shortLabel}
+            </span>
+            <span style="font-size: 9px; color: #94a3b8;">
+              • ${p.city}
+            </span>
+          </div>
+          <div style="font-size: 12px; font-weight: 700; color: #f8fafc; line-height: 1.3; max-width: 260px;">
+            ${p.name}
+          </div>
+          <div style="font-size: 10px; color: ${cfg.color}; font-weight: 600; font-family: monospace; margin-top: 3px;">
+            ${p.capacity_output}
+          </div>
+        </div>
+      `;
+
+      marker.bindTooltip(tooltipHtml, {
+        direction: 'top',
+        offset: [0, -13],
+        className: 'custom-map-tooltip',
+        opacity: 0.98,
+      });
+
+      const popupHtml = `
+        <div style="font-family: 'Plus Jakarta Sans', system-ui, sans-serif; min-width: 270px; max-width: 310px; padding: 12px; background: #0b0f17; border-radius: 8px;">
+          <div style="display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-bottom: 6px;">
+            <span style="font-size: 9px; font-weight: 700; text-transform: uppercase; color: ${cfg.color}; background: ${cfg.color}18; border: 1px solid ${cfg.color}40; padding: 2px 6px; border-radius: 4px; display: inline-flex; align-items: center; gap: 4px;">
+              <span>${cfg.emoji}</span> ${cfg.shortLabel}
+            </span>
+            <span style="font-size: 10px; color: #94a3b8; font-family: monospace;">
+              ${p.city}, ${p.province}
+            </span>
+          </div>
+
+          <div style="font-size: 13px; font-weight: 700; color: #f8fafc; line-height: 1.3; margin-bottom: 4px;">
+            ${p.name}
+          </div>
+          <div style="font-size: 11px; color: #cbd5e1; margin-bottom: 8px;">
+            Operator: <strong style="color: #f1f5f9;">${p.operator}</strong>
+          </div>
+
+          <div style="font-size: 11px; background: #111827; border: 1px solid #1f2937; border-radius: 6px; padding: 8px; margin-bottom: 8px;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+              <span style="color: #94a3b8; font-size: 10px; text-transform: uppercase; font-weight: 600;">Kapasitas Produksi</span>
+              <span style="font-weight: 700; color: ${cfg.color}; font-family: monospace; font-size: 11px;">${p.capacity_output}</span>
+            </div>
+            <div style="border-top: 1px solid #1f2937; padding-top: 4px; margin-top: 4px;">
+              <span style="color: #94a3b8; font-size: 10px; text-transform: uppercase; font-weight: 600; display: block; margin-bottom: 2px;">Pasar Utama / Koridor</span>
+              <span style="color: #e2e8f0; font-size: 11px; line-height: 1.35; display: block;">${p.key_supplied_markets}</span>
+            </div>
+          </div>
+
+          ${
+            p.special_feature
+              ? `
+            <div style="font-size: 10.5px; background: rgba(6, 182, 212, 0.1); border: 1px solid rgba(6, 182, 212, 0.3); border-radius: 6px; padding: 6px 8px; color: #67e8f9; line-height: 1.35;">
+              <strong>⚓ Catatan Logistik:</strong> ${p.special_feature}
+            </div>
+          `
+              : ''
+          }
+        </div>
+      `;
+
+      marker.bindPopup(popupHtml, {
+        className: 'custom-map-popup',
+        offset: [0, -13],
+        closeButton: false,
+      });
+
+      hubLayer.addLayer(marker);
+    });
+  }, [materialHubs, showMaterialHubs]);
 
   // Handle Fly-To coordinates (from project list / marker click)
 

@@ -3,7 +3,8 @@ import { ExternalLink, X } from 'lucide-react';
 import { ProjectFeature, getProjectCoordinates } from '../types/project';
 import { BatchingPlantFeature } from '../types/batchingPlant';
 import { FaultLineFeature } from '../types/faultLine';
-import { findNearestBatchingPlants } from '../utils/logistics';
+import { MaterialHubFeature } from '../types/materialHub';
+import { findNearestBatchingPlants, findNearestMaterialHubs } from '../utils/logistics';
 import { findNearestFaultLine } from '../utils/seismic';
 import { CATEGORY_CONFIG, STATUS_CONFIG } from '../constants/categories';
 import { formatBudget, formatDate } from '../utils/formatters';
@@ -17,6 +18,7 @@ interface ProjectDrawerProps {
   onZoomTo: (coords: [number, number]) => void;
   batchingPlants?: BatchingPlantFeature[];
   faultLines?: FaultLineFeature[];
+  materialHubs?: MaterialHubFeature[];
   onSelectContractor?: (contractor: string) => void;
 }
 
@@ -34,6 +36,7 @@ export const ProjectDrawer: React.FC<ProjectDrawerProps> = ({
   onZoomTo,
   batchingPlants = [],
   faultLines = [],
+  materialHubs = [],
   onSelectContractor,
 }) => {
   const [isBimModalOpen, setIsBimModalOpen] = useState(false);
@@ -83,6 +86,31 @@ export const ProjectDrawer: React.FC<ProjectDrawerProps> = ({
     if (!project || !faultLines || faultLines.length === 0) return null;
     return findNearestFaultLine(lat, lon, faultLines);
   }, [project, lat, lon, faultLines]);
+
+  // Nearest Material Supply Hubs (Quarry, Steel, Cement, Facade)
+  const nearestQuarry = useMemo(() => {
+    if (!project || !materialHubs || materialHubs.length === 0) return null;
+    const res = findNearestMaterialHubs(lat, lon, materialHubs, 'Quarry (Pasir & Agregat)', 1);
+    return res[0] || null;
+  }, [project, lat, lon, materialHubs]);
+
+  const nearestSteel = useMemo(() => {
+    if (!project || !materialHubs || materialHubs.length === 0) return null;
+    const res = findNearestMaterialHubs(lat, lon, materialHubs, 'Baja Konstruksi (Steel Mills)', 1);
+    return res[0] || null;
+  }, [project, lat, lon, materialHubs]);
+
+  const nearestCement = useMemo(() => {
+    if (!project || !materialHubs || materialHubs.length === 0) return null;
+    const res = findNearestMaterialHubs(lat, lon, materialHubs, 'Pabrik Semen Terpadu', 1);
+    return res[0] || null;
+  }, [project, lat, lon, materialHubs]);
+
+  const isIKNProject = useMemo(() => {
+    if (!props) return false;
+    const text = (props.project_name + ' ' + (props.province || '') + ' ' + (props.regency || '')).toLowerCase();
+    return props.category === 'IKN' || text.includes('ikn') || text.includes('sepaku') || text.includes('penajam') || text.includes('kalimantan timur');
+  }, [props]);
 
 
 
@@ -514,7 +542,121 @@ export const ProjectDrawer: React.FC<ProjectDrawerProps> = ({
                 )}
               </section>
 
-              {/* 7. Geotechnical & Seismic Fault Proximity */}
+              {/* 7. Construction Material Supply Chain & Quarry Radar */}
+              <section className="bg-neutral-900/60 border border-neutral-800 rounded-lg p-4 space-y-3">
+                <div className="flex items-center justify-between">
+                  <div className="flex items-center gap-1.5">
+                    <span className="text-sm">🏭</span>
+                    <span className="text-[10px] font-bold uppercase tracking-wider text-neutral-300">
+                      Material Supply Chain & Quarry Radar
+                    </span>
+                  </div>
+                  <span className="text-[9px] font-mono px-2 py-0.5 rounded bg-neutral-800 text-neutral-400 border border-neutral-700">
+                    SNI / Pareto Items
+                  </span>
+                </div>
+
+                {/* Special IKN Maritime Supply Corridor Callout */}
+                {isIKNProject && (
+                  <div className="p-3 rounded-lg bg-cyan-950/40 border border-cyan-700/50 space-y-1.5 text-xs">
+                    <div className="flex items-center gap-2 font-bold text-cyan-300 text-xs">
+                      <span>⚓</span>
+                      <span>Koridor Pasokan Maritim IKN (Selat Makassar)</span>
+                    </div>
+                    <p className="text-[11px] text-cyan-100/90 leading-relaxed">
+                      Sekitar <strong>70–80% pasir beton mutu tinggi IKN</strong> dipasok dari <strong>Tambang Palu - Donggala (Watusampu)</strong> melalui tongkang laut melintasi Selat Makassar ke Pelabuhan Semayang Balikpapan dan Dermaga Logistik ITCI Sepaku (~350 km jalur laut). Pasokan semen curah diangkut via kapal curah semen dari <strong>Semen Tonasa Pangkep</strong> dan <strong>SIG Tuban</strong>.
+                    </p>
+                  </div>
+                )}
+
+                <div className="grid grid-cols-1 gap-2.5">
+                  {/* Nearest Quarry */}
+                  {nearestQuarry && (
+                    <div className="p-2.5 rounded-lg bg-neutral-950/80 border border-neutral-800/90 space-y-1.5">
+                      <div className="flex items-start justify-between gap-2">
+                        <div className="flex items-center gap-1.5">
+                          <span className="text-sm">⛰️</span>
+                          <div>
+                            <span className="text-[9px] uppercase font-bold text-amber-400 tracking-wider block">
+                              Nearest Quarry (Pasir & Agregat)
+                            </span>
+                            <div className="text-xs font-bold text-neutral-100 leading-snug">
+                              {nearestQuarry.hub.properties.name}
+                            </div>
+                          </div>
+                        </div>
+                        <div className="text-right shrink-0">
+                          <span className="text-sm font-bold font-mono text-amber-300 tabular-nums">
+                            {nearestQuarry.distanceKm.toFixed(1)} km
+                          </span>
+                        </div>
+                      </div>
+                      <div className="text-[10px] text-neutral-400 flex items-center justify-between pt-1 border-t border-neutral-800/60">
+                        <span>Operator: <strong className="text-neutral-300">{nearestQuarry.hub.properties.operator}</strong></span>
+                        <span className="text-amber-400/90 font-mono">{nearestQuarry.hub.properties.capacity_output}</span>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Nearest Steel Mill */}
+                  {nearestSteel && (
+                    <div className="p-2.5 rounded-lg bg-neutral-950/80 border border-neutral-800/90 space-y-1.5">
+                      <div className="flex items-start justify-between gap-2">
+                        <div className="flex items-center gap-1.5">
+                          <span className="text-sm">🔩</span>
+                          <div>
+                            <span className="text-[9px] uppercase font-bold text-cyan-400 tracking-wider block">
+                              Nearest Baja Konstruksi (Steel Mill)
+                            </span>
+                            <div className="text-xs font-bold text-neutral-100 leading-snug">
+                              {nearestSteel.hub.properties.name}
+                            </div>
+                          </div>
+                        </div>
+                        <div className="text-right shrink-0">
+                          <span className="text-sm font-bold font-mono text-cyan-300 tabular-nums">
+                            {nearestSteel.distanceKm.toFixed(1)} km
+                          </span>
+                        </div>
+                      </div>
+                      <div className="text-[10px] text-neutral-400 flex items-center justify-between pt-1 border-t border-neutral-800/60">
+                        <span>Operator: <strong className="text-neutral-300">{nearestSteel.hub.properties.operator}</strong></span>
+                        <span className="text-cyan-400/90 font-mono">{nearestSteel.hub.properties.capacity_output}</span>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Nearest Cement Plant */}
+                  {nearestCement && (
+                    <div className="p-2.5 rounded-lg bg-neutral-950/80 border border-neutral-800/90 space-y-1.5">
+                      <div className="flex items-start justify-between gap-2">
+                        <div className="flex items-center gap-1.5">
+                          <span className="text-sm">🧱</span>
+                          <div>
+                            <span className="text-[9px] uppercase font-bold text-rose-400 tracking-wider block">
+                              Nearest Pabrik Semen Terpadu
+                            </span>
+                            <div className="text-xs font-bold text-neutral-100 leading-snug">
+                              {nearestCement.hub.properties.name}
+                            </div>
+                          </div>
+                        </div>
+                        <div className="text-right shrink-0">
+                          <span className="text-sm font-bold font-mono text-rose-300 tabular-nums">
+                            {nearestCement.distanceKm.toFixed(1)} km
+                          </span>
+                        </div>
+                      </div>
+                      <div className="text-[10px] text-neutral-400 flex items-center justify-between pt-1 border-t border-neutral-800/60">
+                        <span>Operator: <strong className="text-neutral-300">{nearestCement.hub.properties.operator}</strong></span>
+                        <span className="text-rose-400/90 font-mono">{nearestCement.hub.properties.capacity_output}</span>
+                      </div>
+                    </div>
+                  )}
+                </div>
+              </section>
+
+              {/* 8. Geotechnical & Seismic Fault Proximity */}
               <section className="bg-neutral-900/60 border border-neutral-800 rounded-lg p-4 space-y-3">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-1.5">

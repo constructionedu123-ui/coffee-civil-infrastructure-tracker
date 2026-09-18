@@ -1,0 +1,1000 @@
+{
+  "type": "FeatureCollection",
+  "metadata": {
+    "total_features": 45,
+    "category": "Construction Material Supply Chain Hubs (Quarry, Steel, Cement, Facade)",
+    "source": "Verified Directory of Primary Construction Material Manufacturers and Quarries"
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "id": "quarry-sulteng-01",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          119.825,
+          -0.835
+        ]
+      },
+      "properties": {
+        "id": "quarry-sulteng-01",
+        "name": "Tambang Pasir Palu - Donggala (Watusampu)",
+        "operator": "Asosiasi Penambang Batuan Pasir Sulteng / Mitra IKN",
+        "hub_type": "Quarry (Pasir & Agregat)",
+        "capacity_output": "12.000.000 Ton/Tahun",
+        "key_supplied_markets": "IKN Nusantara & Balikpapan (Jalur Tongkang Laut Selat Makassar)",
+        "city": "Palu",
+        "province": "Sulawesi Tengah",
+        "special_feature": "Pemasok Pasir Beton Utama IKN Nusantara via Tongkang Maritim ke Balikpapan & ITCI"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "quarry-kepri-01",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          103.421,
+          1.085
+        ]
+      },
+      "properties": {
+        "id": "quarry-kepri-01",
+        "name": "Tambang Batu Granit Karimun",
+        "operator": "PT Karimun Granite / Mitra Industri",
+        "hub_type": "Quarry (Pasir & Agregat)",
+        "capacity_output": "8.500.000 Ton/Tahun",
+        "key_supplied_markets": "Batam, Singapura & Kepulauan Riau (Reklamasi & Pelabuhan)",
+        "city": "Karimun",
+        "province": "Kepulauan Riau",
+        "special_feature": "Batu Granit Kualitas Tinggi untuk Struktur Laut, Pemecah Gelombang & Reklamasi"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "quarry-jabar-01",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          106.578,
+          -6.521
+        ]
+      },
+      "properties": {
+        "id": "quarry-jabar-01",
+        "name": "Quarry Andesit Rumpin - Cigudeg",
+        "operator": "PT Holcim Agregat / Pionirbeton / Swasta",
+        "hub_type": "Quarry (Pasir & Agregat)",
+        "capacity_output": "10.000.000 Ton/Tahun",
+        "key_supplied_markets": "Jabodetabek & Banten (Proyek Jalan Tol, Gedung & LRT)",
+        "city": "Bogor",
+        "province": "Jawa Barat",
+        "special_feature": "Sumber Agregat Kasar Andesit Terbesar untuk Konstruksi Jabodetabek"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "quarry-jateng-01",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          110.284,
+          -7.585
+        ]
+      },
+      "properties": {
+        "id": "quarry-jateng-01",
+        "name": "Tambang Pasir Vulkanik Kali Progo - Muntilan",
+        "operator": "Paguyuban Penambang Merapi / PT Progo Agregat",
+        "hub_type": "Quarry (Pasir & Agregat)",
+        "capacity_output": "4.500.000 Ton/Tahun",
+        "key_supplied_markets": "Yogyakarta, Solo & Semarang (Joglosemar)",
+        "city": "Magelang",
+        "province": "Jawa Tengah",
+        "special_feature": "Pasir Lahar Gunung Merapi Bebas Lumpur dengan Modulus Halus Butir Ideal"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "quarry-banten-01",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          106.082,
+          -5.992
+        ]
+      },
+      "properties": {
+        "id": "quarry-banten-01",
+        "name": "Quarry Batu Split & Andesit Bojonegara",
+        "operator": "PT Gunung Putri Graha Mas / Bojonegara Hub",
+        "hub_type": "Quarry (Pasir & Agregat)",
+        "capacity_output": "9.000.000 Ton/Tahun",
+        "key_supplied_markets": "Pelabuhan Merak, DKI Jakarta & Tol Laut ke Sumatera Bagian Selatan",
+        "city": "Serang",
+        "province": "Banten",
+        "special_feature": "Dermaga Khusus Tongkang Agregat Antar-Pulau Langsung ke Laut Jawa"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "quarry-jatim-01",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          113.125,
+          -8.195
+        ]
+      },
+      "properties": {
+        "id": "quarry-jatim-01",
+        "name": "Tambang Pasir Semeru Lumajang",
+        "operator": "Koperasi Tambang Pasir Semeru Mandiri",
+        "hub_type": "Quarry (Pasir & Agregat)",
+        "capacity_output": "5.500.000 Ton/Tahun",
+        "key_supplied_markets": "Surabaya, Malang, Probolinggo & Bali",
+        "city": "Lumajang",
+        "province": "Jawa Timur",
+        "special_feature": "Pasir Besi & Pasir Konstruksi Lahar Semeru Bergradasi Sangat Kasar"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "quarry-diy-01",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          110.112,
+          -7.845
+        ]
+      },
+      "properties": {
+        "id": "quarry-diy-01",
+        "name": "Tambang Batu Andesit Kokap Kulon Progo",
+        "operator": "PT Menoreh Makmur Agregat",
+        "hub_type": "Quarry (Pasir & Agregat)",
+        "capacity_output": "2.800.000 Ton/Tahun",
+        "key_supplied_markets": "Bandara YIA, Tol Solo-Yogyakarta & Jalur Rel Kereta Bandara",
+        "city": "Kulon Progo",
+        "province": "D.I. Yogyakarta",
+        "special_feature": "Pemasok Agregat Pondasi Lapis Atas (LPA/LPB) Koridor Selatan Jawa"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "quarry-jabar-02",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          107.391,
+          -6.645
+        ]
+      },
+      "properties": {
+        "id": "quarry-jabar-02",
+        "name": "Quarry Batu Split Plered Purwakarta",
+        "operator": "PT Gunung Mandiri / BUMN Mitra Karya",
+        "hub_type": "Quarry (Pasir & Agregat)",
+        "capacity_output": "3.800.000 Ton/Tahun",
+        "key_supplied_markets": "Tol Cipularang, Kereta Cepat Whoosh & Tol Japek II Selatan",
+        "city": "Purwakarta",
+        "province": "Jawa Barat",
+        "special_feature": "Batu Ballast Rel Kereta Api dan Agregat Aspal Hotmix Spesifikasi Bina Marga"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "quarry-sulsel-01",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          119.61,
+          -4.845
+        ]
+      },
+      "properties": {
+        "id": "quarry-sulsel-01",
+        "name": "Quarry Agregat Maros - Pangkep",
+        "operator": "PT Semen Tonasa Mining & Agregat Hub",
+        "hub_type": "Quarry (Pasir & Agregat)",
+        "capacity_output": "6.000.000 Ton/Tahun",
+        "key_supplied_markets": "Makassar, IKN Nusantara & Maluku (Via Pelabuhan Biringkassi)",
+        "city": "Pangkep",
+        "province": "Sulawesi Selatan",
+        "special_feature": "Batu Gamping & Agregat Kasar Pelabuhan Biringkassi untuk Proyek Maritim IKN"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "quarry-kalsel-01",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          114.582,
+          -3.185
+        ]
+      },
+      "properties": {
+        "id": "quarry-kalsel-01",
+        "name": "Quarry Pasir Sungai Barito",
+        "operator": "PT Barito Pasir Kencana",
+        "hub_type": "Quarry (Pasir & Agregat)",
+        "capacity_output": "3.200.000 Ton/Tahun",
+        "key_supplied_markets": "Banjarmasin, Banjarbaru & IKN Koridor Selatan (Kalsel-Kaltim)",
+        "city": "Barito Kuala",
+        "province": "Kalimantan Selatan",
+        "special_feature": "Sedimen Sungai Barito dengan Kapasitas Sedot Tongkang Berkapasitas Besar"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "quarry-kaltim-01",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          117.025,
+          -0.495
+        ]
+      },
+      "properties": {
+        "id": "quarry-kaltim-01",
+        "name": "Quarry Pasir & Sirtu Sungai Mahakam",
+        "operator": "Paguyuban Pengusaha Pasir Mahakam Mandiri",
+        "hub_type": "Quarry (Pasir & Agregat)",
+        "capacity_output": "2.500.000 Ton/Tahun",
+        "key_supplied_markets": "Samarinda, Balikpapan & Akses IKN Samboja-Sepaku",
+        "city": "Kutai Kartanegara",
+        "province": "Kalimantan Timur",
+        "special_feature": "Pemasok Pasir Lokal Terdekat Koridor Samboja - Samboja Barat"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "quarry-lampung-01",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          105.345,
+          -5.525
+        ]
+      },
+      "properties": {
+        "id": "quarry-lampung-01",
+        "name": "Quarry Andesit Tarahan Lampung",
+        "operator": "PT Tarahan Agregat Perkasa",
+        "hub_type": "Quarry (Pasir & Agregat)",
+        "capacity_output": "3.000.000 Ton/Tahun",
+        "key_supplied_markets": "Jalan Tol Trans Sumatera (JTTS) Bakauheni - Palembang & Dermaga Tarahan",
+        "city": "Lampung Selatan",
+        "province": "Lampung",
+        "special_feature": "Pemasok Utama Agregat Pondasi dan Ballast Kereta Batubara Babaranjang"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "quarry-sumut-01",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          98.425,
+          3.652
+        ]
+      },
+      "properties": {
+        "id": "quarry-sumut-01",
+        "name": "Quarry Batu Split Binjai - Langkat",
+        "operator": "PT Langkat Makmur Agregat",
+        "hub_type": "Quarry (Pasir & Agregat)",
+        "capacity_output": "2.700.000 Ton/Tahun",
+        "key_supplied_markets": "Medan Metropolitan, Tol Binjai-Langsa & Pelabuhan Belawan",
+        "city": "Langkat",
+        "province": "Sumatera Utara",
+        "special_feature": "Material Split Andesit Sungai Bingai Bersertifikat PU Bina Marga"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "steel-banten-01",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          106.012,
+          -6.018
+        ]
+      },
+      "properties": {
+        "id": "steel-banten-01",
+        "name": "PT Krakatau Steel (Persero) Tbk",
+        "operator": "PT Krakatau Steel (BUMN)",
+        "hub_type": "Baja Konstruksi (Steel Mills)",
+        "capacity_output": "3.150.000 Ton/Tahun",
+        "key_supplied_markets": "Nasional & Ekspor (Hot Rolled Coil, Wire Rod, Plat Jembatan)",
+        "city": "Cilegon",
+        "province": "Banten",
+        "special_feature": "Produsen Baja Baja Terpadu Terbesar di Indonesia BUMN"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "steel-banten-02",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          106.005,
+          -6.002
+        ]
+      },
+      "properties": {
+        "id": "steel-banten-02",
+        "name": "PT Krakatau POSCO",
+        "operator": "PT Krakatau POSCO (JV POSCO & Krakatau Steel)",
+        "hub_type": "Baja Konstruksi (Steel Mills)",
+        "capacity_output": "3.000.000 Ton/Tahun",
+        "key_supplied_markets": "Nasional, IKN Nusantara, Galangan Kapal & Heavy Construction",
+        "city": "Cilegon",
+        "province": "Banten",
+        "special_feature": "Plat Baja Tebal (Heavy Plate) untuk Jembatan Bentang Panjang & Struktur Dermaga"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "steel-jabar-01",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          107.115,
+          -6.295
+        ]
+      },
+      "properties": {
+        "id": "steel-jabar-01",
+        "name": "PT Gunung Raja Paksi Tbk (GRP)",
+        "operator": "PT Gunung Raja Paksi Tbk",
+        "hub_type": "Baja Konstruksi (Steel Mills)",
+        "capacity_output": "2.800.000 Ton/Tahun",
+        "key_supplied_markets": "Jabodetabek, Jawa, IKN & Ekspor (WF Beam, H-Beam, Baja Profil, Rebar)",
+        "city": "Bekasi",
+        "province": "Jawa Barat",
+        "special_feature": "Pelopor Baja Rendah Karbon (Green Steel) Berstandar EPD Internasional"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "steel-jabar-02",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          107.135,
+          -6.312
+        ]
+      },
+      "properties": {
+        "id": "steel-jabar-02",
+        "name": "PT The Master Steel Mfg (Plant Cikarang)",
+        "operator": "PT The Master Steel Mfg",
+        "hub_type": "Baja Konstruksi (Steel Mills)",
+        "capacity_output": "1.500.000 Ton/Tahun",
+        "key_supplied_markets": "Nasional (Baja Tulangan Beton BJTD, Wire Mesh, Round Bar)",
+        "city": "Bekasi",
+        "province": "Jawa Barat",
+        "special_feature": "Besi Ulir Mutu Tinggi (BJTD 40 / 50) untuk Gedung Tinggi & Jembatan Layang"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "steel-jabar-03",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          106.942,
+          -6.415
+        ]
+      },
+      "properties": {
+        "id": "steel-jabar-03",
+        "name": "PT Bukaka Teknik Utama Tbk",
+        "operator": "PT Bukaka Teknik Utama Tbk",
+        "hub_type": "Baja Konstruksi (Steel Mills)",
+        "capacity_output": "120.000 Ton Fabrikasi/Tahun",
+        "key_supplied_markets": "Nasional (Jembatan Rangka Baja Girder, Garbarata Bandara & Tower Listrik)",
+        "city": "Bogor",
+        "province": "Jawa Barat",
+        "special_feature": "Pusat Fabrikasi Jembatan Rangka Baja Standar Bina Marga & Box Girder Tol Layang"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "steel-jatim-01",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          112.658,
+          -7.262
+        ]
+      },
+      "properties": {
+        "id": "steel-jatim-01",
+        "name": "PT Steel Pipe Industry of Indonesia Tbk (SPINDO)",
+        "operator": "PT Steel Pipe Industry of Indonesia Tbk",
+        "hub_type": "Baja Konstruksi (Steel Mills)",
+        "capacity_output": "600.000 Ton/Tahun",
+        "key_supplied_markets": "Jawa Timur, Kalimantan, IKN & Indonesia Timur (Pipa Pancang Baja)",
+        "city": "Surabaya",
+        "province": "Jawa Timur",
+        "special_feature": "Pipa Baja Pancang Spiral & ERW untuk Pondasi Dermaga dan Jembatan Laut"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "steel-jatim-02",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          112.585,
+          -7.385
+        ]
+      },
+      "properties": {
+        "id": "steel-jatim-02",
+        "name": "PT Ispat Indo",
+        "operator": "PT Ispat Indo (Mittal Group)",
+        "hub_type": "Baja Konstruksi (Steel Mills)",
+        "capacity_output": "700.000 Ton/Tahun",
+        "key_supplied_markets": "Jawa Timur, Indonesia Timur (Wire Rod & Billet Baja Mutu Tinggi)",
+        "city": "Sidoarjo",
+        "province": "Jawa Timur",
+        "special_feature": "Kawat Baja Prategang (PC Strand & PC Wire) untuk Girder Beton Precast"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "steel-dki-01",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          106.931,
+          -6.182
+        ]
+      },
+      "properties": {
+        "id": "steel-dki-01",
+        "name": "PT Jakarta Central Asia Steel",
+        "operator": "PT Central Asia Steel",
+        "hub_type": "Baja Konstruksi (Steel Mills)",
+        "capacity_output": "450.000 Ton/Tahun",
+        "key_supplied_markets": "Jabodetabek & Jawa Barat (Besi Beton Deformed Rebar)",
+        "city": "Jakarta Timur",
+        "province": "DKI Jakarta",
+        "special_feature": "Besi Beton Ulir Standar SNI untuk Proyek Gedung Bertingkat Jakarta"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "steel-jabar-04",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          108.215,
+          -6.742
+        ]
+      },
+      "properties": {
+        "id": "steel-jabar-04",
+        "name": "PT Wijaya Karya Rekayasa Konstruksi (WIKA Steel Majalengka)",
+        "operator": "PT Wijaya Karya (Persero) Tbk",
+        "hub_type": "Baja Konstruksi (Steel Mills)",
+        "capacity_output": "80.000 Ton Fabrikasi/Tahun",
+        "key_supplied_markets": "Tol Cisumdawu, Bandara Kertajati, IKN (Girder Baja Jembatan)",
+        "city": "Majalengka",
+        "province": "Jawa Barat",
+        "special_feature": "Pusat Fabrikasi Baja Struktur Berat & Steel Box Girder BUMN WIKA"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "steel-jatim-03",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          112.645,
+          -7.165
+        ]
+      },
+      "properties": {
+        "id": "steel-jatim-03",
+        "name": "PT Barata Indonesia (Persero)",
+        "operator": "PT Barata Indonesia (BUMN)",
+        "hub_type": "Baja Konstruksi (Steel Mills)",
+        "capacity_output": "60.000 Ton Fabrikasi/Tahun",
+        "key_supplied_markets": "Nasional (Pintu Air Bendungan, Jembatan Rel KA, Heavy Cast Steel)",
+        "city": "Gresik",
+        "province": "Jawa Timur",
+        "special_feature": "Spesialis Baja Hidromekanikal Bendungan & Jembatan Rangka Baja Kereta Api"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "steel-banten-03",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          106.425,
+          -6.215
+        ]
+      },
+      "properties": {
+        "id": "steel-banten-03",
+        "name": "PT Lautan Steel Indonesia",
+        "operator": "PT Lautan Steel",
+        "hub_type": "Baja Konstruksi (Steel Mills)",
+        "capacity_output": "500.000 Ton/Tahun",
+        "key_supplied_markets": "Banten, DKI Jakarta & Jawa Barat (Baja Tulangan Beton SNI)",
+        "city": "Tangerang",
+        "province": "Banten",
+        "special_feature": "Pabrik Rebar Deformed & Plain Bersertifikat SNI 2052:2017"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "cement-jabar-01",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          106.885,
+          -6.495
+        ]
+      },
+      "properties": {
+        "id": "cement-jabar-01",
+        "name": "Indocement Tunggal Prakarsa - Plant Citeureup",
+        "operator": "PT Indocement Tunggal Prakarsa Tbk (Heidelberg Materials)",
+        "hub_type": "Pabrik Semen Terpadu",
+        "capacity_output": "18.000.000 Ton/Tahun",
+        "key_supplied_markets": "Jabodetabek, Jawa Barat, Banten & Sumatera (Semen Tiga Roda)",
+        "city": "Bogor",
+        "province": "Jawa Barat",
+        "special_feature": "Kompleks Pabrik Semen Terpadu Terbesar di Indonesia (14 Kiln Lines)"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "cement-jabar-02",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          108.435,
+          -6.715
+        ]
+      },
+      "properties": {
+        "id": "cement-jabar-02",
+        "name": "Indocement Tunggal Prakarsa - Plant Palimanan",
+        "operator": "PT Indocement Tunggal Prakarsa Tbk",
+        "hub_type": "Pabrik Semen Terpadu",
+        "capacity_output": "4.500.000 Ton/Tahun",
+        "key_supplied_markets": "Jawa Barat Bagian Timur & Jawa Tengah Utara (Semen Tiga Roda)",
+        "city": "Cirebon",
+        "province": "Jawa Barat",
+        "special_feature": "Pabrik Semen Ramah Lingkungan dengan Fasilitas Refuse-Derived Fuel (RDF)"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "cement-jatim-01",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          111.915,
+          -6.895
+        ]
+      },
+      "properties": {
+        "id": "cement-jatim-01",
+        "name": "Semen Indonesia (SIG) - Pabrik Tuban",
+        "operator": "PT Semen Indonesia (Persero) Tbk",
+        "hub_type": "Pabrik Semen Terpadu",
+        "capacity_output": "14.500.000 Ton/Tahun",
+        "key_supplied_markets": "Jawa Timur, Jawa Tengah, IKN Nusantara & Indonesia Timur (Semen Gresik)",
+        "city": "Tuban",
+        "province": "Jawa Timur",
+        "special_feature": "Pelabuhan Khusus Dermaga Tuban untuk Pengiriman Curah Antar-Pulau Termasuk IKN"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "cement-jateng-01",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          111.485,
+          -6.785
+        ]
+      },
+      "properties": {
+        "id": "cement-jateng-01",
+        "name": "Semen Gresik - Pabrik Rembang",
+        "operator": "PT Semen Gresik (Anak Usaha SIG)",
+        "hub_type": "Pabrik Semen Terpadu",
+        "capacity_output": "3.000.000 Ton/Tahun",
+        "key_supplied_markets": "Jawa Tengah & D.I. Yogyakarta (Semen Gresik Ultrapro)",
+        "city": "Rembang",
+        "province": "Jawa Tengah",
+        "special_feature": "Pabrik Semen Generasi Modern SIG dengan Efisiensi Termal Tinggi"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "cement-sulsel-01",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          119.645,
+          -4.815
+        ]
+      },
+      "properties": {
+        "id": "cement-sulsel-01",
+        "name": "Semen Tonasa - Pabrik Pangkep",
+        "operator": "PT Semen Tonasa (Anak Usaha SIG)",
+        "hub_type": "Pabrik Semen Terpadu",
+        "capacity_output": "7.400.000 Ton/Tahun",
+        "key_supplied_markets": "Sulawesi, IKN Nusantara, Kalimantan Timur, Maluku & Papua",
+        "city": "Pangkep",
+        "province": "Sulawesi Selatan",
+        "special_feature": "Pemasok Semen Terbesar IKN Nusantara via Pelabuhan Khusus Biringkassi"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "cement-sumbar-01",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          100.465,
+          -0.955
+        ]
+      },
+      "properties": {
+        "id": "cement-sumbar-01",
+        "name": "Semen Padang - Pabrik Indarung",
+        "operator": "PT Semen Padang (Anak Usaha SIG)",
+        "hub_type": "Pabrik Semen Terpadu",
+        "capacity_output": "8.900.000 Ton/Tahun",
+        "key_supplied_markets": "Sumatera Barat, Riau, Jambi, Bengkulu & Sumatera Utara",
+        "city": "Padang",
+        "province": "Sumatera Barat",
+        "special_feature": "Pabrik Semen Tertua di Asia Tenggara (Berdiri 1910) dengan Pelabuhan Teluk Bayur"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "cement-banten-01",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          106.245,
+          -6.925
+        ]
+      },
+      "properties": {
+        "id": "cement-banten-01",
+        "name": "Cemindo Gemilang - Pabrik Bayah",
+        "operator": "PT Cemindo Gemilang Tbk",
+        "hub_type": "Pabrik Semen Terpadu",
+        "capacity_output": "4.000.000 Ton/Tahun",
+        "key_supplied_markets": "Banten, Jawa Barat Selatan, DKI Jakarta & Ekspor (Semen Merah Putih)",
+        "city": "Lebak",
+        "province": "Banten",
+        "special_feature": "Pabrik Semen Terpadu dengan Pelabuhan Samudera Pribadi (Bayah Port Jetty)"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "cement-jabar-03",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          106.945,
+          -6.445
+        ]
+      },
+      "properties": {
+        "id": "cement-jabar-03",
+        "name": "Solusi Bangun Indonesia (Dynamix) - Pabrik Narogong",
+        "operator": "PT Solusi Bangun Indonesia Tbk (SIG Group)",
+        "hub_type": "Pabrik Semen Terpadu",
+        "capacity_output": "5.000.000 Ton/Tahun",
+        "key_supplied_markets": "Jabodetabek & Jawa Barat (Semen Dynamix)",
+        "city": "Bogor",
+        "province": "Jawa Barat",
+        "special_feature": "Fasilitas Pengolahan Sampah RDF Terbesar Pemasok Bahan Bakar Alternatif Semen"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "cement-jateng-02",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          109.025,
+          -7.695
+        ]
+      },
+      "properties": {
+        "id": "cement-jateng-02",
+        "name": "Solusi Bangun Indonesia (Dynamix) - Pabrik Cilacap",
+        "operator": "PT Solusi Bangun Indonesia Tbk (SIG Group)",
+        "hub_type": "Pabrik Semen Terpadu",
+        "capacity_output": "3.600.000 Ton/Tahun",
+        "key_supplied_markets": "Jawa Tengah Selatan, D.I. Yogyakarta & Jawa Barat Timur",
+        "city": "Cilacap",
+        "province": "Jawa Tengah",
+        "special_feature": "Pabrik Semen Pesisir Selatan Jawa dengan Integrasi Pengolahan Sampah TPST RDF Cilacap"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "cement-sulsel-02",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          119.625,
+          -4.965
+        ]
+      },
+      "properties": {
+        "id": "cement-sulsel-02",
+        "name": "Semen Bosowa Maros",
+        "operator": "PT Bosowa Berlian Motor / Bosowa Semen",
+        "hub_type": "Pabrik Semen Terpadu",
+        "capacity_output": "4.200.000 Ton/Tahun",
+        "key_supplied_markets": "Sulawesi Selatan, Sulawesi Barat & Kawasan Timur Indonesia",
+        "city": "Maros",
+        "province": "Sulawesi Selatan",
+        "special_feature": "Pemasok Semen Terpadu Swasta Terbesar di Kawasan Timur Indonesia"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "cement-sumsel-01",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          104.165,
+          -4.125
+        ]
+      },
+      "properties": {
+        "id": "cement-sumsel-01",
+        "name": "PT Semen Baturaja Tbk",
+        "operator": "PT Semen Baturaja Tbk (SIG Group)",
+        "hub_type": "Pabrik Semen Terpadu",
+        "capacity_output": "3.850.000 Ton/Tahun",
+        "key_supplied_markets": "Sumatera Selatan, Lampung, Jambi & Bengkulu (Semen Baturaja)",
+        "city": "Ogan Komering Ulu",
+        "province": "Sumatera Selatan",
+        "special_feature": "Pemasok Utama Proyek Tol Trans Sumatera Wilayah Sumatera Bagian Selatan"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "cement-kalsel-01",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.425,
+          -2.145
+        ]
+      },
+      "properties": {
+        "id": "cement-kalsel-01",
+        "name": "PT Conch South Kalimantan Cement (Tanjung)",
+        "operator": "PT Conch South Kalimantan Cement",
+        "hub_type": "Pabrik Semen Terpadu",
+        "capacity_output": "3.200.000 Ton/Tahun",
+        "key_supplied_markets": "Kalimantan Selatan, Kalimantan Tengah & IKN Nusantara Koridor Darat",
+        "city": "Tabalong",
+        "province": "Kalimantan Selatan",
+        "special_feature": "Pemasok Semen Jalur Darat Terdekat ke Koridor IKN Nusantara (Tabalong-Penajam)"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "cement-ntt-01",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          123.615,
+          -10.155
+        ]
+      },
+      "properties": {
+        "id": "cement-ntt-01",
+        "name": "Semen Kupang (Persero)",
+        "operator": "PT Semen Kupang (Persero)",
+        "hub_type": "Pabrik Semen Terpadu",
+        "capacity_output": "450.000 Ton/Tahun",
+        "key_supplied_markets": "Nusa Tenggara Timur & Timor Leste",
+        "city": "Kupang",
+        "province": "Nusa Tenggara Timur",
+        "special_feature": "Pabrik Semen BUMN Utama Penopang Pembangunan Infrastruktur Kepulauan NTT"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "facade-jabar-01",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          107.412,
+          -6.398
+        ]
+      },
+      "properties": {
+        "id": "facade-jabar-01",
+        "name": "PT Asahimas Flat Glass Tbk - Cikampek Plant",
+        "operator": "PT Asahimas Flat Glass Tbk (AGC Inc.)",
+        "hub_type": "Fasad & Kaca (Architectural Facade)",
+        "capacity_output": "500.000 Ton Kaca/Tahun",
+        "key_supplied_markets": "Nasional & Ekspor (Low-E Solar Reflective Glass, Laminated Facades, Tempered)",
+        "city": "Karawang",
+        "province": "Jawa Barat",
+        "special_feature": "Pemasok Utama Kaca Hemat Energi Gedung Pencakar Langit Jakarta & Bandara IKN"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "facade-dki-01",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          106.848,
+          -6.128
+        ]
+      },
+      "properties": {
+        "id": "facade-dki-01",
+        "name": "PT Asahimas Flat Glass Tbk - Ancol Plant",
+        "operator": "PT Asahimas Flat Glass Tbk",
+        "hub_type": "Fasad & Kaca (Architectural Facade)",
+        "capacity_output": "250.000 Ton Kaca/Tahun",
+        "key_supplied_markets": "Jabodetabek (Kaca Arsitektural, Kaca Cermin & Float Glass)",
+        "city": "Jakarta Utara",
+        "province": "DKI Jakarta",
+        "special_feature": "Pabrik Kaca Lembaran Legendaris Ancol untuk Fasad Komersial Jabodetabek"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "facade-jabar-02",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          107.128,
+          -6.325
+        ]
+      },
+      "properties": {
+        "id": "facade-jabar-02",
+        "name": "PT Mulia Industrindo Tbk (Mulia Glass)",
+        "operator": "PT Mulia Industrindo Tbk",
+        "hub_type": "Fasad & Kaca (Architectural Facade)",
+        "capacity_output": "650.000 Ton Kaca/Tahun",
+        "key_supplied_markets": "Nasional & Ekspor (Kaca Curtain Wall, Float Glass, Glass Block Arsitektur)",
+        "city": "Bekasi",
+        "province": "Jawa Barat",
+        "special_feature": "Produsen Kaca Gedung Bertingkat Terintegrasi Terbesar di Kawasan Industri Cikarang"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "facade-banten-01",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          106.635,
+          -6.215
+        ]
+      },
+      "properties": {
+        "id": "facade-banten-01",
+        "name": "PT YKK AP Indonesia",
+        "operator": "PT YKK AP Indonesia",
+        "hub_type": "Fasad & Kaca (Architectural Facade)",
+        "capacity_output": "48.000 Ton Profil Fasad/Tahun",
+        "key_supplied_markets": "Nasional & Ekspor (Unitized Curtain Wall, Window Wall, Profil Kusen Fasad)",
+        "city": "Tangerang",
+        "province": "Banten",
+        "special_feature": "Standar Emas Sistem Kusen Aluminium & Curtain Wall Kedap Air Angin Gedung Tinggi"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "facade-jabar-03",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          107.012,
+          -6.255
+        ]
+      },
+      "properties": {
+        "id": "facade-jabar-03",
+        "name": "PT Alakasa Extrusions Tbk / Alexindo",
+        "operator": "PT Alakasa Extrusions Tbk",
+        "hub_type": "Fasad & Kaca (Architectural Facade)",
+        "capacity_output": "30.000 Ton Profil/Tahun",
+        "key_supplied_markets": "Jabodetabek & Nasional (Aluminium Extrusions untuk Fasad & Spandrel)",
+        "city": "Bekasi",
+        "province": "Jawa Barat",
+        "special_feature": "Ekstrusi Aluminium Arsitektural Anodized & Powder Coating Standar ASTM"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "facade-jabar-04",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          107.142,
+          -6.345
+        ]
+      },
+      "properties": {
+        "id": "facade-jabar-04",
+        "name": "PT Saint-Gobain Construction Products Indonesia (Gyproc)",
+        "operator": "PT Saint-Gobain CPI",
+        "hub_type": "Fasad & Kaca (Architectural Facade)",
+        "capacity_output": "30.000.000 m² Papan Gypsum/Tahun",
+        "key_supplied_markets": "Nasional & IKN (Sistem Partisi Akustik, Dinding Tahan Api & Plafon Drywall)",
+        "city": "Bekasi",
+        "province": "Jawa Barat",
+        "special_feature": "Sistem Drywall Tahan Api & Partisi Akustik Bangunan Hijau (Green Building)"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "facade-dki-02",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          106.715,
+          -6.165
+        ]
+      },
+      "properties": {
+        "id": "facade-dki-02",
+        "name": "PT Tembaga Mulia Semanan Tbk",
+        "operator": "PT Tembaga Mulia Semanan Tbk",
+        "hub_type": "Fasad & Kaca (Architectural Facade)",
+        "capacity_output": "100.000 Ton Logam/Tahun",
+        "key_supplied_markets": "Nasional (Batang Aluminium & Tembaga Arsitektural / Listrik Gedung)",
+        "city": "Jakarta Barat",
+        "province": "DKI Jakarta",
+        "special_feature": "Komponen Logam Ekstrusi Arsitektural dan Konduktor Kelistrikan Gedung Bertingkat"
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "facade-jatim-01",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          112.725,
+          -7.345
+        ]
+      },
+      "properties": {
+        "id": "facade-jatim-01",
+        "name": "PT Alutama / Indalex Surabaya Hub",
+        "operator": "PT Alutama Aluminium",
+        "hub_type": "Fasad & Kaca (Architectural Facade)",
+        "capacity_output": "20.000 Ton/Tahun",
+        "key_supplied_markets": "Jawa Timur, Bali & Indonesia Timur (Fasad Aluminium Gedung & Kusen)",
+        "city": "Surabaya",
+        "province": "Jawa Timur",
+        "special_feature": "Pusat Distribusi dan Fabrikasi Fasad Aluminium untuk Proyek Indonesia Timur"
+      }
+    }
+  ]
+}

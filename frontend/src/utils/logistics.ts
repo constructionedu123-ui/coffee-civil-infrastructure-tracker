@@ -1,4 +1,5 @@
-﻿import { BatchingPlantFeature } from "../types/batchingPlant";
+import { BatchingPlantFeature } from "../types/batchingPlant";
+import { MaterialHubFeature, MaterialHubType } from "../types/materialHub";
 
 export interface ConcreteSupplyStatus {
   tier: "optimal" | "retarded" | "desert";
@@ -92,6 +93,40 @@ export function findNearestBatchingPlants(
       plant,
       distanceKm,
       status: getConcreteSupplyStatus(distanceKm),
+    };
+  });
+
+  withDistances.sort((a, b) => a.distanceKm - b.distanceKm);
+  return withDistances.slice(0, limit);
+}
+
+export interface NearestMaterialHubResult {
+  hub: MaterialHubFeature;
+  distanceKm: number;
+}
+
+/**
+ * Finds the nearest material supply hubs of a given type (or any type) to given coordinates
+ */
+export function findNearestMaterialHubs(
+  lat: number,
+  lon: number,
+  hubs: MaterialHubFeature[],
+  typeFilter?: MaterialHubType,
+  limit: number = 2
+): NearestMaterialHubResult[] {
+  if (!hubs || hubs.length === 0) return [];
+
+  const filtered = typeFilter
+    ? hubs.filter((h) => h.properties.hub_type === typeFilter)
+    : hubs;
+
+  const withDistances = filtered.map((hub) => {
+    const [hLon, hLat] = hub.geometry.coordinates;
+    const distanceKm = calculateHaversineDistanceKm(lat, lon, hLat, hLon);
+    return {
+      hub,
+      distanceKm,
     };
   });
 

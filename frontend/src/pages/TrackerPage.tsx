@@ -14,9 +14,13 @@ import {
   FaultLineFeature,
   FaultLineFeatureCollection,
 } from '../types/faultLine';
+import {
+  MaterialHubFeature,
+  MaterialHubFeatureCollection,
+} from '../types/materialHub';
 import { Header } from '../components/Header';
 import { KPICards } from '../components/KPICards';
-import { FilterBar } from '../components/FilterBar';
+import { FilterBar, MaterialHubFilterState } from '../components/FilterBar';
 import { InfrastructureMap } from '../components/Map/InfrastructureMap';
 import { MapLegend } from '../components/Map/MapLegend';
 import { ProjectDrawer } from '../components/ProjectDrawer';
@@ -33,11 +37,20 @@ export const TrackerPage: React.FC = () => {
   const [allProjects, setAllProjects] = useState<ProjectFeature[]>([]);
   const [batchingPlants, setBatchingPlants] = useState<BatchingPlantFeature[]>([]);
   const [faultLines, setFaultLines] = useState<FaultLineFeature[]>([]);
-  const [showBatchingPlants, setShowBatchingPlants] = useState<boolean>(true);
+  const [materialHubs, setMaterialHubs] = useState<MaterialHubFeature[]>([]);
   const [showSupplyBuffers, setShowSupplyBuffers] = useState<boolean>(false);
   const [showFaultLines, setShowFaultLines] = useState<boolean>(true);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
+
+  // Material Hubs Filters (Quarry, Steel, Cement, Facade, Batching)
+  const [materialFilters, setMaterialFilters] = useState<MaterialHubFilterState>({
+    quarry: true,
+    steel: true,
+    cement: true,
+    facade: true,
+    batching: true,
+  });
 
   // View Switcher State ('map' | 'table')
   const [activeView, setActiveView] = useState<'map' | 'table'>('map');
@@ -67,15 +80,16 @@ export const TrackerPage: React.FC = () => {
   const [focusIKNCounter, setFocusIKNCounter] = useState<number>(0);
   const [basemap, setBasemap] = useState<'dark' | 'satellite'>('satellite');
 
-  // Fetch GeoJSON data on mount (Projects & Batching Plants)
+  // Fetch GeoJSON data on mount (Projects, Batching Plants, Fault Lines, Material Hubs)
   useEffect(() => {
     async function loadData() {
       try {
         setLoading(true);
-        const [resProjects, resPlants, resFaults] = await Promise.all([
+        const [resProjects, resPlants, resFaults, resHubs] = await Promise.all([
           fetch('/data/projects.geojson'),
           fetch('/data/batching_plants.geojson'),
           fetch('/data/fault_lines.geojson'),
+          fetch('/data/material_hubs.geojson'),
         ]);
 
         if (!resProjects.ok) {
@@ -105,6 +119,12 @@ export const TrackerPage: React.FC = () => {
           const dataFaults: FaultLineFeatureCollection = await resFaults.json();
           setFaultLines(dataFaults.features || []);
         }
+
+        if (resHubs.ok) {
+          const dataHubs: MaterialHubFeatureCollection = await resHubs.json();
+          setMaterialHubs(dataHubs.features || []);
+        }
+
         setError(null);
       } catch (err: any) {
         console.error('Error fetching GIS data:', err);
@@ -121,7 +141,6 @@ export const TrackerPage: React.FC = () => {
   const handleToggleCategory = (category: ProjectCategory) => {
     setSelectedCategories((prev) => {
       if (prev.includes(category)) {
-        // Prevent deselecting all
         if (prev.length === 1) return prev;
         return prev.filter((c) => c !== category);
       } else {
@@ -130,123 +149,145 @@ export const TrackerPage: React.FC = () => {
     });
   };
 
-  // Reset Filters
-  const handleResetFilters = () => {
-    setSearchQuery('');
-    setSelectedCategories(['Transport', 'Energy', 'Water', 'Housing', 'IKN', 'Commercial & Private']);
-    setSelectedStatus('All');
-    setSelectedRegion('All');
-    setSelectedContractor(null);
+  // Material filter handlers
+  const handleToggleMaterialFilter = (key: keyof MaterialHubFilterState) => {
+    setMaterialFilters((prev) => {
+      const next = { ...prev, [key]: !prev[key] };
+      // If batching is turned off, also turn off supply buffers
+      if (key === 'batching' && !next.batching) {
+        setShowSupplyBuffers(false);
+      }
+      return next;
+    });
   };
 
-  const hasActiveFilters =
-    searchQuery !== '' ||
-    selectedCategories.length < 6 ||
-    selectedStatus !== 'All' ||
-    selectedRegion !== 'All' ||
-    selectedContractor !== null;
+  const handleSetAllMaterialFilters = (val: boolean) => {
+    setMaterialFilters({
+      quarry: val,
+      steel: val,
+      cement: val,
+      facade: val,
+      batching: val,
+    });
+    if (!val) {
+      setShowSupplyBuffers(false);
+    }
+  };
 
-  // Filtered Projects computation
+  // Select project and center map
+  const handleSelectProject = (project: ProjectFeature) => {
+    setSelectedProject(project);
+    const coords = getProjectCoordinates(project.geometry);
+    setFlyToCoords([coords[1], coords[0]]); // [lat, lon]
+  };
+
+  // Handle community / private project submission
+  const handleProjectSubmitted = (newProject: ProjectFeature) => {
+    setAllProjects((prev) => [newProject, ...prev]);
+    setSelectedProject(newProject);
+    const coords = getProjectCoordinates(newProject.geometry);
+    setActiveView('map');
+    setFlyToCoords([coords[1], coords[0]]);
+  };
+
+  // Filter projects by Search, Category, Status, Region, and Contractor
   const filteredProjects = useMemo(() => {
     return allProjects.filter((project) => {
       const props = project.properties;
 
-      // 1. Category Filter
+      // Contractor Filter
+      if (selectedContractor) {
+        const matches = projectMatchesContractor(props, selectedContractor);
+        if (!matches) return false;
+      }
+
+      // Search Query
+      if (searchQuery.trim()) {
+        const q = searchQuery.toLowerCase();
+        const matchesName = props.project_name.toLowerCase().includes(q);
+        const matchesProv = (props.province || '').toLowerCase().includes(q);
+        const matchesCity = (props.regency || '').toLowerCase().includes(q);
+        const matchesContractor = (props.contractor || '').toLowerCase().includes(q);
+        if (!matchesName && !matchesProv && !matchesCity && !matchesContractor) {
+          return false;
+        }
+      }
+
+      // Category Filter
       if (!selectedCategories.includes(props.category)) {
         return false;
       }
 
-      // 2. Status Filter
-      if (selectedStatus !== 'All') {
-        if (selectedStatus === 'Operational') {
-          if (props.status !== 'Operational' && props.status !== 'Completed') return false;
-        } else if (props.status !== selectedStatus) {
-          return false;
-        }
+      // Status Filter
+      if (selectedStatus !== 'All' && props.status !== selectedStatus) {
+        return false;
       }
 
-      // 3. Region Filter
+      // Region Filter
       if (selectedRegion !== 'All') {
-        const projectRegion = getRegionForProvince(props.province);
+        const projectRegion = getRegionForProvince(props.province || '');
         if (projectRegion !== selectedRegion) {
-          return false;
-        }
-      }
-
-      // 4. Contractor Filter (from FilterBar / Analytics Drawer / ProjectDrawer)
-      if (selectedContractor) {
-        if (!projectMatchesContractor(props, selectedContractor)) {
-          return false;
-        }
-      }
-
-      // 5. Search Query Filter
-      if (searchQuery.trim() !== '') {
-        const query = searchQuery.toLowerCase();
-        const matchesName = props.project_name.toLowerCase().includes(query);
-        const matchesProvince = (props.province || '').toLowerCase().includes(query);
-        const matchesRegency = (props.regency || '').toLowerCase().includes(query);
-        const matchesContractor = (props.contractor || '').toLowerCase().includes(query);
-
-        if (!matchesName && !matchesProvince && !matchesRegency && !matchesContractor) {
           return false;
         }
       }
 
       return true;
     });
-  }, [allProjects, selectedCategories, selectedStatus, selectedRegion, searchQuery, selectedContractor]);
+  }, [allProjects, searchQuery, selectedCategories, selectedStatus, selectedRegion, selectedContractor]);
 
-  // Handle Project Selection from List, Marker, or Search
-  const handleSelectProject = (project: ProjectFeature) => {
-    setSelectedProject(project);
-    const [lon, lat] = getProjectCoordinates(project.geometry);
-    setFlyToCoords([lat, lon]);
-  };
-
-  // Handle Community & User Project Submissions
-  const handleProjectSubmitted = (newProject: ProjectFeature) => {
-    setAllProjects((prev) => [newProject, ...prev]);
-    setActiveView('map');
-    handleSelectProject(newProject);
-  };
+  const hasActiveFilters =
+    searchQuery.trim() !== '' ||
+    selectedCategories.length < 6 ||
+    selectedStatus !== 'All' ||
+    selectedRegion !== 'All' ||
+    selectedContractor !== null;
 
   if (loading) {
     return (
-      <div className="w-screen h-screen bg-dark-900 flex flex-col items-center justify-center gap-3 text-slate-300">
-        <Loader2 className="w-8 h-8 text-blue-500 animate-spin" />
-        <p className="text-sm font-semibold tracking-wide">Loading Indonesian Infrastructure GIS Data...</p>
+      <div className="flex h-screen w-screen items-center justify-center bg-[#0b0f17] text-white">
+        <div className="flex flex-col items-center gap-3">
+          <Loader2 className="w-8 h-8 animate-spin text-blue-500" />
+          <span className="text-sm font-medium tracking-wide">
+            Memuat Data Spasial Infrastruktur & Material Hubs Indonesia...
+          </span>
+        </div>
       </div>
     );
   }
 
   if (error) {
     return (
-      <div className="w-screen h-screen bg-dark-900 flex flex-col items-center justify-center p-6 text-center space-y-4">
-        <div className="p-3 bg-red-500/10 border border-red-500/20 text-red-400 rounded-full">
-          <AlertTriangle className="w-8 h-8" />
+      <div className="flex h-screen w-screen items-center justify-center bg-[#0b0f17] text-white p-6">
+        <div className="max-w-md p-6 bg-red-950/40 border border-red-800/80 rounded-xl text-center space-y-3">
+          <AlertTriangle className="w-10 h-10 text-red-400 mx-auto" />
+          <h2 className="text-lg font-bold text-red-200">Gagal Memuat Data Spasial</h2>
+          <p className="text-xs text-red-300/80 leading-relaxed">{error}</p>
+          <button
+            onClick={() => window.location.reload()}
+            className="px-4 py-1.5 bg-red-900/60 hover:bg-red-800 text-red-100 rounded-lg text-xs font-semibold transition-colors"
+          >
+            Muat Ulang Halaman
+          </button>
         </div>
-        <h2 className="text-lg font-bold text-white">Failed to Load Infrastructure Map</h2>
-        <p className="text-xs text-slate-400 max-w-md">{error}</p>
-        <button
-          onClick={() => window.location.reload()}
-          className="px-4 py-2 bg-blue-600 hover:bg-blue-500 text-white rounded-lg text-xs font-semibold"
-        >
-          Retry
-        </button>
       </div>
     );
   }
 
   return (
-    <div className="w-screen h-screen flex flex-col bg-dark-900 text-slate-100 overflow-hidden font-['Plus_Jakarta_Sans',sans-serif]">
-      {/* Top Header - Pure Tracker Branding */}
+    <div className="flex flex-col h-screen w-screen overflow-hidden bg-[#0b0f17] text-slate-100 font-sans">
+      {/* Header */}
       <Header
         searchQuery={searchQuery}
         onSearchChange={setSearchQuery}
         totalFiltered={filteredProjects.length}
         totalProjects={allProjects.length}
-        onResetFilters={handleResetFilters}
+        onResetFilters={() => {
+          setSearchQuery('');
+          setSelectedCategories(['Transport', 'Energy', 'Water', 'Housing', 'IKN', 'Commercial & Private']);
+          setSelectedStatus('All');
+          setSelectedRegion('All');
+          setSelectedContractor(null);
+        }}
         hasActiveFilters={hasActiveFilters}
         activeView={activeView}
         onViewChange={setActiveView}
@@ -285,19 +326,16 @@ export const TrackerPage: React.FC = () => {
           setBasemap(newBasemap);
           setActiveView('map');
         }}
-        showBatchingPlants={showBatchingPlants}
-        onToggleBatchingPlants={() => {
-          setShowBatchingPlants((prev) => {
-            const next = !prev;
-            if (!next) setShowSupplyBuffers(false);
-            return next;
-          });
-        }}
+        materialFilters={materialFilters}
+        onToggleMaterialFilter={handleToggleMaterialFilter}
+        onSetAllMaterialFilters={handleSetAllMaterialFilters}
         showSupplyBuffers={showSupplyBuffers}
         onToggleSupplyBuffers={() => {
           setShowSupplyBuffers((prev) => {
             const next = !prev;
-            if (next) setShowBatchingPlants(true);
+            if (next && !materialFilters.batching) {
+              setMaterialFilters((f) => ({ ...f, batching: true }));
+            }
             return next;
           });
         }}
@@ -318,10 +356,12 @@ export const TrackerPage: React.FC = () => {
               focusIKNCounter={focusIKNCounter}
               basemap={basemap}
               batchingPlants={batchingPlants}
-              showBatchingPlants={showBatchingPlants}
+              showBatchingPlants={materialFilters.batching}
               showSupplyBuffers={showSupplyBuffers}
               faultLines={faultLines}
               showFaultLines={showFaultLines}
+              materialHubs={materialHubs}
+              showMaterialHubs={materialFilters}
             />
 
             {/* Collapsible Project Directory List (Left) */}
@@ -335,9 +375,13 @@ export const TrackerPage: React.FC = () => {
 
             {/* Map Legend (Bottom Right) */}
             <MapLegend
-              showBatchingPlants={showBatchingPlants}
+              showBatchingPlants={materialFilters.batching}
               showSupplyBuffers={showSupplyBuffers}
               showFaultLines={showFaultLines}
+              showQuarries={materialFilters.quarry}
+              showSteelMills={materialFilters.steel}
+              showCementPlants={materialFilters.cement}
+              showFacadePlants={materialFilters.facade}
             />
           </>
         ) : (
@@ -371,6 +415,7 @@ export const TrackerPage: React.FC = () => {
         }}
         batchingPlants={batchingPlants}
         faultLines={faultLines}
+        materialHubs={materialHubs}
         onSelectContractor={(contractor) => {
           setSelectedContractor(contractor);
         }}
