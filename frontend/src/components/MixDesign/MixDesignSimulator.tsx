@@ -233,7 +233,7 @@ export const MixDesignSimulator: React.FC = () => {
   };
 
   return (
-    <div className="simulator-container w-full h-full flex flex-col bg-[#f8fafc] text-slate-900 font-['Plus_Jakarta_Sans',sans-serif] overflow-hidden print:w-auto print:h-auto print:min-h-0 print:overflow-visible print:bg-white">
+    <div className="simulator-container w-full h-full flex flex-col bg-[#0b0f17] text-slate-100 font-['Plus_Jakarta_Sans',sans-serif] overflow-hidden print:w-auto print:h-auto print:min-h-0 print:overflow-visible print:bg-white">
       {/* Isolated Standalone Header */}
       <MixDesignHeader
         onExportCSV={() =>
@@ -254,17 +254,17 @@ export const MixDesignSimulator: React.FC = () => {
       <div className="flex-1 overflow-y-auto p-4 sm:p-6 lg:p-8 print:p-0 print:overflow-visible print:h-auto print:block">
         <div className="max-w-7xl mx-auto space-y-6 print:max-w-none print:w-full print:space-y-6">
 
-        {/* Sub-navigation tabs (Built Intelligence Style, hidden in print) */}
-        <div className="flex items-center gap-1 bg-slate-200/60 border border-slate-200/80 rounded-xl p-1 w-fit shadow-xs print:hidden">
+        {/* Sub-navigation tabs (Dark Engineering Style, hidden in print) */}
+        <div className="flex items-center gap-1 bg-slate-900/80 border border-slate-800 rounded-xl p-1 w-fit shadow-lg print:hidden">
           <button
             onClick={() => setActiveSubTab('all')}
             className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-semibold transition ${
               activeSubTab === 'all'
-                ? 'bg-white text-slate-900 shadow-sm border border-slate-200/80'
-                : 'text-slate-600 hover:text-slate-900'
+                ? 'bg-slate-800 text-white shadow-md border border-slate-700/80'
+                : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/40'
             }`}
           >
-            <LayoutDashboard className="w-3.5 h-3.5 text-slate-800" />
+            <LayoutDashboard className="w-3.5 h-3.5 text-slate-200" />
             <span>Dashboard Terpadu</span>
           </button>
 
@@ -272,11 +272,11 @@ export const MixDesignSimulator: React.FC = () => {
             onClick={() => setActiveSubTab('sieve')}
             className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-semibold transition ${
               activeSubTab === 'sieve'
-                ? 'bg-white text-slate-900 shadow-sm border border-slate-200/80'
-                : 'text-slate-600 hover:text-slate-900'
+                ? 'bg-slate-800 text-white shadow-md border border-slate-700/80'
+                : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/40'
             }`}
           >
-            <Layers className="w-3.5 h-3.5 text-sky-600" />
+            <Layers className="w-3.5 h-3.5 text-sky-400" />
             <span>1. Analisis Ayakan & FM</span>
           </button>
 
@@ -284,11 +284,11 @@ export const MixDesignSimulator: React.FC = () => {
             onClick={() => setActiveSubTab('jmf')}
             className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-semibold transition ${
               activeSubTab === 'jmf'
-                ? 'bg-white text-slate-900 shadow-sm border border-slate-200/80'
-                : 'text-slate-600 hover:text-slate-900'
+                ? 'bg-slate-800 text-white shadow-md border border-slate-700/80'
+                : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/40'
             }`}
           >
-            <Calculator className="w-3.5 h-3.5 text-emerald-600" />
+            <Calculator className="w-3.5 h-3.5 text-emerald-400" />
             <span>2. JMF Proportioning (SNI/ACI)</span>
           </button>
 
@@ -296,11 +296,11 @@ export const MixDesignSimulator: React.FC = () => {
             onClick={() => setActiveSubTab('moisture')}
             className={`flex items-center gap-1.5 px-3.5 py-1.5 rounded-lg text-xs font-semibold transition ${
               activeSubTab === 'moisture'
-                ? 'bg-white text-slate-900 shadow-sm border border-slate-200/80'
-                : 'text-slate-600 hover:text-slate-900'
+                ? 'bg-slate-800 text-white shadow-md border border-slate-700/80'
+                : 'text-slate-400 hover:text-slate-200 hover:bg-slate-800/40'
             }`}
           >
-            <Truck className="w-3.5 h-3.5 text-amber-600" />
+            <Truck className="w-3.5 h-3.5 text-amber-400" />
             <span>3. Koreksi Kadar Air & Truk</span>
           </button>
         </div>
@@ -309,7 +309,7 @@ export const MixDesignSimulator: React.FC = () => {
         <div className="space-y-6 print:space-y-0">
           {/* Module 1: Sieve Analysis & Grading Curve */}
           <section
-            className={`bg-white rounded-2xl border border-slate-200/80 shadow-[0_2px_12px_rgba(0,0,0,0.03)] p-6 print:p-4 print:shadow-none print:border-slate-300 print:rounded-xl print-avoid-break ${
+            className={`bg-[#131b26] rounded-2xl border border-slate-800/80 shadow-2xl p-6 print:bg-white print:p-4 print:shadow-none print:border-slate-300 print:rounded-xl print-avoid-break ${
               activeSubTab === 'all' || activeSubTab === 'sieve' ? 'block' : 'hidden print:block'
             }`}
           >
@@ -324,7 +324,7 @@ export const MixDesignSimulator: React.FC = () => {
 
           {/* Module 2: Job Mix Formula Proportioning (SNI 7656 / ACI 211) */}
           <section
-            className={`bg-white rounded-2xl border border-slate-200/80 shadow-[0_2px_12px_rgba(0,0,0,0.03)] p-6 print:p-4 print:shadow-none print:border-slate-300 print:rounded-xl print-page-break print-avoid-break ${
+            className={`bg-[#131b26] rounded-2xl border border-slate-800/80 shadow-2xl p-6 print:bg-white print:p-4 print:shadow-none print:border-slate-300 print:rounded-xl print-page-break print-avoid-break ${
               activeSubTab === 'all' || activeSubTab === 'jmf' ? 'block' : 'hidden print:block'
             }`}
           >
@@ -338,7 +338,7 @@ export const MixDesignSimulator: React.FC = () => {
 
           {/* Module 3: Field Moisture Correction & Truck Batching */}
           <section
-            className={`bg-white rounded-2xl border border-slate-200/80 shadow-[0_2px_12px_rgba(0,0,0,0.03)] p-6 print:p-4 print:shadow-none print:border-slate-300 print:rounded-xl print-page-break print-avoid-break ${
+            className={`bg-[#131b26] rounded-2xl border border-slate-800/80 shadow-2xl p-6 print:bg-white print:p-4 print:shadow-none print:border-slate-300 print:rounded-xl print-page-break print-avoid-break ${
               activeSubTab === 'all' || activeSubTab === 'moisture' ? 'block' : 'hidden print:block'
             }`}
           >
@@ -353,7 +353,7 @@ export const MixDesignSimulator: React.FC = () => {
         </div>
 
         {/* Footer info banner */}
-        <footer className="pt-6 border-t border-slate-200 text-center text-xs text-slate-500 print:mt-6 print:pt-4 print:border-t-2 print:border-slate-400 print:text-[10px]">
+        <footer className="pt-6 border-t border-slate-800 text-center text-xs text-slate-500 print:mt-6 print:pt-4 print:border-t-2 print:border-slate-400 print:text-[10px]">
           <p>
             Coffee Civil Engineering Lab Suite • SNI 7656:2012 (Tata cara pemilihan proporsi campuran
             beton normal) • ASTM C136 / C33 • Dirancang untuk Quality Control Teknisi Beton & Site
