@@ -37,6 +37,8 @@ interface FilterBarProps {
   onToggleFaultLines?: () => void;
   showMaritimeRoutes?: boolean;
   onToggleMaritimeRoutes?: () => void;
+  showRainRadar?: boolean;
+  onToggleRainRadar?: () => void;
   materialFilters?: MaterialHubFilterState;
   onToggleMaterialFilter?: (key: keyof MaterialHubFilterState) => void;
   onSetAllMaterialFilters?: (val: boolean) => void;
@@ -66,6 +68,8 @@ export const FilterBar: React.FC<FilterBarProps> = ({
   onToggleFaultLines,
   showMaritimeRoutes = true,
   onToggleMaritimeRoutes,
+  showRainRadar = false,
+  onToggleRainRadar,
   materialFilters,
   onToggleMaterialFilter,
   onSetAllMaterialFilters,
@@ -482,6 +486,22 @@ export const FilterBar: React.FC<FilterBarProps> = ({
             title="Toggle Inter-Island Maritime Construction Logistics Network (Tol Laut Material, Rute Tongkang & Kapal Curah)"
           >
             <span>🚢</span> Logistik Maritim
+          </button>
+        )}
+
+        {/* Live Weather & Rainfall Radar Toggle (RainViewer / Radar Cuaca BMKG) */}
+        {onToggleRainRadar && (
+          <button
+            type="button"
+            onClick={onToggleRainRadar}
+            className={`flex items-center gap-1.5 px-2.5 py-1 rounded-md border text-[11px] font-semibold transition-colors whitespace-nowrap ${
+              showRainRadar
+                ? "bg-sky-500/20 text-sky-300 border-sky-500/80 shadow-sm shadow-sky-500/10"
+                : "bg-neutral-900 border-neutral-800 text-neutral-400 hover:text-neutral-200 hover:border-neutral-700"
+            }`}
+            title="Toggle Live Rainfall & Weather Radar (RainViewer / Radar Cuaca BMKG)"
+          >
+            <span>🌧️</span> Radar Hujan
           </button>
         )}
 

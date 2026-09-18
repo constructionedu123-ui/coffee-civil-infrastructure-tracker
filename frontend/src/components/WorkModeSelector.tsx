@@ -36,11 +36,11 @@ export const WorkModeSelector: React.FC<WorkModeSelectorProps> = ({
         }`}
         title="Pilih Kurasi Mode Kerja (Layer, Filter & Basemap)"
       >
-        <option value="standard">🌐 Standar (Semua)</option>
-        <option value="contractor">👷 Kontraktor & Vendor</option>
-        <option value="geotech">⚡ Geoteknik & Gempa</option>
-        <option value="logistics">🚢 Logistik & Tol Laut</option>
-        <option value="ikn">🏛️ Fokus IKN Nusantara</option>
+        <option value="standard" className="bg-[#0f141c] text-neutral-100">🌐 Standar (Semua)</option>
+        <option value="contractor" className="bg-[#0f141c] text-emerald-300 font-semibold">👷 Kontraktor & Vendor</option>
+        <option value="geotech" className="bg-[#0f141c] text-rose-300 font-semibold">⚡ Geoteknik & Gempa</option>
+        <option value="logistics" className="bg-[#0f141c] text-cyan-300 font-semibold">🚢 Logistik & Tol Laut</option>
+        <option value="ikn" className="bg-[#0f141c] text-amber-300 font-semibold">🏛️ Fokus IKN Nusantara</option>
       </select>
     </div>
   );

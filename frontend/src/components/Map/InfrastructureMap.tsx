@@ -13,6 +13,8 @@ import { createMaterialHubIcon, MATERIAL_HUB_CONFIG } from './MaterialHubMarker'
 import { MeasureTool } from './MeasureTool';
 import { CATEGORY_CONFIG, STATUS_CONFIG } from '../../constants/categories';
 import { formatBudget } from '../../utils/formatters';
+import { getLatestRainRadarUrl } from '../../utils/rainRadar';
+import { X } from 'lucide-react';
 
 // IKN Nusantara camera preset (Sepaku, East Kalimantan)
 const IKN_CENTER: [number, number] = [-0.97, 116.70];
@@ -34,6 +36,7 @@ interface InfrastructureMapProps {
   shippingRoutes?: ShippingRouteFeature[];
   portHubs?: PortHubFeature[];
   showMaritimeRoutes?: boolean;
+  showRainRadar?: boolean;
   materialHubs?: MaterialHubFeature[];
   showMaterialHubs?: {
     quarry: boolean;
@@ -67,6 +70,7 @@ export const InfrastructureMap: React.FC<InfrastructureMapProps> = ({
   shippingRoutes = [],
   portHubs = [],
   showMaritimeRoutes = true,
+  showRainRadar = false,
   materialHubs = [],
   showMaterialHubs,
   opportunityFinder,
@@ -82,9 +86,11 @@ export const InfrastructureMap: React.FC<InfrastructureMapProps> = ({
   const materialHubLayerRef = useRef<L.FeatureGroup | null>(null);
   const maritimeLayerRef = useRef<L.FeatureGroup | null>(null);
   const opportunityLayerRef = useRef<L.FeatureGroup | null>(null);
+  const rainRadarLayerRef = useRef<L.TileLayer | null>(null);
   const baseTileLayerRef = useRef<L.TileLayer | null>(null);
   const refTileLayerRef = useRef<L.TileLayer | null>(null);
   const [mapReady, setMapReady] = useState<L.Map | null>(null);
+  const [showRainLegend, setShowRainLegend] = useState<boolean>(true);
 
   // Initialize Map
   useEffect(() => {
@@ -168,6 +174,10 @@ export const InfrastructureMap: React.FC<InfrastructureMapProps> = ({
       faultLineLayer.clearLayers();
       maritimeLayer.clearLayers();
       opportunityLayer.clearLayers();
+      if (rainRadarLayerRef.current) {
+        rainRadarLayerRef.current.remove();
+        rainRadarLayerRef.current = null;
+      }
       map.remove();
       mapInstanceRef.current = null;
       setMapReady(null);
@@ -858,6 +868,60 @@ export const InfrastructureMap: React.FC<InfrastructureMapProps> = ({
     }
   }, [shippingRoutes, portHubs, showMaritimeRoutes]);
 
+  // Handle RainViewer Live Weather Radar Overlay
+  useEffect(() => {
+    const map = mapInstanceRef.current;
+    if (!map) return;
+
+    let isMounted = true;
+    let refreshInterval: ReturnType<typeof setInterval> | null = null;
+
+    const loadRadarLayer = async (forceRefresh = false) => {
+      try {
+        const tileUrl = await getLatestRainRadarUrl(forceRefresh);
+        if (!isMounted) return;
+
+        if (rainRadarLayerRef.current) {
+          map.removeLayer(rainRadarLayerRef.current);
+          rainRadarLayerRef.current = null;
+        }
+
+        if (showRainRadar && tileUrl) {
+          const radarTile = L.tileLayer(tileUrl, {
+            opacity: 0.65,
+            zIndex: 420,
+            maxZoom: 19,
+            attribution: '&copy; <a href="https://www.rainviewer.com" target="_blank" rel="noopener noreferrer">RainViewer</a>',
+          });
+          radarTile.addTo(map);
+          rainRadarLayerRef.current = radarTile;
+        }
+      } catch (err) {
+        console.error('Failed to load RainViewer radar layer:', err);
+      }
+    };
+
+    if (showRainRadar) {
+      setShowRainLegend(true);
+      loadRadarLayer();
+
+      // Refresh radar timestamp every 10 minutes
+      refreshInterval = setInterval(() => {
+        loadRadarLayer(true);
+      }, 10 * 60 * 1000);
+    } else {
+      if (rainRadarLayerRef.current) {
+        map.removeLayer(rainRadarLayerRef.current);
+        rainRadarLayerRef.current = null;
+      }
+    }
+
+    return () => {
+      isMounted = false;
+      if (refreshInterval) clearInterval(refreshInterval);
+    };
+  }, [showRainRadar, mapReady]);
+
   // Handle Fly-To coordinates (from project list / marker click)
 
   useEffect(() => {
@@ -994,6 +1058,40 @@ export const InfrastructureMap: React.FC<InfrastructureMapProps> = ({
     <div className={`relative w-full h-full ${basemap === 'satellite' ? 'is-satellite' : ''}`}>
       <div ref={mapContainerRef} className="w-full h-full" />
       <MeasureTool map={mapReady} forceCloseTrigger={selectedProject} />
+
+      {/* Floating Rainfall Intensity Legend */}
+      {showRainRadar && showRainLegend && (
+        <div className="absolute bottom-6 left-4 z-[1000] flex items-center gap-2.5 px-3 py-2 rounded-xl bg-[#0f141c]/95 backdrop-blur-md border border-neutral-700 shadow-2xl text-xs text-neutral-200 select-none animate-in fade-in slide-in-from-bottom-2 duration-200">
+          <div className="flex items-center gap-1.5 font-bold text-sky-400 shrink-0">
+            <span>🌧️</span>
+            <span className="hidden sm:inline">Radar Hujan:</span>
+          </div>
+          <div className="flex items-center gap-2 text-[11px] font-medium">
+            <span className="flex items-center gap-1 text-emerald-300">
+              <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 shrink-0 inline-block shadow-[0_0_6px_rgba(16,185,129,0.5)]" />
+              <span>Ringan</span>
+            </span>
+            <span className="text-neutral-600">•</span>
+            <span className="flex items-center gap-1 text-amber-300">
+              <span className="w-2.5 h-2.5 rounded-full bg-amber-400 shrink-0 inline-block shadow-[0_0_6px_rgba(251,191,36,0.5)]" />
+              <span>Sedang</span>
+            </span>
+            <span className="text-neutral-600">•</span>
+            <span className="flex items-center gap-1 text-rose-400">
+              <span className="w-2.5 h-2.5 rounded-full bg-rose-500 shrink-0 inline-block shadow-[0_0_6px_rgba(244,63,94,0.5)]" />
+              <span>Lebat / Badai</span>
+            </span>
+          </div>
+          <button
+            type="button"
+            onClick={() => setShowRainLegend(false)}
+            className="p-1 text-neutral-400 hover:text-white hover:bg-neutral-800 rounded transition-colors ml-1 shrink-0"
+            title="Tutup Legenda Radar Hujan"
+          >
+            <X className="w-3.5 h-3.5" />
+          </button>
+        </div>
+      )}
     </div>
   );
 };

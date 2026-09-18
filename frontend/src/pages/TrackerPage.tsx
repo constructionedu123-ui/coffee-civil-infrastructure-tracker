@@ -52,6 +52,7 @@ export const TrackerPage: React.FC = () => {
   const [showSupplyBuffers, setShowSupplyBuffers] = useState<boolean>(false);
   const [showFaultLines, setShowFaultLines] = useState<boolean>(true);
   const [showMaritimeRoutes, setShowMaritimeRoutes] = useState<boolean>(true);
+  const [showRainRadar, setShowRainRadar] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -587,6 +588,8 @@ export const TrackerPage: React.FC = () => {
         onToggleFaultLines={() => setShowFaultLines((prev) => !prev)}
         showMaritimeRoutes={showMaritimeRoutes}
         onToggleMaritimeRoutes={() => setShowMaritimeRoutes((prev) => !prev)}
+        showRainRadar={showRainRadar}
+        onToggleRainRadar={() => setShowRainRadar((prev) => !prev)}
       />
 
       {/* Map & Overlays or Table View Container */}
@@ -609,6 +612,7 @@ export const TrackerPage: React.FC = () => {
               shippingRoutes={shippingRoutes}
               portHubs={portHubs}
               showMaritimeRoutes={showMaritimeRoutes}
+              showRainRadar={showRainRadar}
               materialHubs={materialHubs}
               showMaterialHubs={materialFilters}
               opportunityFinder={{
