@@ -3296,6 +3296,76 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
+          106.8228,
+          -6.2001
+        ]
+      },
+      "properties": {
+        "project_id": "swasta-jkt-005",
+        "project_name": "Autograph Tower Thamrin Nine (Supertall)",
+        "category": "Commercial & Private",
+        "status": "Operational",
+        "budget_idr": 4.5,
+        "budget_raw": "Rp 4,50 Triliun",
+        "contractor": "PT Acset Indonusa - Samsung C&T KSO",
+        "funding_scheme": "Swasta Murni (Private)",
+        "pjpk": "PT Putragaya Wahana",
+        "province": "DKI Jakarta",
+        "regency": "Kota Jakarta Pusat",
+        "geocode_method": "exact_kabupaten",
+        "source_url": "https://acset.co",
+        "source_name": "Laporan Kontrak Swasta / BUMN",
+        "scraped_at": "2026-09-18T11:44:36.121424",
+        "created_at": "2026-09-18 09:44:36",
+        "updated_at": "2026-09-18 09:44:36",
+        "unor": "Supertall Tower (382.9 m)",
+        "balai": null,
+        "fiscal_year": "2022",
+        "progress": 100.0,
+        "bim_viewer_url": null,
+        "bim_uuid": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          107.412,
+          -6.531
+        ]
+      },
+      "properties": {
+        "project_id": "swasta-jbr-009",
+        "project_name": "BDx Indonesia Hyperscale CGK4 Jatiluhur",
+        "category": "Commercial & Private",
+        "status": "Construction",
+        "budget_idr": 1.6,
+        "budget_raw": "Rp 1,60 Triliun",
+        "contractor": "PT Adhi Karya (Persero) Tbk",
+        "funding_scheme": "Swasta Murni (Private)",
+        "pjpk": "Big Data Exchange (BDx) / Indosat",
+        "province": "Jawa Barat",
+        "regency": "Kabupaten Purwakarta",
+        "geocode_method": "exact_kabupaten",
+        "source_url": "https://adhi.co.id",
+        "source_name": "Laporan Kontrak BUMN / Proyek Swasta",
+        "scraped_at": "2026-09-18T11:44:36.121424",
+        "created_at": "2026-09-18 09:44:36",
+        "updated_at": "2026-09-18 09:44:36",
+        "unor": "100 MW Renewable Powered Center",
+        "balai": null,
+        "fiscal_year": "2024",
+        "progress": 40.0,
+        "bim_viewer_url": null,
+        "bim_uuid": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
           106.8255,
           -6.1825
         ]
@@ -3317,11 +3387,46 @@
         "source_name": "Laporan Kontrak BUMN / Proyek Swasta",
         "scraped_at": "2026-09-18T11:30:40.646965",
         "created_at": "2026-09-18 09:30:40",
-        "updated_at": "2026-09-18 09:30:40",
+        "updated_at": "2026-09-18 09:44:36",
         "unor": "Headquarters Bank Tower",
         "balai": null,
         "fiscal_year": "2024",
         "progress": 35.0,
+        "bim_viewer_url": null,
+        "bim_uuid": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          115.263,
+          -8.677
+        ]
+      },
+      "properties": {
+        "project_id": "swasta-bli-001",
+        "project_name": "Bali International Hospital Sanur (KEK Kesehatan)",
+        "category": "Commercial & Private",
+        "status": "Construction",
+        "budget_idr": 1.45,
+        "budget_raw": "Rp 1,45 Triliun",
+        "contractor": "PT PP (Persero) Tbk",
+        "funding_scheme": "Swasta Murni (Private)",
+        "pjpk": "PT Pertamina Bina Medika IHC & Mayo Clinic Partner",
+        "province": "Bali",
+        "regency": "Kota Denpasar",
+        "geocode_method": "exact_kabupaten",
+        "source_url": "https://ptpp.co.id",
+        "source_name": "Laporan Kontrak BUMN / Proyek Swasta",
+        "scraped_at": "2026-09-18T11:44:36.122773",
+        "created_at": "2026-09-18 09:44:36",
+        "updated_at": "2026-09-18 09:44:36",
+        "unor": "International Medical Tourism Hub",
+        "balai": null,
+        "fiscal_year": "2024",
+        "progress": 92.0,
         "bim_viewer_url": null,
         "bim_uuid": null
       }
@@ -7391,6 +7496,41 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
+          106.791,
+          -6.177
+        ]
+      },
+      "properties": {
+        "project_id": "swasta-jkt-017",
+        "project_name": "Central Park & Neo Soho Mall Jakarta",
+        "category": "Commercial & Private",
+        "status": "Operational",
+        "budget_idr": 4.0,
+        "budget_raw": "Rp 4,00 Triliun",
+        "contractor": "PT Total Bangun Persada Tbk",
+        "funding_scheme": "Swasta Murni (Private)",
+        "pjpk": "Agung Podomoro Land",
+        "province": "DKI Jakarta",
+        "regency": "Kota Jakarta Barat",
+        "geocode_method": "exact_kabupaten",
+        "source_url": "https://totalbp.com",
+        "source_name": "Laporan Kontrak Swasta / BUMN",
+        "scraped_at": "2026-09-18T11:44:36.122773",
+        "created_at": "2026-09-18 09:44:36",
+        "updated_at": "2026-09-18 09:44:36",
+        "unor": "Megasuperblock Commercial Center",
+        "balai": null,
+        "fiscal_year": "2020",
+        "progress": 100.0,
+        "bim_viewer_url": null,
+        "bim_uuid": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
           107.6191,
           -6.9175
         ]
@@ -7454,6 +7594,76 @@
         "progress": 100.0,
         "bim_viewer_url": "https://bim.pu.go.id/f36eca6e-70f2-42f9-9767-59d073f0285a",
         "bim_uuid": "f36eca6e-70f2-42f9-9767-59d073f0285a"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          106.741,
+          -6.182
+        ]
+      },
+      "properties": {
+        "project_id": "swasta-jkt-015",
+        "project_name": "Ciputra International Puri Jakarta",
+        "category": "Commercial & Private",
+        "status": "Operational",
+        "budget_idr": 2.2,
+        "budget_raw": "Rp 2,20 Triliun",
+        "contractor": "PT Nusa Raya Cipta Tbk",
+        "funding_scheme": "Swasta Murni (Private)",
+        "pjpk": "PT Ciputra Development Tbk",
+        "province": "DKI Jakarta",
+        "regency": "Kota Jakarta Barat",
+        "geocode_method": "exact_kabupaten",
+        "source_url": "https://nusarayacipta.com",
+        "source_name": "Laporan Kontrak Swasta / BUMN",
+        "scraped_at": "2026-09-18T11:44:36.122773",
+        "created_at": "2026-09-18 09:44:36",
+        "updated_at": "2026-09-18 09:44:36",
+        "unor": "Commercial Complex & Towers",
+        "balai": null,
+        "fiscal_year": "2021",
+        "progress": 100.0,
+        "bim_viewer_url": null,
+        "bim_uuid": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          112.719,
+          -7.291
+        ]
+      },
+      "properties": {
+        "project_id": "swasta-sby-004",
+        "project_name": "Ciputra World Surabaya Phase 3 & 4",
+        "category": "Commercial & Private",
+        "status": "Operational",
+        "budget_idr": 1.8,
+        "budget_raw": "Rp 1,80 Triliun",
+        "contractor": "PT Nusa Raya Cipta Tbk",
+        "funding_scheme": "Swasta Murni (Private)",
+        "pjpk": "PT Ciputra Development Tbk",
+        "province": "Jawa Timur",
+        "regency": "Kota Surabaya",
+        "geocode_method": "exact_kabupaten",
+        "source_url": "https://nusarayacipta.com",
+        "source_name": "Laporan Kontrak Swasta / BUMN",
+        "scraped_at": "2026-09-18T11:44:36.122773",
+        "created_at": "2026-09-18 09:44:36",
+        "updated_at": "2026-09-18 09:44:36",
+        "unor": "Mixed-Use Mall & SOHO Tower",
+        "balai": null,
+        "fiscal_year": "2021",
+        "progress": 100.0,
+        "bim_viewer_url": null,
+        "bim_uuid": null
       }
     },
     {
@@ -7706,6 +7916,76 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
+          107.1065,
+          -6.275
+        ]
+      },
+      "properties": {
+        "project_id": "swasta-jbr-002",
+        "project_name": "DCI Indonesia Campus Cibitung JK1-JK5",
+        "category": "Commercial & Private",
+        "status": "Operational",
+        "budget_idr": 4.5,
+        "budget_raw": "Rp 4,50 Triliun",
+        "contractor": "PT Total Bangun Persada Tbk",
+        "funding_scheme": "Swasta Murni (Private)",
+        "pjpk": "PT DCI Indonesia Tbk / Equinix Partner",
+        "province": "Jawa Barat",
+        "regency": "Kabupaten Bekasi",
+        "geocode_method": "exact_kabupaten",
+        "source_url": "https://totalbp.com",
+        "source_name": "Laporan Kontrak Swasta / BUMN",
+        "scraped_at": "2026-09-18T11:44:36.121424",
+        "created_at": "2026-09-18 09:44:36",
+        "updated_at": "2026-09-18 09:44:36",
+        "unor": "Tier-IV Hyperscale Data Center",
+        "balai": null,
+        "fiscal_year": "2022",
+        "progress": 100.0,
+        "bim_viewer_url": null,
+        "bim_uuid": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          107.291,
+          -6.3712
+        ]
+      },
+      "properties": {
+        "project_id": "swasta-jbr-001",
+        "project_name": "DCI Indonesia Hyperscale Campus H2 Karawang",
+        "category": "Commercial & Private",
+        "status": "Construction",
+        "budget_idr": 3.2,
+        "budget_raw": "Rp 3,20 Triliun",
+        "contractor": "PT Total Bangun Persada Tbk",
+        "funding_scheme": "Swasta Murni (Private)",
+        "pjpk": "PT DCI Indonesia Tbk & Salim Group",
+        "province": "Jawa Barat",
+        "regency": "Kabupaten Karawang",
+        "geocode_method": "exact_kabupaten",
+        "source_url": "https://dci-indonesia.com",
+        "source_name": "Laporan Kontrak Swasta / BUMN",
+        "scraped_at": "2026-09-18T11:44:36.121424",
+        "created_at": "2026-09-18 09:44:36",
+        "updated_at": "2026-09-18 09:44:36",
+        "unor": "Hyperscale Tier-IV Data Campus",
+        "balai": null,
+        "fiscal_year": "2024",
+        "progress": 70.0,
+        "bim_viewer_url": null,
+        "bim_uuid": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
           116.722357,
           -1.133962
         ]
@@ -7874,6 +8154,41 @@
         "progress": 100.0,
         "bim_viewer_url": "https://bim.pu.go.id/3be336b1-2b41-43ab-b1a1-d8ba62fc9045",
         "bim_uuid": "3be336b1-2b41-43ab-b1a1-d8ba62fc9045"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          107.085,
+          -6.291
+        ]
+      },
+      "properties": {
+        "project_id": "swasta-jbr-008",
+        "project_name": "EdgeConneX Hyperscale Data Center Bekasi JTX01",
+        "category": "Commercial & Private",
+        "status": "Construction",
+        "budget_idr": 2.4,
+        "budget_raw": "Rp 2,40 Triliun",
+        "contractor": "PT Total Bangun Persada Tbk",
+        "funding_scheme": "Swasta Murni (Private)",
+        "pjpk": "EdgeConneX / EQT Infrastructure",
+        "province": "Jawa Barat",
+        "regency": "Kabupaten Bekasi",
+        "geocode_method": "exact_kabupaten",
+        "source_url": "https://totalbp.com",
+        "source_name": "Laporan Kontrak Swasta / BUMN",
+        "scraped_at": "2026-09-18T11:44:36.121424",
+        "created_at": "2026-09-18 09:44:36",
+        "updated_at": "2026-09-18 09:44:36",
+        "unor": "90 MW Hyperscale Center",
+        "balai": null,
+        "fiscal_year": "2024",
+        "progress": 65.0,
+        "bim_viewer_url": null,
+        "bim_uuid": null
       }
     },
     {
@@ -8231,6 +8546,41 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
+          121.585,
+          -4.152
+        ]
+      },
+      "properties": {
+        "project_id": "swasta-slt-003",
+        "project_name": "Fasilitas Pemurnian Feronikel Kolaka Antam",
+        "category": "Commercial & Private",
+        "status": "Operational",
+        "budget_idr": 5.2,
+        "budget_raw": "Rp 5,20 Triliun",
+        "contractor": "PT Wijaya Karya (WIKA)",
+        "funding_scheme": "Swasta Murni (Private)",
+        "pjpk": "PT Aneka Tambang Tbk (Antam)",
+        "province": "Sulawesi Tenggara",
+        "regency": "Kabupaten Kolaka",
+        "geocode_method": "exact_kabupaten",
+        "source_url": "https://wika.co.id",
+        "source_name": "Laporan Kontrak BUMN / Proyek Swasta",
+        "scraped_at": "2026-09-18T11:44:36.122773",
+        "created_at": "2026-09-18 09:44:36",
+        "updated_at": "2026-09-18 09:44:36",
+        "unor": "FeNi Smelter Modernization",
+        "balai": null,
+        "fiscal_year": "2021",
+        "progress": 100.0,
+        "bim_viewer_url": null,
+        "bim_uuid": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
           112.734653,
           -7.377835
         ]
@@ -8364,6 +8714,41 @@
         "progress": 100.0,
         "bim_viewer_url": "https://bim.pu.go.id/59bfcc45-fccf-49a6-93f6-0b4f85ca7574",
         "bim_uuid": "59bfcc45-fccf-49a6-93f6-0b4f85ca7574"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          104.112,
+          1.185
+        ]
+      },
+      "properties": {
+        "project_id": "swasta-batam-004",
+        "project_name": "GDS Hyperscale Data Center Campus Nongsa",
+        "category": "Commercial & Private",
+        "status": "Construction",
+        "budget_idr": 3.1,
+        "budget_raw": "Rp 3,10 Triliun",
+        "contractor": "PT PP (Persero) Tbk",
+        "funding_scheme": "Swasta Murni (Private)",
+        "pjpk": "GDS Holdings Ltd / ST Telemedia",
+        "province": "Kepulauan Riau",
+        "regency": "Kota Batam",
+        "geocode_method": "exact_kabupaten",
+        "source_url": "https://ptpp.co.id",
+        "source_name": "Laporan Kontrak BUMN / Proyek Swasta",
+        "scraped_at": "2026-09-18T11:44:36.121424",
+        "created_at": "2026-09-18 09:44:36",
+        "updated_at": "2026-09-18 09:44:36",
+        "unor": "54 MW Cross-Border Cloud Hub",
+        "balai": null,
+        "fiscal_year": "2024",
+        "progress": 52.0,
+        "bim_viewer_url": null,
+        "bim_uuid": null
       }
     },
     {
@@ -8609,6 +8994,76 @@
         "progress": 100.0,
         "bim_viewer_url": "https://bim.pu.go.id/4e36f5dd-31cf-4987-b41e-42114a168341",
         "bim_uuid": "4e36f5dd-31cf-4987-b41e-42114a168341"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          106.642,
+          -6.3025
+        ]
+      },
+      "properties": {
+        "project_id": "swasta-jbr-020",
+        "project_name": "Gedung Kantor Pusat BCA Foresta BSD City",
+        "category": "Commercial & Private",
+        "status": "Operational",
+        "budget_idr": 0.9,
+        "budget_raw": "Rp 900 Miliar",
+        "contractor": "PT Total Bangun Persada Tbk",
+        "funding_scheme": "Swasta Murni (Private)",
+        "pjpk": "PT Bank Central Asia Tbk",
+        "province": "Banten",
+        "regency": "Kabupaten Tangerang",
+        "geocode_method": "exact_kabupaten",
+        "source_url": "https://totalbp.com",
+        "source_name": "Laporan Kontrak Swasta / BUMN",
+        "scraped_at": "2026-09-18T11:44:36.122773",
+        "created_at": "2026-09-18 09:44:36",
+        "updated_at": "2026-09-18 09:44:36",
+        "unor": "Green Mark Platinum Corporate Center",
+        "balai": null,
+        "fiscal_year": "2021",
+        "progress": 100.0,
+        "bim_viewer_url": null,
+        "bim_uuid": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          107.6094,
+          -6.9174
+        ]
+      },
+      "properties": {
+        "project_id": "swasta-bdg-001",
+        "project_name": "Gedung Kantor Pusat Bank BJB Bandung",
+        "category": "Commercial & Private",
+        "status": "Operational",
+        "budget_idr": 0.75,
+        "budget_raw": "Rp 750 Miliar",
+        "contractor": "PT Wijaya Karya (WIKA)",
+        "funding_scheme": "Swasta Murni (Private)",
+        "pjpk": "PT Bank BJB Tbk",
+        "province": "Jawa Barat",
+        "regency": "Kota Bandung",
+        "geocode_method": "exact_kabupaten",
+        "source_url": "https://wika.co.id",
+        "source_name": "Laporan Kontrak BUMN / Proyek Swasta",
+        "scraped_at": "2026-09-18T11:44:36.121424",
+        "created_at": "2026-09-18 09:44:36",
+        "updated_at": "2026-09-18 09:44:36",
+        "unor": "Regional Banking Headquarters",
+        "balai": null,
+        "fiscal_year": "2022",
+        "progress": 100.0,
+        "bim_viewer_url": null,
+        "bim_uuid": null
       }
     },
     {
@@ -8966,6 +9421,111 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
+          106.974,
+          -6.252
+        ]
+      },
+      "properties": {
+        "project_id": "swasta-jbr-014",
+        "project_name": "Grand Kamala Lagoon Kalimalang Bekasi",
+        "category": "Commercial & Private",
+        "status": "Operational",
+        "budget_idr": 2.6,
+        "budget_raw": "Rp 2,60 Triliun",
+        "contractor": "PT PP (Persero) Tbk",
+        "funding_scheme": "Swasta Murni (Private)",
+        "pjpk": "PT PP Properti Tbk",
+        "province": "Jawa Barat",
+        "regency": "Kota Bekasi",
+        "geocode_method": "exact_kabupaten",
+        "source_url": "https://ptpp.co.id",
+        "source_name": "Laporan Kontrak BUMN / Proyek Swasta",
+        "scraped_at": "2026-09-18T11:44:36.122773",
+        "created_at": "2026-09-18 09:44:36",
+        "updated_at": "2026-09-18 09:44:36",
+        "unor": "Mixed-Use CBD Township",
+        "balai": null,
+        "fiscal_year": "2021",
+        "progress": 100.0,
+        "bim_viewer_url": null,
+        "bim_uuid": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          112.798,
+          -7.241
+        ]
+      },
+      "properties": {
+        "project_id": "swasta-sby-006",
+        "project_name": "Grand Sagara Surabaya (Kenjeran Waterfront)",
+        "category": "Commercial & Private",
+        "status": "Construction",
+        "budget_idr": 1.9,
+        "budget_raw": "Rp 1,90 Triliun",
+        "contractor": "PT PP (Persero) Tbk",
+        "funding_scheme": "Swasta Murni (Private)",
+        "pjpk": "PT PP Properti Tbk",
+        "province": "Jawa Timur",
+        "regency": "Kota Surabaya",
+        "geocode_method": "exact_kabupaten",
+        "source_url": "https://ptpp.co.id",
+        "source_name": "Laporan Kontrak BUMN / Proyek Swasta",
+        "scraped_at": "2026-09-18T11:44:36.122773",
+        "created_at": "2026-09-18 09:44:36",
+        "updated_at": "2026-09-18 09:44:36",
+        "unor": "Waterfront Mixed Development",
+        "balai": null,
+        "fiscal_year": "2024",
+        "progress": 48.0,
+        "bim_viewer_url": null,
+        "bim_uuid": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          112.7431,
+          -7.269
+        ]
+      },
+      "properties": {
+        "project_id": "swasta-sby-002",
+        "project_name": "Grha CIMB Niaga Surabaya",
+        "category": "Commercial & Private",
+        "status": "Operational",
+        "budget_idr": 0.48,
+        "budget_raw": "Rp 480 Miliar",
+        "contractor": "PT Nusa Raya Cipta Tbk",
+        "funding_scheme": "Swasta Murni (Private)",
+        "pjpk": "PT Bank CIMB Niaga Tbk",
+        "province": "Jawa Timur",
+        "regency": "Kota Surabaya",
+        "geocode_method": "exact_kabupaten",
+        "source_url": "https://nusarayacipta.com",
+        "source_name": "Laporan Kontrak Swasta / BUMN",
+        "scraped_at": "2026-09-18T11:44:36.121424",
+        "created_at": "2026-09-18 09:44:36",
+        "updated_at": "2026-09-18 09:44:36",
+        "unor": "Commercial Banking Center",
+        "balai": null,
+        "fiscal_year": "2020",
+        "progress": 100.0,
+        "bim_viewer_url": null,
+        "bim_uuid": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
           105.4068,
           -4.5586
         ]
@@ -9057,7 +9617,7 @@
         "source_name": "Laporan Kontrak BUMN / Proyek Swasta",
         "scraped_at": "2026-09-18T11:30:40.646965",
         "created_at": "2026-09-18 09:30:40",
-        "updated_at": "2026-09-18 09:30:40",
+        "updated_at": "2026-09-18 09:44:36",
         "unor": "Data Center & Tech Hub",
         "balai": null,
         "fiscal_year": "2024",
@@ -23946,6 +24506,41 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
+          112.612,
+          -7.108
+        ]
+      },
+      "properties": {
+        "project_id": "swasta-jtm-002",
+        "project_name": "Kawasan Industri JIIPE Commercial Terminal Port",
+        "category": "Commercial & Private",
+        "status": "Operational",
+        "budget_idr": 6.8,
+        "budget_raw": "Rp 6,80 Triliun",
+        "contractor": "PT Wijaya Karya (WIKA)",
+        "funding_scheme": "Swasta Murni (Private)",
+        "pjpk": "PT AKR Corporindo Tbk & PT Pelabuhan Indonesia",
+        "province": "Jawa Timur",
+        "regency": "Kabupaten Gresik",
+        "geocode_method": "exact_kabupaten",
+        "source_url": "https://wika.co.id",
+        "source_name": "Laporan Kontrak BUMN / Proyek Swasta",
+        "scraped_at": "2026-09-18T11:44:36.122773",
+        "created_at": "2026-09-18 09:44:36",
+        "updated_at": "2026-09-18 09:44:36",
+        "unor": "Integrated Deep Sea Commercial Port",
+        "balai": null,
+        "fiscal_year": "2022",
+        "progress": 100.0,
+        "bim_viewer_url": null,
+        "bim_uuid": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
           114.5914,
           -3.3167
         ]
@@ -24121,6 +24716,41 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
+          106.352,
+          -6.185
+        ]
+      },
+      "properties": {
+        "project_id": "swasta-btn-004",
+        "project_name": "Kawasan Industri Modern Cikande Logistics Center",
+        "category": "Commercial & Private",
+        "status": "Operational",
+        "budget_idr": 1.7,
+        "budget_raw": "Rp 1,70 Triliun",
+        "contractor": "PT Nusa Raya Cipta Tbk",
+        "funding_scheme": "Swasta Murni (Private)",
+        "pjpk": "PT Modernland Realty Tbk",
+        "province": "Banten",
+        "regency": "Kabupaten Serang",
+        "geocode_method": "exact_kabupaten",
+        "source_url": "https://nusarayacipta.com",
+        "source_name": "Laporan Kontrak Swasta / BUMN",
+        "scraped_at": "2026-09-18T11:44:36.122773",
+        "created_at": "2026-09-18 09:44:36",
+        "updated_at": "2026-09-18 09:44:36",
+        "unor": "Heavy Industrial & Smart Logistics Estate",
+        "balai": null,
+        "fiscal_year": "2022",
+        "progress": 100.0,
+        "bim_viewer_url": null,
+        "bim_uuid": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
           121.4,
           -1.4167
         ]
@@ -24147,6 +24777,41 @@
         "balai": null,
         "fiscal_year": null,
         "progress": null,
+        "bim_viewer_url": null,
+        "bim_uuid": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          122.158,
+          -2.831
+        ]
+      },
+      "properties": {
+        "project_id": "swasta-slt-001",
+        "project_name": "Kawasan Industri PT IMIP Morowali Extension",
+        "category": "Commercial & Private",
+        "status": "Construction",
+        "budget_idr": 25.0,
+        "budget_raw": "Rp 25,0 Triliun",
+        "contractor": "PT PP - PT Bintang Delapan KSO",
+        "funding_scheme": "Swasta Murni (Private)",
+        "pjpk": "PT Indonesia Morowali Industrial Park (IMIP)",
+        "province": "Sulawesi Tengah",
+        "regency": "Kabupaten Morowali",
+        "geocode_method": "exact_kabupaten",
+        "source_url": "https://ptpp.co.id",
+        "source_name": "Laporan Kontrak BUMN / Proyek Swasta",
+        "scraped_at": "2026-09-18T11:44:36.122773",
+        "created_at": "2026-09-18 09:44:36",
+        "updated_at": "2026-09-18 09:44:36",
+        "unor": "Stainless Steel & Battery Grade Industrial Park",
+        "balai": null,
+        "fiscal_year": "2024",
+        "progress": 80.0,
         "bim_viewer_url": null,
         "bim_uuid": null
       }
@@ -24996,6 +25661,41 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
+          106.012,
+          -5.992
+        ]
+      },
+      "properties": {
+        "project_id": "swasta-btn-003",
+        "project_name": "Kompleks Petrokimia PT Lotte Chemical Titan Cilegon (LINE Project)",
+        "category": "Commercial & Private",
+        "status": "Construction",
+        "budget_idr": 58.0,
+        "budget_raw": "Rp 58,0 Triliun (USD 3,9B)",
+        "contractor": "PT PP - Lotte E&C KSO",
+        "funding_scheme": "Swasta Murni (Private)",
+        "pjpk": "PT Lotte Chemical Indonesia",
+        "province": "Banten",
+        "regency": "Kota Cilegon",
+        "geocode_method": "exact_kabupaten",
+        "source_url": "https://ptpp.co.id",
+        "source_name": "Laporan Kontrak BUMN / Proyek Swasta",
+        "scraped_at": "2026-09-18T11:44:36.122773",
+        "created_at": "2026-09-18 09:44:36",
+        "updated_at": "2026-09-18 09:44:36",
+        "unor": "Naphtha Cracker Petrochemical Complex",
+        "balai": null,
+        "fiscal_year": "2024",
+        "progress": 88.0,
+        "bim_viewer_url": null,
+        "bim_uuid": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
           122.5,
           -3.9667
         ]
@@ -25164,6 +25864,146 @@
         "progress": 100.0,
         "bim_viewer_url": "https://bim.pu.go.id/b986647a-a9a6-4970-9f66-071c3034e898",
         "bim_uuid": "b986647a-a9a6-4970-9f66-071c3034e898"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          107.021,
+          -6.258
+        ]
+      },
+      "properties": {
+        "project_id": "swasta-jbr-011",
+        "project_name": "LRT City Bekasi Timur (Eastern Green)",
+        "category": "Commercial & Private",
+        "status": "Operational",
+        "budget_idr": 1.4,
+        "budget_raw": "Rp 1,40 Triliun",
+        "contractor": "PT Adhi Karya (Persero) Tbk",
+        "funding_scheme": "Swasta Murni (Private)",
+        "pjpk": "PT Adhi Commuter Properti Tbk",
+        "province": "Jawa Barat",
+        "regency": "Kota Bekasi",
+        "geocode_method": "exact_kabupaten",
+        "source_url": "https://adhi.co.id",
+        "source_name": "Laporan Kontrak BUMN / Proyek Swasta",
+        "scraped_at": "2026-09-18T11:44:36.122773",
+        "created_at": "2026-09-18 09:44:36",
+        "updated_at": "2026-09-18 09:44:36",
+        "unor": "Transit-Oriented Development",
+        "balai": null,
+        "fiscal_year": "2022",
+        "progress": 100.0,
+        "bim_viewer_url": null,
+        "bim_uuid": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          106.8775,
+          -6.326
+        ]
+      },
+      "properties": {
+        "project_id": "swasta-jkt-014",
+        "project_name": "LRT City Ciracas (Urban Signatures)",
+        "category": "Commercial & Private",
+        "status": "Construction",
+        "budget_idr": 1.3,
+        "budget_raw": "Rp 1,30 Triliun",
+        "contractor": "PT Adhi Karya (Persero) Tbk",
+        "funding_scheme": "Swasta Murni (Private)",
+        "pjpk": "PT Adhi Commuter Properti Tbk",
+        "province": "DKI Jakarta",
+        "regency": "Kota Jakarta Timur",
+        "geocode_method": "exact_kabupaten",
+        "source_url": "https://adhi.co.id",
+        "source_name": "Laporan Kontrak BUMN / Proyek Swasta",
+        "scraped_at": "2026-09-18T11:44:36.122773",
+        "created_at": "2026-09-18 09:44:36",
+        "updated_at": "2026-09-18 09:44:36",
+        "unor": "Transit-Oriented Development (TOD)",
+        "balai": null,
+        "fiscal_year": "2024",
+        "progress": 75.0,
+        "bim_viewer_url": null,
+        "bim_uuid": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          106.862,
+          -6.531
+        ]
+      },
+      "properties": {
+        "project_id": "swasta-jbr-010",
+        "project_name": "LRT City Sentul (Royal Sentul Park)",
+        "category": "Commercial & Private",
+        "status": "Operational",
+        "budget_idr": 1.1,
+        "budget_raw": "Rp 1,10 Triliun",
+        "contractor": "PT Adhi Karya (Persero) Tbk",
+        "funding_scheme": "Swasta Murni (Private)",
+        "pjpk": "PT Adhi Commuter Properti Tbk",
+        "province": "Jawa Barat",
+        "regency": "Kabupaten Bogor",
+        "geocode_method": "exact_kabupaten",
+        "source_url": "https://adhi.co.id",
+        "source_name": "Laporan Kontrak BUMN / Proyek Swasta",
+        "scraped_at": "2026-09-18T11:44:36.122773",
+        "created_at": "2026-09-18 09:44:36",
+        "updated_at": "2026-09-18 09:44:36",
+        "unor": "TOD Residential & Commercial",
+        "balai": null,
+        "fiscal_year": "2022",
+        "progress": 100.0,
+        "bim_viewer_url": null,
+        "bim_uuid": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          106.861,
+          -6.242
+        ]
+      },
+      "properties": {
+        "project_id": "swasta-jkt-021",
+        "project_name": "LRT City Tebet (The Premiere MTH)",
+        "category": "Commercial & Private",
+        "status": "Construction",
+        "budget_idr": 0.98,
+        "budget_raw": "Rp 980 Miliar",
+        "contractor": "PT Adhi Karya (Persero) Tbk",
+        "funding_scheme": "Swasta Murni (Private)",
+        "pjpk": "PT Adhi Commuter Properti Tbk",
+        "province": "DKI Jakarta",
+        "regency": "Kota Jakarta Selatan",
+        "geocode_method": "exact_kabupaten",
+        "source_url": "https://adhi.co.id",
+        "source_name": "Laporan Kontrak BUMN / Proyek Swasta",
+        "scraped_at": "2026-09-18T11:44:36.122773",
+        "created_at": "2026-09-18 09:44:36",
+        "updated_at": "2026-09-18 09:44:36",
+        "unor": "TOD Office & Commercial Hub",
+        "balai": null,
+        "fiscal_year": "2024",
+        "progress": 68.0,
+        "bim_viewer_url": null,
+        "bim_uuid": null
       }
     },
     {
@@ -25479,6 +26319,41 @@
         "progress": 100.0,
         "bim_viewer_url": "https://bim.pu.go.id/17a650e0-04f6-41b7-96fb-01ef12074e60",
         "bim_uuid": "17a650e0-04f6-41b7-96fb-01ef12074e60"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          106.8222,
+          -6.2008
+        ]
+      },
+      "properties": {
+        "project_id": "swasta-jkt-006",
+        "project_name": "Luminary Tower Thamrin Nine",
+        "category": "Commercial & Private",
+        "status": "Construction",
+        "budget_idr": 2.8,
+        "budget_raw": "Rp 2,80 Triliun",
+        "contractor": "PT Acset Indonusa Tbk",
+        "funding_scheme": "Swasta Murni (Private)",
+        "pjpk": "PT Putragaya Wahana",
+        "province": "DKI Jakarta",
+        "regency": "Kota Jakarta Pusat",
+        "geocode_method": "exact_kabupaten",
+        "source_url": "https://acset.co",
+        "source_name": "Laporan Kontrak Swasta / BUMN",
+        "scraped_at": "2026-09-18T11:44:36.121424",
+        "created_at": "2026-09-18 09:44:36",
+        "updated_at": "2026-09-18 09:44:36",
+        "unor": "Supertall Mixed-Use Tower (304 m)",
+        "balai": null,
+        "fiscal_year": "2024",
+        "progress": 82.0,
+        "bim_viewer_url": null,
+        "bim_uuid": null
       }
     },
     {
@@ -25927,7 +26802,7 @@
         "source_name": "Laporan Kontrak BUMN / Proyek Swasta",
         "scraped_at": "2026-09-18T11:30:40.646965",
         "created_at": "2026-09-18 09:30:40",
-        "updated_at": "2026-09-18 09:30:40",
+        "updated_at": "2026-09-18 09:44:36",
         "unor": "IT Infrastructure & Security Hub",
         "balai": null,
         "fiscal_year": "2024",
@@ -26046,6 +26921,391 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
+          107.625,
+          -6.942
+        ]
+      },
+      "properties": {
+        "project_id": "swasta-bdg-002",
+        "project_name": "Mayapada Hospital Bandung",
+        "category": "Commercial & Private",
+        "status": "Operational",
+        "budget_idr": 0.65,
+        "budget_raw": "Rp 650 Miliar",
+        "contractor": "PT Nusa Raya Cipta Tbk",
+        "funding_scheme": "Swasta Murni (Private)",
+        "pjpk": "Mayapada Healthcare Group",
+        "province": "Jawa Barat",
+        "regency": "Kota Bandung",
+        "geocode_method": "exact_kabupaten",
+        "source_url": "https://nusarayacipta.com",
+        "source_name": "Laporan Kontrak Swasta / BUMN",
+        "scraped_at": "2026-09-18T11:44:36.121424",
+        "created_at": "2026-09-18 09:44:36",
+        "updated_at": "2026-09-18 09:44:36",
+        "unor": "Tertiary General Hospital",
+        "balai": null,
+        "fiscal_year": "2022",
+        "progress": 100.0,
+        "bim_viewer_url": null,
+        "bim_uuid": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.7112,
+          -0.9632
+        ]
+      },
+      "properties": {
+        "project_id": "swasta-ikn-001",
+        "project_name": "Mayapada Hospital Nusantara IKN",
+        "category": "Commercial & Private",
+        "status": "Construction",
+        "budget_idr": 0.5,
+        "budget_raw": "Rp 500 Miliar",
+        "contractor": "PT Nusa Raya Cipta Tbk",
+        "funding_scheme": "Swasta Murni (Private)",
+        "pjpk": "Mayapada Healthcare Group (PT Sejahteraraya Anugrahjaya Tbk)",
+        "province": "Kalimantan Timur",
+        "regency": "Kabupaten Penajam Paser Utara",
+        "geocode_method": "exact_kabupaten",
+        "source_url": "https://mayapadahospital.com",
+        "source_name": "Laporan Kontrak Swasta / BUMN",
+        "scraped_at": "2026-09-18T11:44:36.121424",
+        "created_at": "2026-09-18 09:44:36",
+        "updated_at": "2026-09-18 09:44:36",
+        "unor": "Green Hospital IKN Nusantara",
+        "balai": null,
+        "fiscal_year": "2024",
+        "progress": 85.0,
+        "bim_viewer_url": null,
+        "bim_uuid": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          112.729,
+          -7.318
+        ]
+      },
+      "properties": {
+        "project_id": "swasta-sby-003",
+        "project_name": "Mayapada Hospital Surabaya",
+        "category": "Commercial & Private",
+        "status": "Operational",
+        "budget_idr": 0.6,
+        "budget_raw": "Rp 600 Miliar",
+        "contractor": "PT Nusa Raya Cipta Tbk",
+        "funding_scheme": "Swasta Murni (Private)",
+        "pjpk": "Mayapada Healthcare Group",
+        "province": "Jawa Timur",
+        "regency": "Kota Surabaya",
+        "geocode_method": "exact_kabupaten",
+        "source_url": "https://nusarayacipta.com",
+        "source_name": "Laporan Kontrak Swasta / BUMN",
+        "scraped_at": "2026-09-18T11:44:36.122773",
+        "created_at": "2026-09-18 09:44:36",
+        "updated_at": "2026-09-18 09:44:36",
+        "unor": "Modern General Hospital Surabaya",
+        "balai": null,
+        "fiscal_year": "2022",
+        "progress": 100.0,
+        "bim_viewer_url": null,
+        "bim_uuid": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          106.8215,
+          -6.2081
+        ]
+      },
+      "properties": {
+        "project_id": "swasta-jkt-004",
+        "project_name": "Menara Astra Jakarta",
+        "category": "Commercial & Private",
+        "status": "Operational",
+        "budget_idr": 2.2,
+        "budget_raw": "Rp 2,20 Triliun",
+        "contractor": "Shimizu - PT Total Bangun Persada KSO",
+        "funding_scheme": "Swasta Murni (Private)",
+        "pjpk": "PT Astra International Tbk",
+        "province": "DKI Jakarta",
+        "regency": "Kota Jakarta Pusat",
+        "geocode_method": "exact_kabupaten",
+        "source_url": "https://totalbp.com",
+        "source_name": "Laporan Kontrak Swasta / BUMN",
+        "scraped_at": "2026-09-18T11:44:36.121424",
+        "created_at": "2026-09-18 09:44:36",
+        "updated_at": "2026-09-18 09:44:36",
+        "unor": "Corporate Headquarters Landmark",
+        "balai": null,
+        "fiscal_year": "2022",
+        "progress": 100.0,
+        "bim_viewer_url": null,
+        "bim_uuid": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          106.8219,
+          -6.195
+        ]
+      },
+      "properties": {
+        "project_id": "swasta-jkt-003",
+        "project_name": "Menara BCA Grand Indonesia",
+        "category": "Commercial & Private",
+        "status": "Operational",
+        "budget_idr": 1.5,
+        "budget_raw": "Rp 1,50 Triliun",
+        "contractor": "PT Total Bangun Persada Tbk",
+        "funding_scheme": "Swasta Murni (Private)",
+        "pjpk": "PT Bank Central Asia Tbk / Djarum Group",
+        "province": "DKI Jakarta",
+        "regency": "Kota Jakarta Pusat",
+        "geocode_method": "exact_kabupaten",
+        "source_url": "https://totalbp.com",
+        "source_name": "Laporan Kontrak Swasta / BUMN",
+        "scraped_at": "2026-09-18T11:44:36.121424",
+        "created_at": "2026-09-18 09:44:36",
+        "updated_at": "2026-09-18 09:44:36",
+        "unor": "Headquarters Grade-A Tower",
+        "balai": null,
+        "fiscal_year": "2021",
+        "progress": 100.0,
+        "bim_viewer_url": null,
+        "bim_uuid": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          106.8265,
+          -6.2341
+        ]
+      },
+      "properties": {
+        "project_id": "swasta-jkt-007",
+        "project_name": "Menara BRI Gatot Subroto",
+        "category": "Commercial & Private",
+        "status": "Operational",
+        "budget_idr": 1.15,
+        "budget_raw": "Rp 1,15 Triliun",
+        "contractor": "PT PP (Persero) Tbk",
+        "funding_scheme": "Swasta Murni (Private)",
+        "pjpk": "PT Bank Rakyat Indonesia (Persero) Tbk",
+        "province": "DKI Jakarta",
+        "regency": "Kota Jakarta Selatan",
+        "geocode_method": "exact_kabupaten",
+        "source_url": "https://ptpp.co.id",
+        "source_name": "Laporan Kontrak BUMN / Proyek Swasta",
+        "scraped_at": "2026-09-18T11:44:36.121424",
+        "created_at": "2026-09-18 09:44:36",
+        "updated_at": "2026-09-18 09:44:36",
+        "unor": "Corporate Banking Tower",
+        "balai": null,
+        "fiscal_year": "2021",
+        "progress": 100.0,
+        "bim_viewer_url": null,
+        "bim_uuid": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          98.6738,
+          3.5935
+        ]
+      },
+      "properties": {
+        "project_id": "swasta-mdn-001",
+        "project_name": "Menara BRI Medan Podomoro City",
+        "category": "Commercial & Private",
+        "status": "Operational",
+        "budget_idr": 0.65,
+        "budget_raw": "Rp 650 Miliar",
+        "contractor": "PT Total Bangun Persada Tbk",
+        "funding_scheme": "Swasta Murni (Private)",
+        "pjpk": "Agung Podomoro Land & Bank BRI",
+        "province": "Sumatera Utara",
+        "regency": "Kota Medan",
+        "geocode_method": "exact_kabupaten",
+        "source_url": "https://totalbp.com",
+        "source_name": "Laporan Kontrak Swasta / BUMN",
+        "scraped_at": "2026-09-18T11:44:36.121424",
+        "created_at": "2026-09-18 09:44:36",
+        "updated_at": "2026-09-18 09:44:36",
+        "unor": "Grade-A Regional Office Tower",
+        "balai": null,
+        "fiscal_year": "2021",
+        "progress": 100.0,
+        "bim_viewer_url": null,
+        "bim_uuid": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          106.826,
+          -6.2285
+        ]
+      },
+      "properties": {
+        "project_id": "swasta-jkt-009",
+        "project_name": "Menara BTPN Mega Kuningan",
+        "category": "Commercial & Private",
+        "status": "Operational",
+        "budget_idr": 1.3,
+        "budget_raw": "Rp 1,30 Triliun",
+        "contractor": "PT Nusa Raya Cipta Tbk",
+        "funding_scheme": "Swasta Murni (Private)",
+        "pjpk": "PT Bank BTPN Tbk / Sumitomo Mitsui",
+        "province": "DKI Jakarta",
+        "regency": "Kota Jakarta Selatan",
+        "geocode_method": "exact_kabupaten",
+        "source_url": "https://nusarayacipta.com",
+        "source_name": "Laporan Kontrak Swasta / BUMN",
+        "scraped_at": "2026-09-18T11:44:36.121424",
+        "created_at": "2026-09-18 09:44:36",
+        "updated_at": "2026-09-18 09:44:36",
+        "unor": "Grade-A Banking Tower",
+        "balai": null,
+        "fiscal_year": "2020",
+        "progress": 100.0,
+        "bim_viewer_url": null,
+        "bim_uuid": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          112.7483,
+          -7.2642
+        ]
+      },
+      "properties": {
+        "project_id": "swasta-sby-001",
+        "project_name": "Menara Bank Mega Regional Surabaya",
+        "category": "Commercial & Private",
+        "status": "Operational",
+        "budget_idr": 0.55,
+        "budget_raw": "Rp 550 Miliar",
+        "contractor": "PT Total Bangun Persada Tbk",
+        "funding_scheme": "Swasta Murni (Private)",
+        "pjpk": "CT Corp / PT Bank Mega Tbk",
+        "province": "Jawa Timur",
+        "regency": "Kota Surabaya",
+        "geocode_method": "exact_kabupaten",
+        "source_url": "https://totalbp.com",
+        "source_name": "Laporan Kontrak Swasta / BUMN",
+        "scraped_at": "2026-09-18T11:44:36.121424",
+        "created_at": "2026-09-18 09:44:36",
+        "updated_at": "2026-09-18 09:44:36",
+        "unor": "Commercial Office Tower",
+        "balai": null,
+        "fiscal_year": "2021",
+        "progress": 100.0,
+        "bim_viewer_url": null,
+        "bim_uuid": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          106.802,
+          -6.223
+        ]
+      },
+      "properties": {
+        "project_id": "swasta-jkt-022",
+        "project_name": "Menara Bank Panin Senayan Sudirman",
+        "category": "Commercial & Private",
+        "status": "Operational",
+        "budget_idr": 0.85,
+        "budget_raw": "Rp 850 Miliar",
+        "contractor": "PT Total Bangun Persada Tbk",
+        "funding_scheme": "Swasta Murni (Private)",
+        "pjpk": "PT Bank Pan Indonesia Tbk",
+        "province": "DKI Jakarta",
+        "regency": "Kota Jakarta Pusat",
+        "geocode_method": "exact_kabupaten",
+        "source_url": "https://totalbp.com",
+        "source_name": "Laporan Kontrak Swasta / BUMN",
+        "scraped_at": "2026-09-18T11:44:36.122773",
+        "created_at": "2026-09-18 09:44:36",
+        "updated_at": "2026-09-18 09:44:36",
+        "unor": "Financial Center Tower",
+        "balai": null,
+        "fiscal_year": "2020",
+        "progress": 100.0,
+        "bim_viewer_url": null,
+        "bim_uuid": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          106.819,
+          -6.219
+        ]
+      },
+      "properties": {
+        "project_id": "swasta-jkt-018",
+        "project_name": "Menara Binavest Tower Sudirman",
+        "category": "Commercial & Private",
+        "status": "Operational",
+        "budget_idr": 0.95,
+        "budget_raw": "Rp 950 Miliar",
+        "contractor": "PT Total Bangun Persada Tbk",
+        "funding_scheme": "Swasta Murni (Private)",
+        "pjpk": "PT Bina Investa Prima",
+        "province": "DKI Jakarta",
+        "regency": "Kota Jakarta Selatan",
+        "geocode_method": "exact_kabupaten",
+        "source_url": "https://totalbp.com",
+        "source_name": "Laporan Kontrak Swasta / BUMN",
+        "scraped_at": "2026-09-18T11:44:36.122773",
+        "created_at": "2026-09-18 09:44:36",
+        "updated_at": "2026-09-18 09:44:36",
+        "unor": "Commercial Grade-A Office",
+        "balai": null,
+        "fiscal_year": "2021",
+        "progress": 100.0,
+        "bim_viewer_url": null,
+        "bim_uuid": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
           106.8272,
           -6.1818
         ]
@@ -26067,10 +27327,80 @@
         "source_name": "Laporan Kontrak BUMN / Proyek Swasta",
         "scraped_at": "2026-09-18T11:30:40.646965",
         "created_at": "2026-09-18 09:30:40",
-        "updated_at": "2026-09-18 09:30:40",
+        "updated_at": "2026-09-18 09:44:36",
         "unor": "Commercial Grade-A Office Tower",
         "balai": null,
         "fiscal_year": "2023",
+        "progress": 100.0,
+        "bim_viewer_url": null,
+        "bim_uuid": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          106.795,
+          -6.208
+        ]
+      },
+      "properties": {
+        "project_id": "swasta-jkt-019",
+        "project_name": "Menara Kompas Gramedia Palmerah",
+        "category": "Commercial & Private",
+        "status": "Operational",
+        "budget_idr": 0.82,
+        "budget_raw": "Rp 820 Miliar",
+        "contractor": "PT Total Bangun Persada Tbk",
+        "funding_scheme": "Swasta Murni (Private)",
+        "pjpk": "Kompas Gramedia Group",
+        "province": "DKI Jakarta",
+        "regency": "Kota Jakarta Pusat",
+        "geocode_method": "exact_kabupaten",
+        "source_url": "https://totalbp.com",
+        "source_name": "Laporan Kontrak Swasta / BUMN",
+        "scraped_at": "2026-09-18T11:44:36.122773",
+        "created_at": "2026-09-18 09:44:36",
+        "updated_at": "2026-09-18 09:44:36",
+        "unor": "Media & Technology Headquarters",
+        "balai": null,
+        "fiscal_year": "2020",
+        "progress": 100.0,
+        "bim_viewer_url": null,
+        "bim_uuid": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          106.8062,
+          -6.2248
+        ]
+      },
+      "properties": {
+        "project_id": "swasta-jkt-010",
+        "project_name": "Menara Mandiri Sudirman Tower 1 & 2",
+        "category": "Commercial & Private",
+        "status": "Operational",
+        "budget_idr": 1.4,
+        "budget_raw": "Rp 1,40 Triliun",
+        "contractor": "PT PP (Persero) Tbk",
+        "funding_scheme": "Swasta Murni (Private)",
+        "pjpk": "PT Bank Mandiri (Persero) Tbk",
+        "province": "DKI Jakarta",
+        "regency": "Kota Jakarta Selatan",
+        "geocode_method": "exact_kabupaten",
+        "source_url": "https://ptpp.co.id",
+        "source_name": "Laporan Kontrak BUMN / Proyek Swasta",
+        "scraped_at": "2026-09-18T11:44:36.121424",
+        "created_at": "2026-09-18 09:44:36",
+        "updated_at": "2026-09-18 09:44:36",
+        "unor": "Headquarters Plaza Mandiri",
+        "balai": null,
+        "fiscal_year": "2020",
         "progress": 100.0,
         "bim_viewer_url": null,
         "bim_uuid": null
@@ -26501,6 +27831,41 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
+          107.158,
+          -6.331
+        ]
+      },
+      "properties": {
+        "project_id": "swasta-jbr-007",
+        "project_name": "NTT Global Data Center JKT3 Cikarang",
+        "category": "Commercial & Private",
+        "status": "Operational",
+        "budget_idr": 1.75,
+        "budget_raw": "Rp 1,75 Triliun",
+        "contractor": "PT Kajima Indonesia - PT Wijaya Karya KSO",
+        "funding_scheme": "Swasta Murni (Private)",
+        "pjpk": "NTT Ltd / NTT Communications",
+        "province": "Jawa Barat",
+        "regency": "Kabupaten Bekasi",
+        "geocode_method": "exact_kabupaten",
+        "source_url": "https://wika.co.id",
+        "source_name": "Laporan Kontrak BUMN / Proyek Swasta",
+        "scraped_at": "2026-09-18T11:44:36.121424",
+        "created_at": "2026-09-18 09:44:36",
+        "updated_at": "2026-09-18 09:44:36",
+        "unor": "Hyperscale Data Center JKT3",
+        "balai": null,
+        "fiscal_year": "2022",
+        "progress": 100.0,
+        "bim_viewer_url": null,
+        "bim_uuid": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
           120.0167,
           -1.2833
         ]
@@ -26669,6 +28034,76 @@
         "progress": 100.0,
         "bim_viewer_url": "https://bim.pu.go.id/37fbe9e7-baf9-4ed0-94b2-51327017280c",
         "bim_uuid": "37fbe9e7-baf9-4ed0-94b2-51327017280c"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          104.048,
+          1.125
+        ]
+      },
+      "properties": {
+        "project_id": "swasta-batam-006",
+        "project_name": "One Avenue Batam Commercial Mixed-Use",
+        "category": "Commercial & Private",
+        "status": "Construction",
+        "budget_idr": 1.1,
+        "budget_raw": "Rp 1,10 Triliun",
+        "contractor": "PT Total Bangun Persada Tbk",
+        "funding_scheme": "Swasta Murni (Private)",
+        "pjpk": "PT Nirvana Realty / One Avenue",
+        "province": "Kepulauan Riau",
+        "regency": "Kota Batam",
+        "geocode_method": "exact_kabupaten",
+        "source_url": "https://totalbp.com",
+        "source_name": "Laporan Kontrak Swasta / BUMN",
+        "scraped_at": "2026-09-18T11:44:36.122773",
+        "created_at": "2026-09-18 09:44:36",
+        "updated_at": "2026-09-18 09:44:36",
+        "unor": "Commercial Hub & Residence",
+        "balai": null,
+        "fiscal_year": "2024",
+        "progress": 60.0,
+        "bim_viewer_url": null,
+        "bim_uuid": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          107.0945,
+          -6.282
+        ]
+      },
+      "properties": {
+        "project_id": "swasta-jbr-005",
+        "project_name": "PDG Hyperscale Data Center Cibitung JC2",
+        "category": "Commercial & Private",
+        "status": "Construction",
+        "budget_idr": 2.5,
+        "budget_raw": "Rp 2,50 Triliun",
+        "contractor": "PT Nusa Raya Cipta Tbk",
+        "funding_scheme": "Swasta Murni (Private)",
+        "pjpk": "Princeton Digital Group (PDG)",
+        "province": "Jawa Barat",
+        "regency": "Kabupaten Bekasi",
+        "geocode_method": "exact_kabupaten",
+        "source_url": "https://princetondg.com",
+        "source_name": "Laporan Kontrak Swasta / BUMN",
+        "scraped_at": "2026-09-18T11:44:36.121424",
+        "created_at": "2026-09-18 09:44:36",
+        "updated_at": "2026-09-18 09:44:36",
+        "unor": "120 MW Hyperscale Campus",
+        "balai": null,
+        "fiscal_year": "2024",
+        "progress": 62.0,
+        "bim_viewer_url": null,
+        "bim_uuid": null
       }
     },
     {
@@ -27936,6 +29371,251 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
+          107.452,
+          -6.415
+        ]
+      },
+      "properties": {
+        "project_id": "swasta-jbr-018",
+        "project_name": "Pabrik Kaca Asahi Flat Glass Cikampek",
+        "category": "Commercial & Private",
+        "status": "Operational",
+        "budget_idr": 3.8,
+        "budget_raw": "Rp 3,80 Triliun",
+        "contractor": "PT Wijaya Karya (WIKA)",
+        "funding_scheme": "Swasta Murni (Private)",
+        "pjpk": "PT Asahimas Flat Glass Tbk",
+        "province": "Jawa Barat",
+        "regency": "Kabupaten Karawang",
+        "geocode_method": "exact_kabupaten",
+        "source_url": "https://wika.co.id",
+        "source_name": "Laporan Kontrak BUMN / Proyek Swasta",
+        "scraped_at": "2026-09-18T11:44:36.122773",
+        "created_at": "2026-09-18 09:44:36",
+        "updated_at": "2026-09-18 09:44:36",
+        "unor": "Industrial Flat Glass Furnace",
+        "balai": null,
+        "fiscal_year": "2021",
+        "progress": 100.0,
+        "bim_viewer_url": null,
+        "bim_uuid": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          104.168,
+          0.885
+        ]
+      },
+      "properties": {
+        "project_id": "swasta-batam-007",
+        "project_name": "Pabrik Kaca Solar Panel Xinyi Glass Rempang Batam",
+        "category": "Commercial & Private",
+        "status": "Construction",
+        "budget_idr": 11.5,
+        "budget_raw": "Rp 11,5 Triliun (USD 800M)",
+        "contractor": "PT PP (Persero) Tbk",
+        "funding_scheme": "Swasta Murni (Private)",
+        "pjpk": "Xinyi International Investment Ltd",
+        "province": "Kepulauan Riau",
+        "regency": "Kota Batam",
+        "geocode_method": "exact_kabupaten",
+        "source_url": "https://ptpp.co.id",
+        "source_name": "Laporan Kontrak BUMN / Proyek Swasta",
+        "scraped_at": "2026-09-18T11:44:36.122773",
+        "created_at": "2026-09-18 09:44:36",
+        "updated_at": "2026-09-18 09:44:36",
+        "unor": "Photovoltaic Solar Glass Manufacturing Hub",
+        "balai": null,
+        "fiscal_year": "2024",
+        "progress": 30.0,
+        "bim_viewer_url": null,
+        "bim_uuid": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          112.485,
+          -7.452
+        ]
+      },
+      "properties": {
+        "project_id": "swasta-jtm-003",
+        "project_name": "Pabrik Kertas PT Tjiwi Kimia Mojokerto Unit Baru",
+        "category": "Commercial & Private",
+        "status": "Operational",
+        "budget_idr": 4.1,
+        "budget_raw": "Rp 4,10 Triliun",
+        "contractor": "PT Wijaya Karya (WIKA)",
+        "funding_scheme": "Swasta Murni (Private)",
+        "pjpk": "Asia Pulp & Paper (APP Sinarmas)",
+        "province": "Jawa Timur",
+        "regency": "Kabupaten Mojokerto",
+        "geocode_method": "exact_kabupaten",
+        "source_url": "https://wika.co.id",
+        "source_name": "Laporan Kontrak BUMN / Proyek Swasta",
+        "scraped_at": "2026-09-18T11:44:36.122773",
+        "created_at": "2026-09-18 09:44:36",
+        "updated_at": "2026-09-18 09:44:36",
+        "unor": "Paper Mill & Industrial Boiler Expansion",
+        "balai": null,
+        "fiscal_year": "2021",
+        "progress": 100.0,
+        "bim_viewer_url": null,
+        "bim_uuid": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          107.185,
+          -6.365
+        ]
+      },
+      "properties": {
+        "project_id": "swasta-jbr-016",
+        "project_name": "Pabrik Mobil PT Hyundai Motor Manufacturing Cikarang",
+        "category": "Commercial & Private",
+        "status": "Operational",
+        "budget_idr": 21.0,
+        "budget_raw": "Rp 21,0 Triliun (USD 1,5B)",
+        "contractor": "PT Nusa Raya Cipta Tbk",
+        "funding_scheme": "Swasta Murni (Private)",
+        "pjpk": "Hyundai Motor Company",
+        "province": "Jawa Barat",
+        "regency": "Kabupaten Bekasi",
+        "geocode_method": "exact_kabupaten",
+        "source_url": "https://nusarayacipta.com",
+        "source_name": "Laporan Kontrak Swasta / BUMN",
+        "scraped_at": "2026-09-18T11:44:36.122773",
+        "created_at": "2026-09-18 09:44:36",
+        "updated_at": "2026-09-18 09:44:36",
+        "unor": "Manufacturing & EV Assembly Plant",
+        "balai": null,
+        "fiscal_year": "2022",
+        "progress": 100.0,
+        "bim_viewer_url": null,
+        "bim_uuid": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          107.168,
+          -6.352
+        ]
+      },
+      "properties": {
+        "project_id": "swasta-jbr-017",
+        "project_name": "Pabrik Mobil PT SGMW Wuling Motor Indonesia Cikarang",
+        "category": "Commercial & Private",
+        "status": "Operational",
+        "budget_idr": 10.0,
+        "budget_raw": "Rp 10,0 Triliun (USD 700M)",
+        "contractor": "PT Total Bangun Persada Tbk",
+        "funding_scheme": "Swasta Murni (Private)",
+        "pjpk": "SAIC-GM-Wuling Automobile",
+        "province": "Jawa Barat",
+        "regency": "Kabupaten Bekasi",
+        "geocode_method": "exact_kabupaten",
+        "source_url": "https://totalbp.com",
+        "source_name": "Laporan Kontrak Swasta / BUMN",
+        "scraped_at": "2026-09-18T11:44:36.122773",
+        "created_at": "2026-09-18 09:44:36",
+        "updated_at": "2026-09-18 09:44:36",
+        "unor": "Automobile & EV Production Hub",
+        "balai": null,
+        "fiscal_year": "2021",
+        "progress": 100.0,
+        "bim_viewer_url": null,
+        "bim_uuid": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          107.271,
+          -6.368
+        ]
+      },
+      "properties": {
+        "project_id": "swasta-jbr-015",
+        "project_name": "Pabrik Sel Baterai EV PT HLI Green Power Karawang",
+        "category": "Commercial & Private",
+        "status": "Operational",
+        "budget_idr": 15.6,
+        "budget_raw": "Rp 15,6 Triliun (USD 1,1B)",
+        "contractor": "PT Wijaya Karya (WIKA)",
+        "funding_scheme": "Swasta Murni (Private)",
+        "pjpk": "PT HLI Green Power (Hyundai Motor & LG Energy Solution)",
+        "province": "Jawa Barat",
+        "regency": "Kabupaten Karawang",
+        "geocode_method": "exact_kabupaten",
+        "source_url": "https://wika.co.id",
+        "source_name": "Laporan Kontrak BUMN / Proyek Swasta",
+        "scraped_at": "2026-09-18T11:44:36.122773",
+        "created_at": "2026-09-18 09:44:36",
+        "updated_at": "2026-09-18 09:44:36",
+        "unor": "10 GWh EV Battery Cell Gigafactory",
+        "balai": null,
+        "fiscal_year": "2024",
+        "progress": 100.0,
+        "bim_viewer_url": null,
+        "bim_uuid": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          110.825,
+          -7.031
+        ]
+      },
+      "properties": {
+        "project_id": "swasta-jtg-001",
+        "project_name": "Pabrik Semen PT Semen Grobogan",
+        "category": "Commercial & Private",
+        "status": "Operational",
+        "budget_idr": 4.5,
+        "budget_raw": "Rp 4,50 Triliun",
+        "contractor": "PT Wijaya Karya (WIKA)",
+        "funding_scheme": "Swasta Murni (Private)",
+        "pjpk": "PT Semen Grobogan",
+        "province": "Jawa Tengah",
+        "regency": "Kabupaten Grobogan",
+        "geocode_method": "exact_kabupaten",
+        "source_url": "https://wika.co.id",
+        "source_name": "Laporan Kontrak BUMN / Proyek Swasta",
+        "scraped_at": "2026-09-18T11:44:36.122773",
+        "created_at": "2026-09-18 09:44:36",
+        "updated_at": "2026-09-18 09:44:36",
+        "unor": "Integrated Cement Manufacturing Plant",
+        "balai": null,
+        "fiscal_year": "2022",
+        "progress": 100.0,
+        "bim_viewer_url": null,
+        "bim_uuid": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
           112.5793,
           -8.316109
         ]
@@ -28314,6 +29994,76 @@
         "progress": 100.0,
         "bim_viewer_url": "https://bim.pu.go.id/25a080be-997c-4df1-a404-b44a4cdda7d4",
         "bim_uuid": "25a080be-997c-4df1-a404-b44a4cdda7d4"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          112.805,
+          -7.275
+        ]
+      },
+      "properties": {
+        "project_id": "swasta-sby-005",
+        "project_name": "Pakuwon City Mall & East Coast Center",
+        "category": "Commercial & Private",
+        "status": "Operational",
+        "budget_idr": 1.5,
+        "budget_raw": "Rp 1,50 Triliun",
+        "contractor": "PT Total Bangun Persada Tbk",
+        "funding_scheme": "Swasta Murni (Private)",
+        "pjpk": "PT Pakuwon Jati Tbk",
+        "province": "Jawa Timur",
+        "regency": "Kota Surabaya",
+        "geocode_method": "exact_kabupaten",
+        "source_url": "https://totalbp.com",
+        "source_name": "Laporan Kontrak Swasta / BUMN",
+        "scraped_at": "2026-09-18T11:44:36.122773",
+        "created_at": "2026-09-18 09:44:36",
+        "updated_at": "2026-09-18 09:44:36",
+        "unor": "Commercial Lifestyle Center",
+        "balai": null,
+        "fiscal_year": "2022",
+        "progress": 100.0,
+        "bim_viewer_url": null,
+        "bim_uuid": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          106.995,
+          -6.241
+        ]
+      },
+      "properties": {
+        "project_id": "swasta-jbr-013",
+        "project_name": "Pakuwon Mall Bekasi & Pakuwon Residences",
+        "category": "Commercial & Private",
+        "status": "Construction",
+        "budget_idr": 2.2,
+        "budget_raw": "Rp 2,20 Triliun",
+        "contractor": "PT Total Bangun Persada Tbk",
+        "funding_scheme": "Swasta Murni (Private)",
+        "pjpk": "PT Pakuwon Jati Tbk",
+        "province": "Jawa Barat",
+        "regency": "Kota Bekasi",
+        "geocode_method": "exact_kabupaten",
+        "source_url": "https://totalbp.com",
+        "source_name": "Laporan Kontrak Swasta / BUMN",
+        "scraped_at": "2026-09-18T11:44:36.122773",
+        "created_at": "2026-09-18 09:44:36",
+        "updated_at": "2026-09-18 09:44:36",
+        "unor": "Superblock Mall & Residential Towers",
+        "balai": null,
+        "fiscal_year": "2024",
+        "progress": 72.0,
+        "bim_viewer_url": null,
+        "bim_uuid": null
       }
     },
     {
@@ -29217,7 +30967,7 @@
         "source_name": "Laporan Kontrak BUMN / Proyek Swasta",
         "scraped_at": "2026-09-18T11:30:40.646965",
         "created_at": "2026-09-18 09:30:40",
-        "updated_at": "2026-09-18 09:30:40",
+        "updated_at": "2026-09-18 09:44:36",
         "unor": "Gedung Komersial Swasta",
         "balai": null,
         "fiscal_year": "2024",
@@ -34726,6 +36476,111 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
+          98.674,
+          3.594
+        ]
+      },
+      "properties": {
+        "project_id": "swasta-mdn-003",
+        "project_name": "Podomoro City Deli Medan Mixed-Use",
+        "category": "Commercial & Private",
+        "status": "Operational",
+        "budget_idr": 3.5,
+        "budget_raw": "Rp 3,50 Triliun",
+        "contractor": "PT Total Bangun Persada Tbk",
+        "funding_scheme": "Swasta Murni (Private)",
+        "pjpk": "Agung Podomoro Land",
+        "province": "Sumatera Utara",
+        "regency": "Kota Medan",
+        "geocode_method": "exact_kabupaten",
+        "source_url": "https://totalbp.com",
+        "source_name": "Laporan Kontrak Swasta / BUMN",
+        "scraped_at": "2026-09-18T11:44:36.122773",
+        "created_at": "2026-09-18 09:44:36",
+        "updated_at": "2026-09-18 09:44:36",
+        "unor": "Landmark Superblock (Towers, Mall, SOHO)",
+        "balai": null,
+        "fiscal_year": "2021",
+        "progress": 100.0,
+        "bim_viewer_url": null,
+        "bim_uuid": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          104.0412,
+          1.1185
+        ]
+      },
+      "properties": {
+        "project_id": "swasta-batam-005",
+        "project_name": "Pollux Meisterstadt Batam (Habibie Complex)",
+        "category": "Commercial & Private",
+        "status": "Operational",
+        "budget_idr": 4.2,
+        "budget_raw": "Rp 4,20 Triliun",
+        "contractor": "PT PP (Persero) Tbk",
+        "funding_scheme": "Swasta Murni (Private)",
+        "pjpk": "PT Pollux Barelang Megasuperblok",
+        "province": "Kepulauan Riau",
+        "regency": "Kota Batam",
+        "geocode_method": "exact_kabupaten",
+        "source_url": "https://ptpp.co.id",
+        "source_name": "Laporan Kontrak BUMN / Proyek Swasta",
+        "scraped_at": "2026-09-18T11:44:36.122773",
+        "created_at": "2026-09-18 09:44:36",
+        "updated_at": "2026-09-18 09:44:36",
+        "unor": "Integrated Megasuperblock Batam",
+        "balai": null,
+        "fiscal_year": "2021",
+        "progress": 100.0,
+        "bim_viewer_url": null,
+        "bim_uuid": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          106.784,
+          -6.265
+        ]
+      },
+      "properties": {
+        "project_id": "swasta-jkt-020",
+        "project_name": "Pondok Indah Mall 3 & Office Tower",
+        "category": "Commercial & Private",
+        "status": "Operational",
+        "budget_idr": 2.3,
+        "budget_raw": "Rp 2,30 Triliun",
+        "contractor": "PT Total Bangun Persada Tbk",
+        "funding_scheme": "Swasta Murni (Private)",
+        "pjpk": "PT Metropolitan Kentjana Tbk",
+        "province": "DKI Jakarta",
+        "regency": "Kota Jakarta Selatan",
+        "geocode_method": "exact_kabupaten",
+        "source_url": "https://totalbp.com",
+        "source_name": "Laporan Kontrak Swasta / BUMN",
+        "scraped_at": "2026-09-18T11:44:36.122773",
+        "created_at": "2026-09-18 09:44:36",
+        "updated_at": "2026-09-18 09:44:36",
+        "unor": "Luxury Mall & Commercial Center",
+        "balai": null,
+        "fiscal_year": "2021",
+        "progress": 100.0,
+        "bim_viewer_url": null,
+        "bim_uuid": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
           101.178571,
           1.548875
         ]
@@ -35069,6 +36924,251 @@
         "progress": 100.0,
         "bim_viewer_url": "https://bim.pu.go.id/0d414754-9b90-4d7f-9c74-e7e9c1c20ccb",
         "bim_uuid": "0d414754-9b90-4d7f-9c74-e7e9c1c20ccb"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          98.675,
+          3.589
+        ]
+      },
+      "properties": {
+        "project_id": "swasta-mdn-002",
+        "project_name": "RS Columbia Asia Hospital Medan",
+        "category": "Commercial & Private",
+        "status": "Operational",
+        "budget_idr": 0.4,
+        "budget_raw": "Rp 400 Miliar",
+        "contractor": "PT PP (Persero) Tbk",
+        "funding_scheme": "Swasta Murni (Private)",
+        "pjpk": "Columbia Asia Group",
+        "province": "Sumatera Utara",
+        "regency": "Kota Medan",
+        "geocode_method": "exact_kabupaten",
+        "source_url": "https://ptpp.co.id",
+        "source_name": "Laporan Kontrak BUMN / Proyek Swasta",
+        "scraped_at": "2026-09-18T11:44:36.121424",
+        "created_at": "2026-09-18 09:44:36",
+        "updated_at": "2026-09-18 09:44:36",
+        "unor": "Tertiary Medical Center",
+        "balai": null,
+        "fiscal_year": "2021",
+        "progress": 100.0,
+        "bim_viewer_url": null,
+        "bim_uuid": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          106.7972,
+          -6.187
+        ]
+      },
+      "properties": {
+        "project_id": "swasta-jkt-013",
+        "project_name": "RS Mitra Keluarga Slipi Jakarta",
+        "category": "Commercial & Private",
+        "status": "Operational",
+        "budget_idr": 0.45,
+        "budget_raw": "Rp 450 Miliar",
+        "contractor": "PT Total Bangun Persada Tbk",
+        "funding_scheme": "Swasta Murni (Private)",
+        "pjpk": "PT Mitra Keluarga Karyasehat Tbk",
+        "province": "DKI Jakarta",
+        "regency": "Kota Jakarta Barat",
+        "geocode_method": "exact_kabupaten",
+        "source_url": "https://totalbp.com",
+        "source_name": "Laporan Kontrak Swasta / BUMN",
+        "scraped_at": "2026-09-18T11:44:36.121424",
+        "created_at": "2026-09-18 09:44:36",
+        "updated_at": "2026-09-18 09:44:36",
+        "unor": "Private Specialized Hospital",
+        "balai": null,
+        "fiscal_year": "2022",
+        "progress": 100.0,
+        "bim_viewer_url": null,
+        "bim_uuid": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          106.7125,
+          -6.2845
+        ]
+      },
+      "properties": {
+        "project_id": "swasta-btn-002",
+        "project_name": "RS Pondok Indah Bintaro Jaya",
+        "category": "Commercial & Private",
+        "status": "Operational",
+        "budget_idr": 0.7,
+        "budget_raw": "Rp 700 Miliar",
+        "contractor": "PT Nusa Raya Cipta Tbk",
+        "funding_scheme": "Swasta Murni (Private)",
+        "pjpk": "PT Binara Guna Mediktama",
+        "province": "Banten",
+        "regency": "Kota Tangerang Selatan",
+        "geocode_method": "exact_kabupaten",
+        "source_url": "https://nusarayacipta.com",
+        "source_name": "Laporan Kontrak Swasta / BUMN",
+        "scraped_at": "2026-09-18T11:44:36.121424",
+        "created_at": "2026-09-18 09:44:36",
+        "updated_at": "2026-09-18 09:44:36",
+        "unor": "Eco-Hospital Bintaro Jaya",
+        "balai": null,
+        "fiscal_year": "2021",
+        "progress": 100.0,
+        "bim_viewer_url": null,
+        "bim_uuid": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.885,
+          -1.248
+        ]
+      },
+      "properties": {
+        "project_id": "swasta-bpn-001",
+        "project_name": "RS Siloam Hospital Balikpapan",
+        "category": "Commercial & Private",
+        "status": "Operational",
+        "budget_idr": 0.35,
+        "budget_raw": "Rp 350 Miliar",
+        "contractor": "PT Wijaya Karya (WIKA)",
+        "funding_scheme": "Swasta Murni (Private)",
+        "pjpk": "PT Siloam International Hospitals Tbk",
+        "province": "Kalimantan Timur",
+        "regency": "Kota Balikpapan",
+        "geocode_method": "exact_kabupaten",
+        "source_url": "https://wika.co.id",
+        "source_name": "Laporan Kontrak BUMN / Proyek Swasta",
+        "scraped_at": "2026-09-18T11:44:36.122773",
+        "created_at": "2026-09-18 09:44:36",
+        "updated_at": "2026-09-18 09:44:36",
+        "unor": "Specialist Private Hospital",
+        "balai": null,
+        "fiscal_year": "2020",
+        "progress": 100.0,
+        "bim_viewer_url": null,
+        "bim_uuid": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          106.6085,
+          -6.2235
+        ]
+      },
+      "properties": {
+        "project_id": "swasta-btn-001",
+        "project_name": "RS Siloam Hospital Lippo Village Karawaci",
+        "category": "Commercial & Private",
+        "status": "Operational",
+        "budget_idr": 0.85,
+        "budget_raw": "Rp 850 Miliar",
+        "contractor": "PT Total Bangun Persada Tbk",
+        "funding_scheme": "Swasta Murni (Private)",
+        "pjpk": "PT Siloam International Hospitals Tbk",
+        "province": "Banten",
+        "regency": "Kabupaten Tangerang",
+        "geocode_method": "exact_kabupaten",
+        "source_url": "https://totalbp.com",
+        "source_name": "Laporan Kontrak Swasta / BUMN",
+        "scraped_at": "2026-09-18T11:44:36.121424",
+        "created_at": "2026-09-18 09:44:36",
+        "updated_at": "2026-09-18 09:44:36",
+        "unor": "Private Flagship General Hospital",
+        "balai": null,
+        "fiscal_year": "2021",
+        "progress": 100.0,
+        "bim_viewer_url": null,
+        "bim_uuid": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          119.405,
+          -5.155
+        ]
+      },
+      "properties": {
+        "project_id": "swasta-mks-002",
+        "project_name": "RS Siloam Hospital Makassar Tanjung Bunga",
+        "category": "Commercial & Private",
+        "status": "Operational",
+        "budget_idr": 0.45,
+        "budget_raw": "Rp 450 Miliar",
+        "contractor": "PT Wijaya Karya (WIKA)",
+        "funding_scheme": "Swasta Murni (Private)",
+        "pjpk": "PT Siloam International Hospitals Tbk",
+        "province": "Sulawesi Selatan",
+        "regency": "Kota Makassar",
+        "geocode_method": "exact_kabupaten",
+        "source_url": "https://wika.co.id",
+        "source_name": "Laporan Kontrak BUMN / Proyek Swasta",
+        "scraped_at": "2026-09-18T11:44:36.122773",
+        "created_at": "2026-09-18 09:44:36",
+        "updated_at": "2026-09-18 09:44:36",
+        "unor": "Tertiary Referral Hospital",
+        "balai": null,
+        "fiscal_year": "2021",
+        "progress": 100.0,
+        "bim_viewer_url": null,
+        "bim_uuid": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          104.745,
+          -2.973
+        ]
+      },
+      "properties": {
+        "project_id": "swasta-plm-001",
+        "project_name": "RS Siloam Sriwijaya Palembang",
+        "category": "Commercial & Private",
+        "status": "Operational",
+        "budget_idr": 0.38,
+        "budget_raw": "Rp 380 Miliar",
+        "contractor": "PT Wijaya Karya (WIKA)",
+        "funding_scheme": "Swasta Murni (Private)",
+        "pjpk": "PT Siloam International Hospitals Tbk",
+        "province": "Sumatera Selatan",
+        "regency": "Kota Palembang",
+        "geocode_method": "exact_kabupaten",
+        "source_url": "https://wika.co.id",
+        "source_name": "Laporan Kontrak BUMN / Proyek Swasta",
+        "scraped_at": "2026-09-18T11:44:36.122773",
+        "created_at": "2026-09-18 09:44:36",
+        "updated_at": "2026-09-18 09:44:36",
+        "unor": "Private Specialized Hospital",
+        "balai": null,
+        "fiscal_year": "2020",
+        "progress": 100.0,
+        "bim_viewer_url": null,
+        "bim_uuid": null
       }
     },
     {
@@ -38016,6 +40116,41 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
+          107.142,
+          -6.325
+        ]
+      },
+      "properties": {
+        "project_id": "swasta-jbr-006",
+        "project_name": "STT GDC Indonesia Hyperscale Campus Cikarang",
+        "category": "Commercial & Private",
+        "status": "Construction",
+        "budget_idr": 2.1,
+        "budget_raw": "Rp 2,10 Triliun",
+        "contractor": "PT Wijaya Karya (WIKA)",
+        "funding_scheme": "Swasta Murni (Private)",
+        "pjpk": "ST Telemedia Global Data Centres",
+        "province": "Jawa Barat",
+        "regency": "Kabupaten Bekasi",
+        "geocode_method": "exact_kabupaten",
+        "source_url": "https://wika.co.id",
+        "source_name": "Laporan Kontrak BUMN / Proyek Swasta",
+        "scraped_at": "2026-09-18T11:44:36.121424",
+        "created_at": "2026-09-18 09:44:36",
+        "updated_at": "2026-09-18 09:44:36",
+        "unor": "72 MW Data Center Facility",
+        "balai": null,
+        "fiscal_year": "2024",
+        "progress": 78.0,
+        "bim_viewer_url": null,
+        "bim_uuid": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
           112.05952,
           -6.888441
         ]
@@ -38156,6 +40291,76 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
+          106.7975,
+          -6.227
+        ]
+      },
+      "properties": {
+        "project_id": "swasta-jkt-016",
+        "project_name": "Senayan City Mall & Tower Complex",
+        "category": "Commercial & Private",
+        "status": "Operational",
+        "budget_idr": 3.0,
+        "budget_raw": "Rp 3,00 Triliun",
+        "contractor": "PT Total Bangun Persada Tbk",
+        "funding_scheme": "Swasta Murni (Private)",
+        "pjpk": "Agung Podomoro Land",
+        "province": "DKI Jakarta",
+        "regency": "Kota Jakarta Pusat",
+        "geocode_method": "exact_kabupaten",
+        "source_url": "https://totalbp.com",
+        "source_name": "Laporan Kontrak Swasta / BUMN",
+        "scraped_at": "2026-09-18T11:44:36.122773",
+        "created_at": "2026-09-18 09:44:36",
+        "updated_at": "2026-09-18 09:44:36",
+        "unor": "Commercial Shopping & Offices",
+        "balai": null,
+        "fiscal_year": "2020",
+        "progress": 100.0,
+        "bim_viewer_url": null,
+        "bim_uuid": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          106.8085,
+          -6.226
+        ]
+      },
+      "properties": {
+        "project_id": "swasta-jkt-012",
+        "project_name": "Sequis Tower SCBD",
+        "category": "Commercial & Private",
+        "status": "Operational",
+        "budget_idr": 2.1,
+        "budget_raw": "Rp 2,10 Triliun",
+        "contractor": "PT Total Bangun Persada Tbk",
+        "funding_scheme": "Swasta Murni (Private)",
+        "pjpk": "Gunung Sewu Kencana / FARPOINT",
+        "province": "DKI Jakarta",
+        "regency": "Kota Jakarta Selatan",
+        "geocode_method": "exact_kabupaten",
+        "source_url": "https://totalbp.com",
+        "source_name": "Laporan Kontrak Swasta / BUMN",
+        "scraped_at": "2026-09-18T11:44:36.121424",
+        "created_at": "2026-09-18 09:44:36",
+        "updated_at": "2026-09-18 09:44:36",
+        "unor": "LEED Platinum Commercial Tower",
+        "balai": null,
+        "fiscal_year": "2021",
+        "progress": 100.0,
+        "bim_viewer_url": null,
+        "bim_uuid": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
           106.840324,
           -6.321782
         ]
@@ -38184,6 +40389,41 @@
         "progress": 100.0,
         "bim_viewer_url": "https://bim.pu.go.id/c9f1efd1-6857-4889-8e51-c38cd4036abd",
         "bim_uuid": "c9f1efd1-6857-4889-8e51-c38cd4036abd"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          106.8219,
+          -6.2135
+        ]
+      },
+      "properties": {
+        "project_id": "swasta-jkt-011",
+        "project_name": "Sinarmas MSIG Tower Sudirman",
+        "category": "Commercial & Private",
+        "status": "Operational",
+        "budget_idr": 1.85,
+        "budget_raw": "Rp 1,85 Triliun",
+        "contractor": "PT Acset Indonusa Tbk",
+        "funding_scheme": "Swasta Murni (Private)",
+        "pjpk": "Sinarmas Land & MSIG Insurance",
+        "province": "DKI Jakarta",
+        "regency": "Kota Jakarta Selatan",
+        "geocode_method": "exact_kabupaten",
+        "source_url": "https://acset.co",
+        "source_name": "Laporan Kontrak Swasta / BUMN",
+        "scraped_at": "2026-09-18T11:44:36.121424",
+        "created_at": "2026-09-18 09:44:36",
+        "updated_at": "2026-09-18 09:44:36",
+        "unor": "Grade-A Office Tower (245 m)",
+        "balai": null,
+        "fiscal_year": "2020",
+        "progress": 100.0,
+        "bim_viewer_url": null,
+        "bim_uuid": null
       }
     },
     {
@@ -38576,6 +40816,181 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
+          127.632,
+          -1.542
+        ]
+      },
+      "properties": {
+        "project_id": "swasta-mlk-001",
+        "project_name": "Smelter Nikel HPAL PT Trimegah Bangun Persada (Harita) Pulau Obi",
+        "category": "Commercial & Private",
+        "status": "Operational",
+        "budget_idr": 18.0,
+        "budget_raw": "Rp 18,0 Triliun",
+        "contractor": "PT Wijaya Karya (WIKA)",
+        "funding_scheme": "Swasta Murni (Private)",
+        "pjpk": "Harita Nickel Group",
+        "province": "Maluku Utara",
+        "regency": "Kabupaten Halmahera Selatan",
+        "geocode_method": "exact_kabupaten",
+        "source_url": "https://wika.co.id",
+        "source_name": "Laporan Kontrak BUMN / Proyek Swasta",
+        "scraped_at": "2026-09-18T11:44:36.122773",
+        "created_at": "2026-09-18 09:44:36",
+        "updated_at": "2026-09-18 09:44:36",
+        "unor": "HPAL Battery Raw Material Smelter",
+        "balai": null,
+        "fiscal_year": "2023",
+        "progress": 100.0,
+        "bim_viewer_url": null,
+        "bim_uuid": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          121.611,
+          -4.182
+        ]
+      },
+      "properties": {
+        "project_id": "swasta-slt-002",
+        "project_name": "Smelter Nikel HPAL PT Vale Indonesia Pomalaa Block",
+        "category": "Commercial & Private",
+        "status": "Construction",
+        "budget_idr": 37.5,
+        "budget_raw": "Rp 37,5 Triliun (USD 2,5B)",
+        "contractor": "PT Wijaya Karya (WIKA)",
+        "funding_scheme": "Swasta Murni (Private)",
+        "pjpk": "PT Vale Indonesia Tbk & Zhejiang Huayou Cobalt",
+        "province": "Sulawesi Tenggara",
+        "regency": "Kabupaten Kolaka",
+        "geocode_method": "exact_kabupaten",
+        "source_url": "https://wika.co.id",
+        "source_name": "Laporan Kontrak BUMN / Proyek Swasta",
+        "scraped_at": "2026-09-18T11:44:36.122773",
+        "created_at": "2026-09-18 09:44:36",
+        "updated_at": "2026-09-18 09:44:36",
+        "unor": "HPAL Processing Facility",
+        "balai": null,
+        "fiscal_year": "2024",
+        "progress": 45.0,
+        "bim_viewer_url": null,
+        "bim_uuid": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          116.782,
+          -8.761
+        ]
+      },
+      "properties": {
+        "project_id": "swasta-ntb-001",
+        "project_name": "Smelter Tembaga & Emas PT Amman Mineral Industri Sumbawa",
+        "category": "Commercial & Private",
+        "status": "Construction",
+        "budget_idr": 14.5,
+        "budget_raw": "Rp 14,5 Triliun (USD 980M)",
+        "contractor": "PT PP - China Nonferrous KSO",
+        "funding_scheme": "Swasta Murni (Private)",
+        "pjpk": "PT Amman Mineral Industri Tbk",
+        "province": "Nusa Tenggara Barat",
+        "regency": "Kabupaten Sumbawa Barat",
+        "geocode_method": "exact_kabupaten",
+        "source_url": "https://ptpp.co.id",
+        "source_name": "Laporan Kontrak BUMN / Proyek Swasta",
+        "scraped_at": "2026-09-18T11:44:36.122773",
+        "created_at": "2026-09-18 09:44:36",
+        "updated_at": "2026-09-18 09:44:36",
+        "unor": "Copper & Gold Smelter Facility",
+        "balai": null,
+        "fiscal_year": "2024",
+        "progress": 95.0,
+        "bim_viewer_url": null,
+        "bim_uuid": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          112.605,
+          -7.112
+        ]
+      },
+      "properties": {
+        "project_id": "swasta-jtm-001",
+        "project_name": "Smelter Tembaga PT Freeport Indonesia Manyar Gresik",
+        "category": "Commercial & Private",
+        "status": "Operational",
+        "budget_idr": 42.0,
+        "budget_raw": "Rp 42,0 Triliun (USD 3,0B)",
+        "contractor": "Chiyoda - PT Wijaya Karya (WIKA) KSO",
+        "funding_scheme": "Swasta Murni (Private)",
+        "pjpk": "PT Freeport Indonesia",
+        "province": "Jawa Timur",
+        "regency": "Kabupaten Gresik",
+        "geocode_method": "exact_kabupaten",
+        "source_url": "https://wika.co.id",
+        "source_name": "Laporan Kontrak BUMN / Proyek Swasta",
+        "scraped_at": "2026-09-18T11:44:36.122773",
+        "created_at": "2026-09-18 09:44:36",
+        "updated_at": "2026-09-18 09:44:36",
+        "unor": "Single-Line Copper Smelter",
+        "balai": null,
+        "fiscal_year": "2024",
+        "progress": 100.0,
+        "bim_viewer_url": null,
+        "bim_uuid": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          106.789,
+          -6.293
+        ]
+      },
+      "properties": {
+        "project_id": "swasta-jkt-023",
+        "project_name": "South Quarter Dome & Commercial Complex TB Simatupang",
+        "category": "Commercial & Private",
+        "status": "Operational",
+        "budget_idr": 2.4,
+        "budget_raw": "Rp 2,40 Triliun",
+        "contractor": "PT Nusa Raya Cipta Tbk",
+        "funding_scheme": "Swasta Murni (Private)",
+        "pjpk": "PT Intiland Development Tbk",
+        "province": "DKI Jakarta",
+        "regency": "Kota Jakarta Selatan",
+        "geocode_method": "exact_kabupaten",
+        "source_url": "https://nusarayacipta.com",
+        "source_name": "Laporan Kontrak Swasta / BUMN",
+        "scraped_at": "2026-09-18T11:44:36.122773",
+        "created_at": "2026-09-18 09:44:36",
+        "updated_at": "2026-09-18 09:44:36",
+        "unor": "Grade-A Eco Business Park",
+        "balai": null,
+        "fiscal_year": "2021",
+        "progress": 100.0,
+        "bim_viewer_url": null,
+        "bim_uuid": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
           107.58234,
           -7.228849
         ]
@@ -38814,6 +41229,41 @@
         "progress": 100.0,
         "bim_viewer_url": "https://bim.pu.go.id/fd96b6cd-7076-4b5f-a6d5-d0aa3db313c8",
         "bim_uuid": "fd96b6cd-7076-4b5f-a6d5-d0aa3db313c8"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          107.698,
+          -6.955
+        ]
+      },
+      "properties": {
+        "project_id": "swasta-jbr-019",
+        "project_name": "Summarecon Mall Bandung & Gedung Komersial",
+        "category": "Commercial & Private",
+        "status": "Operational",
+        "budget_idr": 1.65,
+        "budget_raw": "Rp 1,65 Triliun",
+        "contractor": "PT Total Bangun Persada Tbk",
+        "funding_scheme": "Swasta Murni (Private)",
+        "pjpk": "PT Summarecon Agung Tbk",
+        "province": "Jawa Barat",
+        "regency": "Kota Bandung",
+        "geocode_method": "exact_kabupaten",
+        "source_url": "https://totalbp.com",
+        "source_name": "Laporan Kontrak Swasta / BUMN",
+        "scraped_at": "2026-09-18T11:44:36.122773",
+        "created_at": "2026-09-18 09:44:36",
+        "updated_at": "2026-09-18 09:44:36",
+        "unor": "Commercial Lifestyle Center Gedebage",
+        "balai": null,
+        "fiscal_year": "2023",
+        "progress": 100.0,
+        "bim_viewer_url": null,
+        "bim_uuid": null
       }
     },
     {
@@ -39066,6 +41516,76 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
+          107.1652,
+          -6.3421
+        ]
+      },
+      "properties": {
+        "project_id": "swasta-jbr-003",
+        "project_name": "Telkom Hyperscale Data Center Cikarang HDC 1",
+        "category": "Commercial & Private",
+        "status": "Operational",
+        "budget_idr": 1.8,
+        "budget_raw": "Rp 1,80 Triliun",
+        "contractor": "PT PP (Persero) Tbk",
+        "funding_scheme": "Swasta Murni (Private)",
+        "pjpk": "PT Telkom Data Ekosistem (NeutraDC)",
+        "province": "Jawa Barat",
+        "regency": "Kabupaten Bekasi",
+        "geocode_method": "exact_kabupaten",
+        "source_url": "https://ptpp.co.id",
+        "source_name": "Laporan Kontrak BUMN / Proyek Swasta",
+        "scraped_at": "2026-09-18T11:44:36.121424",
+        "created_at": "2026-09-18 09:44:36",
+        "updated_at": "2026-09-18 09:44:36",
+        "unor": "Carrier-Neutral Hyperscale Facility",
+        "balai": null,
+        "fiscal_year": "2022",
+        "progress": 100.0,
+        "bim_viewer_url": null,
+        "bim_uuid": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          107.166,
+          -6.3425
+        ]
+      },
+      "properties": {
+        "project_id": "swasta-jbr-004",
+        "project_name": "Telkom Hyperscale Data Center Cikarang HDC 2",
+        "category": "Commercial & Private",
+        "status": "Construction",
+        "budget_idr": 1.95,
+        "budget_raw": "Rp 1,95 Triliun",
+        "contractor": "PT PP (Persero) Tbk",
+        "funding_scheme": "Swasta Murni (Private)",
+        "pjpk": "PT Telkom Data Ekosistem (NeutraDC)",
+        "province": "Jawa Barat",
+        "regency": "Kabupaten Bekasi",
+        "geocode_method": "exact_kabupaten",
+        "source_url": "https://ptpp.co.id",
+        "source_name": "Laporan Kontrak BUMN / Proyek Swasta",
+        "scraped_at": "2026-09-18T11:44:36.121424",
+        "created_at": "2026-09-18 09:44:36",
+        "updated_at": "2026-09-18 09:44:36",
+        "unor": "Hyperscale Expansion Module",
+        "balai": null,
+        "fiscal_year": "2024",
+        "progress": 45.0,
+        "bim_viewer_url": null,
+        "bim_uuid": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
           121.0794,
           -8.6574
         ]
@@ -39129,6 +41649,41 @@
         "progress": 100.0,
         "bim_viewer_url": "https://bim.pu.go.id/f2426162-0a41-4a3b-8575-b381219035d4",
         "bim_uuid": "f2426162-0a41-4a3b-8575-b381219035d4"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          106.822,
+          -6.222
+        ]
+      },
+      "properties": {
+        "project_id": "swasta-jkt-024",
+        "project_name": "Tokopedia Tower Ciputra World 2 Jakarta",
+        "category": "Commercial & Private",
+        "status": "Operational",
+        "budget_idr": 1.95,
+        "budget_raw": "Rp 1,95 Triliun",
+        "contractor": "PT Total Bangun Persada Tbk",
+        "funding_scheme": "Swasta Murni (Private)",
+        "pjpk": "PT Ciputra Development Tbk",
+        "province": "DKI Jakarta",
+        "regency": "Kota Jakarta Selatan",
+        "geocode_method": "exact_kabupaten",
+        "source_url": "https://totalbp.com",
+        "source_name": "Laporan Kontrak Swasta / BUMN",
+        "scraped_at": "2026-09-18T11:44:36.122773",
+        "created_at": "2026-09-18 09:44:36",
+        "updated_at": "2026-09-18 09:44:36",
+        "unor": "Technology & Financial Hub (240 m)",
+        "balai": null,
+        "fiscal_year": "2021",
+        "progress": 100.0,
+        "bim_viewer_url": null,
+        "bim_uuid": null
       }
     },
     {
@@ -39241,6 +41796,41 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
+          119.395,
+          -5.161
+        ]
+      },
+      "properties": {
+        "project_id": "swasta-mks-001",
+        "project_name": "Trans Studio Mall & Hotel Complex Makassar",
+        "category": "Commercial & Private",
+        "status": "Operational",
+        "budget_idr": 1.8,
+        "budget_raw": "Rp 1,80 Triliun",
+        "contractor": "PT Total Bangun Persada Tbk",
+        "funding_scheme": "Swasta Murni (Private)",
+        "pjpk": "CT Corp / Trans Retail",
+        "province": "Sulawesi Selatan",
+        "regency": "Kota Makassar",
+        "geocode_method": "exact_kabupaten",
+        "source_url": "https://totalbp.com",
+        "source_name": "Laporan Kontrak Swasta / BUMN",
+        "scraped_at": "2026-09-18T11:44:36.122773",
+        "created_at": "2026-09-18 09:44:36",
+        "updated_at": "2026-09-18 09:44:36",
+        "unor": "Commercial Leisure & Business Hub",
+        "balai": null,
+        "fiscal_year": "2020",
+        "progress": 100.0,
+        "bim_viewer_url": null,
+        "bim_uuid": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
           101.4,
           0.5
         ]
@@ -39267,6 +41857,41 @@
         "balai": null,
         "fiscal_year": null,
         "progress": null,
+        "bim_viewer_url": null,
+        "bim_uuid": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          106.8091,
+          -6.2268
+        ]
+      },
+      "properties": {
+        "project_id": "swasta-jkt-008",
+        "project_name": "Treasury Tower District 8 SCBD",
+        "category": "Commercial & Private",
+        "status": "Operational",
+        "budget_idr": 2.7,
+        "budget_raw": "Rp 2,70 Triliun",
+        "contractor": "PT Total Bangun Persada Tbk",
+        "funding_scheme": "Swasta Murni (Private)",
+        "pjpk": "Agung Sedayu Group",
+        "province": "DKI Jakarta",
+        "regency": "Kota Jakarta Selatan",
+        "geocode_method": "exact_kabupaten",
+        "source_url": "https://totalbp.com",
+        "source_name": "Laporan Kontrak Swasta / BUMN",
+        "scraped_at": "2026-09-18T11:44:36.121424",
+        "created_at": "2026-09-18 09:44:36",
+        "updated_at": "2026-09-18 09:44:36",
+        "unor": "SCBD Financial Landmark (280 m)",
+        "balai": null,
+        "fiscal_year": "2021",
+        "progress": 100.0,
         "bim_viewer_url": null,
         "bim_uuid": null
       }
@@ -39337,6 +41962,41 @@
         "balai": null,
         "fiscal_year": null,
         "progress": null,
+        "bim_viewer_url": null,
+        "bim_uuid": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          107.098,
+          -6.302
+        ]
+      },
+      "properties": {
+        "project_id": "swasta-jbr-012",
+        "project_name": "Vasanta Innopark MM2100 Cikarang",
+        "category": "Commercial & Private",
+        "status": "Operational",
+        "budget_idr": 2.5,
+        "budget_raw": "Rp 2,50 Triliun",
+        "contractor": "PT Total Bangun Persada Tbk",
+        "funding_scheme": "Swasta Murni (Private)",
+        "pjpk": "Vasanta Group & Mitsubishi Corporation",
+        "province": "Jawa Barat",
+        "regency": "Kabupaten Bekasi",
+        "geocode_method": "exact_kabupaten",
+        "source_url": "https://totalbp.com",
+        "source_name": "Laporan Kontrak Swasta / BUMN",
+        "scraped_at": "2026-09-18T11:44:36.122773",
+        "created_at": "2026-09-18 09:44:36",
+        "updated_at": "2026-09-18 09:44:36",
+        "unor": "Japanese Township & Commercial Complex",
+        "balai": null,
+        "fiscal_year": "2022",
+        "progress": 100.0,
         "bim_viewer_url": null,
         "bim_uuid": null
       }
@@ -39518,7 +42178,7 @@
     }
   ],
   "metadata": {
-    "total_features": 1129,
+    "total_features": 1205,
     "unresolved_count": 160,
     "source": "Coffee Civil News Bot – Phase 1 Pipeline"
   }
