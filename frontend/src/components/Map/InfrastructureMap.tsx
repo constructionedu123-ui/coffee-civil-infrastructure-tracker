@@ -13,7 +13,7 @@ import { createMaterialHubIcon, MATERIAL_HUB_CONFIG } from './MaterialHubMarker'
 import { MeasureTool } from './MeasureTool';
 import { CATEGORY_CONFIG, STATUS_CONFIG } from '../../constants/categories';
 import { formatBudget } from '../../utils/formatters';
-import { getLatestRainRadarUrl } from '../../utils/rainRadar';
+import { getLatestWeatherUrls } from '../../utils/rainRadar';
 import { X } from 'lucide-react';
 
 // IKN Nusantara camera preset (Sepaku, East Kalimantan)
@@ -37,6 +37,8 @@ interface InfrastructureMapProps {
   portHubs?: PortHubFeature[];
   showMaritimeRoutes?: boolean;
   showRainRadar?: boolean;
+  weatherMode?: 'radar' | 'satellite';
+  onWeatherModeChange?: (mode: 'radar' | 'satellite') => void;
   materialHubs?: MaterialHubFeature[];
   showMaterialHubs?: {
     quarry: boolean;
@@ -71,6 +73,8 @@ export const InfrastructureMap: React.FC<InfrastructureMapProps> = ({
   portHubs = [],
   showMaritimeRoutes = true,
   showRainRadar = false,
+  weatherMode = 'radar',
+  onWeatherModeChange,
   materialHubs = [],
   showMaterialHubs,
   opportunityFinder,
@@ -868,7 +872,7 @@ export const InfrastructureMap: React.FC<InfrastructureMapProps> = ({
     }
   }, [shippingRoutes, portHubs, showMaritimeRoutes]);
 
-  // Handle RainViewer Live Weather Radar Overlay
+  // Handle Live Weather Overlay (Radar Presipitasi Hujan & Satelit Awan Real-Time)
   useEffect(() => {
     const map = mapInstanceRef.current;
     if (!map) return;
@@ -876,9 +880,9 @@ export const InfrastructureMap: React.FC<InfrastructureMapProps> = ({
     let isMounted = true;
     let refreshInterval: ReturnType<typeof setInterval> | null = null;
 
-    const loadRadarLayer = async (forceRefresh = false) => {
+    const loadWeatherLayer = async (forceRefresh = false) => {
       try {
-        const tileUrl = await getLatestRainRadarUrl(forceRefresh);
+        const urls = await getLatestWeatherUrls(forceRefresh);
         if (!isMounted) return;
 
         if (rainRadarLayerRef.current) {
@@ -886,28 +890,44 @@ export const InfrastructureMap: React.FC<InfrastructureMapProps> = ({
           rainRadarLayerRef.current = null;
         }
 
-        if (showRainRadar && tileUrl) {
-          const radarTile = L.tileLayer(tileUrl, {
-            opacity: 0.65,
-            zIndex: 420,
-            maxZoom: 19,
-            attribution: '&copy; <a href="https://www.rainviewer.com" target="_blank" rel="noopener noreferrer">RainViewer</a>',
-          });
-          radarTile.addTo(map);
-          rainRadarLayerRef.current = radarTile;
+        if (showRainRadar && urls) {
+          let layer: L.TileLayer;
+          if (weatherMode === 'satellite') {
+            layer = L.tileLayer(urls.satelliteUrl, {
+              opacity: 0.60,
+              zIndex: 420,
+              maxNativeZoom: 6, // Himawari-9 / NASA GIBS clean infrared native resolution
+              maxZoom: 19,      // Auto-scales smoothly all the way to zoom 19
+              minZoom: 2,
+              tileSize: 256,
+              attribution: '&copy; <a href="https://earthdata.nasa.gov" target="_blank" rel="noopener noreferrer">Himawari-9 / NASA GIBS</a>',
+            });
+          } else {
+            layer = L.tileLayer(urls.radarUrl, {
+              opacity: 0.65,
+              zIndex: 420,
+              maxNativeZoom: 7, // RainViewer public native tile limit (prevents "Zoom Level Not Supported" tiles on zooms 8-19)
+              maxZoom: 19,      // Auto-scales zoom 7 tiles cleanly up to zoom 19
+              minZoom: 2,
+              tileSize: 256,
+              attribution: '&copy; <a href="https://www.rainviewer.com" target="_blank" rel="noopener noreferrer">RainViewer</a>',
+            });
+          }
+          layer.addTo(map);
+          rainRadarLayerRef.current = layer;
         }
       } catch (err) {
-        console.error('Failed to load RainViewer radar layer:', err);
+        console.error('Failed to load live weather layer:', err);
       }
     };
 
     if (showRainRadar) {
       setShowRainLegend(true);
-      loadRadarLayer();
+      loadWeatherLayer();
 
-      // Refresh radar timestamp every 10 minutes
+      // Refresh weather timestamp every 10 minutes
       refreshInterval = setInterval(() => {
-        loadRadarLayer(true);
+        loadWeatherLayer(true);
       }, 10 * 60 * 1000);
     } else {
       if (rainRadarLayerRef.current) {
@@ -920,7 +940,7 @@ export const InfrastructureMap: React.FC<InfrastructureMapProps> = ({
       isMounted = false;
       if (refreshInterval) clearInterval(refreshInterval);
     };
-  }, [showRainRadar, mapReady]);
+  }, [showRainRadar, weatherMode, mapReady]);
 
   // Handle Fly-To coordinates (from project list / marker click)
 
@@ -1059,34 +1079,75 @@ export const InfrastructureMap: React.FC<InfrastructureMapProps> = ({
       <div ref={mapContainerRef} className="w-full h-full" />
       <MeasureTool map={mapReady} forceCloseTrigger={selectedProject} />
 
-      {/* Floating Rainfall Intensity Legend */}
+      {/* Floating Weather Overlay Control & Legend */}
       {showRainRadar && showRainLegend && (
-        <div className="absolute bottom-6 left-4 z-[1000] flex items-center gap-2.5 px-3 py-2 rounded-xl bg-[#0f141c]/95 backdrop-blur-md border border-neutral-700 shadow-2xl text-xs text-neutral-200 select-none animate-in fade-in slide-in-from-bottom-2 duration-200">
-          <div className="flex items-center gap-1.5 font-bold text-sky-400 shrink-0">
-            <span>🌧️</span>
-            <span className="hidden sm:inline">Radar Hujan:</span>
+        <div className="absolute bottom-6 left-4 z-[1000] flex flex-wrap sm:flex-nowrap items-center gap-2.5 px-3 py-2 rounded-xl bg-[#0f141c]/95 backdrop-blur-md border border-neutral-700 shadow-2xl text-xs text-neutral-200 select-none animate-in fade-in slide-in-from-bottom-2 duration-200 max-w-[95vw]">
+          {/* Mode Switcher: Hujan vs Awan Satelit */}
+          <div className="flex items-center rounded-lg bg-neutral-900/90 p-0.5 border border-neutral-800 shrink-0">
+            <button
+              type="button"
+              onClick={() => onWeatherModeChange?.('radar')}
+              className={`flex items-center gap-1 px-2 py-0.5 rounded text-[11px] font-bold transition-all ${
+                weatherMode === 'radar'
+                  ? 'bg-sky-500/30 text-sky-300 border border-sky-500/60 shadow-sm'
+                  : 'text-neutral-400 hover:text-neutral-200'
+              }`}
+              title="Tampilkan Radar Presipitasi Hujan (RainViewer / BMKG)"
+            >
+              <span>🌧️</span> Hujan
+            </button>
+            <button
+              type="button"
+              onClick={() => onWeatherModeChange?.('satellite')}
+              className={`flex items-center gap-1 px-2 py-0.5 rounded text-[11px] font-bold transition-all ${
+                weatherMode === 'satellite'
+                  ? 'bg-indigo-500/30 text-indigo-300 border border-indigo-500/60 shadow-sm'
+                  : 'text-neutral-400 hover:text-neutral-200'
+              }`}
+              title="Tampilkan Citra Satelit Awan Real-Time (Himawari-9 Infrared)"
+            >
+              <span>☁️</span> Awan Satelit
+            </button>
           </div>
-          <div className="flex items-center gap-2 text-[11px] font-medium">
-            <span className="flex items-center gap-1 text-emerald-300">
-              <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 shrink-0 inline-block shadow-[0_0_6px_rgba(16,185,129,0.5)]" />
-              <span>Ringan</span>
-            </span>
-            <span className="text-neutral-600">•</span>
-            <span className="flex items-center gap-1 text-amber-300">
-              <span className="w-2.5 h-2.5 rounded-full bg-amber-400 shrink-0 inline-block shadow-[0_0_6px_rgba(251,191,36,0.5)]" />
-              <span>Sedang</span>
-            </span>
-            <span className="text-neutral-600">•</span>
-            <span className="flex items-center gap-1 text-rose-400">
-              <span className="w-2.5 h-2.5 rounded-full bg-rose-500 shrink-0 inline-block shadow-[0_0_6px_rgba(244,63,94,0.5)]" />
-              <span>Lebat / Badai</span>
-            </span>
-          </div>
+
+          {/* Legend Items based on mode */}
+          {weatherMode === 'radar' ? (
+            <div className="flex items-center gap-2 text-[11px] font-medium border-l border-neutral-800 pl-2">
+              <span className="flex items-center gap-1 text-emerald-300">
+                <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 shrink-0 inline-block shadow-[0_0_6px_rgba(16,185,129,0.5)]" />
+                <span>Ringan</span>
+              </span>
+              <span className="text-neutral-600">•</span>
+              <span className="flex items-center gap-1 text-amber-300">
+                <span className="w-2.5 h-2.5 rounded-full bg-amber-400 shrink-0 inline-block shadow-[0_0_6px_rgba(251,191,36,0.5)]" />
+                <span>Sedang</span>
+              </span>
+              <span className="text-neutral-600">•</span>
+              <span className="flex items-center gap-1 text-rose-400">
+                <span className="w-2.5 h-2.5 rounded-full bg-rose-500 shrink-0 inline-block shadow-[0_0_6px_rgba(244,63,94,0.5)]" />
+                <span>Lebat</span>
+              </span>
+            </div>
+          ) : (
+            <div className="flex items-center gap-2 text-[11px] font-medium border-l border-neutral-800 pl-2">
+              <span className="text-neutral-400">Himawari-9 IR:</span>
+              <span className="flex items-center gap-1 text-cyan-300">
+                <span className="w-2.5 h-2.5 rounded-full bg-cyan-400 shrink-0 inline-block shadow-[0_0_6px_rgba(34,211,238,0.5)]" />
+                <span>Awan Tebal / Konvektif</span>
+              </span>
+              <span className="text-neutral-600">•</span>
+              <span className="flex items-center gap-1 text-neutral-300">
+                <span className="w-2.5 h-2.5 rounded-full bg-neutral-400 shrink-0 inline-block" />
+                <span>Awan Tipis</span>
+              </span>
+            </div>
+          )}
+
           <button
             type="button"
             onClick={() => setShowRainLegend(false)}
-            className="p-1 text-neutral-400 hover:text-white hover:bg-neutral-800 rounded transition-colors ml-1 shrink-0"
-            title="Tutup Legenda Radar Hujan"
+            className="p-1 text-neutral-400 hover:text-white hover:bg-neutral-800 rounded transition-colors ml-auto shrink-0"
+            title="Tutup Legenda Cuaca"
           >
             <X className="w-3.5 h-3.5" />
           </button>

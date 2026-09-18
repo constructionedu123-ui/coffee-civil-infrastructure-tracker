@@ -53,6 +53,7 @@ export const TrackerPage: React.FC = () => {
   const [showFaultLines, setShowFaultLines] = useState<boolean>(true);
   const [showMaritimeRoutes, setShowMaritimeRoutes] = useState<boolean>(true);
   const [showRainRadar, setShowRainRadar] = useState<boolean>(false);
+  const [weatherMode, setWeatherMode] = useState<'radar' | 'satellite'>('radar');
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -590,6 +591,8 @@ export const TrackerPage: React.FC = () => {
         onToggleMaritimeRoutes={() => setShowMaritimeRoutes((prev) => !prev)}
         showRainRadar={showRainRadar}
         onToggleRainRadar={() => setShowRainRadar((prev) => !prev)}
+        weatherMode={weatherMode}
+        onWeatherModeChange={setWeatherMode}
       />
 
       {/* Map & Overlays or Table View Container */}
@@ -613,6 +616,8 @@ export const TrackerPage: React.FC = () => {
               portHubs={portHubs}
               showMaritimeRoutes={showMaritimeRoutes}
               showRainRadar={showRainRadar}
+              weatherMode={weatherMode}
+              onWeatherModeChange={setWeatherMode}
               materialHubs={materialHubs}
               showMaterialHubs={materialFilters}
               opportunityFinder={{

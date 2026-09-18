@@ -39,6 +39,8 @@ interface FilterBarProps {
   onToggleMaritimeRoutes?: () => void;
   showRainRadar?: boolean;
   onToggleRainRadar?: () => void;
+  weatherMode?: 'radar' | 'satellite';
+  onWeatherModeChange?: (mode: 'radar' | 'satellite') => void;
   materialFilters?: MaterialHubFilterState;
   onToggleMaterialFilter?: (key: keyof MaterialHubFilterState) => void;
   onSetAllMaterialFilters?: (val: boolean) => void;
@@ -70,6 +72,8 @@ export const FilterBar: React.FC<FilterBarProps> = ({
   onToggleMaritimeRoutes,
   showRainRadar = false,
   onToggleRainRadar,
+  weatherMode = 'radar',
+  onWeatherModeChange,
   materialFilters,
   onToggleMaterialFilter,
   onSetAllMaterialFilters,
@@ -489,20 +493,51 @@ export const FilterBar: React.FC<FilterBarProps> = ({
           </button>
         )}
 
-        {/* Live Weather & Rainfall Radar Toggle (RainViewer / Radar Cuaca BMKG) */}
+        {/* Live Weather & Rainfall Radar Toggle (RainViewer / Radar Cuaca BMKG / Satelit Awan) */}
         {onToggleRainRadar && (
-          <button
-            type="button"
-            onClick={onToggleRainRadar}
-            className={`flex items-center gap-1.5 px-2.5 py-1 rounded-md border text-[11px] font-semibold transition-colors whitespace-nowrap ${
-              showRainRadar
-                ? "bg-sky-500/20 text-sky-300 border-sky-500/80 shadow-sm shadow-sky-500/10"
-                : "bg-neutral-900 border-neutral-800 text-neutral-400 hover:text-neutral-200 hover:border-neutral-700"
-            }`}
-            title="Toggle Live Rainfall & Weather Radar (RainViewer / Radar Cuaca BMKG)"
-          >
-            <span>🌧️</span> Radar Hujan
-          </button>
+          <div className="flex items-center rounded-md bg-neutral-900 p-0.5 border border-neutral-800">
+            <button
+              type="button"
+              onClick={onToggleRainRadar}
+              className={`flex items-center gap-1.5 px-2.5 py-1 rounded-md text-[11px] font-semibold transition-colors whitespace-nowrap ${
+                showRainRadar
+                  ? "bg-sky-500/20 text-sky-300 border border-sky-500/80 shadow-sm shadow-sky-500/10"
+                  : "text-neutral-400 hover:text-neutral-200"
+              }`}
+              title="Toggle Live Weather Overlay (Radar Hujan & Awan Satelit)"
+            >
+              <span>{weatherMode === 'satellite' ? '☁️' : '🌧️'}</span>
+              <span>{weatherMode === 'satellite' ? 'Awan Satelit' : 'Radar Hujan'}</span>
+            </button>
+            {showRainRadar && onWeatherModeChange && (
+              <div className="flex items-center gap-0.5 border-l border-neutral-800 pl-1 ml-1">
+                <button
+                  type="button"
+                  onClick={() => onWeatherModeChange('radar')}
+                  className={`px-1.5 py-0.5 rounded text-[10px] font-bold transition-all ${
+                    weatherMode === 'radar'
+                      ? 'bg-sky-500 text-white shadow-sm'
+                      : 'text-neutral-400 hover:text-white'
+                  }`}
+                  title="Radar Hujan (Presipitasi)"
+                >
+                  Hujan
+                </button>
+                <button
+                  type="button"
+                  onClick={() => onWeatherModeChange('satellite')}
+                  className={`px-1.5 py-0.5 rounded text-[10px] font-bold transition-all ${
+                    weatherMode === 'satellite'
+                      ? 'bg-indigo-500 text-white shadow-sm'
+                      : 'text-neutral-400 hover:text-white'
+                  }`}
+                  title="Awan Satelit (Live Infrared Clouds)"
+                >
+                  Awan
+                </button>
+              </div>
+            )}
+          </div>
         )}
 
         {/* Basemap Switcher Segmented Pill */}
