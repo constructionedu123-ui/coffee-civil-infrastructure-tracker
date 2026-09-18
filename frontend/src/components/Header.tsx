@@ -9,6 +9,7 @@ import {
   FileJson,
   FileSpreadsheet,
   BarChart3,
+  PlusCircle,
 } from 'lucide-react';
 
 interface HeaderProps {
@@ -24,6 +25,7 @@ interface HeaderProps {
   onExportCSV: () => void;
   isAnalyticsOpen: boolean;
   onToggleAnalytics: () => void;
+  onOpenSubmitModal?: () => void;
 }
 
 export const Header: React.FC<HeaderProps> = ({
@@ -39,6 +41,7 @@ export const Header: React.FC<HeaderProps> = ({
   onExportCSV,
   isAnalyticsOpen,
   onToggleAnalytics,
+  onOpenSubmitModal,
 }) => {
   const [isExportOpen, setIsExportOpen] = useState(false);
   const exportRef = useRef<HTMLDivElement>(null);
@@ -67,11 +70,11 @@ export const Header: React.FC<HeaderProps> = ({
               Indonesian National Infrastructure Tracker (PSN)
             </h1>
             <span className="hidden lg:inline text-[11px] text-neutral-400 font-medium">
-              Katalog Proyek Strategis Nasional
+              Katalog Proyek Strategis Nasional & Swasta
             </span>
           </div>
           <p className="text-[11px] text-neutral-500 hidden sm:block">
-            Official infrastructure monitoring catalog • KPPIP & BPJT Registry
+            Official infrastructure monitoring catalog • KPPIP, BPJT & Commercial Projects
           </p>
         </div>
       </div>
@@ -157,6 +160,18 @@ export const Header: React.FC<HeaderProps> = ({
           <BarChart3 className="w-3.5 h-3.5 text-blue-400" />
           <span>Analytics</span>
         </button>
+
+        {/* Submit Project / Laporkan Proyek Button */}
+        {onOpenSubmitModal && (
+          <button
+            onClick={onOpenSubmitModal}
+            className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-md border text-xs font-semibold transition-all shrink-0 bg-violet-600/90 hover:bg-violet-500 text-white border-violet-500/80 shadow-sm shadow-violet-900/30 whitespace-nowrap"
+            title="Laporkan proyek infrastruktur atau gedung swasta/komersial baru"
+          >
+            <PlusCircle className="w-3.5 h-3.5 text-violet-200" />
+            <span>Laporkan Proyek</span>
+          </button>
+        )}
 
         {/* Export Dropdown */}
         <div className="relative shrink-0" ref={exportRef}>

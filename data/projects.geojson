@@ -3296,6 +3296,41 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
+          106.8255,
+          -6.1825
+        ]
+      },
+      "properties": {
+        "project_id": "swasta-jkt-002",
+        "project_name": "BSI Tower Jakarta (Gedung Landmark Bank Syariah Indonesia)",
+        "category": "Commercial & Private",
+        "status": "Construction",
+        "budget_idr": 1.1,
+        "budget_raw": "Rp 1,10 Triliun",
+        "contractor": "PT PP (Persero) Tbk",
+        "funding_scheme": "Swasta Murni (Private)",
+        "pjpk": "PT Bank Syariah Indonesia Tbk",
+        "province": "DKI Jakarta",
+        "regency": "Kota Jakarta Pusat",
+        "geocode_method": "exact_kabupaten",
+        "source_url": "https://ptpp.co.id",
+        "source_name": "Laporan Kontrak BUMN / Proyek Swasta",
+        "scraped_at": "2026-09-18T11:30:40.646965",
+        "created_at": "2026-09-18 09:30:40",
+        "updated_at": "2026-09-18 09:30:40",
+        "unor": "Headquarters Bank Tower",
+        "balai": null,
+        "fiscal_year": "2024",
+        "progress": 35.0,
+        "bim_viewer_url": null,
+        "bim_uuid": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
           110.3695,
           -7.7956
         ]
@@ -8992,6 +9027,41 @@
         "balai": null,
         "fiscal_year": null,
         "progress": null,
+        "bim_viewer_url": null,
+        "bim_uuid": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          104.1082,
+          1.1834
+        ]
+      },
+      "properties": {
+        "project_id": "swasta-batam-002",
+        "project_name": "Hyperscale Data Center Nongsa Digital Park Batam",
+        "category": "Commercial & Private",
+        "status": "Construction",
+        "budget_idr": 1.25,
+        "budget_raw": "Rp 1,25 Triliun",
+        "contractor": "PT PP (Persero) Tbk",
+        "funding_scheme": "Swasta Murni (Private)",
+        "pjpk": "Nongsa Digital Park / Konsorsium Data Center Swasta",
+        "province": "Kepulauan Riau",
+        "regency": "Kota Batam",
+        "geocode_method": "exact_kabupaten",
+        "source_url": "https://ptpp.co.id",
+        "source_name": "Laporan Kontrak BUMN / Proyek Swasta",
+        "scraped_at": "2026-09-18T11:30:40.646965",
+        "created_at": "2026-09-18 09:30:40",
+        "updated_at": "2026-09-18 09:30:40",
+        "unor": "Data Center & Tech Hub",
+        "balai": null,
+        "fiscal_year": "2024",
+        "progress": 68.0,
         "bim_viewer_url": null,
         "bim_uuid": null
       }
@@ -25836,6 +25906,41 @@
       "geometry": {
         "type": "Point",
         "coordinates": [
+          104.0512,
+          1.1215
+        ]
+      },
+      "properties": {
+        "project_id": "swasta-batam-003",
+        "project_name": "Mandiri IT Center & Disaster Recovery Batam",
+        "category": "Commercial & Private",
+        "status": "Construction",
+        "budget_idr": 0.32,
+        "budget_raw": "Rp 320 Miliar",
+        "contractor": "PT Wijaya Karya (WIKA)",
+        "funding_scheme": "Swasta Murni (Private)",
+        "pjpk": "PT Bank Mandiri (Persero) Tbk",
+        "province": "Kepulauan Riau",
+        "regency": "Kota Batam",
+        "geocode_method": "exact_kabupaten",
+        "source_url": "https://wika.co.id",
+        "source_name": "Laporan Kontrak BUMN / Proyek Swasta",
+        "scraped_at": "2026-09-18T11:30:40.646965",
+        "created_at": "2026-09-18 09:30:40",
+        "updated_at": "2026-09-18 09:30:40",
+        "unor": "IT Infrastructure & Security Hub",
+        "balai": null,
+        "fiscal_year": "2024",
+        "progress": 55.0,
+        "bim_viewer_url": null,
+        "bim_uuid": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
           106.830862,
           -6.169869
         ]
@@ -25932,6 +26037,41 @@
         "balai": null,
         "fiscal_year": null,
         "progress": null,
+        "bim_viewer_url": null,
+        "bim_uuid": null
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          106.8272,
+          -6.1818
+        ]
+      },
+      "properties": {
+        "project_id": "swasta-jkt-001",
+        "project_name": "Menara Danareksa Jakarta",
+        "category": "Commercial & Private",
+        "status": "Completed",
+        "budget_idr": 0.814,
+        "budget_raw": "Rp 814 Miliar",
+        "contractor": "PT PP (Persero) Tbk",
+        "funding_scheme": "Swasta Murni (Private)",
+        "pjpk": "PT Danareksa (Persero) & PT PP (Persero) Tbk",
+        "province": "DKI Jakarta",
+        "regency": "Kota Jakarta Pusat",
+        "geocode_method": "exact_kabupaten",
+        "source_url": "https://ptpp.co.id",
+        "source_name": "Laporan Kontrak BUMN / Proyek Swasta",
+        "scraped_at": "2026-09-18T11:30:40.646965",
+        "created_at": "2026-09-18 09:30:40",
+        "updated_at": "2026-09-18 09:30:40",
+        "unor": "Commercial Grade-A Office Tower",
+        "balai": null,
+        "fiscal_year": "2023",
+        "progress": 100.0,
         "bim_viewer_url": null,
         "bim_uuid": null
       }
@@ -29049,6 +29189,41 @@
         "progress": 100.0,
         "bim_viewer_url": "https://bim.pu.go.id/661ec2c4-e2e0-4cfb-9a3e-6f930322c706",
         "bim_uuid": "661ec2c4-e2e0-4cfb-9a3e-6f930322c706"
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Point",
+        "coordinates": [
+          104.0305,
+          1.1301
+        ]
+      },
+      "properties": {
+        "project_id": "swasta-batam-001",
+        "project_name": "Pembangunan Gedung Perbankan Batam",
+        "category": "Commercial & Private",
+        "status": "Construction",
+        "budget_idr": 0.185,
+        "budget_raw": "Rp 185 Miliar",
+        "contractor": "PT PP (Persero) Tbk",
+        "funding_scheme": "Swasta Murni (Private)",
+        "pjpk": "PT Bank Mandiri (Persero) Tbk / Sektor Perbankan",
+        "province": "Kepulauan Riau",
+        "regency": "Kota Batam",
+        "geocode_method": "exact_kabupaten",
+        "source_url": "https://ptpp.co.id/investor-relations/laporan-tahunan",
+        "source_name": "Laporan Kontrak BUMN / Proyek Swasta",
+        "scraped_at": "2026-09-18T11:30:40.646965",
+        "created_at": "2026-09-18 09:30:40",
+        "updated_at": "2026-09-18 09:30:40",
+        "unor": "Gedung Komersial Swasta",
+        "balai": null,
+        "fiscal_year": "2024",
+        "progress": 42.5,
+        "bim_viewer_url": null,
+        "bim_uuid": null
       }
     },
     {
@@ -39343,7 +39518,7 @@
     }
   ],
   "metadata": {
-    "total_features": 1124,
+    "total_features": 1129,
     "unresolved_count": 160,
     "source": "Coffee Civil News Bot – Phase 1 Pipeline"
   }

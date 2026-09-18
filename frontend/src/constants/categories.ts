@@ -7,7 +7,7 @@ export interface CategoryMeta {
   textClass: string;
   borderClass: string;
   badgeClass: string;
-  iconName: 'truck' | 'zap' | 'droplet' | 'home' | 'landmark';
+  iconName: 'truck' | 'zap' | 'droplet' | 'home' | 'landmark' | 'building';
 }
 
 export const CATEGORY_CONFIG: Record<ProjectCategory, CategoryMeta> = {
@@ -55,6 +55,15 @@ export const CATEGORY_CONFIG: Record<ProjectCategory, CategoryMeta> = {
     borderClass: 'border-slate-500/30',
     badgeClass: 'bg-slate-900 text-slate-300 border-slate-700',
     iconName: 'landmark',
+  },
+  'Commercial & Private': {
+    label: 'Commercial & Private',
+    color: '#8B5CF6', // Royal Violet
+    bgClass: 'bg-purple-500/10 hover:bg-purple-500/15',
+    textClass: 'text-purple-400',
+    borderClass: 'border-purple-500/30',
+    badgeClass: 'bg-purple-950/40 text-purple-300 border-purple-800/50',
+    iconName: 'building',
   },
 };
 

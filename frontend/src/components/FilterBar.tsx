@@ -47,7 +47,7 @@ export const FilterBar: React.FC<FilterBarProps> = ({
   showFaultLines = true,
   onToggleFaultLines,
 }) => {
-  const categories: ProjectCategory[] = ["Transport", "Energy", "Water", "Housing", "IKN"];
+  const categories: ProjectCategory[] = ["Transport", "Energy", "Water", "Housing", "IKN", "Commercial & Private"];
   const statusOptions: (ProjectStatus | "All")[] = [
     "All",
     "Construction",

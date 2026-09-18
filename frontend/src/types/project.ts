@@ -1,4 +1,4 @@
-export type ProjectCategory = 'Transport' | 'Energy' | 'Water' | 'Housing' | 'IKN';
+export type ProjectCategory = 'Transport' | 'Energy' | 'Water' | 'Housing' | 'IKN' | 'Commercial & Private';
 
 export type ProjectStatus = 'Planning' | 'Construction' | 'Operational' | 'Completed' | 'Unknown';
 

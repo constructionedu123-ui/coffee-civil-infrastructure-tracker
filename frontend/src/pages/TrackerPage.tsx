@@ -23,6 +23,7 @@ import { ProjectDrawer } from '../components/ProjectDrawer';
 import { ProjectList } from '../components/ProjectList';
 import { ProjectTable } from '../components/ProjectTable';
 import { AnalyticsDrawer } from '../components/AnalyticsDrawer';
+import { SubmitProjectModal } from '../components/SubmitProjectModal';
 import { exportAsGeoJSON, exportAsCSV } from '../utils/export';
 import { projectMatchesContractor } from '../utils/contractorMatcher';
 import { getRegionForProvince } from '../utils/geo';
@@ -41,8 +42,9 @@ export const TrackerPage: React.FC = () => {
   // View Switcher State ('map' | 'table')
   const [activeView, setActiveView] = useState<'map' | 'table'>('map');
 
-  // Analytics Drawer State
+  // Analytics & Submission Modal States
   const [isAnalyticsOpen, setIsAnalyticsOpen] = useState<boolean>(false);
+  const [isSubmitModalOpen, setIsSubmitModalOpen] = useState<boolean>(false);
   const [selectedContractor, setSelectedContractor] = useState<string | null>(null);
 
   // Filter States
@@ -53,6 +55,7 @@ export const TrackerPage: React.FC = () => {
     'Water',
     'Housing',
     'IKN',
+    'Commercial & Private',
   ]);
   const [selectedStatus, setSelectedStatus] = useState<ProjectStatus | 'All'>('All');
   const [selectedRegion, setSelectedRegion] = useState<string | 'All'>('All');
@@ -79,7 +82,19 @@ export const TrackerPage: React.FC = () => {
           throw new Error(`Failed to load data/projects.geojson: HTTP ${resProjects.status}`);
         }
         const dataProjects: ProjectFeatureCollection = await resProjects.json();
-        setAllProjects(dataProjects.features || []);
+
+        // Merge with locally stored community/private submissions
+        let userProjects: ProjectFeature[] = [];
+        try {
+          const stored = localStorage.getItem('coffee_civil_user_projects');
+          if (stored) {
+            userProjects = JSON.parse(stored);
+          }
+        } catch (e) {
+          console.warn('Error reading user submitted projects from storage:', e);
+        }
+
+        setAllProjects([...userProjects, ...(dataProjects.features || [])]);
 
         if (resPlants.ok) {
           const dataPlants: BatchingPlantFeatureCollection = await resPlants.json();
@@ -118,7 +133,7 @@ export const TrackerPage: React.FC = () => {
   // Reset Filters
   const handleResetFilters = () => {
     setSearchQuery('');
-    setSelectedCategories(['Transport', 'Energy', 'Water', 'Housing', 'IKN']);
+    setSelectedCategories(['Transport', 'Energy', 'Water', 'Housing', 'IKN', 'Commercial & Private']);
     setSelectedStatus('All');
     setSelectedRegion('All');
     setSelectedContractor(null);
@@ -126,7 +141,7 @@ export const TrackerPage: React.FC = () => {
 
   const hasActiveFilters =
     searchQuery !== '' ||
-    selectedCategories.length < 5 ||
+    selectedCategories.length < 6 ||
     selectedStatus !== 'All' ||
     selectedRegion !== 'All' ||
     selectedContractor !== null;
@@ -189,6 +204,13 @@ export const TrackerPage: React.FC = () => {
     setFlyToCoords([lat, lon]);
   };
 
+  // Handle Community & User Project Submissions
+  const handleProjectSubmitted = (newProject: ProjectFeature) => {
+    setAllProjects((prev) => [newProject, ...prev]);
+    setActiveView('map');
+    handleSelectProject(newProject);
+  };
+
   if (loading) {
     return (
       <div className="w-screen h-screen bg-dark-900 flex flex-col items-center justify-center gap-3 text-slate-300">
@@ -232,6 +254,7 @@ export const TrackerPage: React.FC = () => {
         onExportCSV={() => exportAsCSV(filteredProjects, 'psn_projects.csv')}
         isAnalyticsOpen={isAnalyticsOpen}
         onToggleAnalytics={() => setIsAnalyticsOpen((prev) => !prev)}
+        onOpenSubmitModal={() => setIsSubmitModalOpen(true)}
       />
 
       {/* KPI Cards */}
@@ -351,6 +374,13 @@ export const TrackerPage: React.FC = () => {
         onSelectContractor={(contractor) => {
           setSelectedContractor(contractor);
         }}
+      />
+
+      {/* Community & Private Project Submission Modal */}
+      <SubmitProjectModal
+        isOpen={isSubmitModalOpen}
+        onClose={() => setIsSubmitModalOpen(false)}
+        onProjectSubmitted={handleProjectSubmitted}
       />
     </div>
   );

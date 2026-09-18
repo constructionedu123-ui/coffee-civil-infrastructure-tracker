@@ -126,6 +126,12 @@ export const ProjectDrawer: React.FC<ProjectDrawerProps> = ({
         desc: 'Penugasan Khusus Pemerintah kepada BUMN (Corporate Finance)',
         badge: 'bg-amber-500/20 text-amber-300 border-amber-500/30',
       };
+    if (s.includes('swasta murni') || s.includes('private murni'))
+      return {
+        label: scheme || 'Swasta Murni (Private)',
+        desc: 'Investasi Swasta Komersial / Corporate Finance Mandiri (Non-APBN)',
+        badge: 'bg-purple-500/20 text-purple-300 border-purple-500/30',
+      };
     if (s.includes('swasta') || s.includes('private') || s.includes('kks') || s.includes('ipp'))
       return {
         label: scheme || 'Swasta / Private Investment',

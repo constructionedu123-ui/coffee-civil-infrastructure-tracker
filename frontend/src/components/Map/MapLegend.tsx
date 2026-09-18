@@ -15,7 +15,7 @@ export const MapLegend: React.FC<MapLegendProps> = ({
   showFaultLines = false,
 }) => {
   const [isExpanded, setIsExpanded] = useState(true);
-  const categories: ProjectCategory[] = ['Transport', 'Energy', 'Water', 'Housing', 'IKN'];
+  const categories: ProjectCategory[] = ['Transport', 'Energy', 'Water', 'Housing', 'IKN', 'Commercial & Private'];
 
   return (
     <div className="absolute right-4 bottom-6 z-20 bg-neutral-900/95 border border-neutral-800 rounded-lg shadow-lg overflow-hidden text-xs w-56">
