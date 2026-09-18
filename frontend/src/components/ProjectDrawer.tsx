@@ -7,6 +7,7 @@ import { findNearestBatchingPlants } from '../utils/logistics';
 import { findNearestFaultLine } from '../utils/seismic';
 import { CATEGORY_CONFIG, STATUS_CONFIG } from '../constants/categories';
 import { formatBudget, formatDate } from '../utils/formatters';
+import { getProjectContractors, getPrimaryContractor } from '../utils/contractorMatcher';
 
 const BimViewerModal = lazy(() => import('./BimViewerModal'));
 
@@ -16,6 +17,7 @@ interface ProjectDrawerProps {
   onZoomTo: (coords: [number, number]) => void;
   batchingPlants?: BatchingPlantFeature[];
   faultLines?: FaultLineFeature[];
+  onSelectContractor?: (contractor: string) => void;
 }
 
 
@@ -26,23 +28,13 @@ const MILESTONES = [
   { step: '04', title: 'Operasional', subtitle: 'Beroperasi Penuh' },
 ];
 
-const BUMN_TAGS: { match: string; label: string }[] = [
-  { match: 'WIKA',       label: 'Wijaya Karya (WIKA)' },
-  { match: 'PP',         label: 'PT PP (Persero)' },
-  { match: 'Hutama',     label: 'Hutama Karya (HK)' },
-  { match: 'Adhi',       label: 'Adhi Karya' },
-  { match: 'Waskita',    label: 'Waskita Karya' },
-  { match: 'Jasa Marga', label: 'Jasa Marga' },
-  { match: 'PLN',        label: 'PT PLN (Persero)' },
-  { match: 'Pertamina',  label: 'PT Pertamina (Persero)' },
-];
-
 export const ProjectDrawer: React.FC<ProjectDrawerProps> = ({
   project,
   onClose,
   onZoomTo,
   batchingPlants = [],
   faultLines = [],
+  onSelectContractor,
 }) => {
   const [isBimModalOpen, setIsBimModalOpen] = useState(false);
 
@@ -149,7 +141,8 @@ export const ProjectDrawer: React.FC<ProjectDrawerProps> = ({
 
   const schemeInfo = getSchemeBadge(props?.funding_scheme);
   const contractorStr = props?.contractor || '';
-  const matchedTags = BUMN_TAGS.filter(({ match }) => contractorStr.includes(match));
+  const projectContractors = props ? getProjectContractors(props) : [];
+  const primaryContractor = props ? getPrimaryContractor(props) : 'BUMN Karya / Swasta';
 
   return (
     <>
@@ -341,22 +334,48 @@ export const ProjectDrawer: React.FC<ProjectDrawerProps> = ({
               </section>
 
               {/* 4. Lead Contractor */}
-              <section className="bg-neutral-900/60 border border-neutral-800 rounded-lg p-4 space-y-2">
-                <span className="text-[10px] font-bold uppercase tracking-wider text-neutral-400">
-                  Lead Contractor / Concessionaire
-                </span>
-                <div className="font-semibold text-neutral-200 text-[12px] leading-snug">
+              <section className="bg-neutral-900/60 border border-neutral-800 rounded-lg p-4 space-y-2.5">
+                <div className="flex items-center justify-between">
+                  <span className="text-[10px] font-bold uppercase tracking-wider text-neutral-400">
+                    Lead Contractor / Concessionaire
+                  </span>
+                  <span className="text-[10px] text-neutral-500">
+                    Click badge to filter
+                  </span>
+                </div>
+
+                <div
+                  onClick={() => {
+                    if (onSelectContractor && primaryContractor) {
+                      onSelectContractor(primaryContractor);
+                      onClose();
+                    }
+                  }}
+                  className="font-semibold text-neutral-200 hover:text-blue-300 text-[12px] leading-snug cursor-pointer transition-colors"
+                  title={`Filter map by ${primaryContractor}`}
+                >
                   {contractorStr || 'BUMN Konstruksi / Swasta'}
                 </div>
-                {matchedTags.length > 0 && (
-                  <div className="flex flex-wrap gap-1.5 pt-1 border-t border-neutral-800/60">
-                    {matchedTags.map(({ match, label }) => (
-                      <span
-                        key={match}
-                        className="text-[10px] font-medium px-2 py-0.5 rounded bg-neutral-800 text-neutral-300 border border-neutral-700"
+
+                {projectContractors.length > 0 && (
+                  <div className="flex flex-wrap gap-1.5 pt-2 border-t border-neutral-800/60">
+                    {projectContractors.map((cName) => (
+                      <button
+                        key={cName}
+                        type="button"
+                        onClick={() => {
+                          if (onSelectContractor) {
+                            onSelectContractor(cName);
+                            onClose();
+                          }
+                        }}
+                        className="text-[11px] font-medium px-2.5 py-1 rounded bg-blue-950/60 hover:bg-blue-900/80 text-blue-300 hover:text-white border border-blue-800/60 hover:border-blue-500 transition-all flex items-center gap-1.5 group/badge cursor-pointer shadow-sm"
+                        title={`Filter map by: ${cName}`}
                       >
-                        {label}
-                      </span>
+                        <span className="text-[10px]">👷</span>
+                        <span>{cName}</span>
+                        <span className="text-[9px] text-blue-400 group-hover/badge:translate-x-0.5 transition-transform">→</span>
+                      </button>
                     ))}
                   </div>
                 )}

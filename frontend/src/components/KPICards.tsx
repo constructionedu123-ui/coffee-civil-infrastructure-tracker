@@ -5,9 +5,10 @@ import { formatBudget } from '../utils/formatters';
 interface KPICardsProps {
   projects: ProjectFeature[];
   allProjectsCount: number;
+  selectedContractor?: string | null;
 }
 
-export const KPICards: React.FC<KPICardsProps> = ({ projects, allProjectsCount }) => {
+export const KPICards: React.FC<KPICardsProps> = ({ projects, allProjectsCount, selectedContractor }) => {
   const totalCount = projects.length;
 
   const totalInvestment = projects.reduce((sum, p) => {
@@ -26,12 +27,12 @@ export const KPICards: React.FC<KPICardsProps> = ({ projects, allProjectsCount }
 
   const stats = [
     {
-      label: 'Total Projects',
+      label: selectedContractor ? `${selectedContractor}` : 'Total Projects',
       value: totalCount.toString(),
-      subtext: totalCount === allProjectsCount ? 'Full PSN catalog' : `Filtered of ${allProjectsCount}`,
+      subtext: selectedContractor ? `Projects in portfolio` : totalCount === allProjectsCount ? 'Full PSN catalog' : `Filtered of ${allProjectsCount}`,
     },
     {
-      label: 'Estimated CAPEX',
+      label: selectedContractor ? `${selectedContractor} CAPEX` : 'Estimated CAPEX',
       value: formatBudget(totalInvestment),
       subtext: `${disclosedCount} projects disclosed`,
     },

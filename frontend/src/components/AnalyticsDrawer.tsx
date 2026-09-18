@@ -1,6 +1,6 @@
 import React, { useMemo } from 'react';
 import { ProjectFeature } from '../types/project';
-import { resolveContractorEntity } from '../utils/contractor';
+import { getContractorStats } from '../utils/contractorMatcher';
 import { formatBudget } from '../utils/formatters';
 import {
   X,
@@ -27,27 +27,9 @@ export const AnalyticsDrawer: React.FC<AnalyticsDrawerProps> = ({
   selectedContractor,
   onSelectContractor,
 }) => {
-  // Aggregate Contractors
+  // Aggregate Contractors using standardized ContractorMatcher engine
   const contractorAnalytics = useMemo(() => {
-    const map = new Map<string, { count: number; capex: number }>();
-
-    projects.forEach((feat) => {
-      const entity = resolveContractorEntity(feat.properties);
-      const current = map.get(entity) || { count: 0, capex: 0 };
-      current.count += 1;
-      current.capex += feat.properties.budget_idr || 0;
-      map.set(entity, current);
-    });
-
-    const list = Array.from(map.entries()).map(([name, stats]) => ({
-      name,
-      count: stats.count,
-      capex: stats.capex,
-    }));
-
-    // Sort by count descending, then capex
-    list.sort((a, b) => b.count - a.count || b.capex - a.capex);
-    return list;
+    return getContractorStats(projects);
   }, [projects]);
 
   // Aggregate Funding Schemes

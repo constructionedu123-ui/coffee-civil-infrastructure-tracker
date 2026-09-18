@@ -1,7 +1,8 @@
-import React from "react";
+import React, { useMemo } from "react";
 import { ProjectCategory, ProjectStatus, ProjectFeature } from "../types/project";
 import { CATEGORY_CONFIG, STATUS_CONFIG } from "../constants/categories";
 import { INDONESIA_REGIONS } from "../utils/geo";
+import { getContractorStats } from "../utils/contractorMatcher";
 
 interface FilterBarProps {
   selectedCategories: ProjectCategory[];
@@ -12,6 +13,7 @@ interface FilterBarProps {
   onSelectRegion: (region: string | "All") => void;
   allProjects: ProjectFeature[];
   selectedContractor?: string | null;
+  onSelectContractor?: (contractor: string | null) => void;
   onClearContractor?: () => void;
   onFocusIKN?: () => void;
   basemap?: 'dark' | 'satellite';
@@ -33,6 +35,7 @@ export const FilterBar: React.FC<FilterBarProps> = ({
   onSelectRegion,
   allProjects,
   selectedContractor,
+  onSelectContractor,
   onClearContractor,
   onFocusIKN,
   basemap = 'satellite',
@@ -44,9 +47,6 @@ export const FilterBar: React.FC<FilterBarProps> = ({
   showFaultLines = true,
   onToggleFaultLines,
 }) => {
-
-
-
   const categories: ProjectCategory[] = ["Transport", "Energy", "Water", "Housing", "IKN"];
   const statusOptions: (ProjectStatus | "All")[] = [
     "All",
@@ -60,6 +60,10 @@ export const FilterBar: React.FC<FilterBarProps> = ({
     acc[cat] = allProjects.filter((p) => p.properties.category === cat).length;
     return acc;
   }, {} as Record<ProjectCategory, number>);
+
+  const contractorOptions = useMemo(() => {
+    return getContractorStats(allProjects);
+  }, [allProjects]);
 
   return (
     <div className="bg-[#0b0f17] border-b border-neutral-800 px-4 sm:px-6 py-2 flex flex-wrap items-center justify-between gap-3 text-xs">
@@ -144,6 +148,28 @@ export const FilterBar: React.FC<FilterBarProps> = ({
             {INDONESIA_REGIONS.map((region) => (
               <option key={region.name} value={region.name}>
                 {region.name}
+              </option>
+            ))}
+          </select>
+        </div>
+
+        {/* Contractor Selector Dropdown */}
+        <div className="relative flex items-center">
+          <select
+            value={selectedContractor || "All"}
+            onChange={(e) => {
+              const val = e.target.value;
+              if (onSelectContractor) {
+                onSelectContractor(val === "All" ? null : val);
+              }
+            }}
+            className="bg-neutral-900 border border-neutral-800 text-neutral-200 text-xs rounded-md px-2.5 py-1 focus:outline-none focus:border-neutral-600 cursor-pointer max-w-[210px] truncate"
+            title="Filter by Lead Contractor & BUMN Karya"
+          >
+            <option value="All">👷 Kontraktor: Semua ({allProjects.length})</option>
+            {contractorOptions.map((c) => (
+              <option key={c.name} value={c.name}>
+                {c.name} ({c.count})
               </option>
             ))}
           </select>

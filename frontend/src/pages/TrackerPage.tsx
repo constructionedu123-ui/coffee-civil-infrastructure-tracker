@@ -24,7 +24,7 @@ import { ProjectList } from '../components/ProjectList';
 import { ProjectTable } from '../components/ProjectTable';
 import { AnalyticsDrawer } from '../components/AnalyticsDrawer';
 import { exportAsGeoJSON, exportAsCSV } from '../utils/export';
-import { resolveContractorEntity } from '../utils/contractor';
+import { projectMatchesContractor } from '../utils/contractorMatcher';
 import { getRegionForProvince } from '../utils/geo';
 import { Loader2, AlertTriangle } from 'lucide-react';
 
@@ -158,10 +158,9 @@ export const TrackerPage: React.FC = () => {
         }
       }
 
-      // 4. Contractor Filter (from Analytics Drawer)
+      // 4. Contractor Filter (from FilterBar / Analytics Drawer / ProjectDrawer)
       if (selectedContractor) {
-        const entity = resolveContractorEntity(props);
-        if (entity !== selectedContractor) {
+        if (!projectMatchesContractor(props, selectedContractor)) {
           return false;
         }
       }
@@ -236,7 +235,11 @@ export const TrackerPage: React.FC = () => {
       />
 
       {/* KPI Cards */}
-      <KPICards projects={filteredProjects} allProjectsCount={allProjects.length} />
+      <KPICards
+        projects={filteredProjects}
+        allProjectsCount={allProjects.length}
+        selectedContractor={selectedContractor}
+      />
 
       {/* Filter Bar */}
       <FilterBar
@@ -248,6 +251,7 @@ export const TrackerPage: React.FC = () => {
         onSelectRegion={setSelectedRegion}
         allProjects={allProjects}
         selectedContractor={selectedContractor}
+        onSelectContractor={setSelectedContractor}
         onClearContractor={() => setSelectedContractor(null)}
         onFocusIKN={() => {
           setActiveView('map');
@@ -344,6 +348,9 @@ export const TrackerPage: React.FC = () => {
         }}
         batchingPlants={batchingPlants}
         faultLines={faultLines}
+        onSelectContractor={(contractor) => {
+          setSelectedContractor(contractor);
+        }}
       />
     </div>
   );
