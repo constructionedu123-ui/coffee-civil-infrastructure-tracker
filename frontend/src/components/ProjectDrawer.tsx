@@ -1,10 +1,12 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect, useMemo, useState, Suspense, lazy } from 'react';
 import { ExternalLink, X } from 'lucide-react';
 import { ProjectFeature, getProjectCoordinates } from '../types/project';
 import { BatchingPlantFeature } from '../types/batchingPlant';
 import { findNearestBatchingPlants } from '../utils/logistics';
 import { CATEGORY_CONFIG, STATUS_CONFIG } from '../constants/categories';
 import { formatBudget, formatDate } from '../utils/formatters';
+
+const BimViewerModal = lazy(() => import('./BimViewerModal'));
 
 interface ProjectDrawerProps {
   project: ProjectFeature | null;
@@ -38,14 +40,24 @@ export const ProjectDrawer: React.FC<ProjectDrawerProps> = ({
   onZoomTo,
   batchingPlants = [],
 }) => {
+  const [isBimModalOpen, setIsBimModalOpen] = useState(false);
+
   // Escape key dismissal
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === 'Escape') onClose();
+      // If BIM modal is open, don't close the drawer on Esc
+      if (e.key === 'Escape' && !isBimModalOpen) onClose();
     };
     window.addEventListener('keydown', handleKeyDown);
     return () => window.removeEventListener('keydown', handleKeyDown);
-  }, [onClose]);
+  }, [onClose, isBimModalOpen]);
+
+  // Reset BIM modal when drawer closes or project changes
+  useEffect(() => {
+    if (!project) {
+      setIsBimModalOpen(false);
+    }
+  }, [project]);
 
   const isOpen = project !== null;
   const props = project?.properties;
@@ -192,18 +204,16 @@ export const ProjectDrawer: React.FC<ProjectDrawerProps> = ({
                 {props.project_name}
               </h2>
 
-              {/* 3D BIM Model badge if available */}
-              {props.bim_viewer_url && (
+              {/* 3D BIM Model inspect button if available */}
+              {(props.bim_viewer_url || props.bim_uuid) && (
                 <div className="mt-2.5">
-                  <a
-                    href={props.bim_viewer_url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white font-bold text-xs shadow-lg shadow-cyan-600/25 border border-cyan-400/40 transition-all transform hover:scale-[1.02]"
+                  <button
+                    onClick={() => setIsBimModalOpen(true)}
+                    className="inline-flex items-center gap-2 px-3 py-1.5 rounded-lg bg-blue-600/20 hover:bg-blue-600/30 text-cyan-300 font-bold text-xs shadow-lg shadow-cyan-500/10 border border-cyan-500/40 hover:border-cyan-400 transition-all transform hover:scale-[1.02]"
                   >
-                    <span>🧊 Open 3D BIM Model</span>
-                    <ExternalLink className="w-3.5 h-3.5 text-cyan-200" />
-                  </a>
+                    <span>🧊 Inspect 3D BIM Model</span>
+                    <span className="w-1.5 h-1.5 rounded-full bg-cyan-400 animate-pulse" />
+                  </button>
                 </div>
               )}
             </div>
@@ -485,16 +495,14 @@ export const ProjectDrawer: React.FC<ProjectDrawerProps> = ({
 
             {/* ── Pinned Action Bar ── */}
             <div className="shrink-0 px-5 py-4 border-t border-neutral-800 bg-[#0f141c] space-y-2">
-              {props.bim_viewer_url && (
-                <a
-                  href={props.bim_viewer_url}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="w-full py-2.5 px-4 rounded-md bg-gradient-to-r from-cyan-600 to-blue-600 hover:from-cyan-500 hover:to-blue-500 text-white font-bold text-xs flex items-center justify-center gap-2 shadow-lg shadow-cyan-600/30 border border-cyan-400/40 transition-all transform hover:scale-[1.01]"
+              {(props.bim_viewer_url || props.bim_uuid) && (
+                <button
+                  onClick={() => setIsBimModalOpen(true)}
+                  className="w-full py-2.5 px-4 rounded-md bg-gradient-to-r from-blue-600 via-cyan-600 to-blue-700 hover:from-blue-500 hover:to-cyan-500 text-white font-bold text-xs flex items-center justify-center gap-2 shadow-lg shadow-cyan-600/25 border border-cyan-400/40 transition-all transform hover:scale-[1.01]"
                 >
-                  <span>🧊 Open 3D BIM Model (Kementerian PU)</span>
-                  <ExternalLink className="w-3.5 h-3.5 shrink-0 text-cyan-200" />
-                </a>
+                  <span>🧊 Inspect 3D BIM Model</span>
+                  <span className="w-2 h-2 rounded-full bg-cyan-300 animate-pulse" />
+                </button>
               )}
 
               <a
@@ -520,6 +528,21 @@ export const ProjectDrawer: React.FC<ProjectDrawerProps> = ({
           </>
         )}
       </aside>
+
+      {/* ── Lazy-Loaded 3D BIM Viewer Modal ── */}
+      {isBimModalOpen && props && (
+        <Suspense fallback={null}>
+          <BimViewerModal
+            isOpen={isBimModalOpen}
+            onClose={() => setIsBimModalOpen(false)}
+            projectName={props.project_name}
+            bimUuid={props.bim_uuid}
+            bimViewerUrl={props.bim_viewer_url}
+            unor={props.unor}
+            balai={props.balai}
+          />
+        </Suspense>
+      )}
     </>
   );
 };
