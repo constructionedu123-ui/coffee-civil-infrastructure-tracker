@@ -1,4 +1,5 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { ProjectFeature, getProjectCoordinates } from '../types/project';
 import { BatchingPlantFeature } from '../types/batchingPlant';
 import { FaultLineFeature } from '../types/faultLine';
@@ -76,11 +77,21 @@ export const ProjectPrintDossier: React.FC<ProjectPrintDossierProps> = ({
   const deepLink = `https://coffeecivil.com/tracker/?project=${encodeURIComponent(projectId)}`;
   const formattedInvestment = formatBudget(props.budget_idr, props.budget_raw);
 
-  return (
-    <div
-      id="project-print-dossier"
-      className="hidden print:block bg-white text-slate-900 font-sans p-6 max-w-[210mm] mx-auto text-xs leading-normal"
-    >
+  useEffect(() => {
+    document.body.classList.add('has-print-portal');
+    return () => {
+      document.body.classList.remove('has-print-portal');
+    };
+  }, []);
+
+  if (typeof document === 'undefined') return null;
+
+  return createPortal(
+    <div id="print-portal">
+      <div
+        id="project-print-dossier"
+        className="bg-white text-slate-900 font-sans p-0 max-w-[180mm] mx-auto text-xs leading-normal"
+      >
       {/* ── HEADER ── */}
       <div className="border-b-2 border-slate-900 pb-3 mb-4">
         <div className="flex items-start justify-between">
@@ -363,5 +374,7 @@ export const ProjectPrintDossier: React.FC<ProjectPrintDossierProps> = ({
         </div>
       </div>
     </div>
-  );
+  </div>,
+  document.body
+);
 };

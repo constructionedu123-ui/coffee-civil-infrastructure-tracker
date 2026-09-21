@@ -174,30 +174,20 @@
   background: #020617 !important;
 }
 
+@media screen {
+  #print-portal,
+  #project-print-dossier {
+    display: none !important;
+  }
+}
+
 /* ==========================================================================
-   Print / PDF Layout Reset (Formal White Engineering Report)
+   Print / PDF Layout Reset (Formal White Engineering Report & Strict Isolation)
    ========================================================================== */
 @media print {
   @page {
     size: A4 portrait;
-    margin: 8mm 10mm 8mm 10mm;
-  }
-
-  /* Root Container Print Reset: force pure white canvas & dark text */
-  html,
-  body,
-  #root,
-  main,
-  .simulator-container,
-  .print-reset-container {
-    height: auto !important;
-    min-height: auto !important;
-    max-height: none !important;
-    overflow: visible !important;
-    background-color: #ffffff !important;
-    background: #ffffff !important;
-    color: #0f172a !important;
-    position: static !important;
+    margin: 12mm 15mm 12mm 15mm;
   }
 
   /* Global print color fidelity */
@@ -217,6 +207,114 @@
   .shadow-xl,
   .shadow-2xl {
     box-shadow: none !important;
+  }
+
+  /* Page break helpers */
+  .print-page-break {
+    break-before: page !important;
+    page-break-before: always !important;
+  }
+
+  .print-avoid-break {
+    break-inside: avoid !important;
+    page-break-inside: avoid !important;
+  }
+
+  /* Force display of hidden tab modules in print */
+  .print-force-block {
+    display: block !important;
+  }
+
+  /* Hide interactive controls and screen-only elements */
+  .no-print,
+  .print\:hidden {
+    display: none !important;
+  }
+
+  /* ── Strict Isolation for Project Print Dossier (Phase 21) ────────── */
+  html,
+  body {
+    background: white !important;
+    background-color: white !important;
+    color: #111827 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    width: 100% !important;
+    height: auto !important;
+    min-height: auto !important;
+    overflow: visible !important;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif !important;
+  }
+
+  /* Completely eliminate #root and all app UI from layout and rendering when print portal is active */
+  body.has-print-portal #root,
+  body:has(#print-portal) #root,
+  #root > *:not(#print-portal) {
+    display: none !important;
+  }
+
+  /* Also hide any floating elements */
+  header,
+  nav,
+  aside,
+  .leaflet-container,
+  .modal-backdrop,
+  [role="dialog"],
+  iframe,
+  button {
+    display: none !important;
+  }
+
+  /* Show ONLY the printable dossier */
+  #print-portal {
+    display: block !important;
+    visibility: visible !important;
+    position: static !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    background: white !important;
+    color: #111827 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+
+  #print-portal * {
+    visibility: visible !important;
+  }
+
+  #project-print-dossier {
+    display: block !important;
+    visibility: visible !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    margin: 0 !important;
+    padding: 0 !important;
+    background: white !important;
+    color: #111827 !important;
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+
+  #project-print-dossier table,
+  #project-print-dossier tr,
+  #project-print-dossier td {
+    page-break-inside: avoid !important;
+    break-inside: avoid !important;
+  }
+
+  /* Simulator container fallback styles when print portal is not active */
+  .simulator-container,
+  .print-reset-container {
+    height: auto !important;
+    min-height: auto !important;
+    max-height: none !important;
+    overflow: visible !important;
+    background-color: #ffffff !important;
+    background: #ffffff !important;
+    color: #0f172a !important;
+    position: static !important;
   }
 
   /* Force all dark backgrounds inside simulator-container to clean white with crisp 1px borders */
@@ -274,7 +372,7 @@
     color: #475569 !important;
   }
 
-  /* Recharts Semi-Log Chart: crisp white background, light grid, dark axes */
+  /* Recharts Semi-Log Chart */
   .recharts-responsive-container,
   .recharts-wrapper,
   .recharts-surface {
@@ -302,7 +400,6 @@
     font-size: 9px !important;
   }
 
-  /* S-curve chart line in print */
   .recharts-line-curve[stroke="#38bdf8"] {
     stroke: #0284c7 !important;
     stroke-width: 2.5px !important;
@@ -311,63 +408,6 @@
   .recharts-line-curve[stroke="#64748b"] {
     stroke: #94a3b8 !important;
     stroke-width: 1.5px !important;
-  }
-
-  /* Page break helpers */
-  .print-page-break {
-    break-before: page !important;
-    page-break-before: always !important;
-  }
-
-  .print-avoid-break {
-    break-inside: avoid !important;
-    page-break-inside: avoid !important;
-  }
-
-  /* Force display of hidden tab modules in print */
-  .print-force-block {
-    display: block !important;
-  }
-
-  /* Hide interactive controls and screen-only elements */
-  .no-print,
-  .print\:hidden {
-    display: none !important;
-  }
-
-  /* ── Printable Project Engineering Fact Sheet (Phase 21) ────────── */
-  #project-print-dossier {
-    display: block !important;
-    position: static !important;
-    width: 100% !important;
-    max-width: 100% !important;
-    margin: 0 !important;
-    padding: 0 !important;
-    background: #ffffff !important;
-    color: #0f172a !important;
-    page-break-inside: avoid !important;
-    break-inside: avoid !important;
-  }
-
-  #project-print-dossier table,
-  #project-print-dossier tr,
-  #project-print-dossier td {
-    page-break-inside: avoid !important;
-    break-inside: avoid !important;
-  }
-
-  /* Hide app containers when printing dossier */
-  #root > main,
-  #root > header,
-  #root > nav,
-  .leaflet-container {
-    display: none !important;
-  }
-}
-
-@media screen {
-  #project-print-dossier {
-    display: none !important;
   }
 }
 
