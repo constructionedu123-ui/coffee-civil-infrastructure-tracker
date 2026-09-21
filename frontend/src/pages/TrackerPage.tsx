@@ -649,6 +649,8 @@ export const TrackerPage: React.FC = () => {
               showSteelMills={materialFilters.steel}
               showCementPlants={materialFilters.cement}
               showFacadePlants={materialFilters.facade}
+              showRainRadar={showRainRadar}
+              weatherMode={weatherMode}
             />
           </>
         ) : (

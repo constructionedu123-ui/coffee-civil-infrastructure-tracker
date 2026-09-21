@@ -3,7 +3,7 @@ import { ChevronDown, ChevronUp } from 'lucide-react';
 import { ProjectCategory } from '../../types/project';
 import { CATEGORY_CONFIG } from '../../constants/categories';
 
-interface MapLegendProps {
+export interface MapLegendProps {
   showBatchingPlants?: boolean;
   showSupplyBuffers?: boolean;
   showFaultLines?: boolean;
@@ -12,6 +12,8 @@ interface MapLegendProps {
   showCementPlants?: boolean;
   showFacadePlants?: boolean;
   showMaritimeRoutes?: boolean;
+  showRainRadar?: boolean;
+  weatherMode?: 'radar' | 'satellite';
 }
 
 export const MapLegend: React.FC<MapLegendProps> = ({
@@ -23,51 +25,111 @@ export const MapLegend: React.FC<MapLegendProps> = ({
   showCementPlants = false,
   showFacadePlants = false,
   showMaritimeRoutes = false,
+  showRainRadar = false,
+  weatherMode = 'radar',
 }) => {
-  const [isExpanded, setIsExpanded] = useState(true);
-  const categories: ProjectCategory[] = ['Transport', 'Energy', 'Water', 'Housing', 'IKN', 'Commercial & Private'];
+  // Default state: Open on desktop (width >= 768px), collapsed on mobile
+  const [isExpanded, setIsExpanded] = useState(() => {
+    if (typeof window !== 'undefined') {
+      return window.innerWidth >= 768;
+    }
+    return true;
+  });
 
-  return (
-    <div className="absolute right-4 bottom-6 z-20 bg-neutral-900/95 border border-neutral-800 rounded-lg shadow-lg overflow-hidden text-xs w-60">
-      <button
-        onClick={() => setIsExpanded(!isExpanded)}
-        className="w-full px-3 py-2 flex items-center justify-between text-neutral-300 hover:text-white bg-neutral-800/80 transition-colors"
+  const categories: ProjectCategory[] = [
+    'Transport',
+    'Energy',
+    'Water',
+    'Housing',
+    'IKN',
+    'Commercial & Private',
+  ];
+
+  // If collapsed, display a sleek floating pill button
+  if (!isExpanded) {
+    return (
+      <div
+        className="absolute bottom-6 right-6 z-[1000] opacity-100 visible pointer-events-auto select-none"
+        onDoubleClick={(e) => e.stopPropagation()}
+        onMouseDown={(e) => e.stopPropagation()}
+        onWheel={(e) => e.stopPropagation()}
       >
-        <span className="font-semibold uppercase text-[10px] tracking-wider text-neutral-400">
-          Map Legend
-        </span>
-        {isExpanded ? <ChevronDown className="w-3.5 h-3.5" /> : <ChevronUp className="w-3.5 h-3.5" />}
-      </button>
+        <button
+          type="button"
+          onClick={() => setIsExpanded(true)}
+          className="flex items-center gap-2 px-3 py-2 rounded-xl bg-[#0f141c]/95 backdrop-blur-md border border-neutral-800 hover:border-neutral-700 shadow-2xl text-xs font-semibold text-neutral-200 hover:text-white transition-all active:scale-95 group"
+          title="Buka Legenda Peta"
+        >
+          <span className="text-sm">ℹ️</span>
+          <span>Legenda Peta</span>
+          <ChevronUp className="w-3.5 h-3.5 text-neutral-400 group-hover:text-white transition-transform" />
+        </button>
+      </div>
+    );
+  }
 
-      {isExpanded && (
-        <div className="p-3 space-y-2 border-t border-neutral-800 max-h-[70vh] overflow-y-auto">
-          <div className="space-y-1.5">
-            <span className="text-[10px] uppercase font-semibold text-neutral-400 block mb-1">
-              PSN Sectors
+  // Expanded complete legend card
+  return (
+    <div
+      className="absolute bottom-6 right-6 z-[1000] opacity-100 visible pointer-events-auto select-none"
+      onDoubleClick={(e) => e.stopPropagation()}
+      onMouseDown={(e) => e.stopPropagation()}
+      onWheel={(e) => e.stopPropagation()}
+    >
+      <div className="bg-[#0f141c]/95 backdrop-blur-md border border-neutral-800 shadow-2xl rounded-xl p-3 text-xs w-64 max-h-[75vh] flex flex-col transition-all">
+        {/* Header with collapsible toggle */}
+        <div className="flex items-center justify-between pb-2 border-b border-neutral-800/80 shrink-0">
+          <div className="flex items-center gap-1.5">
+            <span className="text-sm">ℹ️</span>
+            <span className="font-bold text-[11px] uppercase tracking-wider text-neutral-200">
+              Legenda Peta
             </span>
-            {categories.map((cat) => {
-              const cfg = CATEGORY_CONFIG[cat];
-              return (
-                <div key={cat} className="flex items-center gap-2 text-neutral-300">
-                  <div
-                    className="w-2.5 h-2.5 rounded-full shrink-0 border border-white/60"
-                    style={{ backgroundColor: cfg.color }}
-                  />
-                  <span className="truncate text-[11px]">{cfg.label}</span>
-                </div>
-              );
-            })}
+          </div>
+          <button
+            type="button"
+            onClick={() => setIsExpanded(false)}
+            className="p-1 rounded-md hover:bg-neutral-800 text-neutral-400 hover:text-white transition-colors"
+            title="Kecilkan Legenda"
+          >
+            <ChevronDown className="w-3.5 h-3.5" />
+          </button>
+        </div>
+
+        {/* Scrollable Legend Content */}
+        <div className="mt-2 space-y-2.5 overflow-y-auto pr-1 max-h-[60vh]">
+          {/* PSN Sectors */}
+          <div className="space-y-1.5">
+            <span className="text-[10px] uppercase font-bold text-neutral-400 block tracking-wider">
+              Sektor Proyek
+            </span>
+            <div className="space-y-1">
+              {categories.map((cat) => {
+                const cfg = CATEGORY_CONFIG[cat];
+                return (
+                  <div key={cat} className="flex items-center gap-2 text-neutral-300">
+                    <div
+                      className="w-2.5 h-2.5 rounded-full shrink-0 border border-white/60 shadow-sm"
+                      style={{ backgroundColor: cfg.color }}
+                    />
+                    <span className="truncate text-[11px]">{cfg.label}</span>
+                  </div>
+                );
+              })}
+            </div>
           </div>
 
-          <div className="pt-2 border-t border-neutral-800 space-y-1.5">
-            <span className="text-[10px] uppercase font-semibold text-neutral-400 block">
-              Marker Indicators
+          {/* Marker Indicators & Active Layers */}
+          <div className="pt-2 border-t border-neutral-800/80 space-y-1.5">
+            <span className="text-[10px] uppercase font-bold text-neutral-400 block tracking-wider">
+              Indikator & Layer Aktif
             </span>
-            <div className="flex items-center gap-2 text-neutral-400 text-[11px]">
+
+            {/* National corridor pin */}
+            <div className="flex items-center gap-2 text-neutral-300 text-[11px]">
               <div className="w-3 h-3 rounded-full bg-neutral-700 border border-white flex items-center justify-center shrink-0">
                 <div className="w-1 h-1 rounded-full bg-white" />
               </div>
-              <span>National Corridor Scope</span>
+              <span className="text-neutral-400">Koridor Multi-Wilayah (PSN)</span>
             </div>
 
             {/* Material Supply Chain Hubs */}
@@ -117,22 +179,22 @@ export const MapLegend: React.FC<MapLegendProps> = ({
             )}
 
             {showSupplyBuffers && (
-              <>
-                <div className="flex items-center gap-2 text-neutral-400 text-[10px]">
-                  <div className="w-3 h-3 rounded-full border border-emerald-500 bg-emerald-500/20 shrink-0" />
-                  <span>15 km Optimal (90-min limit)</span>
+              <div className="space-y-1 pl-1 pt-0.5">
+                <div className="flex items-center gap-2 text-neutral-300 text-[10.5px]">
+                  <div className="w-2.5 h-2.5 rounded-full border border-emerald-500 bg-emerald-500/25 shrink-0" />
+                  <span>15 km Optimal (90-mnt ASTM C94)</span>
                 </div>
-                <div className="flex items-center gap-2 text-neutral-400 text-[10px]">
-                  <div className="w-3 h-3 rounded-full border border-amber-500 bg-amber-500/20 shrink-0" />
-                  <span>30 km Max Retarded Limit</span>
+                <div className="flex items-center gap-2 text-neutral-300 text-[10.5px]">
+                  <div className="w-2.5 h-2.5 rounded-full border border-amber-500 bg-amber-500/25 shrink-0" />
+                  <span>30 km Batas Maks (Admixture Retarder)</span>
                 </div>
-              </>
+              </div>
             )}
 
             {showFaultLines && (
               <div className="flex items-center gap-2 text-neutral-300 text-[11px] pt-1 border-t border-neutral-800/60">
                 <div className="w-4 h-1 rounded bg-rose-500 shadow-[0_0_6px_#ef4444] shrink-0" />
-                <span>Sesar Aktif (PuSGeN)</span>
+                <span>Sesar Aktif (PuSGeN 2017/2024)</span>
               </div>
             )}
 
@@ -146,13 +208,20 @@ export const MapLegend: React.FC<MapLegendProps> = ({
                   <div className="w-3.5 h-3.5 rounded-full bg-cyan-950 border border-cyan-400 flex items-center justify-center text-[9px] shrink-0 text-cyan-200">
                     ⚓
                   </div>
-                  <span>Pelabuhan / Terminal Logistik</span>
+                  <span>Pelabuhan / Terminal Curah</span>
                 </div>
               </>
             )}
+
+            {showRainRadar && (
+              <div className="flex items-center gap-2 text-neutral-300 text-[11px] pt-1 border-t border-neutral-800/60">
+                <span className="text-sm shrink-0">{weatherMode === 'radar' ? '🌧️' : '☁️'}</span>
+                <span>{weatherMode === 'radar' ? 'Radar Hujan Live (RainViewer)' : 'Awan Satelit IR (RainViewer)'}</span>
+              </div>
+            )}
           </div>
         </div>
-      )}
+      </div>
     </div>
   );
 };
