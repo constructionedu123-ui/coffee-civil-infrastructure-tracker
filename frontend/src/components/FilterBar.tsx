@@ -43,6 +43,8 @@ interface FilterBarProps {
   onWeatherModeChange?: (mode: 'radar' | 'satellite') => void;
   showProvincialHeatmap?: boolean;
   onToggleProvincialHeatmap?: () => void;
+  showKekCorridors?: boolean;
+  onToggleKekCorridors?: () => void;
   materialFilters?: MaterialHubFilterState;
   onToggleMaterialFilter?: (key: keyof MaterialHubFilterState) => void;
   onSetAllMaterialFilters?: (val: boolean) => void;
@@ -78,6 +80,8 @@ export const FilterBar: React.FC<FilterBarProps> = ({
   onWeatherModeChange,
   showProvincialHeatmap = false,
   onToggleProvincialHeatmap,
+  showKekCorridors = false,
+  onToggleKekCorridors,
   materialFilters,
   onToggleMaterialFilter,
   onSetAllMaterialFilters,
@@ -557,6 +561,22 @@ export const FilterBar: React.FC<FilterBarProps> = ({
             title="Toggle Provincial Investment & Budget Heatmap Layer (Choropleth Sebaran Anggaran)"
           >
             <span>🗺️</span> Heatmap Anggaran
+          </button>
+        )}
+
+        {/* Strategic Downstream Mineral & KEK Corridors Toggle */}
+        {onToggleKekCorridors && (
+          <button
+            type="button"
+            onClick={onToggleKekCorridors}
+            className={`flex items-center gap-1.5 px-2.5 py-1 rounded-md border text-[11px] font-semibold transition-colors whitespace-nowrap ${
+              showKekCorridors
+                ? "bg-purple-500/20 text-purple-300 border-purple-500/80 shadow-sm shadow-purple-500/10"
+                : "bg-neutral-900 border-neutral-800 text-neutral-400 hover:text-neutral-200 hover:border-neutral-700"
+            }`}
+            title="Toggle Strategic Mineral Downstream (Hilirisasi) & KEK Mega-Industrial Corridors Layer"
+          >
+            <span>🏭</span> Hilirisasi &amp; KEK
           </button>
         )}
 

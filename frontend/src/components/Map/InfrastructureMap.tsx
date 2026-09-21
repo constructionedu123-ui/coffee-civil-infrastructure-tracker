@@ -15,6 +15,7 @@ import { CATEGORY_CONFIG, STATUS_CONFIG } from '../../constants/categories';
 import { formatBudget } from '../../utils/formatters';
 import { getLatestWeatherUrls } from '../../utils/rainRadar';
 import { ProvincialHeatmapLayer } from './ProvincialHeatmapLayer';
+import { KekCorridorsLayer } from './KekCorridorsLayer';
 import { X } from 'lucide-react';
 
 // IKN Nusantara camera preset (Sepaku, East Kalimantan)
@@ -43,6 +44,8 @@ interface InfrastructureMapProps {
   showProvincialHeatmap?: boolean;
   onToggleProvincialHeatmap?: () => void;
   onSelectProvince?: (provinceName: string) => void;
+  showKekCorridors?: boolean;
+  onToggleKekCorridors?: () => void;
   materialHubs?: MaterialHubFeature[];
   showMaterialHubs?: {
     quarry: boolean;
@@ -82,6 +85,8 @@ export const InfrastructureMap: React.FC<InfrastructureMapProps> = ({
   showProvincialHeatmap = false,
   onToggleProvincialHeatmap,
   onSelectProvince,
+  showKekCorridors = false,
+  onToggleKekCorridors,
   materialHubs = [],
   showMaterialHubs,
   opportunityFinder,
@@ -1093,6 +1098,13 @@ export const InfrastructureMap: React.FC<InfrastructureMapProps> = ({
         isActive={showProvincialHeatmap}
         onSelectProvince={onSelectProvince}
         onClose={onToggleProvincialHeatmap}
+      />
+
+      {/* Strategic Hilirisasi & KEK Industrial Corridors Layer */}
+      <KekCorridorsLayer
+        map={mapReady}
+        isActive={showKekCorridors}
+        onClose={onToggleKekCorridors}
       />
 
       {/* Floating Weather Overlay Control & Legend */}

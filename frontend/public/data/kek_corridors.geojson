@@ -1,0 +1,855 @@
+{
+  "type": "FeatureCollection",
+  "metadata": {
+    "title": "Indonesian Strategic Hilirisasi & KEK Industrial Corridors",
+    "total_corridors": 14,
+    "updated_at": "2026-09-21T13:32:16.742Z"
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              122.128,
+              -2.8575
+            ],
+            [
+              122.144,
+              -2.7945
+            ],
+            [
+              122.188,
+              -2.799
+            ],
+            [
+              122.196,
+              -2.8485
+            ],
+            [
+              122.172,
+              -2.8755
+            ],
+            [
+              122.136,
+              -2.871
+            ],
+            [
+              122.128,
+              -2.8575
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "id": "imip-morowali",
+        "name": "IMIP Morowali",
+        "province": "Sulawesi Tengah",
+        "regency": "Kabupaten Morowali",
+        "category": "Nikel & Baterai EV",
+        "status": "PSN",
+        "area_ha": 4000,
+        "investment_est": "US$ 15.3 Miliar (~Rp 245 T)",
+        "core_commodities": "Nickel Pig Iron (NPI), Stainless Steel, HPAL MHP, Katoda Baterai EV",
+        "anchor_tenants": [
+          "PT Tsingshan Steel",
+          "PT BSI",
+          "PT QMB New Energy",
+          "PT Huayue"
+        ],
+        "connected_infrastructure": "Bandara Khusus IMIP, Pelabuhan Jetty Curah Laut Dalam, PLTU Captive 3,000 MW, Jalan Trans Sulawesi",
+        "center_coords": [
+          -2.835,
+          122.16
+        ],
+        "description": "Pusat hilirisasi nikel dan rantai pasok stainless steel & prekursor baterai litium terbesar di Asia Tenggara."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              127.939,
+              0.461
+            ],
+            [
+              127.957,
+              0.5282
+            ],
+            [
+              128.0065,
+              0.5234
+            ],
+            [
+              128.0155,
+              0.4706
+            ],
+            [
+              127.9885,
+              0.4418
+            ],
+            [
+              127.948,
+              0.4466
+            ],
+            [
+              127.939,
+              0.461
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "id": "iwip-weda-bay",
+        "name": "IWIP Weda Bay",
+        "province": "Maluku Utara",
+        "regency": "Kabupaten Halmahera Tengah",
+        "category": "Nikel & Baterai EV",
+        "status": "PSN",
+        "area_ha": 5000,
+        "investment_est": "US$ 11.0 Miliar (~Rp 175 T)",
+        "core_commodities": "Ferronickel, Nickel Matte, HPAL Prekursor Baterai EV",
+        "anchor_tenants": [
+          "Eramet",
+          "Tsingshan",
+          "Zhejiang Huayou Cobalt",
+          "PT Weda Bay Nickel"
+        ],
+        "connected_infrastructure": "Pelabuhan Khusus IWIP Tanjung Ulie, PLTU Captive 3,400 MW, Airstrip Weda Bay",
+        "center_coords": [
+          0.485,
+          127.975
+        ],
+        "description": "Mega kawasan industri nikel terintegrasi tambang & smelter HPAL di pesisir Teluk Weda Halmahera."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              122.3976,
+              -3.902
+            ],
+            [
+              122.4128,
+              -3.846
+            ],
+            [
+              122.4546,
+              -3.85
+            ],
+            [
+              122.4622,
+              -3.894
+            ],
+            [
+              122.4394,
+              -3.918
+            ],
+            [
+              122.4052,
+              -3.914
+            ],
+            [
+              122.3976,
+              -3.902
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "id": "konawe-industrial-park",
+        "name": "Konawe Industrial Park (VDNI & OSS)",
+        "province": "Sulawesi Tenggara",
+        "regency": "Kabupaten Konawe",
+        "category": "Nikel & Baterai EV",
+        "status": "PSN",
+        "area_ha": 3500,
+        "investment_est": "US$ 3.8 Miliar (~Rp 60 T)",
+        "core_commodities": "Ferronickel, Stainless Steel Slab & Billet Baja Karbon",
+        "anchor_tenants": [
+          "PT Virtue Dragon Nickel Industry (VDNI)",
+          "PT Obsidian Stainless Steel (OSS)"
+        ],
+        "connected_infrastructure": "Pelabuhan Khusus Muara Sampara, Jembatan Sampara, PLTU Morosi 700 MW",
+        "center_coords": [
+          -3.882,
+          122.428
+        ],
+        "description": "Sentra pemurnian nikel dan produksi baja tahan karat terpadu di kawasan Morosi Konawe."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              121.587,
+              -4.204
+            ],
+            [
+              121.601,
+              -4.1508
+            ],
+            [
+              121.6395,
+              -4.1546
+            ],
+            [
+              121.6465,
+              -4.1964
+            ],
+            [
+              121.6255,
+              -4.2192
+            ],
+            [
+              121.594,
+              -4.2154
+            ],
+            [
+              121.587,
+              -4.204
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "id": "pomalaa-smelter-hub",
+        "name": "Pomalaa Smelter Hub",
+        "province": "Sulawesi Tenggara",
+        "regency": "Kabupaten Kolaka",
+        "category": "Nikel & Baterai EV",
+        "status": "PSN",
+        "area_ha": 2800,
+        "investment_est": "US$ 4.5 Miliar (~Rp 72 T)",
+        "core_commodities": "HPAL Mixed Hydroxide Precipitate (MHP) untuk Baterai Kendaraan Listrik",
+        "anchor_tenants": [
+          "PT Vale Indonesia Tbk",
+          "Ford Motor Company",
+          "Zhejiang Huayou Cobalt",
+          "PT Antam UBPN"
+        ],
+        "connected_infrastructure": "Pelabuhan Khusus Pomalaa, Bandara Sangia Nibandera Kolaka, Jalan Nasional Kolaka-Bombana",
+        "center_coords": [
+          -4.185,
+          121.615
+        ],
+        "description": "Hub smelter HPAL nikel rendah kadar (limonit) kemitraan Vale, Ford, dan Huayou untuk pasar otomotif global."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              112.5716,
+              -7.1295
+            ],
+            [
+              112.5868,
+              -7.0805
+            ],
+            [
+              112.6286,
+              -7.084
+            ],
+            [
+              112.6362,
+              -7.1225
+            ],
+            [
+              112.6134,
+              -7.1435
+            ],
+            [
+              112.5792,
+              -7.14
+            ],
+            [
+              112.5716,
+              -7.1295
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "id": "jiipe-manyar-gresik",
+        "name": "JIIPE Manyar / Smelter Freeport",
+        "province": "Jawa Timur",
+        "regency": "Kabupaten Gresik",
+        "category": "Tembaga & Smelter Logam",
+        "status": "KEK",
+        "area_ha": 3000,
+        "investment_est": "US$ 3.7 Miliar (~Rp 59 T)",
+        "core_commodities": "Katoda Tembaga (1.7 Juta Ton Konsentrat/Thn) & Precious Metal Refinery (Emas & Perak)",
+        "anchor_tenants": [
+          "PT Freeport Indonesia",
+          "PT AKR Corporindo",
+          "PT Pelindo",
+          "PT Xinyi Glass"
+        ],
+        "connected_infrastructure": "Pelabuhan Laut Dalam JIIPE Manyar (-16m LWS), Tol Krian-Legundi-Bunder-Manyar (KLBM), Jalur Rel Barang",
+        "center_coords": [
+          -7.112,
+          112.602
+        ],
+        "description": "Kawasan Ekonomi Khusus industri manufaktur & fasilitas pemurnian tembaga single-line terbesar di dunia."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              116.761,
+              -8.868
+            ],
+            [
+              116.773,
+              -8.8232
+            ],
+            [
+              116.806,
+              -8.8264
+            ],
+            [
+              116.812,
+              -8.8616
+            ],
+            [
+              116.794,
+              -8.8808
+            ],
+            [
+              116.767,
+              -8.8776
+            ],
+            [
+              116.761,
+              -8.868
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "id": "amman-mineral-smelter",
+        "name": "Amman Mineral Smelter",
+        "province": "Nusa Tenggara Barat",
+        "regency": "Kabupaten Sumbawa Barat",
+        "category": "Tembaga & Smelter Logam",
+        "status": "PSN",
+        "area_ha": 1200,
+        "investment_est": "US$ 1.5 Miliar (~Rp 24 T)",
+        "core_commodities": "Pemurnian Konsentrat Tembaga (900.000 Ton/Thn), Asam Sulfat & Anoda Tembaga",
+        "anchor_tenants": [
+          "PT Amman Mineral Industri (AMNT)",
+          "PT Macmahon Indonesia"
+        ],
+        "connected_infrastructure": "Pelabuhan Khusus Dermaga Benete, PLTGU Sumbawa Barat, Fasilitas Desalinasi Air Laut",
+        "center_coords": [
+          -8.852,
+          116.785
+        ],
+        "description": "Smelter tembaga modern pendukung tambang Batu Hijau & Elang di Sumbawa Barat."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              109.859,
+              -6.955
+            ],
+            [
+              109.877,
+              -6.899
+            ],
+            [
+              109.9265,
+              -6.903
+            ],
+            [
+              109.9355,
+              -6.947
+            ],
+            [
+              109.9085,
+              -6.971
+            ],
+            [
+              109.868,
+              -6.967
+            ],
+            [
+              109.859,
+              -6.955
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "id": "kitb-grand-batang-city",
+        "name": "KITB Grand Batang City",
+        "province": "Jawa Tengah",
+        "regency": "Kabupaten Batang",
+        "category": "Manufaktur Hijau & EV",
+        "status": "PSN",
+        "area_ha": 4300,
+        "investment_est": "Rp 35.0 Triliun",
+        "core_commodities": "Rantai Pasok Baterai EV, Kaca Solar Panel, Alat Medis & Semikonduktor",
+        "anchor_tenants": [
+          "LG Energy Solution (Konsorsium EV)",
+          "KCC Glass Corp Korea",
+          "Yih Quan Footwear",
+          "Wavin NV"
+        ],
+        "connected_infrastructure": "Akses Langsung Tol Trans Jawa KM 371, Stasiun KA Pelabuhan & Dry Port KITB, Dermaga Jetty Batang",
+        "center_coords": [
+          -6.935,
+          109.895
+        ],
+        "description": "Mega kawasan industri hijau BUMN terpadu percontohan nasional berorientasi ekspor dan teknologi masa depan."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              110.2044,
+              -6.934
+            ],
+            [
+              110.2172,
+              -6.8948
+            ],
+            [
+              110.2524,
+              -6.8976
+            ],
+            [
+              110.2588,
+              -6.9284
+            ],
+            [
+              110.2396,
+              -6.9452
+            ],
+            [
+              110.2108,
+              -6.9424
+            ],
+            [
+              110.2044,
+              -6.934
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "id": "kek-kendal",
+        "name": "KEK Kendal (KIK)",
+        "province": "Jawa Tengah",
+        "regency": "Kabupaten Kendal",
+        "category": "Manufaktur Hijau & EV",
+        "status": "KEK",
+        "area_ha": 1000,
+        "investment_est": "Rp 43.8 Triliun",
+        "core_commodities": "Komponen Otomotif EV, Elektronika Presisi, Tekstil Modern & Perabot Ekspor",
+        "anchor_tenants": [
+          "Sembcorp Development Singapore",
+          "PT Kawasan Industri Jababeka Tbk",
+          "Bafang Electric",
+          "PT Eken Global"
+        ],
+        "connected_infrastructure": "Pelabuhan Kendal, Akses Tol Trans Jawa Semarang-Batang, Bandara Ahmad Yani Semarang (20 km)",
+        "center_coords": [
+          -6.92,
+          110.23
+        ],
+        "description": "KEK industri manufaktur hasil kolaborasi strategis bilateral Indonesia-Singapura."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              107.688,
+              -6.444
+            ],
+            [
+              107.704,
+              -6.3908
+            ],
+            [
+              107.748,
+              -6.3946
+            ],
+            [
+              107.756,
+              -6.4364
+            ],
+            [
+              107.732,
+              -6.4592
+            ],
+            [
+              107.696,
+              -6.4554
+            ],
+            [
+              107.688,
+              -6.444
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "id": "subang-smartpolitan",
+        "name": "Subang Smartpolitan",
+        "province": "Jawa Barat",
+        "regency": "Kabupaten Subang",
+        "category": "Manufaktur Hijau & EV",
+        "status": "Kawasan Industri Strategis",
+        "area_ha": 2700,
+        "investment_est": "Rp 28.5 Triliun",
+        "core_commodities": "Pusat Kendaraan Listrik (EV Hub), Smart Logistics & Industri Presisi 4.0",
+        "anchor_tenants": [
+          "Suryacipta City of Industry",
+          "BYD Auto Indonesia (Giga Factory EV)",
+          "Sanwa Musen Industry"
+        ],
+        "connected_infrastructure": "Tol Cipali Interchange KM 89, Akses Jalan Tol Menuju Pelabuhan Patimban (35 Menit), Bandara Kertajati",
+        "center_coords": [
+          -6.425,
+          107.72
+        ],
+        "description": "Kawasan kota industri cerdas ramah lingkungan lokasi pabrik mobil listrik raksasa BYD di koridor Rebana."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              117.437,
+              2.8225
+            ],
+            [
+              117.461,
+              2.9135
+            ],
+            [
+              117.527,
+              2.907
+            ],
+            [
+              117.539,
+              2.8355
+            ],
+            [
+              117.503,
+              2.7965
+            ],
+            [
+              117.449,
+              2.803
+            ],
+            [
+              117.437,
+              2.8225
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "id": "kipi-tanah-kuning",
+        "name": "KIPI Tanah Kuning (Mangkupadi)",
+        "province": "Kalimantan Utara",
+        "regency": "Kabupaten Bulungan",
+        "category": "Manufaktur Hijau & EV",
+        "status": "PSN",
+        "area_ha": 10100,
+        "investment_est": "US$ 130 Miliar (~Rp 2,000 T bertahap)",
+        "core_commodities": "Smelter Aluminium Hijau, Petrokimia Terintegrasi, Polikristal Silikon Panel Surya",
+        "anchor_tenants": [
+          "PT Kalimantan Aluminium Industry (Adaro Group)",
+          "PT Kaltara Power Indonesia",
+          "Taisho Energy Investment"
+        ],
+        "connected_infrastructure": "PLTA Kayan Cascade 9,000 MW, Pelabuhan Samudera Laut Dalam Tanah Kuning, Jalur Trans Kalimantan",
+        "center_coords": [
+          2.855,
+          117.485
+        ],
+        "description": "Kawasan Industri Hijau Indonesia (KIHI) terbesar di dunia yang digerakkan energi baru terbarukan hidroelektrik."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              99.3146,
+              3.1475
+            ],
+            [
+              99.3298,
+              3.1965
+            ],
+            [
+              99.3716,
+              3.193
+            ],
+            [
+              99.3792,
+              3.1545
+            ],
+            [
+              99.3564,
+              3.1335
+            ],
+            [
+              99.3222,
+              3.137
+            ],
+            [
+              99.3146,
+              3.1475
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "id": "kek-sei-mangkei",
+        "name": "KEK Sei Mangkei",
+        "province": "Sumatera Utara",
+        "regency": "Kabupaten Simalungun",
+        "category": "Petrokimia & Oleokimia",
+        "status": "KEK",
+        "area_ha": 2002,
+        "investment_est": "Rp 12.8 Triliun",
+        "core_commodities": "Hilirisasi Kelapa Sawit (Fatty Acid, Fatty Alcohol, Surfactant), Biodiesel & Karet Sintetis",
+        "anchor_tenants": [
+          "PT Unilever Oleochemical Indonesia",
+          "PT Aice Sumatera Industry",
+          "PT Industri Nabati Lestari"
+        ],
+        "connected_infrastructure": "Jalur Rel Kereta Api Barang Khusus Sei Mangkei ke Pelabuhan Kuala Tanjung, Tol Indrapura-Kisaran",
+        "center_coords": [
+          3.165,
+          99.345
+        ],
+        "description": "Pusat hilirisasi kelapa sawit terpadu pelopor zero-waste bio-industry di koridor barat Sumatera."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              104.5778,
+              0.897
+            ],
+            [
+              104.5914,
+              0.9474
+            ],
+            [
+              104.6288,
+              0.9438
+            ],
+            [
+              104.6356,
+              0.9042
+            ],
+            [
+              104.6152,
+              0.8826
+            ],
+            [
+              104.5846,
+              0.8862
+            ],
+            [
+              104.5778,
+              0.897
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "id": "kek-galang-batang",
+        "name": "KEK Galang Batang",
+        "province": "Kepulauan Riau",
+        "regency": "Kabupaten Bintan",
+        "category": "Tembaga & Smelter Logam",
+        "status": "KEK",
+        "area_ha": 2333,
+        "investment_est": "Rp 36.2 Triliun",
+        "core_commodities": "Smelter Bauksit menjadi Smelter Grade Alumina (SGA) & Aluminium Ingot",
+        "anchor_tenants": [
+          "PT Bintan Alumina Indonesia (BAI)",
+          "Nanshan Group China"
+        ],
+        "connected_infrastructure": "Pelabuhan Samudera Galang Batang, PLTU Captive 6x150 MW, Waduk Penampungan Air 5 Juta m³",
+        "center_coords": [
+          0.915,
+          104.605
+        ],
+        "description": "Pusat pemurnian bauksit kepulauan penghasil alumina kualitas tinggi yang menghadap Selat Malaka."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              115.2476,
+              -8.6925
+            ],
+            [
+              115.2548,
+              -8.6715
+            ],
+            [
+              115.2746,
+              -8.673
+            ],
+            [
+              115.2782,
+              -8.6895
+            ],
+            [
+              115.2674,
+              -8.6985
+            ],
+            [
+              115.2512,
+              -8.697
+            ],
+            [
+              115.2476,
+              -8.6925
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "id": "kek-sanur",
+        "name": "KEK Sanur (Health & Wellness)",
+        "province": "Bali",
+        "regency": "Kota Denpasar",
+        "category": "Kesehatan / Pemerintahan",
+        "status": "KEK",
+        "area_ha": 41.2,
+        "investment_est": "Rp 10.3 Triliun",
+        "core_commodities": "Rumah Sakit Internasional, Klinik Estetika Terpadu, Riset Kedokteran & Resor Medis",
+        "anchor_tenants": [
+          "Bali International Hospital (Mayo Clinic Partner)",
+          "PT Hotel Indonesia Natour (InJourney)",
+          "Alster Lake Clinic"
+        ],
+        "connected_infrastructure": "Jalan Bypass Ngurah Rai, Pelabuhan Wisata Sanur, Bandara Internasional I Gusti Ngurah Rai (15 Menit)",
+        "center_coords": [
+          -8.685,
+          115.262
+        ],
+        "description": "KEK Kesehatan pertama di Indonesia yang mengintegrasikan layanan medis kelas dunia dan pariwisata kebugaran."
+      }
+    },
+    {
+      "type": "Feature",
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [
+              116.6584,
+              -0.994
+            ],
+            [
+              116.6792,
+              -0.9268
+            ],
+            [
+              116.7364,
+              -0.9316
+            ],
+            [
+              116.7468,
+              -0.9844
+            ],
+            [
+              116.7156,
+              -1.0132
+            ],
+            [
+              116.6688,
+              -1.0084
+            ],
+            [
+              116.6584,
+              -0.994
+            ]
+          ]
+        ]
+      },
+      "properties": {
+        "id": "kawasan-inti-ikn-kipp",
+        "name": "Kawasan Inti IKN (KIPP Sepaku)",
+        "province": "Kalimantan Timur",
+        "regency": "Kabupaten Penajam Paser Utara",
+        "category": "Kesehatan / Pemerintahan",
+        "status": "PSN",
+        "area_ha": 6671,
+        "investment_est": "Rp 466.0 Triliun (Masterplan IKN)",
+        "core_commodities": "Pusat Pemerintahan Nasional, Kompleks Istana Garuda, Smart Eco-City & Green Mobility",
+        "anchor_tenants": [
+          "Kementerian Pekerjaan Umum",
+          "Otorita Ibu Kota Nusantara",
+          "Konsorsium Nusantara (Agung Sedayu, Salim, Barito)",
+          "Pakuwon Group",
+          "Bank Syariah Indonesia"
+        ],
+        "connected_infrastructure": "Jalan Tol Akses IKN Seksi 3A-5A, Jembatan Pulau Balang, Bendungan Sepaku Semoi, Bandara VVIP IKN",
+        "center_coords": [
+          -0.97,
+          116.7
+        ],
+        "description": "Kawasan Inti Pusat Pemerintahan (KIPP) Ibu Kota Nusantara yang dirancang sebagai smart, green, and sustainable capital city."
+      }
+    }
+  ]
+}

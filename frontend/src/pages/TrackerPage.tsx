@@ -57,6 +57,7 @@ export const TrackerPage: React.FC = () => {
   const [showRainRadar, setShowRainRadar] = useState<boolean>(false);
   const [weatherMode, setWeatherMode] = useState<'radar' | 'satellite'>('radar');
   const [showProvincialHeatmap, setShowProvincialHeatmap] = useState<boolean>(false);
+  const [showKekCorridors, setShowKekCorridors] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -533,6 +534,7 @@ export const TrackerPage: React.FC = () => {
           setSelectedRegion('All');
           setSelectedContractor(null);
           setShowProvincialHeatmap(false);
+          setShowKekCorridors(false);
           setActiveWorkModeId('standard');
         }}
         hasActiveFilters={hasActiveFilters}
@@ -614,6 +616,8 @@ export const TrackerPage: React.FC = () => {
         onWeatherModeChange={setWeatherMode}
         showProvincialHeatmap={showProvincialHeatmap}
         onToggleProvincialHeatmap={() => setShowProvincialHeatmap((prev) => !prev)}
+        showKekCorridors={showKekCorridors}
+        onToggleKekCorridors={() => setShowKekCorridors((prev) => !prev)}
       />
 
       {/* Map & Overlays or Table View Container */}
@@ -644,6 +648,8 @@ export const TrackerPage: React.FC = () => {
               onSelectProvince={(provName) => {
                 setSearchQuery(provName);
               }}
+              showKekCorridors={showKekCorridors}
+              onToggleKekCorridors={() => setShowKekCorridors((prev) => !prev)}
               materialHubs={materialHubs}
               showMaterialHubs={materialFilters}
               opportunityFinder={{
