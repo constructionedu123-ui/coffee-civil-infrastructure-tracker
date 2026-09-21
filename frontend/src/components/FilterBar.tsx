@@ -41,6 +41,8 @@ interface FilterBarProps {
   onToggleRainRadar?: () => void;
   weatherMode?: 'radar' | 'satellite';
   onWeatherModeChange?: (mode: 'radar' | 'satellite') => void;
+  showProvincialHeatmap?: boolean;
+  onToggleProvincialHeatmap?: () => void;
   materialFilters?: MaterialHubFilterState;
   onToggleMaterialFilter?: (key: keyof MaterialHubFilterState) => void;
   onSetAllMaterialFilters?: (val: boolean) => void;
@@ -74,6 +76,8 @@ export const FilterBar: React.FC<FilterBarProps> = ({
   onToggleRainRadar,
   weatherMode = 'radar',
   onWeatherModeChange,
+  showProvincialHeatmap = false,
+  onToggleProvincialHeatmap,
   materialFilters,
   onToggleMaterialFilter,
   onSetAllMaterialFilters,
@@ -538,6 +542,22 @@ export const FilterBar: React.FC<FilterBarProps> = ({
               </div>
             )}
           </div>
+        )}
+
+        {/* Provincial Investment & Budget Heatmap Toggle */}
+        {onToggleProvincialHeatmap && (
+          <button
+            type="button"
+            onClick={onToggleProvincialHeatmap}
+            className={`flex items-center gap-1.5 px-2.5 py-1 rounded-md border text-[11px] font-semibold transition-colors whitespace-nowrap ${
+              showProvincialHeatmap
+                ? "bg-amber-500/20 text-amber-300 border-amber-500/80 shadow-sm shadow-amber-500/10"
+                : "bg-neutral-900 border-neutral-800 text-neutral-400 hover:text-neutral-200 hover:border-neutral-700"
+            }`}
+            title="Toggle Provincial Investment & Budget Heatmap Layer (Choropleth Sebaran Anggaran)"
+          >
+            <span>🗺️</span> Heatmap Anggaran
+          </button>
         )}
 
         {/* Basemap Switcher Segmented Pill */}

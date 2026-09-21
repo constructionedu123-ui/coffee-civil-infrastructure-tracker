@@ -14,6 +14,7 @@ import { MeasureTool } from './MeasureTool';
 import { CATEGORY_CONFIG, STATUS_CONFIG } from '../../constants/categories';
 import { formatBudget } from '../../utils/formatters';
 import { getLatestWeatherUrls } from '../../utils/rainRadar';
+import { ProvincialHeatmapLayer } from './ProvincialHeatmapLayer';
 import { X } from 'lucide-react';
 
 // IKN Nusantara camera preset (Sepaku, East Kalimantan)
@@ -39,6 +40,9 @@ interface InfrastructureMapProps {
   showRainRadar?: boolean;
   weatherMode?: 'radar' | 'satellite';
   onWeatherModeChange?: (mode: 'radar' | 'satellite') => void;
+  showProvincialHeatmap?: boolean;
+  onToggleProvincialHeatmap?: () => void;
+  onSelectProvince?: (provinceName: string) => void;
   materialHubs?: MaterialHubFeature[];
   showMaterialHubs?: {
     quarry: boolean;
@@ -75,6 +79,9 @@ export const InfrastructureMap: React.FC<InfrastructureMapProps> = ({
   showRainRadar = false,
   weatherMode = 'radar',
   onWeatherModeChange,
+  showProvincialHeatmap = false,
+  onToggleProvincialHeatmap,
+  onSelectProvince,
   materialHubs = [],
   showMaterialHubs,
   opportunityFinder,
@@ -1078,6 +1085,15 @@ export const InfrastructureMap: React.FC<InfrastructureMapProps> = ({
     <div className={`relative w-full h-full ${basemap === 'satellite' ? 'is-satellite' : ''}`}>
       <div ref={mapContainerRef} className="w-full h-full" />
       <MeasureTool map={mapReady} forceCloseTrigger={selectedProject} />
+
+      {/* Provincial Investment & Budget Heatmap Layer */}
+      <ProvincialHeatmapLayer
+        map={mapReady}
+        projects={projects}
+        isActive={showProvincialHeatmap}
+        onSelectProvince={onSelectProvince}
+        onClose={onToggleProvincialHeatmap}
+      />
 
       {/* Floating Weather Overlay Control & Legend */}
       {showRainRadar && showRainLegend && (

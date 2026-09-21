@@ -56,6 +56,7 @@ export const TrackerPage: React.FC = () => {
   const [showMaritimeRoutes, setShowMaritimeRoutes] = useState<boolean>(true);
   const [showRainRadar, setShowRainRadar] = useState<boolean>(false);
   const [weatherMode, setWeatherMode] = useState<'radar' | 'satellite'>('radar');
+  const [showProvincialHeatmap, setShowProvincialHeatmap] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
@@ -531,6 +532,7 @@ export const TrackerPage: React.FC = () => {
           setSelectedStatus('All');
           setSelectedRegion('All');
           setSelectedContractor(null);
+          setShowProvincialHeatmap(false);
           setActiveWorkModeId('standard');
         }}
         hasActiveFilters={hasActiveFilters}
@@ -610,6 +612,8 @@ export const TrackerPage: React.FC = () => {
         onToggleRainRadar={() => setShowRainRadar((prev) => !prev)}
         weatherMode={weatherMode}
         onWeatherModeChange={setWeatherMode}
+        showProvincialHeatmap={showProvincialHeatmap}
+        onToggleProvincialHeatmap={() => setShowProvincialHeatmap((prev) => !prev)}
       />
 
       {/* Map & Overlays or Table View Container */}
@@ -635,6 +639,11 @@ export const TrackerPage: React.FC = () => {
               showRainRadar={showRainRadar}
               weatherMode={weatherMode}
               onWeatherModeChange={setWeatherMode}
+              showProvincialHeatmap={showProvincialHeatmap}
+              onToggleProvincialHeatmap={() => setShowProvincialHeatmap((prev) => !prev)}
+              onSelectProvince={(provName) => {
+                setSearchQuery(provName);
+              }}
               materialHubs={materialHubs}
               showMaterialHubs={materialFilters}
               opportunityFinder={{
