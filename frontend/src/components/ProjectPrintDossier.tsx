@@ -8,6 +8,7 @@ import { findNearestBatchingPlants, findNearestMaterialHubs } from '../utils/log
 import { findNearestFaultLine } from '../utils/seismic';
 import { getProjectRainfallAnalysis } from '../utils/rainfallData';
 import { getProjectRegionalCost } from '../utils/regionalCostData';
+import { getProjectGeotechProfile } from '../utils/geotechSoilData';
 import { formatBudget } from '../utils/formatters';
 import { getProjectContractors, getPrimaryContractor } from '../utils/contractorMatcher';
 
@@ -62,6 +63,10 @@ export const ProjectPrintDossier: React.FC<ProjectPrintDossierProps> = ({
 
   const regionalCost = useMemo(() => {
     return getProjectRegionalCost(props.province, props.regency, props.project_name);
+  }, [props.province, props.regency, props.project_name]);
+
+  const geotechProfile = useMemo(() => {
+    return getProjectGeotechProfile(props.province, props.regency, props.project_name);
   }, [props.province, props.regency, props.project_name]);
 
   const allContractors = useMemo(() => {
@@ -226,37 +231,42 @@ export const ProjectPrintDossier: React.FC<ProjectPrintDossierProps> = ({
             <div>
               <div className="flex items-center justify-between border-b border-slate-200 pb-1 mb-1.5">
                 <span className="font-bold text-slate-900 flex items-center gap-1 text-[11px]">
-                  <span>⚡</span> Seismik & Sesar (PuSGeN)
+                  <span>⚡</span> Seismik & Geoteknik
                 </span>
                 <span className="text-[9px] font-mono text-slate-500">SNI 1726</span>
               </div>
-              {nearestFault ? (
-                <div className="space-y-1 text-[10.5px]">
-                  <div>
-                    <span className="text-slate-500">Sesar Terdekat:</span>{' '}
-                    <strong className="text-slate-900 block">{nearestFault.fault.properties.name}</strong>
-                  </div>
-                  <div className="flex justify-between items-baseline pt-0.5">
-                    <span className="text-slate-500">Jarak Tapak:</span>
-                    <strong className="font-mono text-xs text-slate-900">
-                      {nearestFault.distanceKm.toFixed(1)} km
-                    </strong>
-                  </div>
+              <div className="space-y-1 text-[10px]">
+                {nearestFault ? (
                   <div className="flex justify-between items-baseline">
-                    <span className="text-slate-500">Slip Rate:</span>
-                    <span className="font-mono text-slate-700">{nearestFault.fault.properties.slip_rate_mm_year} mm/thn</span>
+                    <span className="text-slate-500 truncate max-w-[90px]">Sesar / Jarak:</span>
+                    <span className="font-mono text-slate-800 font-semibold truncate max-w-[120px]">
+                      {nearestFault.fault.properties.name} ({nearestFault.distanceKm.toFixed(1)} km)
+                    </span>
                   </div>
-                  <div className="pt-1 text-[10px] leading-tight text-slate-600 border-t border-slate-200 mt-1">
-                    {nearestFault.alertLevel === 'high' ? (
-                      <span className="text-red-700 font-semibold">⚠️ Zona Patahan Aktif: Wajib SSGMA & pendetailan daktal penuh.</span>
-                    ) : (
-                      <span className="text-slate-600">Periksa koefisien spektrum percepatan gempa (KDS) tapak proyek.</span>
-                    )}
-                  </div>
+                ) : (
+                  <div className="text-slate-400 text-[9.5px]">Data sesar tidak terjangkau</div>
+                )}
+                <div className="flex justify-between items-baseline pt-0.5 border-t border-slate-200">
+                  <span className="text-slate-500">Kelas Situs:</span>
+                  <strong className="font-mono text-slate-900">
+                    {geotechProfile.sniSiteClassLabel}
+                  </strong>
                 </div>
-              ) : (
-                <div className="text-slate-400 text-[10px]">Data sesar tidak terjangkau</div>
-              )}
+                <div className="flex justify-between items-baseline">
+                  <span className="text-slate-500">Lapisan Keras:</span>
+                  <span className="font-mono text-slate-800 font-semibold">{geotechProfile.hardSoilDepth}</span>
+                </div>
+                <div className="flex justify-between items-baseline">
+                  <span className="text-slate-500">Likuifaksi:</span>
+                  <span className={`font-semibold ${geotechProfile.liquefactionRisk === 'Tinggi' ? 'text-red-700' : 'text-slate-800'}`}>
+                    {geotechProfile.liquefactionRisk}
+                  </span>
+                </div>
+                <div className="pt-1 text-[9.5px] leading-tight text-slate-600 border-t border-slate-200 mt-1">
+                  <span className="font-semibold text-slate-800 block">Rekomendasi Pondasi:</span>
+                  <span className="text-slate-600">{geotechProfile.recommendedFoundation}</span>
+                </div>
+              </div>
             </div>
           </div>
 

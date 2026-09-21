@@ -18,6 +18,7 @@ import { formatBudget, formatDate } from '../utils/formatters';
 import { getProjectContractors, getPrimaryContractor } from '../utils/contractorMatcher';
 import { getProjectRainfallAnalysis } from '../utils/rainfallData';
 import { getProjectRegionalCost } from '../utils/regionalCostData';
+import { getProjectGeotechProfile } from '../utils/geotechSoilData';
 
 const BimViewerModal = lazy(() => import('./BimViewerModal'));
 
@@ -127,6 +128,12 @@ export const ProjectDrawer: React.FC<ProjectDrawerProps> = ({
   const rainfallAnalysis = useMemo(() => {
     if (!props) return null;
     return getProjectRainfallAnalysis(props.province, props.regency, props.project_name);
+  }, [props?.province, props?.regency, props?.project_name]);
+
+  // Geotechnical Soil Profile & Foundation Engineering (SNI 1726)
+  const geotechProfile = useMemo(() => {
+    if (!props) return null;
+    return getProjectGeotechProfile(props.province, props.regency, props.project_name);
   }, [props?.province, props?.regency, props?.project_name]);
 
   // Regional Cost Benchmark & AHSP Unit Price Engine (BPS IKK & PUPR)
@@ -845,7 +852,120 @@ export const ProjectDrawer: React.FC<ProjectDrawerProps> = ({
                 )}
               </section>
 
-              {/* 9. Site Hydrometeorology & Rainfall Mitigation Card (BMKG) */}
+              {/* 9. Geotechnical Soil Profile & Foundation Engineering (SNI 1726) */}
+              {geotechProfile && (
+                <section className="bg-neutral-900/60 border border-neutral-800 rounded-lg p-4 space-y-3">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-1.5">
+                      <span className="text-sm">🔬</span>
+                      <span className="text-[10px] font-bold uppercase tracking-wider text-neutral-300">
+                        Profil Geoteknik & Karakteristik Tanah (SNI 1726)
+                      </span>
+                    </div>
+                    <span className="text-[9px] font-mono px-2 py-0.5 rounded bg-neutral-800 text-neutral-400 border border-neutral-700">
+                      SNI 1726 / Geologi
+                    </span>
+                  </div>
+
+                  {/* Header & Badges Box */}
+                  <div className="p-3 rounded-lg bg-neutral-950/80 border border-neutral-800 space-y-2.5">
+                    <div className="flex items-start justify-between gap-2">
+                      <div>
+                        <span className="text-[9px] uppercase font-bold text-neutral-500 tracking-wider block">
+                          Formasi Geologi Regional
+                        </span>
+                        <div className="text-xs font-semibold text-neutral-200 mt-0.5">
+                          {geotechProfile.geologicalFormation}
+                        </div>
+                        <div className="text-[10px] text-neutral-400 mt-0.5">
+                          Wilayah: <span className="text-neutral-300 font-medium">{geotechProfile.regionName}</span>
+                        </div>
+                      </div>
+
+                      <div className="flex flex-col items-end gap-1 shrink-0">
+                        {/* SNI Site Class Badge */}
+                        <div className={`px-2.5 py-1 rounded border text-right font-mono text-xs font-bold ${geotechProfile.siteClassColorClass}`}>
+                          Kelas Situs: {geotechProfile.sniSiteClass}
+                        </div>
+                        {/* Liquefaction Risk Pill */}
+                        <div className={`px-2 py-0.5 rounded border text-[9.5px] font-medium ${geotechProfile.liquefactionColorClass}`}>
+                          Likuifaksi: {geotechProfile.liquefactionRisk}
+                        </div>
+                      </div>
+                    </div>
+
+                    {/* Dominant Soil & Hard Stratum Depth */}
+                    <div className="grid grid-cols-2 gap-2 pt-2 border-t border-neutral-800/80 text-xs">
+                      <div className="p-2 rounded bg-neutral-900/80 border border-neutral-800/60 space-y-0.5">
+                        <span className="text-[9px] text-neutral-500 uppercase font-semibold block">
+                          Jenis Tanah Dominan
+                        </span>
+                        <div className="font-semibold text-neutral-200 text-[11px] leading-tight">
+                          {geotechProfile.soilClassification}
+                        </div>
+                      </div>
+
+                      <div className="p-2 rounded bg-neutral-900/80 border border-neutral-800/60 space-y-0.5">
+                        <span className="text-[9px] text-neutral-500 uppercase font-semibold block">
+                          Kedalaman Lapisan Keras (N-SPT &gt; 50)
+                        </span>
+                        <div className="font-mono font-bold text-sky-400 text-xs">
+                          ~{geotechProfile.hardSoilDepth}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Key Geotechnical Hazards */}
+                  <div className="space-y-1.5">
+                    <span className="text-[9px] uppercase font-bold text-neutral-400 tracking-wider block">
+                      Bahaya & Tantangan Geoteknik Tapak:
+                    </span>
+                    <div className="space-y-1">
+                      {geotechProfile.keyGeotechHazards.map((hazard, idx) => (
+                        <div
+                          key={idx}
+                          className="flex items-start gap-2 p-2 rounded bg-neutral-950/60 border border-neutral-800/70 text-[11px] text-neutral-300 leading-relaxed"
+                        >
+                          <span className="text-amber-400 shrink-0 text-xs mt-0.5">⚠️</span>
+                          <span>{hazard}</span>
+                        </div>
+                      ))}
+                    </div>
+                  </div>
+
+                  {/* Recommended Foundation & Ground Improvement */}
+                  <div className="p-3 rounded-lg bg-neutral-950 border border-neutral-800 space-y-2">
+                    <div>
+                      <div className="flex items-center gap-1.5 text-[11px] font-bold text-emerald-400">
+                        <span>🏗️</span>
+                        <span>Rekomendasi Rekayasa Pondasi:</span>
+                      </div>
+                      <p className="text-[11px] text-neutral-300 leading-relaxed mt-1 font-medium">
+                        {geotechProfile.recommendedFoundation}
+                      </p>
+                    </div>
+
+                    <div className="pt-2 border-t border-neutral-800/70">
+                      <div className="flex items-center gap-1.5 text-[10.5px] font-semibold text-neutral-300">
+                        <span>🛠️</span>
+                        <span>Metode Perbaikan Tanah (Ground Improvement):</span>
+                      </div>
+                      <p className="text-[10.5px] text-neutral-400 leading-relaxed mt-0.5">
+                        {geotechProfile.groundImprovement}
+                      </p>
+                    </div>
+
+                    <div className="pt-2 border-t border-neutral-800/50">
+                      <p className="text-[10px] text-neutral-400 italic leading-relaxed">
+                        💡 Catatan Geoteknik: {geotechProfile.engineeringAdvice}
+                      </p>
+                    </div>
+                  </div>
+                </section>
+              )}
+
+              {/* 10. Site Hydrometeorology & Rainfall Mitigation Card (BMKG) */}
               {rainfallAnalysis && (
                 <section className="bg-neutral-900/60 border border-neutral-800 rounded-lg p-4 space-y-3">
                   <div className="flex items-center justify-between">
@@ -941,7 +1061,7 @@ export const ProjectDrawer: React.FC<ProjectDrawerProps> = ({
                 </section>
               )}
 
-              {/* 10. Regional Construction Cost Benchmark & AHSP Unit Price Engine */}
+              {/* 11. Regional Construction Cost Benchmark & AHSP Unit Price Engine */}
               {regionalCost && (
                 <section className="bg-neutral-900/60 border border-neutral-800 rounded-lg p-4 space-y-3">
                   <div className="flex items-center justify-between">
@@ -1210,7 +1330,7 @@ export const ProjectDrawer: React.FC<ProjectDrawerProps> = ({
                 </section>
               )}
 
-              {/* 11. Audit Metadata */}
+              {/* 12. Audit Metadata */}
               <div className="px-1 pb-1 space-y-1 text-[10px] text-neutral-500 font-mono border-t border-neutral-800/60 pt-2">
                 <div className="flex items-center justify-between">
                   <span>Source Registry:</span>
