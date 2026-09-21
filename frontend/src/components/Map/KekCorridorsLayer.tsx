@@ -111,7 +111,6 @@ export const KekCorridorsLayer: React.FC<KekCorridorsLayerProps> = ({
 
       const popupHtml = `
         <div style="font-family: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif; min-width: 250px; max-width: 320px; padding: 4px;">
-          {/* Header */}
           <div style="display: flex; align-items: flex-start; justify-content: space-between; gap: 8px; margin-bottom: 6px;">
             <div>
               <div style="font-weight: 800; font-size: 13px; color: #ffffff; line-height: 1.3;">
@@ -126,7 +125,6 @@ export const KekCorridorsLayer: React.FC<KekCorridorsLayerProps> = ({
             </span>
           </div>
 
-          {/* Cluster Badge */}
           <div style="margin-bottom: 8px;">
             <span style="display: inline-flex; align-items: center; gap: 4px; font-size: 10px; font-weight: 700; color: ${config.color}; background: rgba(255,255,255,0.06); border: 1px solid ${config.color}66; padding: 2px 7px; border-radius: 9999px;">
               <span>${config.icon}</span>
@@ -134,7 +132,6 @@ export const KekCorridorsLayer: React.FC<KekCorridorsLayerProps> = ({
             </span>
           </div>
 
-          {/* Key Specs Grid */}
           <div style="font-size: 11px; line-height: 1.5; color: #cbd5e1; border-top: 1px solid #334155; padding-top: 6px; margin-bottom: 6px; display: flex; flex-direction: column; gap: 3px;">
             <div style="display: flex; justify-content: space-between;">
               <span style="color: #94a3b8;">Luas Area:</span>
@@ -152,7 +149,6 @@ export const KekCorridorsLayer: React.FC<KekCorridorsLayerProps> = ({
             </div>
           </div>
 
-          {/* Anchor Tenants */}
           ${
             tenantsHtml
               ? `<div style="border-top: 1px solid rgba(255,255,255,0.07); padding-top: 5px; margin-bottom: 5px;">
@@ -166,7 +162,6 @@ export const KekCorridorsLayer: React.FC<KekCorridorsLayerProps> = ({
               : ''
           }
 
-          {/* Connected Infrastructure */}
           <div style="background: rgba(15, 20, 28, 0.7); border: 1px solid #334155; border-radius: 6px; padding: 5px; margin-top: 4px;">
             <div style="font-size: 9.5px; color: #38bdf8; font-weight: 700; text-transform: uppercase; margin-bottom: 2px;">
               🚢 Akses &amp; Konektivitas Logistik:
