@@ -3,6 +3,7 @@ import { createPortal } from 'react-dom';
 import { ProjectFeature } from '../types/project';
 import { getContractorStats } from '../utils/contractorMatcher';
 import { formatBudget } from '../utils/formatters';
+import { aggregateByIsland } from '../utils/islandAggregator';
 import {
   X,
   Building2,
@@ -11,6 +12,8 @@ import {
   Briefcase,
   ChevronRight,
   Filter,
+  Globe2,
+  Scale,
 } from 'lucide-react';
 
 interface AnalyticsDrawerProps {
@@ -19,6 +22,8 @@ interface AnalyticsDrawerProps {
   projects: ProjectFeature[];
   selectedContractor: string | null;
   onSelectContractor: (contractor: string | null) => void;
+  selectedRegion?: string | 'All';
+  onSelectRegion?: (region: string | 'All') => void;
 }
 
 export const AnalyticsDrawer: React.FC<AnalyticsDrawerProps> = ({
@@ -27,6 +32,8 @@ export const AnalyticsDrawer: React.FC<AnalyticsDrawerProps> = ({
   projects,
   selectedContractor,
   onSelectContractor,
+  selectedRegion = 'All',
+  onSelectRegion,
 }) => {
   // Escape key listener to close drawer
   useEffect(() => {
@@ -40,6 +47,11 @@ export const AnalyticsDrawer: React.FC<AnalyticsDrawerProps> = ({
   // Aggregate Contractors using standardized ContractorMatcher engine
   const contractorAnalytics = useMemo(() => {
     return getContractorStats(projects);
+  }, [projects]);
+
+  // Aggregate Macro Regional Equity (Java vs Luar Jawa)
+  const islandStats = useMemo(() => {
+    return aggregateByIsland(projects);
   }, [projects]);
 
   // Aggregate Funding Schemes
@@ -139,6 +151,100 @@ export const AnalyticsDrawer: React.FC<AnalyticsDrawerProps> = ({
               </button>
             </div>
           )}
+
+          {/* Section 0: Macro Regional Equity (Java vs Luar Jawa) */}
+          <div className="space-y-3 pb-3 border-b border-neutral-800">
+            <div className="flex items-center justify-between">
+              <div className="flex items-center gap-1.5">
+                <Scale className="w-3.5 h-3.5 text-emerald-400" />
+                <span className="text-[10px] font-bold uppercase tracking-wider text-neutral-400">
+                  Pemerataan Wilayah (Jawa vs. Luar Jawa)
+                </span>
+              </div>
+              <span className="text-[10px] font-semibold text-emerald-400 bg-emerald-950/60 border border-emerald-800/80 px-2 py-0.5 rounded-full">
+                Indonesia-Sentris
+              </span>
+            </div>
+
+            {/* Split Equity Bar */}
+            <div className="p-3 rounded-lg bg-[#141a24] border border-neutral-800 space-y-2.5">
+              <div className="flex items-center justify-between text-[11px]">
+                <div className="flex items-center gap-1.5 text-emerald-400 font-semibold">
+                  <Globe2 className="w-3.5 h-3.5" />
+                  <span>Luar Jawa: {islandStats.outerJavaCapexPercentage}%</span>
+                </div>
+                <div className="flex items-center gap-1.5 text-blue-400 font-semibold">
+                  <span>Jawa: {islandStats.javaCapexPercentage}%</span>
+                </div>
+              </div>
+
+              {/* Progress split bar */}
+              <div className="w-full bg-neutral-950 h-2.5 rounded-full overflow-hidden flex gap-0.5 p-0.5 border border-neutral-800">
+                <div
+                  className="bg-emerald-500 h-full rounded-l-full transition-all duration-300"
+                  style={{ width: `${Math.max(islandStats.outerJavaCapexPercentage, 3)}%` }}
+                  title={`Luar Jawa: ${islandStats.outerJavaCapexPercentage}%`}
+                />
+                <div
+                  className="bg-blue-500 h-full rounded-r-full transition-all duration-300"
+                  style={{ width: `${Math.max(islandStats.javaCapexPercentage, 3)}%` }}
+                  title={`Jawa: ${islandStats.javaCapexPercentage}%`}
+                />
+              </div>
+
+              <div className="flex items-center justify-between text-[10px] text-neutral-400 font-mono">
+                <span>{formatBudget(islandStats.outerJavaCapexTrillion)} ({islandStats.outerJavaProjectCount} Proyek)</span>
+                <span>{formatBudget(islandStats.javaCapexTrillion)} ({islandStats.javaProjectCount} Proyek)</span>
+              </div>
+            </div>
+
+            {/* 6 Island Breakdown Grid */}
+            <div className="grid grid-cols-2 gap-2">
+              {islandStats.regions.map((r) => {
+                const isSelected = selectedRegion === r.name;
+                return (
+                  <div
+                    key={r.id}
+                    onClick={() => onSelectRegion && onSelectRegion(isSelected ? 'All' : r.name)}
+                    className={`p-2.5 rounded-lg border transition-all ${
+                      onSelectRegion ? 'cursor-pointer hover:border-neutral-600' : ''
+                    } ${
+                      isSelected
+                        ? 'bg-neutral-800 border-neutral-500 shadow-sm ring-1 ring-neutral-400'
+                        : 'bg-[#141a24] border-neutral-800/80'
+                    }`}
+                  >
+                    <div className="flex items-center justify-between gap-1 mb-1.5">
+                      <div className="flex items-center gap-1.5 min-w-0">
+                        <span
+                          className="w-2 h-2 rounded-full shrink-0"
+                          style={{ backgroundColor: r.color }}
+                        />
+                        <span className="font-semibold text-neutral-200 text-[11px] truncate">
+                          {r.name}
+                        </span>
+                      </div>
+                      <span className="font-mono text-[10px] text-neutral-400 shrink-0">
+                        {r.count} p
+                      </span>
+                    </div>
+
+                    <div className="w-full bg-neutral-950 h-1.5 rounded-full overflow-hidden mb-1">
+                      <div
+                        className="h-full rounded-full transition-all"
+                        style={{ width: `${Math.max(r.percentageCapex, 2)}%`, backgroundColor: r.color }}
+                      />
+                    </div>
+
+                    <div className="flex items-center justify-between text-[10px] font-mono text-neutral-400">
+                      <span className="text-neutral-300 font-semibold">{r.percentageCapex}%</span>
+                      <span>{formatBudget(r.capexTrillion)}</span>
+                    </div>
+                  </div>
+                );
+              })}
+            </div>
+          </div>
 
           {/* Section 1: Top Contractors & Concessionaires */}
           <div className="space-y-3">

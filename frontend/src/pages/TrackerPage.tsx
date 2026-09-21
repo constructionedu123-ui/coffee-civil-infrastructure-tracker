@@ -40,6 +40,8 @@ import { projectMatchesContractor } from '../utils/contractorMatcher';
 import { getRegionForProvince } from '../utils/geo';
 import { WorkModeId, WorkModeConfig } from '../types/workModes';
 import { WorkModeToast } from '../components/WorkModeToast';
+import { RegionalEquityBar } from '../components/RegionalEquityBar';
+import { getMacroRegionForProject } from '../utils/islandAggregator';
 import { Loader2, AlertTriangle } from 'lucide-react';
 
 export const TrackerPage: React.FC = () => {
@@ -466,8 +468,9 @@ export const TrackerPage: React.FC = () => {
 
       // Region Filter
       if (selectedRegion !== 'All') {
+        const projectMacro = getMacroRegionForProject(project);
         const projectRegion = getRegionForProvince(props.province || '');
-        if (projectRegion !== selectedRegion) {
+        if (projectMacro !== selectedRegion && projectRegion !== selectedRegion) {
           return false;
         }
       }
@@ -547,6 +550,20 @@ export const TrackerPage: React.FC = () => {
         projects={filteredProjects}
         allProjectsCount={allProjects.length}
         selectedContractor={selectedContractor}
+      />
+
+      {/* Macro Regional Equity Balance Bar (Java vs. Luar Jawa) */}
+      <RegionalEquityBar
+        projects={allProjects}
+        selectedRegion={selectedRegion}
+        onSelectRegion={setSelectedRegion}
+        onZoomToRegion={(coords, zoom) => {
+          setActiveView('map');
+          if (mapInstance) {
+            mapInstance.flyTo(coords, zoom, { duration: 1.2 });
+          }
+          setFlyToCoords(coords);
+        }}
       />
 
       {/* Filter Bar */}
@@ -672,6 +689,8 @@ export const TrackerPage: React.FC = () => {
         onSelectContractor={(contractor) => {
           setSelectedContractor(contractor);
         }}
+        selectedRegion={selectedRegion}
+        onSelectRegion={setSelectedRegion}
       />
 
       {/* Detailed Slide-out Drawer (Right) */}

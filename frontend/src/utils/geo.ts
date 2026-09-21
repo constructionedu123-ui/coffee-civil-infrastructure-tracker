@@ -5,18 +5,19 @@ export interface RegionGroup {
 
 export const INDONESIA_REGIONS: RegionGroup[] = [
   {
-    name: 'Java (Jawa)',
+    name: 'Jawa',
     provinces: [
       'DKI Jakarta',
       'Jawa Barat',
       'Jawa Tengah',
       'DI Yogyakarta',
+      'D.I. Yogyakarta',
       'Jawa Timur',
       'Banten',
     ],
   },
   {
-    name: 'Sumatra',
+    name: 'Sumatera',
     provinces: [
       'Aceh',
       'Sumatera Utara',
@@ -26,13 +27,14 @@ export const INDONESIA_REGIONS: RegionGroup[] = [
       'Jambi',
       'Sumatera Selatan',
       'Bangka Belitung',
+      'Kepulauan Bangka Belitung',
       'Bengkulu',
       'Lampung',
       'Sumatera (Lintas Provinsi)',
     ],
   },
   {
-    name: 'Kalimantan',
+    name: 'Kalimantan (inc. IKN)',
     provinces: [
       'Kalimantan Barat',
       'Kalimantan Tengah',
@@ -40,6 +42,7 @@ export const INDONESIA_REGIONS: RegionGroup[] = [
       'Kalimantan Timur',
       'Kalimantan Utara',
       'IKN',
+      'Ibu Kota Negara Nusantara',
     ],
   },
   {
@@ -54,11 +57,18 @@ export const INDONESIA_REGIONS: RegionGroup[] = [
     ],
   },
   {
-    name: 'Eastern & Maluku-Papua',
+    name: 'Bali & Nusa Tenggara',
     provinces: [
       'Bali',
       'Nusa Tenggara Barat',
+      'NTB',
       'Nusa Tenggara Timur',
+      'NTT',
+    ],
+  },
+  {
+    name: 'Maluku & Papua',
+    provinces: [
       'Maluku',
       'Maluku Utara',
       'Papua',
@@ -78,13 +88,35 @@ export const INDONESIA_REGIONS: RegionGroup[] = [
 export function getRegionForProvince(province: string | null): string {
   if (!province) return 'Other / Unknown';
 
+  const pLower = province.toLowerCase();
+
+  // Support legacy alias checks
+  if (pLower.includes('jawa') || pLower.includes('jakarta') || pLower.includes('banten') || pLower.includes('yogyakarta')) {
+    return 'Jawa';
+  }
+  if (pLower.includes('sumat') || pLower.includes('aceh') || pLower.includes('riau') || pLower.includes('jambi') || pLower.includes('lampung') || pLower.includes('bengkulu') || pLower.includes('bangka')) {
+    return 'Sumatera';
+  }
+  if (pLower.includes('kaliman') || pLower.includes('ikn') || pLower.includes('nusantara')) {
+    return 'Kalimantan (inc. IKN)';
+  }
+  if (pLower.includes('sulawesi') || pLower.includes('gorontalo')) {
+    return 'Sulawesi';
+  }
+  if (pLower.includes('bali') || pLower.includes('nusa tenggara') || pLower.includes('ntb') || pLower.includes('ntt')) {
+    return 'Bali & Nusa Tenggara';
+  }
+  if (pLower.includes('maluku') || pLower.includes('papua')) {
+    return 'Maluku & Papua';
+  }
+
   for (const group of INDONESIA_REGIONS) {
-    if (group.provinces.some((p) => province.toLowerCase().includes(p.toLowerCase()))) {
+    if (group.provinces.some((p) => pLower.includes(p.toLowerCase()))) {
       return group.name;
     }
   }
 
-  if (province.toLowerCase().includes('lintas') || province.toLowerCase().includes('nasional')) {
+  if (pLower.includes('lintas') || pLower.includes('nasional')) {
     return 'Lintas Provinsi / National';
   }
 
