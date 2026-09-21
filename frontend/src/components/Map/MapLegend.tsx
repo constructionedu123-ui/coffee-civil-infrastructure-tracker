@@ -7,6 +7,7 @@ export interface MapLegendProps {
   showBatchingPlants?: boolean;
   showSupplyBuffers?: boolean;
   showFaultLines?: boolean;
+  showMegathrust?: boolean;
   showQuarries?: boolean;
   showSteelMills?: boolean;
   showCementPlants?: boolean;
@@ -20,6 +21,7 @@ export const MapLegend: React.FC<MapLegendProps> = ({
   showBatchingPlants = false,
   showSupplyBuffers = false,
   showFaultLines = false,
+  showMegathrust = false,
   showQuarries = false,
   showSteelMills = false,
   showCementPlants = false,
@@ -195,6 +197,13 @@ export const MapLegend: React.FC<MapLegendProps> = ({
               <div className="flex items-center gap-2 text-neutral-300 text-[11px] pt-1 border-t border-neutral-800/60">
                 <div className="w-4 h-1 rounded bg-rose-500 shadow-[0_0_6px_#ef4444] shrink-0" />
                 <span>Sesar Aktif (PuSGeN 2017/2024)</span>
+              </div>
+            )}
+
+            {showMegathrust && (
+              <div className="flex items-center gap-2 text-neutral-300 text-[11px] pt-1 border-t border-neutral-800/60">
+                <div className="w-4 h-1.5 rounded bg-red-600 shadow-[0_0_8px_#dc2626] shrink-0" />
+                <span className="text-red-300 font-medium">Zona Megathrust &amp; Tsunami</span>
               </div>
             )}
 

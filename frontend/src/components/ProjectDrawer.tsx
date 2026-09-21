@@ -19,6 +19,8 @@ import { getProjectContractors, getPrimaryContractor } from '../utils/contractor
 import { getProjectRainfallAnalysis } from '../utils/rainfallData';
 import { getProjectRegionalCost } from '../utils/regionalCostData';
 import { getProjectGeotechProfile } from '../utils/geotechSoilData';
+import { MegathrustFeature } from '../types/megathrust';
+import { findNearestMegathrustZone } from '../utils/megathrust';
 
 const BimViewerModal = lazy(() => import('./BimViewerModal'));
 
@@ -29,6 +31,7 @@ interface ProjectDrawerProps {
   batchingPlants?: BatchingPlantFeature[];
   faultLines?: FaultLineFeature[];
   materialHubs?: MaterialHubFeature[];
+  megathrustZones?: MegathrustFeature[];
   onSelectContractor?: (contractor: string) => void;
 }
 
@@ -47,6 +50,7 @@ export const ProjectDrawer: React.FC<ProjectDrawerProps> = ({
   batchingPlants = [],
   faultLines = [],
   materialHubs = [],
+  megathrustZones = [],
   onSelectContractor,
 }) => {
   const [isBimModalOpen, setIsBimModalOpen] = useState(false);
@@ -98,6 +102,12 @@ export const ProjectDrawer: React.FC<ProjectDrawerProps> = ({
     if (!project || !faultLines || faultLines.length === 0) return null;
     return findNearestFaultLine(lat, lon, faultLines);
   }, [project, lat, lon, faultLines]);
+
+  // Nearest Megathrust Subduction & Tsunami Hazard Zone (PuSGeN / BMKG)
+  const nearestMegathrust = useMemo(() => {
+    if (!project || !megathrustZones || megathrustZones.length === 0) return null;
+    return findNearestMegathrustZone(lat, lon, megathrustZones);
+  }, [project, lat, lon, megathrustZones]);
 
   // Nearest Material Supply Hubs (Quarry, Steel, Cement, Facade)
   const nearestQuarry = useMemo(() => {
@@ -844,6 +854,76 @@ export const ProjectDrawer: React.FC<ProjectDrawerProps> = ({
                           : 'Low proximity risk to mapped major onshore active fault ruptures. Standard seismic design coefficients apply based on regional hazard maps.'}
                       </p>
                     </div>
+
+                    {/* Megathrust Subduction & Tsunami Hazard Assessment */}
+                    {nearestMegathrust && (
+                      <div className="p-3 rounded-lg bg-neutral-950/90 border border-neutral-800 space-y-2.5">
+                        <div className="flex items-start justify-between gap-2">
+                          <div>
+                            <div className="flex items-center gap-1.5">
+                              <span className="text-xs">🌊</span>
+                              <span className="text-[9px] uppercase font-bold text-red-400 tracking-wider block">
+                                Nearest Megathrust Subduction Zone
+                              </span>
+                            </div>
+                            <div className="text-[13px] font-bold text-neutral-100 leading-snug mt-0.5">
+                              {nearestMegathrust.zone.properties.name}
+                            </div>
+                            <div className="text-[11px] text-neutral-400 mt-0.5">
+                              Wilayah: <span className="text-neutral-300 font-medium">{nearestMegathrust.zone.properties.segment_zone}</span>
+                            </div>
+                          </div>
+                          <div className="text-right shrink-0">
+                            <div className="text-lg font-bold font-mono text-red-400 tabular-nums">
+                              {nearestMegathrust.distanceKm.toFixed(1)} km
+                            </div>
+                            <span className="text-[9px] text-neutral-500 uppercase font-mono block">Subduction Trench</span>
+                          </div>
+                        </div>
+
+                        <div className="grid grid-cols-3 gap-1.5 pt-1.5 border-t border-neutral-800/80 text-[10px]">
+                          <div className="p-1.5 rounded bg-neutral-900/60 border border-neutral-800/40">
+                            <span className="text-neutral-500 block text-[9px]">Potensi Maks</span>
+                            <strong className="text-red-400 font-mono text-[11px]">Mw {nearestMegathrust.zone.properties.mw_max}</strong>
+                          </div>
+                          <div className="p-1.5 rounded bg-neutral-900/60 border border-neutral-800/40">
+                            <span className="text-neutral-500 block text-[9px]">Slip Rate</span>
+                            <strong className="text-orange-400 font-mono text-[11px]">{nearestMegathrust.zone.properties.slip_rate_cm_year} cm/thn</strong>
+                          </div>
+                          <div className="p-1.5 rounded bg-neutral-900/60 border border-neutral-800/40">
+                            <span className="text-neutral-500 block text-[9px]">Status Segmen</span>
+                            <strong className={`font-mono text-[10px] truncate block ${nearestMegathrust.zone.properties.is_seismic_gap ? 'text-red-400' : 'text-amber-400'}`}>
+                              {nearestMegathrust.zone.properties.is_seismic_gap ? 'Seismic Gap' : 'Aktif'}
+                            </strong>
+                          </div>
+                        </div>
+
+                        {/* Megathrust Threat Warning Banner */}
+                        <div className={`p-2.5 rounded-lg border space-y-1.5 ${nearestMegathrust.badgeClass}`}>
+                          <div className="flex items-center gap-1.5 font-bold text-xs">
+                            <span>{nearestMegathrust.isTsunamiThreat ? '🌊' : '⚡'}</span>
+                            <span>
+                              {nearestMegathrust.isTsunamiThreat
+                                ? '🌊 Zona Bahaya Megathrust & Tsunami Pesisir'
+                                : 'Zona Subduksi Megathrust Regional'}
+                            </span>
+                          </div>
+                          <p className="text-[11px] leading-relaxed opacity-95">
+                            {nearestMegathrust.alertText}
+                          </p>
+                          <div className="pt-1.5 border-t border-red-500/20 text-[10.5px] space-y-1">
+                            <div>
+                              <span className="text-neutral-400">Potensi Tsunami: </span>
+                              <strong className="text-sky-300">{nearestMegathrust.zone.properties.tsunami_potential}</strong>
+                            </div>
+                            <div>
+                              <span className="text-neutral-400">Rekomendasi Rekayasa: </span>
+                              <span className="text-neutral-200">{nearestMegathrust.zone.properties.structural_recommendation}</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    )}
                   </div>
                 ) : (
                   <div className="text-neutral-500 text-xs py-2">
@@ -1427,6 +1507,7 @@ export const ProjectDrawer: React.FC<ProjectDrawerProps> = ({
           batchingPlants={batchingPlants}
           faultLines={faultLines}
           materialHubs={materialHubs}
+          megathrustZones={megathrustZones}
         />
       )}
 

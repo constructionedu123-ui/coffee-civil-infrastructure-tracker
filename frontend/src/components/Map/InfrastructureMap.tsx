@@ -16,6 +16,7 @@ import { formatBudget } from '../../utils/formatters';
 import { getLatestWeatherUrls } from '../../utils/rainRadar';
 import { ProvincialHeatmapLayer } from './ProvincialHeatmapLayer';
 import { KekCorridorsLayer } from './KekCorridorsLayer';
+import { MegathrustLayer } from './MegathrustLayer';
 import { X } from 'lucide-react';
 
 // IKN Nusantara camera preset (Sepaku, East Kalimantan)
@@ -46,6 +47,8 @@ interface InfrastructureMapProps {
   onSelectProvince?: (provinceName: string) => void;
   showKekCorridors?: boolean;
   onToggleKekCorridors?: () => void;
+  showMegathrust?: boolean;
+  onToggleMegathrust?: () => void;
   materialHubs?: MaterialHubFeature[];
   showMaterialHubs?: {
     quarry: boolean;
@@ -87,6 +90,8 @@ export const InfrastructureMap: React.FC<InfrastructureMapProps> = ({
   onSelectProvince,
   showKekCorridors = false,
   onToggleKekCorridors,
+  showMegathrust = false,
+  onToggleMegathrust,
   materialHubs = [],
   showMaterialHubs,
   opportunityFinder,
@@ -1105,6 +1110,13 @@ export const InfrastructureMap: React.FC<InfrastructureMapProps> = ({
         map={mapReady}
         isActive={showKekCorridors}
         onClose={onToggleKekCorridors}
+      />
+
+      {/* Indonesian Megathrust Subduction Segments & Tsunami Hazard Layer */}
+      <MegathrustLayer
+        map={mapReady}
+        isActive={showMegathrust}
+        onClose={onToggleMegathrust}
       />
 
       {/* Floating Weather Overlay Control & Legend */}

@@ -1,0 +1,374 @@
+{
+  "type": "FeatureCollection",
+  "metadata": {
+    "title": "Indonesian Megathrust Subduction Segments & Tsunami Hazard Zones",
+    "source": "Pusat Studi Gempa Nasional (PuSGeN 2017/BMKG) & IUGG Tsunami Commission",
+    "version": "1.0",
+    "total_segments": 11
+  },
+  "features": [
+    {
+      "type": "Feature",
+      "id": "mt-aceh-andaman",
+      "properties": {
+        "id": "mt-aceh-andaman",
+        "name": "Megathrust Aceh - Andaman",
+        "segment_zone": "Pesisir Barat Aceh & Kepulauan Andaman",
+        "mw_max": 9.2,
+        "slip_rate_cm_year": 4.5,
+        "seismic_gap_status": "Post-Rupture Relaxation (Siklus Akumulasi Baru)",
+        "is_seismic_gap": false,
+        "tsunami_potential": "Ekstrem (Run-up historis 20 - 30+ meter)",
+        "threat_level": "extreme",
+        "historical_events": "Megathrust Sumatra-Andaman 26 Des 2004 (Mw 9.1-9.3)",
+        "recurrence_period": "400 - 600 tahun",
+        "structural_recommendation": "Elevasi minimum pelabuhan & coastal jetty > +10m MSL; shelter evakuasi vertikal beton bertulang tahan hempasan hidrodinamis; pemecah gelombang tetrapod.",
+        "center_coords": [5.8, 93.2]
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [90.6, 10.0],
+            [92.0, 6.0],
+            [93.8, 3.0],
+            [95.2, 3.5],
+            [93.5, 6.8],
+            [91.8, 10.5],
+            [90.6, 10.0]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "mt-nias-simeulue",
+      "properties": {
+        "id": "mt-nias-simeulue",
+        "name": "Megathrust Nias - Simeulue",
+        "segment_zone": "Offshore Sumatera Utara, Nias & Simeulue",
+        "mw_max": 8.7,
+        "slip_rate_cm_year": 4.8,
+        "seismic_gap_status": "Partial Stress Release (Ruptur 2005)",
+        "is_seismic_gap": false,
+        "tsunami_potential": "Sangat Tinggi (Run-up 5 - 12 meter)",
+        "threat_level": "high",
+        "historical_events": "Gempa Nias 28 Maret 2005 (Mw 8.6)",
+        "recurrence_period": "~150 - 200 tahun",
+        "structural_recommendation": "Pondasi tiang pancang geser lentur tinggi, revetment pelindung erosi pantai, early warning system tsunami terintegrasi ke site office proyek.",
+        "center_coords": [1.4, 96.5]
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [93.8, 3.0],
+            [95.6, 0.8],
+            [97.0, -0.6],
+            [98.2, -0.2],
+            [96.7, 1.4],
+            [95.2, 3.5],
+            [93.8, 3.0]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "mt-mentawai-siberut",
+      "properties": {
+        "id": "mt-mentawai-siberut",
+        "name": "Megathrust Mentawai - Siberut",
+        "segment_zone": "Sumatera Barat, Kepulauan Mentawai, Padang & Bengkulu",
+        "mw_max": 8.9,
+        "slip_rate_cm_year": 5.2,
+        "seismic_gap_status": "Active Seismic Gap (Kritis - Belum Rilis >190 Tahun)",
+        "is_seismic_gap": true,
+        "tsunami_potential": "Katastropik (Run-up 10 - 15 meter estimasi Padang-Pariaman)",
+        "threat_level": "extreme",
+        "historical_events": "Paleo-megathrust 1797 & 1833 (Segmen Siberut terkunci penuh)",
+        "recurrence_period": "~200 tahun (Saat ini pada fase matang)",
+        "structural_recommendation": "WAJIB Kategori Desain Seismik E/F (SNI 1726). Bangunan fasilitas publik wajib berfungsi ganda sebagai Tempat Evakuasi Sementara (TES) bertingkat kokoh, seawall masif di sepanjang koridor pesisir.",
+        "center_coords": [-1.8, 99.1]
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [97.0, -0.6],
+            [98.4, -2.4],
+            [100.0, -4.0],
+            [101.2, -3.4],
+            [99.7, -1.8],
+            [98.2, -0.2],
+            [97.0, -0.6]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "mt-enggano",
+      "properties": {
+        "id": "mt-enggano",
+        "name": "Megathrust Enggano",
+        "segment_zone": "Offshore Bengkulu Selatan & Pulau Enggano",
+        "mw_max": 8.4,
+        "slip_rate_cm_year": 5.5,
+        "seismic_gap_status": "Active Subduction Zone (Akumulasi Aktif)",
+        "is_seismic_gap": false,
+        "tsunami_potential": "Tinggi (Run-up 4 - 8 meter)",
+        "threat_level": "high",
+        "historical_events": "Gempa Bengkulu 2000 (Mw 7.9) & 2007 (Mw 8.4)",
+        "recurrence_period": "~100 - 150 tahun",
+        "structural_recommendation": "Desain koefisien beban gelombang pasang, perkuatan struktur dermaga terhadap likuifaksi pasir pantai dan gaya apung (buoyancy uplift).",
+        "center_coords": [-5.3, 102.3]
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [100.0, -4.0],
+            [101.8, -5.6],
+            [103.6, -7.0],
+            [104.7, -6.3],
+            [102.9, -5.0],
+            [101.2, -3.4],
+            [100.0, -4.0]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "mt-selat-sunda",
+      "properties": {
+        "id": "mt-selat-sunda",
+        "name": "Megathrust Selat Sunda - Banten",
+        "segment_zone": "Selat Sunda, Ujung Kulon, Banten Selatan & Lampung Selatan",
+        "mw_max": 8.7,
+        "slip_rate_cm_year": 5.8,
+        "seismic_gap_status": "Active Seismic Gap (Status Siaga PuSGeN / BMKG)",
+        "is_seismic_gap": true,
+        "tsunami_potential": "Sangat Tinggi (Run-up 10 - 20 meter di Selat Sunda)",
+        "threat_level": "extreme",
+        "historical_events": "Belum ada pelepasan gempa bumi dangkal raksasa dalam katalog modern",
+        "recurrence_period": "~300 - 500 tahun",
+        "structural_recommendation": "Infrastruktur vital energi & petrokimia Cilegon/Anyer wajib memiliki dinding proteksi gelombang laut (sea defense), jalur evakuasi bebas sumbatan, generator cadangan elevasi tinggi > +15m MSL.",
+        "center_coords": [-7.4, 105.3]
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [103.6, -7.0],
+            [105.0, -7.9],
+            [106.8, -8.6],
+            [107.5, -7.8],
+            [105.8, -7.2],
+            [104.7, -6.3],
+            [103.6, -7.0]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "mt-jabar-jateng",
+      "properties": {
+        "id": "mt-jabar-jateng",
+        "name": "Megathrust Jawa Barat & Tengah",
+        "segment_zone": "Samudera Hindia Selatan Pangandaran, Cilacap & Kebumen",
+        "mw_max": 8.8,
+        "slip_rate_cm_year": 6.0,
+        "seismic_gap_status": "Active Subduction Zone (Akumulasi Deformasi Terkunci)",
+        "is_seismic_gap": true,
+        "tsunami_potential": "Sangat Tinggi (Run-up 8 - 15 meter)",
+        "threat_level": "extreme",
+        "historical_events": "Tsunami Pangandaran 2006 (Mw 7.7 Tsunami Earthquake), Gempa Selatan Jawa 1921",
+        "recurrence_period": "~300 - 400 tahun",
+        "structural_recommendation": "Jalur Pansela Jawa wajib dilengkapi sistem peringatan dini sirene BMKG dan elevated bridge cross-section anti-scour; fondasi jembatan diperdalam tembus lapisan pasir likuifaktif.",
+        "center_coords": [-8.9, 109.2]
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [106.8, -8.6],
+            [109.2, -9.4],
+            [111.5, -9.6],
+            [112.0, -8.8],
+            [109.5, -8.5],
+            [107.5, -7.8],
+            [106.8, -8.6]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "mt-jatim",
+      "properties": {
+        "id": "mt-jatim",
+        "name": "Megathrust Jawa Timur",
+        "segment_zone": "Samudera Hindia Selatan Pacitan, Trenggalek, Malang & Banyuwangi",
+        "mw_max": 8.8,
+        "slip_rate_cm_year": 6.2,
+        "seismic_gap_status": "Active Subduction Zone (Deformasi Lempeng Indo-Australia)",
+        "is_seismic_gap": false,
+        "tsunami_potential": "Sangat Tinggi (Run-up 8 - 14 meter)",
+        "threat_level": "high",
+        "historical_events": "Tsunami Banyuwangi 2 Juni 1994 (Mw 7.8)",
+        "recurrence_period": "~250 - 350 tahun",
+        "structural_recommendation": "Zona sempadan pantai 200 meter dilarang untuk pemukiman padat/pabrik tanpa proteksi penahan gelombang; desain jembatan muara sungai wajib tahan gaya seret tsunami (hydrodynamic drag).",
+        "center_coords": [-9.6, 113.5]
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [111.5, -9.6],
+            [113.8, -9.9],
+            [115.8, -10.2],
+            [116.2, -9.4],
+            [114.2, -9.1],
+            [112.0, -8.8],
+            [111.5, -9.6]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "mt-bali-nusatenggara",
+      "properties": {
+        "id": "mt-bali-nusatenggara",
+        "name": "Megathrust Bali & Nusa Tenggara (Sumba)",
+        "segment_zone": "Palung Jawa Bagian Timur, Bali Selatan, Lombok, Sumbawa & Sumba",
+        "mw_max": 8.5,
+        "slip_rate_cm_year": 6.5,
+        "seismic_gap_status": "Active Subduction Transition Zone",
+        "is_seismic_gap": false,
+        "tsunami_potential": "Sangat Tinggi (Run-up 6 - 12 meter)",
+        "threat_level": "high",
+        "historical_events": "Gempa Tsunami Sumba 19 Agustus 1977 (Mw 8.3)",
+        "recurrence_period": "~150 - 200 tahun",
+        "structural_recommendation": "Kawasan pariwisata tepi pantai (Kuta, Sanur, Mandalika) wajib memiliki masterplan evakuasi vertikal ke hotel bertingkat tinggi dengan konstruksi daktail penuh.",
+        "center_coords": [-10.2, 119.5]
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [115.8, -10.2],
+            [119.5, -10.6],
+            [123.5, -11.2],
+            [124.0, -10.3],
+            [119.8, -9.8],
+            [116.2, -9.4],
+            [115.8, -10.2]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "mt-sulawesi-utara",
+      "properties": {
+        "id": "mt-sulawesi-utara",
+        "name": "Megathrust Sulawesi Utara",
+        "segment_zone": "Palung Sulawesi Utara (North Sulawesi Trench), Gorontalo & Manado",
+        "mw_max": 8.5,
+        "slip_rate_cm_year": 4.2,
+        "seismic_gap_status": "Active Oceanic Trench Subduction",
+        "is_seismic_gap": false,
+        "tsunami_potential": "Tinggi (Run-up 5 - 10 meter)",
+        "threat_level": "high",
+        "historical_events": "Gempa Tolitoli 1996 (Mw 7.9) & Gempa Tambu 1968 (Mw 7.2)",
+        "recurrence_period": "~100 - 150 tahun",
+        "structural_recommendation": "Struktur pelabuhan & coastal road di Teluk Manado/Gorontalo wajib memperhitungkan efek batimetri teluk sempit yang melipatgandakan tinggi gelombang tsunami.",
+        "center_coords": [1.9, 122.9]
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [120.0, 1.4],
+            [122.5, 1.2],
+            [125.5, 1.7],
+            [125.8, 2.5],
+            [122.8, 2.1],
+            [120.0, 2.2],
+            [120.0, 1.4]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "mt-laut-maluku",
+      "properties": {
+        "id": "mt-laut-maluku",
+        "name": "Megathrust Laut Maluku & Filipina",
+        "segment_zone": "Sistem Palung Tabrakan Ganda Halmahera & Busur Sangihe",
+        "mw_max": 8.2,
+        "slip_rate_cm_year": 5.0,
+        "seismic_gap_status": "Extreme Seismicity Collision Zone (Seismisitas Sangat Tinggi)",
+        "is_seismic_gap": false,
+        "tsunami_potential": "Tinggi (Waktu tiba tsunami sangat singkat < 15 menit)",
+        "threat_level": "high",
+        "historical_events": "Sering memicu gempa Mw 7.0+ dengan patahan naik ganda (divergent double subduction)",
+        "recurrence_period": "~50 - 100 tahun",
+        "structural_recommendation": "Infrastruktur hilirisasi nikel Weda Bay & fasilitas maritim Halmahera wajib memiliki sirine otomatis instan dan tanggul pencegah luapan air laut cepat.",
+        "center_coords": [2.0, 126.9]
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [125.2, 0.4],
+            [126.5, 1.8],
+            [127.8, 3.8],
+            [128.8, 3.6],
+            [127.5, 1.4],
+            [126.0, 0.2],
+            [125.2, 0.4]
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "id": "mt-papua-new-guinea",
+      "properties": {
+        "id": "mt-papua-new-guinea",
+        "name": "Megathrust Papua (Palung New Guinea)",
+        "segment_zone": "Palung New Guinea, Samudera Pasifik Utara Biak, Supiori & Jayapura",
+        "mw_max": 8.7,
+        "slip_rate_cm_year": 7.0,
+        "seismic_gap_status": "Fast Convergent Subduction Margin (Lempeng Pasifik)",
+        "is_seismic_gap": false,
+        "tsunami_potential": "Sangat Tinggi (Run-up 7 - 12 meter)",
+        "threat_level": "high",
+        "historical_events": "Gempa & Tsunami Biak 17 Februari 1996 (Mw 8.2)",
+        "recurrence_period": "~100 - 150 tahun",
+        "structural_recommendation": "Perkuatan dermaga pelabuhan samudra Jayapura & Biak terhadap gaya inersia gelombang; hindari konstruksi di atas endapan delta rawa tanpa cerucuk matras beton.",
+        "center_coords": [-1.1, 137.3]
+      },
+      "geometry": {
+        "type": "Polygon",
+        "coordinates": [
+          [
+            [133.0, -0.8],
+            [137.2, -1.4],
+            [141.2, -2.4],
+            [141.5, -1.6],
+            [137.5, -0.6],
+            [133.2, -0.1],
+            [133.0, -0.8]
+          ]
+        ]
+      }
+    }
+  ]
+}

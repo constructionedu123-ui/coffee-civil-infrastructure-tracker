@@ -18,6 +18,10 @@ import {
   MaterialHubFeature,
   MaterialHubFeatureCollection,
 } from '../types/materialHub';
+import {
+  MegathrustFeature,
+  MegathrustFeatureCollection,
+} from '../types/megathrust';
 import { Header } from '../components/Header';
 import { KPICards } from '../components/KPICards';
 import { FilterBar, MaterialHubFilterState } from '../components/FilterBar';
@@ -51,8 +55,10 @@ export const TrackerPage: React.FC = () => {
   const [materialHubs, setMaterialHubs] = useState<MaterialHubFeature[]>([]);
   const [shippingRoutes, setShippingRoutes] = useState<ShippingRouteFeature[]>([]);
   const [portHubs, setPortHubs] = useState<PortHubFeature[]>([]);
+  const [megathrustZones, setMegathrustZones] = useState<MegathrustFeature[]>([]);
   const [showSupplyBuffers, setShowSupplyBuffers] = useState<boolean>(false);
   const [showFaultLines, setShowFaultLines] = useState<boolean>(true);
+  const [showMegathrust, setShowMegathrust] = useState<boolean>(false);
   const [showMaritimeRoutes, setShowMaritimeRoutes] = useState<boolean>(true);
   const [showRainRadar, setShowRainRadar] = useState<boolean>(false);
   const [weatherMode, setWeatherMode] = useState<'radar' | 'satellite'>('radar');
@@ -115,13 +121,14 @@ export const TrackerPage: React.FC = () => {
     async function loadData() {
       try {
         setLoading(true);
-        const [resProjects, resPlants, resFaults, resHubs, resRoutes, resPorts] = await Promise.all([
+        const [resProjects, resPlants, resFaults, resHubs, resRoutes, resPorts, resMegathrust] = await Promise.all([
           fetch('/data/projects.geojson'),
           fetch('/data/batching_plants.geojson'),
           fetch('/data/fault_lines.geojson'),
           fetch('/data/material_hubs.geojson'),
           fetch('/data/shipping_routes.geojson'),
           fetch('/data/port_hubs.geojson'),
+          fetch('/data/megathrust_zones.geojson'),
         ]);
 
         if (!resProjects.ok) {
@@ -165,6 +172,11 @@ export const TrackerPage: React.FC = () => {
         if (resPorts.ok) {
           const dataPorts: PortHubFeatureCollection = await resPorts.json();
           setPortHubs(dataPorts.features || []);
+        }
+
+        if (resMegathrust.ok) {
+          const dataMegathrust: MegathrustFeatureCollection = await resMegathrust.json();
+          setMegathrustZones(dataMegathrust.features || []);
         }
 
         setError(null);
@@ -608,6 +620,8 @@ export const TrackerPage: React.FC = () => {
         }}
         showFaultLines={showFaultLines}
         onToggleFaultLines={() => setShowFaultLines((prev) => !prev)}
+        showMegathrust={showMegathrust}
+        onToggleMegathrust={() => setShowMegathrust((prev) => !prev)}
         showMaritimeRoutes={showMaritimeRoutes}
         onToggleMaritimeRoutes={() => setShowMaritimeRoutes((prev) => !prev)}
         showRainRadar={showRainRadar}
@@ -637,6 +651,8 @@ export const TrackerPage: React.FC = () => {
               showSupplyBuffers={showSupplyBuffers}
               faultLines={faultLines}
               showFaultLines={showFaultLines}
+              showMegathrust={showMegathrust}
+              onToggleMegathrust={() => setShowMegathrust((prev) => !prev)}
               shippingRoutes={shippingRoutes}
               portHubs={portHubs}
               showMaritimeRoutes={showMaritimeRoutes}
@@ -676,6 +692,7 @@ export const TrackerPage: React.FC = () => {
               showBatchingPlants={materialFilters.batching}
               showSupplyBuffers={showSupplyBuffers}
               showFaultLines={showFaultLines}
+              showMegathrust={showMegathrust}
               showMaritimeRoutes={showMaritimeRoutes}
               showQuarries={materialFilters.quarry}
               showSteelMills={materialFilters.steel}
@@ -719,6 +736,7 @@ export const TrackerPage: React.FC = () => {
         batchingPlants={batchingPlants}
         faultLines={faultLines}
         materialHubs={materialHubs}
+        megathrustZones={megathrustZones}
         onSelectContractor={(contractor) => {
           setSelectedContractor(contractor);
         }}

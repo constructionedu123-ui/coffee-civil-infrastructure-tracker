@@ -9,6 +9,8 @@ import { findNearestFaultLine } from '../utils/seismic';
 import { getProjectRainfallAnalysis } from '../utils/rainfallData';
 import { getProjectRegionalCost } from '../utils/regionalCostData';
 import { getProjectGeotechProfile } from '../utils/geotechSoilData';
+import { MegathrustFeature } from '../types/megathrust';
+import { findNearestMegathrustZone } from '../utils/megathrust';
 import { formatBudget } from '../utils/formatters';
 import { getProjectContractors, getPrimaryContractor } from '../utils/contractorMatcher';
 
@@ -17,6 +19,7 @@ export interface ProjectPrintDossierProps {
   batchingPlants?: BatchingPlantFeature[];
   faultLines?: FaultLineFeature[];
   materialHubs?: MaterialHubFeature[];
+  megathrustZones?: MegathrustFeature[];
 }
 
 export const ProjectPrintDossier: React.FC<ProjectPrintDossierProps> = ({
@@ -24,6 +27,7 @@ export const ProjectPrintDossier: React.FC<ProjectPrintDossierProps> = ({
   batchingPlants = [],
   faultLines = [],
   materialHubs = [],
+  megathrustZones = [],
 }) => {
   if (!project) return null;
 
@@ -41,6 +45,11 @@ export const ProjectPrintDossier: React.FC<ProjectPrintDossierProps> = ({
     if (!faultLines.length) return null;
     return findNearestFaultLine(lat, lon, faultLines);
   }, [lat, lon, faultLines]);
+
+  const nearestMegathrust = useMemo(() => {
+    if (!megathrustZones.length) return null;
+    return findNearestMegathrustZone(lat, lon, megathrustZones);
+  }, [lat, lon, megathrustZones]);
 
   const nearestQuarry = useMemo(() => {
     if (!materialHubs.length) return null;
@@ -245,6 +254,14 @@ export const ProjectPrintDossier: React.FC<ProjectPrintDossierProps> = ({
                   </div>
                 ) : (
                   <div className="text-slate-400 text-[9.5px]">Data sesar tidak terjangkau</div>
+                )}
+                {nearestMegathrust && (
+                  <div className="flex justify-between items-baseline pt-0.5">
+                    <span className="text-slate-500 truncate max-w-[90px]">Megathrust:</span>
+                    <span className={`font-mono truncate max-w-[120px] ${nearestMegathrust.isTsunamiThreat ? 'text-red-700 font-bold' : 'text-slate-800 font-semibold'}`}>
+                      {nearestMegathrust.zone.properties.name.replace('Megathrust ', '')} ({nearestMegathrust.distanceKm.toFixed(0)} km)
+                    </span>
+                  </div>
                 )}
                 <div className="flex justify-between items-baseline pt-0.5 border-t border-slate-200">
                   <span className="text-slate-500">Kelas Situs:</span>
