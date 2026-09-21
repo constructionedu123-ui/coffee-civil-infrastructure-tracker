@@ -1,4 +1,5 @@
-import React, { useMemo } from 'react';
+import React, { useMemo, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { ProjectFeature } from '../types/project';
 import { getContractorStats } from '../utils/contractorMatcher';
 import { formatBudget } from '../utils/formatters';
@@ -27,6 +28,15 @@ export const AnalyticsDrawer: React.FC<AnalyticsDrawerProps> = ({
   selectedContractor,
   onSelectContractor,
 }) => {
+  // Escape key listener to close drawer
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === 'Escape' && isOpen) onClose();
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [isOpen, onClose]);
+
   // Aggregate Contractors using standardized ContractorMatcher engine
   const contractorAnalytics = useMemo(() => {
     return getContractorStats(projects);
@@ -66,41 +76,43 @@ export const AnalyticsDrawer: React.FC<AnalyticsDrawerProps> = ({
   const maxContractorCount = contractorAnalytics[0]?.count || 1;
   const totalProjects = projects.length;
 
-  return (
+  if (typeof document === 'undefined') return null;
+
+  return createPortal(
     <>
-      {/* Backdrop */}
+      {/* Dark Subtle Backdrop */}
       <div
         onClick={onClose}
-        className={`fixed inset-0 bg-black/60 z-40 transition-opacity duration-200 ${
+        className={`fixed inset-0 bg-black/50 backdrop-blur-[2px] z-[2400] transition-opacity duration-200 ${
           isOpen ? 'opacity-100 pointer-events-auto' : 'opacity-0 pointer-events-none'
         }`}
       />
 
       {/* Slide-out Drawer */}
       <aside
-        className={`fixed inset-y-0 right-0 z-50 w-full sm:w-[460px] md:w-[500px] bg-neutral-950 border-l border-neutral-800 shadow-2xl flex flex-col transform transition-transform duration-200 ease-in-out ${
+        className={`fixed inset-y-0 right-0 h-full z-[2500] w-full sm:w-[460px] md:w-[500px] max-w-full bg-[#0f141c] border-l border-neutral-800 shadow-2xl flex flex-col text-white transform transition-transform duration-200 ease-in-out ${
           isOpen ? 'translate-x-0' : 'translate-x-full'
         }`}
       >
         {/* Header */}
-        <div className="px-5 py-4 border-b border-neutral-800 bg-neutral-900/90 flex items-center justify-between gap-3 shrink-0">
+        <div className="px-5 py-4 border-b border-neutral-800 bg-[#0f141c] flex items-center justify-between gap-3 shrink-0">
           <div className="flex items-center gap-2.5">
-            <div className="p-1.5 rounded bg-neutral-800 border border-neutral-700 text-blue-400">
+            <div className="p-1.5 rounded-lg bg-neutral-900 border border-neutral-800 text-blue-400">
               <PieChart className="w-4 h-4" />
             </div>
             <div>
               <h2 className="text-sm sm:text-base font-bold text-neutral-100 tracking-tight">
-                Contractor & Funding Analytics
+                Contractor &amp; Funding Analytics
               </h2>
               <p className="text-[11px] text-neutral-400">
-                Portfolio distribution across SOEs & private entities
+                Portfolio distribution across SOEs &amp; private entities
               </p>
             </div>
           </div>
 
           <button
             onClick={onClose}
-            className="text-neutral-400 hover:text-white p-1 rounded hover:bg-neutral-800 transition-colors shrink-0"
+            className="text-neutral-400 hover:text-white p-1.5 rounded-lg hover:bg-neutral-800 transition-colors shrink-0"
             title="Close Analytics (Esc)"
           >
             <X className="w-4 h-4" />
@@ -108,7 +120,7 @@ export const AnalyticsDrawer: React.FC<AnalyticsDrawerProps> = ({
         </div>
 
         {/* Scrollable Body */}
-        <div className="flex-1 overflow-y-auto p-5 space-y-5 text-xs">
+        <div className="flex-1 overflow-y-auto p-5 space-y-5 text-xs text-white pr-2.5">
           {/* Active Filter Notice */}
           {selectedContractor && (
             <div className="bg-blue-950/40 border border-blue-800/60 rounded-lg p-3 flex items-center justify-between gap-2">
@@ -121,7 +133,7 @@ export const AnalyticsDrawer: React.FC<AnalyticsDrawerProps> = ({
               </div>
               <button
                 onClick={() => onSelectContractor(null)}
-                className="px-2 py-1 bg-blue-900/60 hover:bg-blue-800 border border-blue-700/60 rounded text-[11px] font-semibold text-blue-200 transition-colors"
+                className="px-2.5 py-1 bg-blue-900/60 hover:bg-blue-800 border border-blue-700/60 rounded text-[11px] font-semibold text-blue-200 transition-colors"
               >
                 Clear Filter
               </button>
@@ -134,7 +146,7 @@ export const AnalyticsDrawer: React.FC<AnalyticsDrawerProps> = ({
               <div className="flex items-center gap-1.5">
                 <Building2 className="w-3.5 h-3.5 text-neutral-400" />
                 <span className="text-[10px] font-bold uppercase tracking-wider text-neutral-400">
-                  Lead Contractors & Concessionaires
+                  Lead Contractors &amp; Concessionaires
                 </span>
               </div>
               <span className="text-[10px] font-mono text-neutral-500">
@@ -153,13 +165,13 @@ export const AnalyticsDrawer: React.FC<AnalyticsDrawerProps> = ({
                     onClick={() => onSelectContractor(isSelected ? null : c.name)}
                     className={`p-3 rounded-lg border transition-all cursor-pointer group ${
                       isSelected
-                        ? 'bg-blue-950/40 border-blue-600 shadow-sm'
-                        : 'bg-neutral-900/60 hover:bg-neutral-900 border-neutral-800/80 hover:border-neutral-700'
+                        ? 'bg-blue-950/50 border-blue-500 shadow-sm'
+                        : 'bg-[#141a24] hover:bg-[#1a2332] border-neutral-800 hover:border-neutral-700'
                     }`}
                   >
                     <div className="flex items-start justify-between gap-2 mb-1.5">
                       <div className="flex items-center gap-2 flex-1 min-w-0">
-                        <span className="text-[10px] font-mono font-bold text-neutral-500 w-4">
+                        <span className="text-[10px] font-mono font-bold text-neutral-500 w-5">
                           #{idx + 1}
                         </span>
                         <span className="font-semibold text-neutral-200 group-hover:text-blue-400 transition-colors truncate text-xs">
@@ -212,7 +224,7 @@ export const AnalyticsDrawer: React.FC<AnalyticsDrawerProps> = ({
                 return (
                   <div
                     key={s.label}
-                    className="p-3 rounded-lg bg-neutral-900/60 border border-neutral-800/80 space-y-2"
+                    className="p-3 rounded-lg bg-[#141a24] border border-neutral-800 space-y-2"
                   >
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-1.5">
@@ -250,7 +262,7 @@ export const AnalyticsDrawer: React.FC<AnalyticsDrawerProps> = ({
           <div className="p-3 bg-neutral-900/40 border border-neutral-800 rounded-lg space-y-1 text-[11px] text-neutral-400">
             <div className="flex items-center gap-1.5 text-neutral-300 font-semibold">
               <Briefcase className="w-3.5 h-3.5 text-neutral-400" />
-              <span>KPPIP & BPJT Concession Registry</span>
+              <span>KPPIP &amp; BPJT Concession Registry</span>
             </div>
             <p className="text-[10px] text-neutral-500 leading-relaxed">
               Data aggregated from official National Strategic Projects gazette. Select any contractor above to focus the map and table view on their assigned infrastructure assets.
@@ -258,6 +270,7 @@ export const AnalyticsDrawer: React.FC<AnalyticsDrawerProps> = ({
           </div>
         </div>
       </aside>
-    </>
+    </>,
+    document.body
   );
 };

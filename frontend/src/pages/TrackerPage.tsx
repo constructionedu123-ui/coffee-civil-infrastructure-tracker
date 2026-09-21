@@ -661,18 +661,18 @@ export const TrackerPage: React.FC = () => {
             onSelectProject={handleSelectProject}
           />
         )}
-
-        {/* Contractor & BUMN Analytics Drawer */}
-        <AnalyticsDrawer
-          isOpen={isAnalyticsOpen}
-          onClose={() => setIsAnalyticsOpen(false)}
-          projects={allProjects}
-          selectedContractor={selectedContractor}
-          onSelectContractor={(contractor) => {
-            setSelectedContractor(contractor);
-          }}
-        />
       </main>
+
+      {/* Contractor & BUMN Analytics Drawer */}
+      <AnalyticsDrawer
+        isOpen={isAnalyticsOpen}
+        onClose={() => setIsAnalyticsOpen(false)}
+        projects={allProjects}
+        selectedContractor={selectedContractor}
+        onSelectContractor={(contractor) => {
+          setSelectedContractor(contractor);
+        }}
+      />
 
       {/* Detailed Slide-out Drawer (Right) */}
       <ProjectDrawer
