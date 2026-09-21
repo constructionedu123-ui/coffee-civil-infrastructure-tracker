@@ -113,7 +113,7 @@ export const TrackerPage: React.FC = () => {
     'Commercial & Private',
   ]);
   const [selectedStatus, setSelectedStatus] = useState<ProjectStatus | 'All' | 'active_construction_and_tender'>('All');
-  const [selectedTimeFrame, setSelectedTimeFrame] = useState<TimeFrameFilter>('all');
+  const [selectedTimeFrame, setSelectedTimeFrame] = useState<TimeFrameFilter>('active_now');
   const [selectedRegion, setSelectedRegion] = useState<string | 'All'>('All');
 
   // UI Drawer and List states
@@ -520,7 +520,7 @@ export const TrackerPage: React.FC = () => {
 
   const hasActiveFilters =
     searchQuery.trim() !== '' ||
-    selectedTimeFrame !== 'all' ||
+    selectedTimeFrame !== 'active_now' ||
     selectedCategories.length < 6 ||
     selectedStatus !== 'All' ||
     selectedRegion !== 'All' ||
@@ -567,7 +567,7 @@ export const TrackerPage: React.FC = () => {
         totalProjects={temporalProjects.length}
         onResetFilters={() => {
           setSearchQuery('');
-          setSelectedTimeFrame('all');
+          setSelectedTimeFrame('active_now');
           setSelectedCategories(['Transport', 'Energy', 'Water', 'Housing', 'IKN', 'Commercial & Private']);
           setSelectedStatus('All');
           setSelectedRegion('All');

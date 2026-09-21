@@ -62,7 +62,7 @@ export const FilterBar: React.FC<FilterBarProps> = ({
   onToggleCategory,
   selectedStatus,
   onSelectStatus,
-  selectedTimeFrame = 'all',
+  selectedTimeFrame = 'active_now',
   onSelectTimeFrame,
   selectedRegion,
   onSelectRegion,
