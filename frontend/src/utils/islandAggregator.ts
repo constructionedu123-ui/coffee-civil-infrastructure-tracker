@@ -40,8 +40,8 @@ export const MACRO_REGIONS: MacroRegionConfig[] = [
     ],
     keywordsRegex:
       /jakarta|jawa|banten|yogyakarta|yogyakata|cirebon|karawang|bandung|semarang|surabaya|kudus|pekalongan|malabar|jlegwinangun/i,
-    center: [-7.2, 110.0],
-    zoom: 7,
+    center: [-7.4, 110.0],
+    zoom: 6.8,
   },
   {
     id: 'sumatera',
@@ -65,8 +65,8 @@ export const MACRO_REGIONS: MacroRegionConfig[] = [
     ],
     keywordsRegex:
       /aceh|sumatera|sumatra|riau|jambi|bengkulu|lampung|bangka|belitung|dumai|padang|sawahlunto|krui|bengkunat|way jambu|lemong|ulok mukti|penyak/i,
-    center: [-0.5, 101.5],
-    zoom: 6,
+    center: [0.5, 101.5],
+    zoom: 6.0,
   },
   {
     id: 'kalimantan',
@@ -86,8 +86,8 @@ export const MACRO_REGIONS: MacroRegionConfig[] = [
     ],
     keywordsRegex:
       /kalimantan|kalimatan|ikn|nusantara|banjarmasin|kapuas|sepaku|balikpapan|paser|samarinda/i,
-    center: [-0.5, 114.5],
-    zoom: 6,
+    center: [-0.2, 114.5],
+    zoom: 6.0,
   },
   {
     id: 'sulawesi',
@@ -106,8 +106,8 @@ export const MACRO_REGIONS: MacroRegionConfig[] = [
     ],
     keywordsRegex:
       /sulawesi|gorontalo|makassar|palu|muna|buton|wakatobi|konawe|sigi|pangkep|datokarama|manado|kendari/i,
-    center: [-2.0, 121.5],
-    zoom: 6,
+    center: [-1.8, 121.0],
+    zoom: 6.0,
   },
   {
     id: 'bali_nusra',
@@ -126,7 +126,7 @@ export const MACRO_REGIONS: MacroRegionConfig[] = [
     keywordsRegex:
       /bali|nusa tenggara|ntb|ntt|lombok|sumbawa|flores|timor|kupang|mataram|denpasar/i,
     center: [-8.6, 119.5],
-    zoom: 7,
+    zoom: 6.5,
   },
   {
     id: 'maluku_papua',
@@ -147,8 +147,8 @@ export const MACRO_REGIONS: MacroRegionConfig[] = [
     ],
     keywordsRegex:
       /maluku|papua|ambon|jayapura|sorong|merauke|fatamit|mala|ternate|timika|wamena|manokwari/i,
-    center: [-3.8, 134.5],
-    zoom: 6,
+    center: [-3.8, 134.0],
+    zoom: 5.5,
   },
 ];
 

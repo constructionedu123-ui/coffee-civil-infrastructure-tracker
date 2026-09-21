@@ -573,12 +573,19 @@ export const TrackerPage: React.FC = () => {
         projects={allProjects}
         selectedRegion={selectedRegion}
         onSelectRegion={setSelectedRegion}
-        onZoomToRegion={(coords, zoom) => {
+        onZoomToRegion={(coords, zoom, bounds) => {
           setActiveView('map');
           if (mapInstance) {
-            mapInstance.flyTo(coords, zoom, { duration: 1.2 });
+            if (bounds) {
+              mapInstance.fitBounds(bounds, {
+                padding: [40, 40],
+                maxZoom: zoom,
+                animate: true,
+              });
+            } else {
+              mapInstance.flyTo(coords, zoom, { duration: 1.2 });
+            }
           }
-          setFlyToCoords(coords);
         }}
       />
 

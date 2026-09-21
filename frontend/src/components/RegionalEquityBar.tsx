@@ -7,11 +7,51 @@ import {
 import { Scale, Globe2, X } from 'lucide-react';
 import { formatBudget } from '../utils/formatters';
 
+export const ISLAND_MACRO_VIEWS: Record<
+  string,
+  { center: [number, number]; zoom: number; bounds?: [[number, number], [number, number]] }
+> = {
+  "Jawa": {
+    center: [-7.4, 110.0],
+    zoom: 6.8,
+    bounds: [[-8.9, 105.0], [-5.8, 114.6]],
+  },
+  "Sumatera": {
+    center: [0.5, 101.5],
+    zoom: 6.0,
+    bounds: [[-6.0, 95.0], [6.0, 106.5]],
+  },
+  "Kalimantan (inc. IKN)": {
+    center: [-0.2, 114.5],
+    zoom: 6.0,
+    bounds: [[-4.5, 108.5], [4.5, 119.2]],
+  },
+  "Sulawesi": {
+    center: [-1.8, 121.0],
+    zoom: 6.0,
+    bounds: [[-6.0, 118.5], [2.2, 125.5]],
+  },
+  "Bali & Nusa Tenggara": {
+    center: [-8.6, 119.5],
+    zoom: 6.5,
+    bounds: [[-11.2, 114.2], [-7.8, 125.2]],
+  },
+  "Maluku & Papua": {
+    center: [-3.8, 134.0],
+    zoom: 5.5,
+    bounds: [[-9.5, 125.5], [2.0, 141.2]],
+  },
+};
+
 interface RegionalEquityBarProps {
   projects: ProjectFeature[];
   selectedRegion: string | 'All';
   onSelectRegion: (region: string | 'All') => void;
-  onZoomToRegion?: (center: [number, number], zoom: number) => void;
+  onZoomToRegion?: (
+    center: [number, number],
+    zoom: number,
+    bounds?: [[number, number], [number, number]]
+  ) => void;
 }
 
 export const RegionalEquityBar: React.FC<RegionalEquityBarProps> = ({
@@ -29,10 +69,18 @@ export const RegionalEquityBar: React.FC<RegionalEquityBarProps> = ({
   const handleRegionClick = (r: MacroRegionStat) => {
     if (selectedRegion === r.name) {
       onSelectRegion('All');
+      if (onZoomToRegion) {
+        onZoomToRegion([-0.7893, 113.9213], 5);
+      }
     } else {
       onSelectRegion(r.name);
       if (onZoomToRegion) {
-        onZoomToRegion(r.center, r.zoom);
+        const macro = ISLAND_MACRO_VIEWS[r.name];
+        if (macro) {
+          onZoomToRegion(macro.center, macro.zoom, macro.bounds);
+        } else {
+          onZoomToRegion(r.center, r.zoom);
+        }
       }
     }
   };
@@ -77,11 +125,16 @@ export const RegionalEquityBar: React.FC<RegionalEquityBarProps> = ({
 
           {selectedRegion !== 'All' && (
             <button
-              onClick={() => onSelectRegion('All')}
+              onClick={() => {
+                onSelectRegion('All');
+                if (onZoomToRegion) {
+                  onZoomToRegion([-0.7893, 113.9213], 5);
+                }
+              }}
               className="flex items-center gap-1 px-2 py-0.5 rounded bg-neutral-800 hover:bg-neutral-700 border border-neutral-700 text-neutral-300 text-[10px] font-medium transition-colors"
               title="Reset to all regions"
             >
-              <X className="w-3 h-3" />
+              <X className="w-3.5 h-3.5" />
               <span>Reset Wilayah</span>
             </button>
           )}
