@@ -17,6 +17,7 @@ import { CATEGORY_CONFIG, STATUS_CONFIG } from '../constants/categories';
 import { formatBudget, formatDate } from '../utils/formatters';
 import { getProjectContractors, getPrimaryContractor } from '../utils/contractorMatcher';
 import { getProjectRainfallAnalysis } from '../utils/rainfallData';
+import { getProjectRegionalCost } from '../utils/regionalCostData';
 
 const BimViewerModal = lazy(() => import('./BimViewerModal'));
 
@@ -127,6 +128,22 @@ export const ProjectDrawer: React.FC<ProjectDrawerProps> = ({
     if (!props) return null;
     return getProjectRainfallAnalysis(props.province, props.regency, props.project_name);
   }, [props?.province, props?.regency, props?.project_name]);
+
+  // Regional Cost Benchmark & AHSP Unit Price Engine (BPS IKK & PUPR)
+  const regionalCost = useMemo(() => {
+    if (!props) return null;
+    return getProjectRegionalCost(props.province, props.regency, props.project_name);
+  }, [props?.province, props?.regency, props?.project_name]);
+
+  const [costTab, setCostTab] = useState<'materials' | 'ahsp'>('materials');
+  const [calcVolume, setCalcVolume] = useState<string>('100');
+
+  const estimatedConcreteCost = useMemo(() => {
+    if (!regionalCost) return 0;
+    const vol = parseFloat(calcVolume);
+    if (isNaN(vol) || vol <= 0) return 0;
+    return vol * regionalCost.compositeAhsp.struktur_beton_lengkap_m3;
+  }, [calcVolume, regionalCost]);
 
 
 
@@ -924,7 +941,276 @@ export const ProjectDrawer: React.FC<ProjectDrawerProps> = ({
                 </section>
               )}
 
-              {/* 10. Audit Metadata */}
+              {/* 10. Regional Construction Cost Benchmark & AHSP Unit Price Engine */}
+              {regionalCost && (
+                <section className="bg-neutral-900/60 border border-neutral-800 rounded-lg p-4 space-y-3">
+                  <div className="flex items-center justify-between">
+                    <div className="flex items-center gap-1.5">
+                      <span className="text-sm">💰</span>
+                      <span className="text-[10px] font-bold uppercase tracking-wider text-neutral-300">
+                        Indeks Kemahalan & Biaya Konstruksi (BPS / AHSP)
+                      </span>
+                    </div>
+                    <span className="text-[9px] font-mono px-2 py-0.5 rounded bg-neutral-800 text-neutral-400 border border-neutral-700">
+                      BPS IKK / AHSP PUPR
+                    </span>
+                  </div>
+
+                  {/* Top Box: Regional IKK Score & Baseline Comparison */}
+                  <div className="p-3 rounded-lg bg-neutral-950/80 border border-neutral-800 space-y-2">
+                    <div className="flex items-start justify-between gap-2">
+                      <div>
+                        <span className="text-[9px] uppercase font-bold text-neutral-500 tracking-wider block">
+                          Wilayah Acuan & Indeks Kemahalan Konstruksi
+                        </span>
+                        <div className="text-xs font-semibold text-neutral-200 mt-0.5">
+                          {regionalCost.regionName}
+                        </div>
+                      </div>
+                      <div className={`px-2.5 py-1 rounded border text-right ${regionalCost.badgeColorClass}`}>
+                        <div className="text-xs font-bold font-mono">
+                          IKK: {regionalCost.ikkIndex.toFixed(1)}
+                        </div>
+                        <div className="text-[9px] font-medium tracking-tight">
+                          ({regionalCost.diffText})
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="flex items-center justify-between pt-1 border-t border-neutral-800/60 text-[10.5px]">
+                      <span className="text-neutral-400">Klasifikasi Kemahalan:</span>
+                      <span className={`font-semibold px-2 py-0.5 rounded text-[10px] ${regionalCost.badgeColorClass}`}>
+                        {regionalCost.badgeLabel}
+                      </span>
+                    </div>
+
+                    <p className="text-[10.5px] text-neutral-400 leading-relaxed pt-1 border-t border-neutral-800/50 italic">
+                      💡 {regionalCost.logisticsNote}
+                    </p>
+                  </div>
+
+                  {/* Segmented Tab Switcher */}
+                  <div className="flex items-center p-1 bg-neutral-950 rounded-lg border border-neutral-800 text-xs">
+                    <button
+                      type="button"
+                      onClick={() => setCostTab('materials')}
+                      className={`flex-1 py-1.5 px-2 rounded-md font-medium text-[11px] transition-all flex items-center justify-center gap-1.5 ${
+                        costTab === 'materials'
+                          ? 'bg-neutral-800 text-white shadow-sm font-semibold'
+                          : 'text-neutral-400 hover:text-neutral-200'
+                      }`}
+                    >
+                      <span>🧱</span>
+                      <span>Bahan & Upah</span>
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setCostTab('ahsp')}
+                      className={`flex-1 py-1.5 px-2 rounded-md font-medium text-[11px] transition-all flex items-center justify-center gap-1.5 ${
+                        costTab === 'ahsp'
+                          ? 'bg-neutral-800 text-white shadow-sm font-semibold'
+                          : 'text-neutral-400 hover:text-neutral-200'
+                      }`}
+                    >
+                      <span>🏗️</span>
+                      <span>Pekerjaan Jadi (AHSP)</span>
+                    </button>
+                  </div>
+
+                  {/* Tab Content */}
+                  {costTab === 'materials' ? (
+                    <div className="space-y-2.5">
+                      <div className="grid grid-cols-2 gap-2 text-xs">
+                        <div className="p-2 rounded-lg bg-neutral-950/60 border border-neutral-800/80 space-y-0.5">
+                          <span className="text-[9px] text-neutral-500 uppercase font-semibold block truncate">
+                            Ready-Mix K-300
+                          </span>
+                          <div className="font-mono font-bold text-white text-xs">
+                            Rp {regionalCost.materials.beton_k300_m3.toLocaleString('id-ID')}
+                          </div>
+                          <span className="text-[9px] text-neutral-400">per m³ beton segar</span>
+                        </div>
+
+                        <div className="p-2 rounded-lg bg-neutral-950/60 border border-neutral-800/80 space-y-0.5">
+                          <span className="text-[9px] text-neutral-500 uppercase font-semibold block truncate">
+                            Besi Beton Ulir (BJTS)
+                          </span>
+                          <div className="font-mono font-bold text-white text-xs">
+                            Rp {regionalCost.materials.besi_beton_kg.toLocaleString('id-ID')}
+                          </div>
+                          <span className="text-[9px] text-neutral-400">per kg material</span>
+                        </div>
+
+                        <div className="p-2 rounded-lg bg-neutral-950/60 border border-neutral-800/80 space-y-0.5">
+                          <span className="text-[9px] text-neutral-500 uppercase font-semibold block truncate">
+                            Semen Portland 50kg
+                          </span>
+                          <div className="font-mono font-bold text-white text-xs">
+                            Rp {regionalCost.materials.semen_50kg_sak.toLocaleString('id-ID')}
+                          </div>
+                          <span className="text-[9px] text-neutral-400">per sak (tipe 1)</span>
+                        </div>
+
+                        <div className="p-2 rounded-lg bg-neutral-950/60 border border-neutral-800/80 space-y-0.5">
+                          <span className="text-[9px] text-neutral-500 uppercase font-semibold block truncate">
+                            Pasir Pasang / Beton
+                          </span>
+                          <div className="font-mono font-bold text-white text-xs">
+                            Rp {regionalCost.materials.pasir_m3.toLocaleString('id-ID')}
+                          </div>
+                          <span className="text-[9px] text-neutral-400">per m³ stockpile</span>
+                        </div>
+                      </div>
+
+                      {/* Upah Tenaga Kerja */}
+                      <div className="p-2.5 rounded-lg bg-neutral-950/70 border border-neutral-800 space-y-1.5">
+                        <span className="text-[9px] uppercase font-bold text-neutral-400 tracking-wider block">
+                          Standar Upah Harian Lapangan (7 Jam Kerja):
+                        </span>
+                        <div className="grid grid-cols-3 gap-1.5 text-center">
+                          <div className="p-1.5 bg-neutral-900/80 rounded border border-neutral-800/60">
+                            <span className="text-[9px] text-neutral-500 block truncate">Pekerja Kasar</span>
+                            <span className="font-mono font-bold text-neutral-200 text-xs block mt-0.5 truncate">
+                              Rp {regionalCost.laborDaily.pekerja.toLocaleString('id-ID')}
+                            </span>
+                          </div>
+                          <div className="p-1.5 bg-neutral-900/80 rounded border border-neutral-800/60">
+                            <span className="text-[9px] text-neutral-500 block truncate">Tukang Batu/Besi</span>
+                            <span className="font-mono font-bold text-sky-300 text-xs block mt-0.5 truncate">
+                              Rp {regionalCost.laborDaily.tukang.toLocaleString('id-ID')}
+                            </span>
+                          </div>
+                          <div className="p-1.5 bg-neutral-900/80 rounded border border-neutral-800/60">
+                            <span className="text-[9px] text-neutral-500 block truncate">Mandor</span>
+                            <span className="font-mono font-bold text-amber-300 text-xs block mt-0.5 truncate">
+                              Rp {regionalCost.laborDaily.mandor.toLocaleString('id-ID')}
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  ) : (
+                    <div className="space-y-2">
+                      <div className="p-2.5 rounded-lg bg-neutral-950/60 border border-neutral-800/80 flex items-center justify-between">
+                        <div className="space-y-0.5 pr-2">
+                          <div className="font-semibold text-neutral-200 text-xs">
+                            Struktur Beton Bertulang Lengkap
+                          </div>
+                          <div className="text-[10px] text-neutral-400 leading-tight">
+                            K-300 + 120 kg Besi BJTS + Bekisting 2x + Upah
+                          </div>
+                        </div>
+                        <div className="text-right shrink-0">
+                          <div className="font-mono font-bold text-white text-xs">
+                            Rp {regionalCost.compositeAhsp.struktur_beton_lengkap_m3.toLocaleString('id-ID')}
+                          </div>
+                          <span className="text-[9px] text-neutral-400">per m³ jadi</span>
+                        </div>
+                      </div>
+
+                      <div className="p-2.5 rounded-lg bg-neutral-950/60 border border-neutral-800/80 flex items-center justify-between">
+                        <div className="space-y-0.5 pr-2">
+                          <div className="font-semibold text-neutral-200 text-xs">
+                            Galian Tanah Keras / Berbatu
+                          </div>
+                          <div className="text-[10px] text-neutral-400 leading-tight">
+                            Excavator, perapihan dasar & disposal 5 km
+                          </div>
+                        </div>
+                        <div className="text-right shrink-0">
+                          <div className="font-mono font-bold text-white text-xs">
+                            Rp {regionalCost.compositeAhsp.galian_tanah_m3.toLocaleString('id-ID')}
+                          </div>
+                          <span className="text-[9px] text-neutral-400">per m³ lepas</span>
+                        </div>
+                      </div>
+
+                      <div className="p-2.5 rounded-lg bg-neutral-950/60 border border-neutral-800/80 flex items-center justify-between">
+                        <div className="space-y-0.5 pr-2">
+                          <div className="font-semibold text-neutral-200 text-xs">
+                            Tiang Pancang Spun Pile Ø400–500
+                          </div>
+                          <div className="text-[10px] text-neutral-400 leading-tight">
+                            Pengadaan precast K-600 & pemancangan hydraulic
+                          </div>
+                        </div>
+                        <div className="text-right shrink-0">
+                          <div className="font-mono font-bold text-white text-xs">
+                            Rp {regionalCost.compositeAhsp.tiang_pancang_m.toLocaleString('id-ID')}
+                          </div>
+                          <span className="text-[9px] text-neutral-400">per meter lari</span>
+                        </div>
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Interactive Quick Estimator */}
+                  <div className="p-3 rounded-lg bg-neutral-950 border border-neutral-800/90 space-y-2.5">
+                    <div className="flex items-center justify-between">
+                      <div className="flex items-center gap-1 text-[11px] font-bold text-neutral-300">
+                        <span>⚡</span>
+                        <span>Hitung Cepat Biaya Struktur Beton:</span>
+                      </div>
+                      <span className="text-[9px] text-neutral-500 font-mono">Estimator Cepat</span>
+                    </div>
+
+                    <div className="flex items-center gap-2">
+                      <div className="relative flex-1">
+                        <input
+                          type="number"
+                          min="1"
+                          step="10"
+                          value={calcVolume}
+                          onChange={(e) => setCalcVolume(e.target.value)}
+                          placeholder="Volume m³"
+                          className="w-full bg-neutral-900 border border-neutral-700 focus:border-sky-500 focus:outline-none rounded px-3 py-1.5 text-xs text-white font-mono font-bold placeholder-neutral-500 pr-10"
+                        />
+                        <span className="absolute right-2.5 top-1.5 text-[11px] text-neutral-400 font-mono">m³</span>
+                      </div>
+
+                      <div className="flex items-center gap-1">
+                        {['50', '100', '250', '500'].map((vol) => (
+                          <button
+                            key={vol}
+                            type="button"
+                            onClick={() => setCalcVolume(vol)}
+                            className={`px-2 py-1 rounded text-[10px] font-mono transition-colors border ${
+                              calcVolume === vol
+                                ? 'bg-sky-950 text-sky-300 border-sky-600 font-bold'
+                                : 'bg-neutral-900 text-neutral-400 border-neutral-800 hover:bg-neutral-800'
+                            }`}
+                          >
+                            {vol}
+                          </button>
+                        ))}
+                      </div>
+                    </div>
+
+                    <div className="p-2.5 rounded bg-neutral-900/90 border border-neutral-800 flex items-center justify-between">
+                      <div>
+                        <span className="text-[9px] uppercase font-bold text-neutral-400 tracking-wider block">
+                          Estimasi Kasar Anggaran Struktur:
+                        </span>
+                        <span className="text-[10px] text-neutral-500 font-mono">
+                          {calcVolume || 0} m³ × Rp {(regionalCost.compositeAhsp.struktur_beton_lengkap_m3 / 1e6).toFixed(2)} Jt/m³
+                        </span>
+                      </div>
+                      <div className="text-right">
+                        <div className="text-sm font-bold font-mono text-emerald-400">
+                          Rp {estimatedConcreteCost.toLocaleString('id-ID')}
+                        </div>
+                        {estimatedConcreteCost >= 1e9 && (
+                          <span className="text-[10px] text-emerald-300/80 font-mono block">
+                            (~Rp {(estimatedConcreteCost / 1e9).toFixed(2)} Miliar)
+                          </span>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                </section>
+              )}
+
+              {/* 11. Audit Metadata */}
               <div className="px-1 pb-1 space-y-1 text-[10px] text-neutral-500 font-mono border-t border-neutral-800/60 pt-2">
                 <div className="flex items-center justify-between">
                   <span>Source Registry:</span>

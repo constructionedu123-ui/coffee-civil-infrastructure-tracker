@@ -7,6 +7,7 @@ import { MaterialHubFeature } from '../types/materialHub';
 import { findNearestBatchingPlants, findNearestMaterialHubs } from '../utils/logistics';
 import { findNearestFaultLine } from '../utils/seismic';
 import { getProjectRainfallAnalysis } from '../utils/rainfallData';
+import { getProjectRegionalCost } from '../utils/regionalCostData';
 import { formatBudget } from '../utils/formatters';
 import { getProjectContractors, getPrimaryContractor } from '../utils/contractorMatcher';
 
@@ -57,6 +58,10 @@ export const ProjectPrintDossier: React.FC<ProjectPrintDossierProps> = ({
 
   const rainfall = useMemo(() => {
     return getProjectRainfallAnalysis(props.province, props.regency, props.project_name);
+  }, [props.province, props.regency, props.project_name]);
+
+  const regionalCost = useMemo(() => {
+    return getProjectRegionalCost(props.province, props.regency, props.project_name);
   }, [props.province, props.regency, props.project_name]);
 
   const allContractors = useMemo(() => {
@@ -189,6 +194,21 @@ export const ProjectPrintDossier: React.FC<ProjectPrintDossierProps> = ({
               </td>
               <td className="p-1.5 font-mono text-[10px] text-slate-700">
                 {lat.toFixed(5)}° N/S, {lon.toFixed(5)}° E
+              </td>
+            </tr>
+            <tr className="border-t border-slate-200">
+              <td className="bg-slate-100 font-semibold p-1.5 text-slate-700 border-r border-slate-300">
+                Indeks Biaya BPS (IKK)
+              </td>
+              <td className="p-1.5 font-medium text-slate-800 border-r border-slate-200">
+                <strong className="font-mono text-slate-900">IKK {regionalCost.ikkIndex.toFixed(1)}</strong>{' '}
+                <span className="text-[10px] text-slate-600">({regionalCost.diffText})</span>
+              </td>
+              <td className="bg-slate-100 font-semibold p-1.5 text-slate-700 border-r border-slate-300">
+                Acuan Struktur Beton
+              </td>
+              <td className="p-1.5 font-mono font-bold text-slate-900">
+                Rp {regionalCost.compositeAhsp.struktur_beton_lengkap_m3.toLocaleString('id-ID')}/m³
               </td>
             </tr>
           </tbody>
@@ -324,6 +344,44 @@ export const ProjectPrintDossier: React.FC<ProjectPrintDossierProps> = ({
             </div>
           </div>
         </div>
+
+        {/* ── Sub-baris Indeks Biaya & Harga Acuan AHSP PUPR ── */}
+        <div className="mt-2 border border-slate-300 rounded p-2 bg-slate-50">
+          <div className="flex items-center justify-between border-b border-slate-200 pb-1 mb-1.5">
+            <span className="font-bold text-slate-900 flex items-center gap-1 text-[10.5px]">
+              <span>💰</span> Indeks Kemahalan & Acuan AHSP PUPR ({regionalCost.regionName})
+            </span>
+            <span className="font-mono text-[9px] font-bold px-1.5 py-0.5 rounded bg-slate-200 text-slate-800">
+              IKK: {regionalCost.ikkIndex.toFixed(1)} ({regionalCost.diffText}) • {regionalCost.badgeLabel}
+            </span>
+          </div>
+          <div className="grid grid-cols-4 gap-2 text-[10px]">
+            <div>
+              <span className="text-slate-500 block text-[9px]">Ready-Mix K-300:</span>
+              <strong className="text-slate-900 font-mono text-[10px]">
+                Rp {regionalCost.materials.beton_k300_m3.toLocaleString('id-ID')}/m³
+              </strong>
+            </div>
+            <div>
+              <span className="text-slate-500 block text-[9px]">Besi Beton BJTS:</span>
+              <strong className="text-slate-900 font-mono text-[10px]">
+                Rp {regionalCost.materials.besi_beton_kg.toLocaleString('id-ID')}/kg
+              </strong>
+            </div>
+            <div>
+              <span className="text-slate-500 block text-[9px]">Upah Tukang (7 jam):</span>
+              <strong className="text-slate-900 font-mono text-[10px]">
+                Rp {regionalCost.laborDaily.tukang.toLocaleString('id-ID')}/hari
+              </strong>
+            </div>
+            <div>
+              <span className="text-slate-500 block text-[9px]">Struktur Beton Lengkap:</span>
+              <strong className="text-slate-900 font-mono text-[10px]">
+                Rp {regionalCost.compositeAhsp.struktur_beton_lengkap_m3.toLocaleString('id-ID')}/m³
+              </strong>
+            </div>
+          </div>
+        </div>
       </div>
 
       {/* ── SECTION 3: REKOMENDASI METODE KERJA & CATATAN TEKNIS ── */}
@@ -356,7 +414,7 @@ export const ProjectPrintDossier: React.FC<ProjectPrintDossierProps> = ({
       {/* ── FOOTER & VERIFIKASI RESMI ── */}
       <div className="border-t border-slate-300 pt-2 text-[9px] text-slate-500 font-mono flex items-center justify-between">
         <div>
-          <div>Sumber Data: <strong>KPPIP, Kementerian Pekerjaan Umum, BMKG, PuSGeN 2017/2024, LPSE Inaproc</strong></div>
+          <div>Sumber Data: <strong>KPPIP, Kementerian Pekerjaan Umum, BPS (IKK), BMKG, PuSGeN 2017/2024, LPSE Inaproc</strong></div>
           <div className="text-[8.5px] text-slate-400 mt-0.5">
             Dokumen ini di-generate secara otomatis oleh platform Coffee Civil untuk keperluan tinjauan teknis awal.
           </div>
