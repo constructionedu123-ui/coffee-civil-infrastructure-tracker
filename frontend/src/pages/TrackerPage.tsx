@@ -46,6 +46,12 @@ import { WorkModeId, WorkModeConfig } from '../types/workModes';
 import { WorkModeToast } from '../components/WorkModeToast';
 import { RegionalEquityBar } from '../components/RegionalEquityBar';
 import { getMacroRegionForProject } from '../utils/islandAggregator';
+import {
+  TimeFrameFilter,
+  filterProjectsByTimeFrame,
+  getTimeFrameContextText,
+} from '../utils/timeFilter';
+import { normalizeCapexTrillion } from '../utils/islandAggregator';
 import { Loader2, AlertTriangle } from 'lucide-react';
 
 export const TrackerPage: React.FC = () => {
@@ -107,6 +113,7 @@ export const TrackerPage: React.FC = () => {
     'Commercial & Private',
   ]);
   const [selectedStatus, setSelectedStatus] = useState<ProjectStatus | 'All' | 'active_construction_and_tender'>('All');
+  const [selectedTimeFrame, setSelectedTimeFrame] = useState<TimeFrameFilter>('all');
   const [selectedRegion, setSelectedRegion] = useState<string | 'All'>('All');
 
   // UI Drawer and List states
@@ -431,9 +438,27 @@ export const TrackerPage: React.FC = () => {
     });
   };
 
+  // Base projects filtered by selected temporal era / time frame
+  const temporalProjects = useMemo(() => {
+    return filterProjectsByTimeFrame(allProjects, selectedTimeFrame);
+  }, [allProjects, selectedTimeFrame]);
+
+  // Context subtitle for Regional Equity Bar
+  const timeFrameContextText = useMemo(() => {
+    const capex = temporalProjects.reduce(
+      (sum, p) => sum + (p.properties.budget_idr || 0),
+      0
+    );
+    return getTimeFrameContextText(
+      selectedTimeFrame,
+      temporalProjects.length,
+      normalizeCapexTrillion(capex)
+    );
+  }, [selectedTimeFrame, temporalProjects]);
+
   // Filter projects by Search, Category, Status, Region, and Contractor
   const filteredProjects = useMemo(() => {
-    return allProjects.filter((project) => {
+    return temporalProjects.filter((project) => {
       const props = project.properties;
 
       // Contractor Filter
@@ -491,10 +516,11 @@ export const TrackerPage: React.FC = () => {
 
       return true;
     });
-  }, [allProjects, searchQuery, selectedCategories, selectedStatus, selectedRegion, selectedContractor]);
+  }, [temporalProjects, searchQuery, selectedCategories, selectedStatus, selectedRegion, selectedContractor]);
 
   const hasActiveFilters =
     searchQuery.trim() !== '' ||
+    selectedTimeFrame !== 'all' ||
     selectedCategories.length < 6 ||
     selectedStatus !== 'All' ||
     selectedRegion !== 'All' ||
@@ -538,9 +564,10 @@ export const TrackerPage: React.FC = () => {
         searchQuery={searchQuery}
         onSearchChange={setSearchQuery}
         totalFiltered={filteredProjects.length}
-        totalProjects={allProjects.length}
+        totalProjects={temporalProjects.length}
         onResetFilters={() => {
           setSearchQuery('');
+          setSelectedTimeFrame('all');
           setSelectedCategories(['Transport', 'Energy', 'Water', 'Housing', 'IKN', 'Commercial & Private']);
           setSelectedStatus('All');
           setSelectedRegion('All');
@@ -564,15 +591,17 @@ export const TrackerPage: React.FC = () => {
       {/* KPI Cards */}
       <KPICards
         projects={filteredProjects}
-        allProjectsCount={allProjects.length}
+        allProjectsCount={temporalProjects.length}
         selectedContractor={selectedContractor}
       />
 
       {/* Macro Regional Equity Balance Bar (Java vs. Luar Jawa) */}
       <RegionalEquityBar
-        projects={allProjects}
+        projects={temporalProjects}
         selectedRegion={selectedRegion}
         onSelectRegion={setSelectedRegion}
+        selectedTimeFrame={selectedTimeFrame}
+        timeFrameContextText={timeFrameContextText}
         onZoomToRegion={(coords, zoom, bounds) => {
           setActiveView('map');
           if (mapInstance) {
@@ -597,9 +626,11 @@ export const TrackerPage: React.FC = () => {
         onToggleCategory={handleToggleCategory}
         selectedStatus={selectedStatus}
         onSelectStatus={setSelectedStatus}
+        selectedTimeFrame={selectedTimeFrame}
+        onSelectTimeFrame={setSelectedTimeFrame}
         selectedRegion={selectedRegion}
         onSelectRegion={setSelectedRegion}
-        allProjects={allProjects}
+        allProjects={temporalProjects}
         selectedContractor={selectedContractor}
         onSelectContractor={setSelectedContractor}
         onClearContractor={() => setSelectedContractor(null)}
@@ -723,7 +754,7 @@ export const TrackerPage: React.FC = () => {
       <AnalyticsDrawer
         isOpen={isAnalyticsOpen}
         onClose={() => setIsAnalyticsOpen(false)}
-        projects={allProjects}
+        projects={temporalProjects}
         selectedContractor={selectedContractor}
         onSelectContractor={(contractor) => {
           setSelectedContractor(contractor);

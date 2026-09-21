@@ -6,6 +6,7 @@ import { INDONESIA_REGIONS } from "../utils/geo";
 import { getContractorStats } from "../utils/contractorMatcher";
 import { WorkModeId, WorkModeConfig } from "../types/workModes";
 import { WorkModeSelector } from "./WorkModeSelector";
+import { TimeFrameFilter, TIMEFRAME_OPTIONS } from "../utils/timeFilter";
 
 export interface MaterialHubFilterState {
   quarry: boolean;
@@ -20,6 +21,8 @@ interface FilterBarProps {
   onToggleCategory: (category: ProjectCategory) => void;
   selectedStatus: ProjectStatus | "All" | "active_construction_and_tender";
   onSelectStatus: (status: ProjectStatus | "All" | "active_construction_and_tender") => void;
+  selectedTimeFrame?: TimeFrameFilter;
+  onSelectTimeFrame?: (timeFrame: TimeFrameFilter) => void;
   selectedRegion: string | "All";
   onSelectRegion: (region: string | "All") => void;
   allProjects: ProjectFeature[];
@@ -59,6 +62,8 @@ export const FilterBar: React.FC<FilterBarProps> = ({
   onToggleCategory,
   selectedStatus,
   onSelectStatus,
+  selectedTimeFrame = 'all',
+  onSelectTimeFrame,
   selectedRegion,
   onSelectRegion,
   allProjects,
@@ -267,6 +272,37 @@ export const FilterBar: React.FC<FilterBarProps> = ({
             ))}
           </select>
         </div>
+
+        {/* Temporal Time-Frame & Era Filter Dropdown */}
+        {onSelectTimeFrame && (
+          <div className="flex items-center gap-1.5">
+            <span className="text-neutral-500 text-[10px] uppercase font-semibold hidden sm:inline">
+              Periode:
+            </span>
+            <select
+              value={selectedTimeFrame}
+              onChange={(e) => onSelectTimeFrame(e.target.value as TimeFrameFilter)}
+              className={`border rounded px-2.5 py-1 text-xs focus:outline-none transition-colors font-medium cursor-pointer ${
+                selectedTimeFrame === 'active_now'
+                  ? 'text-emerald-300 border-emerald-500/70 bg-emerald-950/40 shadow-sm shadow-emerald-500/10 font-bold'
+                  : selectedTimeFrame === 'last_5_years'
+                  ? 'text-sky-300 border-sky-500/70 bg-sky-950/40 font-semibold'
+                  : selectedTimeFrame === 'rpjmn_2020_2024'
+                  ? 'text-amber-300 border-amber-500/70 bg-amber-950/40 font-semibold'
+                  : selectedTimeFrame === 'legacy_2015_2019'
+                  ? 'text-orange-300 border-orange-500/70 bg-orange-950/40 font-semibold'
+                  : 'bg-neutral-900 text-neutral-300 border-neutral-800 hover:border-neutral-700'
+              }`}
+              title="Filter Proyek Berdasarkan Periode Waktu & Era Anggaran"
+            >
+              {TIMEFRAME_OPTIONS.map((opt) => (
+                <option key={opt.id} value={opt.id}>
+                  {opt.label}
+                </option>
+              ))}
+            </select>
+          </div>
+        )}
 
         {/* IKN Nusantara Camera Preset */}
         {onFocusIKN && (

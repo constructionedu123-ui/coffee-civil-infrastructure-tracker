@@ -6,6 +6,7 @@ import {
 } from '../utils/islandAggregator';
 import { Scale, Globe2, X } from 'lucide-react';
 import { formatBudget } from '../utils/formatters';
+import { TimeFrameFilter, TIMEFRAME_OPTIONS } from '../utils/timeFilter';
 
 export const ISLAND_MACRO_VIEWS: Record<
   string,
@@ -52,6 +53,8 @@ interface RegionalEquityBarProps {
     zoom: number,
     bounds?: [[number, number], [number, number]]
   ) => void;
+  selectedTimeFrame?: TimeFrameFilter;
+  timeFrameContextText?: string;
 }
 
 export const RegionalEquityBar: React.FC<RegionalEquityBarProps> = ({
@@ -59,6 +62,8 @@ export const RegionalEquityBar: React.FC<RegionalEquityBarProps> = ({
   selectedRegion,
   onSelectRegion,
   onZoomToRegion,
+  selectedTimeFrame,
+  timeFrameContextText,
 }) => {
   const [hoveredRegion, setHoveredRegion] = useState<MacroRegionStat | null>(null);
 
@@ -102,6 +107,12 @@ export const RegionalEquityBar: React.FC<RegionalEquityBarProps> = ({
             <span className="hidden sm:inline-block text-[10px] text-neutral-500">
               (Macro Regional Equity)
             </span>
+            {selectedTimeFrame && selectedTimeFrame !== 'all' && (
+              <span className="px-2 py-0.5 rounded-full bg-blue-950/80 border border-blue-700/60 text-[9.5px] font-mono text-blue-300 font-semibold flex items-center gap-1 shadow-sm">
+                <span>{TIMEFRAME_OPTIONS.find((t) => t.id === selectedTimeFrame)?.icon}</span>
+                <span>{TIMEFRAME_OPTIONS.find((t) => t.id === selectedTimeFrame)?.shortLabel}</span>
+              </span>
+            )}
           </div>
         </div>
 
@@ -140,6 +151,14 @@ export const RegionalEquityBar: React.FC<RegionalEquityBarProps> = ({
           )}
         </div>
       </div>
+
+      {/* Dynamic Time-Frame Context Subtitle */}
+      {timeFrameContextText && (
+        <div className="text-[10px] text-sky-300/90 mb-1 font-medium flex items-center gap-1.5 overflow-hidden text-ellipsis whitespace-nowrap bg-sky-950/30 border border-sky-900/50 rounded px-2 py-0.5">
+          <span className="shrink-0">ℹ️</span>
+          <span className="truncate">{timeFrameContextText}</span>
+        </div>
+      )}
 
       {/* Multi-Segmented Horizontal Equity Bar */}
       <div className="relative group/bar py-0.5">
