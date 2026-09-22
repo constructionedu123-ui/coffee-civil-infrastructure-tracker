@@ -65,16 +65,16 @@ export const Header: React.FC<HeaderProps> = ({
     <header className="bg-[#0b0f17] border-b border-neutral-800 px-4 sm:px-6 py-2.5 sticky top-0 z-30 flex flex-col md:flex-row md:items-center md:justify-between gap-2.5">
       {/* Brand & Editorial Title */}
       <div className="flex items-center gap-3">
-        <div className="w-7 h-7 rounded bg-neutral-800 border border-neutral-700 flex items-center justify-center text-xs font-mono font-bold text-neutral-200 shrink-0">
-          PSN
+        <div className="px-2 h-7 rounded bg-neutral-800 border border-neutral-700 flex items-center justify-center text-[11px] font-mono font-bold text-neutral-200 shrink-0 tracking-wider">
+          RADAR
         </div>
         <div>
           <div className="flex items-baseline gap-2">
             <h1 className="text-sm sm:text-base font-bold text-neutral-100 tracking-tight">
-              Indonesian National Infrastructure Tracker (PSN)
+              Indonesian National Infrastructure Tracker
             </h1>
             <span className="hidden lg:inline text-[11px] text-neutral-400 font-medium">
-              Katalog Proyek Strategis Nasional & Swasta
+              Katalog Proyek Nasional, Komersial & Fasilitas Konstruksi
             </span>
           </div>
           <p className="text-[11px] text-neutral-500 hidden sm:block">
