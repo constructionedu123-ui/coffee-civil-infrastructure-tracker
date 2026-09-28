@@ -1,15 +1,9 @@
-import React, { useState, useEffect, Suspense, lazy } from 'react';
+import React, { Suspense, lazy } from 'react';
 import { Loader2 } from 'lucide-react';
 
 // Code-split route modules
 const InfrastructureTracker = lazy(() =>
   import('./pages/TrackerPage').then((module) => ({ default: module.TrackerPage }))
-);
-
-const MixDesignSimulator = lazy(() =>
-  import('./components/MixDesign/MixDesignSimulator').then((module) => ({
-    default: module.MixDesignSimulator,
-  }))
 );
 
 const LoadingFallback: React.FC = () => (
@@ -20,47 +14,6 @@ const LoadingFallback: React.FC = () => (
 );
 
 export const App: React.FC = () => {
-  const [currentPath, setCurrentPath] = useState<string>(() => {
-    if (typeof window !== 'undefined') {
-      return (window.location.pathname + window.location.hash).toLowerCase();
-    }
-    return '/';
-  });
-
-  useEffect(() => {
-    const updatePath = () => {
-      setCurrentPath((window.location.pathname + window.location.hash).toLowerCase());
-    };
-
-    window.addEventListener('popstate', updatePath);
-    window.addEventListener('hashchange', updatePath);
-
-    return () => {
-      window.removeEventListener('popstate', updatePath);
-      window.removeEventListener('hashchange', updatePath);
-    };
-  }, []);
-
-  // 1. Path-Based Check:
-  // If window.location.pathname.includes('mix-design') or pathname === '/mix-design' (or /concrete)
-  const isMixDesignRoute =
-    currentPath.includes('mix-design') ||
-    currentPath.includes('/mix-design') ||
-    currentPath.includes('concrete');
-
-  if (isMixDesignRoute) {
-    // Render ONLY the Concrete Mix Design Lab (Sieve Analysis curve, JMF calculator, Batching scaler)
-    return (
-      <Suspense fallback={<LoadingFallback />}>
-        <div className="w-screen h-screen flex flex-col bg-[#0b0f17] text-slate-100 overflow-hidden font-['Plus_Jakarta_Sans',sans-serif] print:w-auto print:h-auto print:overflow-visible print:bg-white print-reset-container">
-          <MixDesignSimulator />
-        </div>
-      </Suspense>
-    );
-  }
-
-  // Otherwise (for '/' or '/tracker'):
-  // Render ONLY the Infrastructure Tracker (Map, PSN Index, Batching Plant layers)
   return (
     <Suspense fallback={<LoadingFallback />}>
       <InfrastructureTracker />

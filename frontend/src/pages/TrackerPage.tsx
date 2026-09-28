@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useMemo, useRef } from 'react';
+import React, { useState, useEffect, useMemo, useRef, Suspense, lazy } from 'react';
 import {
   ProjectFeature,
   ProjectCategory,
@@ -54,6 +54,18 @@ import {
 import { normalizeCapexTrillion } from '../utils/islandAggregator';
 import { Loader2, AlertTriangle } from 'lucide-react';
 
+const ConstructionSandbox = lazy(() =>
+  import('../components/ConstructionSandbox/ConstructionSandbox').then((m) => ({
+    default: m.ConstructionSandbox,
+  }))
+);
+
+const MixDesignSimulator = lazy(() =>
+  import('../components/MixDesign/MixDesignSimulator').then((m) => ({
+    default: m.MixDesignSimulator,
+  }))
+);
+
 export const TrackerPage: React.FC = () => {
   const [allProjects, setAllProjects] = useState<ProjectFeature[]>([]);
   const [batchingPlants, setBatchingPlants] = useState<BatchingPlantFeature[]>([]);
@@ -84,6 +96,46 @@ export const TrackerPage: React.FC = () => {
 
   // View Switcher State ('map' | 'table')
   const [activeView, setActiveView] = useState<'map' | 'table'>('map');
+
+  // Main Header Navigation Mode Switcher: [ 🗺️ PSN Map | 🏗️ 4D Site Simulator | 📊 Cost Control ]
+  const [mainTab, setMainTab] = useState<'map' | 'simulator' | 'cost'>(() => {
+    if (typeof window !== 'undefined') {
+      const hash = window.location.hash.toLowerCase();
+      const path = window.location.pathname.toLowerCase();
+      const search = window.location.search.toLowerCase();
+      if (
+        hash.includes('simulator') ||
+        hash.includes('4d') ||
+        path.includes('simulator') ||
+        search.includes('tab=simulator')
+      ) {
+        return 'simulator';
+      }
+      if (
+        hash.includes('cost') ||
+        path.includes('mix-design') ||
+        search.includes('tab=cost')
+      ) {
+        return 'cost';
+      }
+    }
+    return 'map';
+  });
+
+  const handleMainTabChange = (tab: 'map' | 'simulator' | 'cost') => {
+    setMainTab(tab);
+    if (typeof window !== 'undefined') {
+      const url = new URL(window.location.href);
+      if (tab === 'simulator') {
+        url.hash = 'simulator';
+      } else if (tab === 'cost') {
+        url.hash = 'cost';
+      } else {
+        url.hash = '';
+      }
+      window.history.replaceState(null, '', `${url.pathname}${url.search}${url.hash}`);
+    }
+  };
 
   // Analytics & Submission Modal States
   const [isAnalyticsOpen, setIsAnalyticsOpen] = useState<boolean>(false);
@@ -586,10 +638,44 @@ export const TrackerPage: React.FC = () => {
         onOpenSubmitModal={() => setIsSubmitModalOpen(true)}
         isOpportunityFinderOpen={isOpportunityFinderOpen}
         onToggleOpportunityFinder={handleToggleOpportunityFinder}
+        mainTab={mainTab}
+        onMainTabChange={handleMainTabChange}
       />
 
-      {/* KPI Cards */}
-      <KPICards
+      {mainTab === 'simulator' ? (
+        <main className="relative flex-1 w-full overflow-hidden flex flex-col">
+          <Suspense
+            fallback={
+              <div className="w-full h-full bg-[#0a0f1d] flex flex-col items-center justify-center gap-3 text-slate-300">
+                <Loader2 className="w-8 h-8 text-amber-500 animate-spin" />
+                <span className="text-xs font-semibold tracking-wide text-neutral-400">
+                  Memuat 4D Civil Construction Simulation Sandbox...
+                </span>
+              </div>
+            }
+          >
+            <ConstructionSandbox onBackToMap={() => handleMainTabChange('map')} />
+          </Suspense>
+        </main>
+      ) : mainTab === 'cost' ? (
+        <main className="relative flex-1 w-full overflow-hidden flex flex-col bg-[#0b0f17]">
+          <Suspense
+            fallback={
+              <div className="w-full h-full bg-[#0b0f17] flex flex-col items-center justify-center gap-3 text-slate-300">
+                <Loader2 className="w-8 h-8 text-sky-500 animate-spin" />
+                <span className="text-xs font-semibold tracking-wide text-neutral-400">
+                  Memuat Concrete Mix & Cost Control Lab...
+                </span>
+              </div>
+            }
+          >
+            <MixDesignSimulator />
+          </Suspense>
+        </main>
+      ) : (
+        <>
+          {/* KPI Cards */}
+          <KPICards
         projects={filteredProjects}
         allProjectsCount={temporalProjects.length}
         selectedContractor={selectedContractor}
@@ -749,6 +835,8 @@ export const TrackerPage: React.FC = () => {
           />
         )}
       </main>
+        </>
+      )}
 
       {/* Contractor & BUMN Analytics Drawer */}
       <AnalyticsDrawer

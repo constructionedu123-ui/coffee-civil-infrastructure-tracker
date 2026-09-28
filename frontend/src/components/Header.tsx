@@ -28,6 +28,8 @@ interface HeaderProps {
   onOpenSubmitModal?: () => void;
   isOpportunityFinderOpen?: boolean;
   onToggleOpportunityFinder?: () => void;
+  mainTab?: 'map' | 'simulator' | 'cost';
+  onMainTabChange?: (tab: 'map' | 'simulator' | 'cost') => void;
 }
 
 export const Header: React.FC<HeaderProps> = ({
@@ -46,6 +48,8 @@ export const Header: React.FC<HeaderProps> = ({
   onOpenSubmitModal,
   isOpportunityFinderOpen,
   onToggleOpportunityFinder,
+  mainTab = 'map',
+  onMainTabChange,
 }) => {
   const [isExportOpen, setIsExportOpen] = useState(false);
   const exportRef = useRef<HTMLDivElement>(null);
@@ -62,7 +66,7 @@ export const Header: React.FC<HeaderProps> = ({
   }, []);
 
   return (
-    <header className="bg-[#0b0f17] border-b border-neutral-800 px-4 sm:px-6 py-2.5 sticky top-0 z-30 flex flex-col md:flex-row md:items-center md:justify-between gap-2.5">
+    <header className="bg-[#0b0f17] border-b border-neutral-800 px-4 sm:px-6 py-2.5 sticky top-0 z-30 flex flex-col md:flex-row md:items-center md:justify-between gap-2.5 print:hidden">
       {/* Brand & Editorial Title */}
       <div className="flex items-center gap-3">
         <div className="px-2 h-7 rounded bg-neutral-800 border border-neutral-700 flex items-center justify-center text-[11px] font-mono font-bold text-neutral-200 shrink-0 tracking-wider">
@@ -83,8 +87,51 @@ export const Header: React.FC<HeaderProps> = ({
         </div>
       </div>
 
+      {/* Primary Navigation Switcher Tab: [ 🗺️ PSN Map | 🏗️ 4D Site Simulator | 📊 Cost Control ] */}
+      <div className="flex items-center bg-neutral-900 border border-neutral-800 rounded-xl p-1 shrink-0 shadow-inner">
+        <button
+          onClick={() => onMainTabChange?.('map')}
+          className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
+            mainTab === 'map'
+              ? 'bg-blue-600 text-white shadow-sm shadow-blue-900/40'
+              : 'text-neutral-400 hover:text-neutral-200 hover:bg-neutral-800/60'
+          }`}
+          title="Peta Proyek Strategis Nasional (PSN) & Koridor Infrastruktur"
+        >
+          <span>🗺️</span>
+          <span>PSN Map</span>
+        </button>
+
+        <button
+          onClick={() => onMainTabChange?.('simulator')}
+          className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
+            mainTab === 'simulator'
+              ? 'bg-amber-600 text-white shadow-sm shadow-amber-900/40'
+              : 'text-neutral-400 hover:text-neutral-200 hover:bg-neutral-800/60'
+          }`}
+          title="Simulasi 4D Phasing & Logistik Alat Berat Koridor 2.5km"
+        >
+          <span>🏗️</span>
+          <span>4D Site Simulator</span>
+        </button>
+
+        <button
+          onClick={() => onMainTabChange?.('cost')}
+          className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
+            mainTab === 'cost'
+              ? 'bg-emerald-600 text-white shadow-sm shadow-emerald-900/40'
+              : 'text-neutral-400 hover:text-neutral-200 hover:bg-neutral-800/60'
+          }`}
+          title="Laboratorium Mix Design Beton & Pengendalian Biaya AHSP"
+        >
+          <span>📊</span>
+          <span>Cost Control</span>
+        </button>
+      </div>
+
       {/* Controls: Search, View Switcher & Export */}
-      <div className="flex items-center flex-wrap sm:flex-nowrap gap-2.5 w-full md:w-auto justify-between sm:justify-end">
+      {mainTab === 'map' ? (
+        <div className="flex items-center flex-wrap sm:flex-nowrap gap-2.5 w-full md:w-auto justify-between sm:justify-end">
         {/* Search Bar */}
         <div className="relative flex-1 sm:w-64">
           <Search className="w-3.5 h-3.5 text-neutral-500 absolute left-2.5 top-1/2 -translate-y-1/2 pointer-events-none" />
@@ -238,6 +285,33 @@ export const Header: React.FC<HeaderProps> = ({
           )}
         </div>
       </div>
+      ) : mainTab === 'simulator' ? (
+        <div className="flex items-center gap-3">
+          <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-xl bg-neutral-900 border border-neutral-800 text-xs text-neutral-300">
+            <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
+            <span className="font-semibold text-neutral-200">Corridor Tol Japek II Selatan</span>
+            <span className="text-neutral-500">•</span>
+            <span className="font-mono text-amber-400">2.5 km (25 Spans)</span>
+            <span className="text-neutral-500">•</span>
+            <span className="text-neutral-400">Jembatan Cisadane</span>
+          </div>
+          <div className="px-2.5 py-1 rounded-lg bg-amber-500/10 border border-amber-500/30 text-[11px] font-mono text-amber-300 font-semibold">
+            BIM 4D PHASING V2.4
+          </div>
+        </div>
+      ) : (
+        <div className="flex items-center gap-3">
+          <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-xl bg-neutral-900 border border-neutral-800 text-xs text-neutral-300">
+            <span className="w-2 h-2 rounded-full bg-blue-400" />
+            <span className="font-semibold text-neutral-200">Concrete Mix & Sieve Lab</span>
+            <span className="text-neutral-500">•</span>
+            <span className="text-neutral-400">SNI 7656 / ACI 211 & AHSP PUPR</span>
+          </div>
+          <div className="px-2.5 py-1 rounded-lg bg-blue-500/10 border border-blue-500/30 text-[11px] font-mono text-blue-300 font-semibold">
+            COST CONTROL ENGINE
+          </div>
+        </div>
+      )}
     </header>
   );
 };
