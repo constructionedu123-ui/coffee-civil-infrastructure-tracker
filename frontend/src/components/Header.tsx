@@ -1,4 +1,5 @@
-import React, { useState, useRef, useEffect } from 'react';
+import React, { useState, useRef, useEffect, useMemo } from 'react';
+import { useNavigate, useLocation } from 'react-router-dom';
 import {
   Search,
   RotateCcw,
@@ -28,8 +29,8 @@ interface HeaderProps {
   onOpenSubmitModal?: () => void;
   isOpportunityFinderOpen?: boolean;
   onToggleOpportunityFinder?: () => void;
-  mainTab?: 'map' | 'simulator' | 'cost';
-  onMainTabChange?: (tab: 'map' | 'simulator' | 'cost') => void;
+  mainTab?: 'map' | 'simulator' | 'mixDesign' | 'cost';
+  onMainTabChange?: (tab: 'map' | 'simulator' | 'mixDesign' | 'cost') => void;
 }
 
 export const Header: React.FC<HeaderProps> = ({
@@ -53,6 +54,31 @@ export const Header: React.FC<HeaderProps> = ({
 }) => {
   const [isExportOpen, setIsExportOpen] = useState(false);
   const exportRef = useRef<HTMLDivElement>(null);
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const currentTab: 'map' | 'simulator' | 'mixDesign' = useMemo(() => {
+    if (mainTab && mainTab !== 'map') {
+      return mainTab === 'cost' ? 'mixDesign' : mainTab;
+    }
+    const path = location.pathname.toLowerCase();
+    if (path.includes('simulator') || path.includes('4d')) return 'simulator';
+    if (path.includes('mix-design') || path.includes('concrete')) return 'mixDesign';
+    return 'map';
+  }, [mainTab, location.pathname]);
+
+  const handleTabClick = (tab: 'map' | 'simulator' | 'mixDesign') => {
+    if (onMainTabChange) {
+      onMainTabChange(tab);
+    }
+    if (tab === 'map') {
+      navigate('/radar');
+    } else if (tab === 'simulator') {
+      navigate('/4d-simulator');
+    } else if (tab === 'mixDesign') {
+      navigate('/mix-design');
+    }
+  };
 
   // Close dropdown on click outside
   useEffect(() => {
@@ -87,12 +113,12 @@ export const Header: React.FC<HeaderProps> = ({
         </div>
       </div>
 
-      {/* Primary Navigation Switcher Tab: [ 🗺️ PSN Map | 🏗️ 4D Site Simulator | 📊 Cost Control ] */}
+      {/* Primary Navigation Switcher Tab: [ 🗺️ PSN Map | 🏗️ 4D Site Simulator | 🧪 Mix Design Lab ] */}
       <div className="flex items-center bg-neutral-900 border border-neutral-800 rounded-xl p-1 shrink-0 shadow-inner">
         <button
-          onClick={() => onMainTabChange?.('map')}
+          onClick={() => handleTabClick('map')}
           className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
-            mainTab === 'map'
+            currentTab === 'map'
               ? 'bg-blue-600 text-white shadow-sm shadow-blue-900/40'
               : 'text-neutral-400 hover:text-neutral-200 hover:bg-neutral-800/60'
           }`}
@@ -103,9 +129,9 @@ export const Header: React.FC<HeaderProps> = ({
         </button>
 
         <button
-          onClick={() => onMainTabChange?.('simulator')}
+          onClick={() => handleTabClick('simulator')}
           className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
-            mainTab === 'simulator'
+            currentTab === 'simulator'
               ? 'bg-amber-600 text-white shadow-sm shadow-amber-900/40'
               : 'text-neutral-400 hover:text-neutral-200 hover:bg-neutral-800/60'
           }`}
@@ -116,176 +142,176 @@ export const Header: React.FC<HeaderProps> = ({
         </button>
 
         <button
-          onClick={() => onMainTabChange?.('cost')}
+          onClick={() => handleTabClick('mixDesign')}
           className={`flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-xs font-semibold transition-all ${
-            mainTab === 'cost'
+            currentTab === 'mixDesign'
               ? 'bg-emerald-600 text-white shadow-sm shadow-emerald-900/40'
               : 'text-neutral-400 hover:text-neutral-200 hover:bg-neutral-800/60'
           }`}
-          title="Laboratorium Mix Design Beton & Pengendalian Biaya AHSP"
+          title="Laboratorium Mix Design Beton SNI 7656 / ACI 211 & Job Mix Formula"
         >
-          <span>📊</span>
-          <span>Cost Control</span>
+          <span>🧪</span>
+          <span>Mix Design Lab</span>
         </button>
       </div>
 
       {/* Controls: Search, View Switcher & Export */}
-      {mainTab === 'map' ? (
+      {currentTab === 'map' ? (
         <div className="flex items-center flex-wrap sm:flex-nowrap gap-2.5 w-full md:w-auto justify-between sm:justify-end">
-        {/* Search Bar */}
-        <div className="relative flex-1 sm:w-64">
-          <Search className="w-3.5 h-3.5 text-neutral-500 absolute left-2.5 top-1/2 -translate-y-1/2 pointer-events-none" />
-          <input
-            type="text"
-            value={searchQuery}
-            onChange={(e) => onSearchChange(e.target.value)}
-            placeholder="Filter project, province, contractor..."
-            className="w-full bg-neutral-900 border border-neutral-800 rounded-md pl-8 pr-7 py-1.5 text-xs text-neutral-200 placeholder-neutral-500 focus:outline-none focus:border-neutral-600 transition-colors"
-          />
-          {searchQuery && (
+          {/* Search Bar */}
+          <div className="relative flex-1 sm:w-64">
+            <Search className="w-3.5 h-3.5 text-neutral-500 absolute left-2.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={(e) => onSearchChange(e.target.value)}
+              placeholder="Filter project, province, contractor..."
+              className="w-full bg-neutral-900 border border-neutral-800 rounded-md pl-8 pr-7 py-1.5 text-xs text-neutral-200 placeholder-neutral-500 focus:outline-none focus:border-neutral-600 transition-colors"
+            />
+            {searchQuery && (
+              <button
+                onClick={() => onSearchChange('')}
+                className="absolute right-2 top-1/2 -translate-y-1/2 text-neutral-500 hover:text-neutral-300 text-xs px-1"
+              >
+                ✕
+              </button>
+            )}
+          </div>
+
+          {/* Live filtered count pill */}
+          <div className="flex items-center gap-1 text-xs px-2.5 py-1.5 rounded-md bg-neutral-900 border border-neutral-800 text-neutral-400 font-mono tabular-nums whitespace-nowrap">
+            <span className="font-semibold text-neutral-200">{totalFiltered}</span>
+            <span>/</span>
+            <span>{totalProjects}</span>
+          </div>
+
+          {/* Reset button if filters active */}
+          {hasActiveFilters && (
             <button
-              onClick={() => onSearchChange('')}
-              className="absolute right-2 top-1/2 -translate-y-1/2 text-neutral-500 hover:text-neutral-300 text-xs px-1"
+              onClick={onResetFilters}
+              title="Reset filters"
+              className="p-1.5 text-neutral-400 hover:text-white bg-neutral-900 hover:bg-neutral-800 rounded-md border border-neutral-800 transition-colors flex items-center justify-center shrink-0"
             >
-              ✕
+              <RotateCcw className="w-3.5 h-3.5" />
             </button>
           )}
-        </div>
 
-        {/* Live filtered count pill */}
-        <div className="flex items-center gap-1 text-xs px-2.5 py-1.5 rounded-md bg-neutral-900 border border-neutral-800 text-neutral-400 font-mono tabular-nums whitespace-nowrap">
-          <span className="font-semibold text-neutral-200">{totalFiltered}</span>
-          <span>/</span>
-          <span>{totalProjects}</span>
-        </div>
+          {/* Segmented View Switcher [ Map | Table ] */}
+          <div className="flex items-center bg-neutral-900 border border-neutral-800 rounded-md p-0.5 shrink-0">
+            <button
+              onClick={() => onViewChange('map')}
+              className={`flex items-center gap-1.5 px-2.5 py-1 rounded text-xs font-semibold transition-colors ${
+                activeView === 'map'
+                  ? 'bg-neutral-800 text-white shadow-sm'
+                  : 'text-neutral-400 hover:text-neutral-200'
+              }`}
+              title="Switch to Map View"
+            >
+              <Map className="w-3.5 h-3.5" />
+              <span>Map</span>
+            </button>
+            <button
+              onClick={() => onViewChange('table')}
+              className={`flex items-center gap-1.5 px-2.5 py-1 rounded text-xs font-semibold transition-colors ${
+                activeView === 'table'
+                  ? 'bg-neutral-800 text-white shadow-sm'
+                  : 'text-neutral-400 hover:text-neutral-200'
+              }`}
+              title="Switch to Table View"
+            >
+              <Table2 className="w-3.5 h-3.5" />
+              <span>Table</span>
+            </button>
+          </div>
 
-        {/* Reset button if filters active */}
-        {hasActiveFilters && (
-          <button
-            onClick={onResetFilters}
-            title="Reset filters"
-            className="p-1.5 text-neutral-400 hover:text-white bg-neutral-900 hover:bg-neutral-800 rounded-md border border-neutral-800 transition-colors flex items-center justify-center shrink-0"
-          >
-            <RotateCcw className="w-3.5 h-3.5" />
-          </button>
-        )}
+          {/* Radius Opportunity Finder Button */}
+          {onToggleOpportunityFinder && (
+            <button
+              onClick={onToggleOpportunityFinder}
+              className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-md border text-xs font-semibold transition-all shrink-0 ${
+                isOpportunityFinderOpen
+                  ? 'bg-blue-600 text-white border-blue-400 shadow-sm shadow-blue-900/30'
+                  : 'bg-neutral-900 hover:bg-neutral-800 text-neutral-300 hover:text-white border-neutral-800'
+              }`}
+              title="Cari Peluang Proyek dalam Radius Fasilitas (Vendor & Contractor Leads)"
+            >
+              <span className="text-sm leading-none">🎯</span>
+              <span className="hidden sm:inline font-medium">Cari Peluang</span>
+            </button>
+          )}
 
-        {/* Segmented View Switcher [ Map | Table ] */}
-        <div className="flex items-center bg-neutral-900 border border-neutral-800 rounded-md p-0.5 shrink-0">
+          {/* Analytics Toggle Button */}
           <button
-            onClick={() => onViewChange('map')}
-            className={`flex items-center gap-1.5 px-2.5 py-1 rounded text-xs font-semibold transition-colors ${
-              activeView === 'map'
-                ? 'bg-neutral-800 text-white shadow-sm'
-                : 'text-neutral-400 hover:text-neutral-200'
-            }`}
-            title="Switch to Map View"
-          >
-            <Map className="w-3.5 h-3.5" />
-            <span>Map</span>
-          </button>
-          <button
-            onClick={() => onViewChange('table')}
-            className={`flex items-center gap-1.5 px-2.5 py-1 rounded text-xs font-semibold transition-colors ${
-              activeView === 'table'
-                ? 'bg-neutral-800 text-white shadow-sm'
-                : 'text-neutral-400 hover:text-neutral-200'
-            }`}
-            title="Switch to Table View"
-          >
-            <Table2 className="w-3.5 h-3.5" />
-            <span>Table</span>
-          </button>
-        </div>
-
-        {/* Radius Opportunity Finder Button */}
-        {onToggleOpportunityFinder && (
-          <button
-            onClick={onToggleOpportunityFinder}
-            className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-md border text-xs font-semibold transition-all shrink-0 ${
-              isOpportunityFinderOpen
-                ? 'bg-blue-600 text-white border-blue-400 shadow-sm shadow-blue-900/30'
+            onClick={onToggleAnalytics}
+            className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-md border text-xs font-semibold transition-colors shrink-0 ${
+              isAnalyticsOpen
+                ? 'bg-blue-600 text-white border-blue-500 shadow-sm'
                 : 'bg-neutral-900 hover:bg-neutral-800 text-neutral-300 hover:text-white border-neutral-800'
             }`}
-            title="Cari Peluang Proyek dalam Radius Fasilitas (Vendor & Contractor Leads)"
+            title="Open Contractor & Financing Analytics Drawer"
           >
-            <span className="text-sm leading-none">🎯</span>
-            <span className="hidden sm:inline font-medium">Cari Peluang</span>
-          </button>
-        )}
-
-        {/* Analytics Toggle Button */}
-        <button
-          onClick={onToggleAnalytics}
-          className={`flex items-center gap-1.5 px-2.5 py-1.5 rounded-md border text-xs font-semibold transition-colors shrink-0 ${
-            isAnalyticsOpen
-              ? 'bg-blue-600 text-white border-blue-500 shadow-sm'
-              : 'bg-neutral-900 hover:bg-neutral-800 text-neutral-300 hover:text-white border-neutral-800'
-          }`}
-          title="Open Contractor & Financing Analytics Drawer"
-        >
-          <BarChart3 className="w-3.5 h-3.5 text-blue-400" />
-          <span>Analytics</span>
-        </button>
-
-        {/* Submit Project / Laporkan Proyek Button */}
-        {onOpenSubmitModal && (
-          <button
-            onClick={onOpenSubmitModal}
-            className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-md border text-xs font-semibold transition-all shrink-0 bg-violet-600/90 hover:bg-violet-500 text-white border-violet-500/80 shadow-sm shadow-violet-900/30 whitespace-nowrap"
-            title="Laporkan proyek infrastruktur atau gedung swasta/komersial baru"
-          >
-            <PlusCircle className="w-3.5 h-3.5 text-violet-200" />
-            <span>Laporkan Proyek</span>
-          </button>
-        )}
-
-        {/* Export Dropdown */}
-        <div className="relative shrink-0" ref={exportRef}>
-          <button
-            onClick={() => setIsExportOpen((prev) => !prev)}
-            className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-md bg-neutral-900 hover:bg-neutral-800 border border-neutral-800 text-xs font-semibold text-neutral-200 hover:text-white transition-colors"
-            title="Export filtered dataset"
-          >
-            <Download className="w-3.5 h-3.5 text-neutral-400" />
-            <span>Export</span>
-            <ChevronDown className="w-3 h-3 text-neutral-500" />
+            <BarChart3 className="w-3.5 h-3.5 text-blue-400" />
+            <span>Analytics</span>
           </button>
 
-          {isExportOpen && (
-            <div className="absolute right-0 mt-1.5 w-48 bg-neutral-900 border border-neutral-800 rounded-md shadow-xl py-1 z-50 text-xs">
-              <button
-                onClick={() => {
-                  setIsExportOpen(false);
-                  onExportGeoJSON();
-                }}
-                className="w-full px-3 py-2 text-left text-neutral-300 hover:text-white hover:bg-neutral-800/80 flex items-center gap-2 transition-colors"
-              >
-                <FileJson className="w-4 h-4 text-emerald-400" />
-                <div className="space-y-0.5">
-                  <div className="font-semibold">Export as GeoJSON</div>
-                  <div className="text-[10px] text-neutral-500">Filtered features ({totalFiltered})</div>
-                </div>
-              </button>
-
-              <button
-                onClick={() => {
-                  setIsExportOpen(false);
-                  onExportCSV();
-                }}
-                className="w-full px-3 py-2 text-left text-neutral-300 hover:text-white hover:bg-neutral-800/80 flex items-center gap-2 transition-colors border-t border-neutral-800/60"
-              >
-                <FileSpreadsheet className="w-4 h-4 text-blue-400" />
-                <div className="space-y-0.5">
-                  <div className="font-semibold">Export as CSV</div>
-                  <div className="text-[10px] text-neutral-500">Tabular format ({totalFiltered} rows)</div>
-                </div>
-              </button>
-            </div>
+          {/* Submit Project / Laporkan Proyek Button */}
+          {onOpenSubmitModal && (
+            <button
+              onClick={onOpenSubmitModal}
+              className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-md border text-xs font-semibold transition-all shrink-0 bg-violet-600/90 hover:bg-violet-500 text-white border-violet-500/80 shadow-sm shadow-violet-900/30 whitespace-nowrap"
+              title="Laporkan proyek infrastruktur atau gedung swasta/komersial baru"
+            >
+              <PlusCircle className="w-3.5 h-3.5 text-violet-200" />
+              <span>Laporkan Proyek</span>
+            </button>
           )}
+
+          {/* Export Dropdown */}
+          <div className="relative shrink-0" ref={exportRef}>
+            <button
+              onClick={() => setIsExportOpen((prev) => !prev)}
+              className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-md bg-neutral-900 hover:bg-neutral-800 border border-neutral-800 text-xs font-semibold text-neutral-200 hover:text-white transition-colors"
+              title="Export filtered dataset"
+            >
+              <Download className="w-3.5 h-3.5 text-neutral-400" />
+              <span>Export</span>
+              <ChevronDown className="w-3 h-3 text-neutral-500" />
+            </button>
+
+            {isExportOpen && (
+              <div className="absolute right-0 mt-1.5 w-48 bg-neutral-900 border border-neutral-800 rounded-md shadow-xl py-1 z-50 text-xs">
+                <button
+                  onClick={() => {
+                    setIsExportOpen(false);
+                    onExportGeoJSON();
+                  }}
+                  className="w-full px-3 py-2 text-left text-neutral-300 hover:text-white hover:bg-neutral-800/80 flex items-center gap-2 transition-colors"
+                >
+                  <FileJson className="w-4 h-4 text-emerald-400" />
+                  <div className="space-y-0.5">
+                    <div className="font-semibold">Export as GeoJSON</div>
+                    <div className="text-[10px] text-neutral-500">Filtered features ({totalFiltered})</div>
+                  </div>
+                </button>
+
+                <button
+                  onClick={() => {
+                    setIsExportOpen(false);
+                    onExportCSV();
+                  }}
+                  className="w-full px-3 py-2 text-left text-neutral-300 hover:text-white hover:bg-neutral-800/80 flex items-center gap-2 transition-colors border-t border-neutral-800/60"
+                >
+                  <FileSpreadsheet className="w-4 h-4 text-blue-400" />
+                  <div className="space-y-0.5">
+                    <div className="font-semibold">Export as CSV</div>
+                    <div className="text-[10px] text-neutral-500">Tabular format ({totalFiltered} rows)</div>
+                  </div>
+                </button>
+              </div>
+            )}
+          </div>
         </div>
-      </div>
-      ) : mainTab === 'simulator' ? (
+      ) : currentTab === 'simulator' ? (
         <div className="flex items-center gap-3">
           <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-xl bg-neutral-900 border border-neutral-800 text-xs text-neutral-300">
             <span className="w-2 h-2 rounded-full bg-emerald-400 animate-ping" />
@@ -302,13 +328,13 @@ export const Header: React.FC<HeaderProps> = ({
       ) : (
         <div className="flex items-center gap-3">
           <div className="hidden sm:flex items-center gap-2 px-3 py-1.5 rounded-xl bg-neutral-900 border border-neutral-800 text-xs text-neutral-300">
-            <span className="w-2 h-2 rounded-full bg-blue-400" />
+            <span className="w-2 h-2 rounded-full bg-emerald-400" />
             <span className="font-semibold text-neutral-200">Concrete Mix & Sieve Lab</span>
             <span className="text-neutral-500">•</span>
             <span className="text-neutral-400">SNI 7656 / ACI 211 & AHSP PUPR</span>
           </div>
-          <div className="px-2.5 py-1 rounded-lg bg-blue-500/10 border border-blue-500/30 text-[11px] font-mono text-blue-300 font-semibold">
-            COST CONTROL ENGINE
+          <div className="px-2.5 py-1 rounded-lg bg-emerald-500/10 border border-emerald-500/30 text-[11px] font-mono text-emerald-300 font-semibold">
+            CONCRETE LAB / JMF
           </div>
         </div>
       )}

@@ -11,6 +11,10 @@ const SimulatorPage = lazy(() =>
   import('./pages/SimulatorPage').then((module) => ({ default: module.SimulatorPage }))
 );
 
+const MixDesignPage = lazy(() =>
+  import('./pages/MixDesignPage').then((module) => ({ default: module.MixDesignPage }))
+);
+
 const CostControlPage = lazy(() =>
   import('./pages/CostControlPage').then((module) => ({ default: module.CostControlPage }))
 );
@@ -34,12 +38,15 @@ export const App: React.FC = () => {
           {/* 4D Construction Phasing & Site Logistics Simulator (Full Screen) */}
           <Route path="/4d-simulator" element={<SimulatorPage />} />
 
-          {/* Capital Project Cost Intelligence Dashboard (Full Screen) */}
+          {/* Concrete Mix & Sieve Analysis Lab (SNI 7656 / ACI 211 / JMF) */}
+          <Route path="/mix-design" element={<MixDesignPage />} />
+
+          {/* Separate Future Route for EVM / S-Curve Cost Control */}
           <Route path="/cost-control" element={<CostControlPage />} />
 
-          {/* Legacy / Alias Redirects */}
+          {/* Legacy / Convenience Redirects */}
           <Route path="/simulator" element={<Navigate to="/4d-simulator" replace />} />
-          <Route path="/mix-design" element={<Navigate to="/cost-control" replace />} />
+          <Route path="/concrete" element={<Navigate to="/mix-design" replace />} />
 
           {/* Wildcard Fallback */}
           <Route path="*" element={<Navigate to="/radar" replace />} />
