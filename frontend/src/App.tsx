@@ -1,9 +1,18 @@
 import React, { Suspense, lazy } from 'react';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { Loader2 } from 'lucide-react';
 
 // Code-split route modules
 const InfrastructureTracker = lazy(() =>
   import('./pages/TrackerPage').then((module) => ({ default: module.TrackerPage }))
+);
+
+const SimulatorPage = lazy(() =>
+  import('./pages/SimulatorPage').then((module) => ({ default: module.SimulatorPage }))
+);
+
+const CostControlPage = lazy(() =>
+  import('./pages/CostControlPage').then((module) => ({ default: module.CostControlPage }))
 );
 
 const LoadingFallback: React.FC = () => (
@@ -15,8 +24,27 @@ const LoadingFallback: React.FC = () => (
 
 export const App: React.FC = () => {
   return (
-    <Suspense fallback={<LoadingFallback />}>
-      <InfrastructureTracker />
-    </Suspense>
+    <BrowserRouter>
+      <Suspense fallback={<LoadingFallback />}>
+        <Routes>
+          {/* Construction Radar (Default & /radar) */}
+          <Route path="/" element={<InfrastructureTracker />} />
+          <Route path="/radar" element={<InfrastructureTracker />} />
+
+          {/* 4D Construction Phasing & Site Logistics Simulator (Full Screen) */}
+          <Route path="/4d-simulator" element={<SimulatorPage />} />
+
+          {/* Capital Project Cost Intelligence Dashboard (Full Screen) */}
+          <Route path="/cost-control" element={<CostControlPage />} />
+
+          {/* Legacy / Alias Redirects */}
+          <Route path="/simulator" element={<Navigate to="/4d-simulator" replace />} />
+          <Route path="/mix-design" element={<Navigate to="/cost-control" replace />} />
+
+          {/* Wildcard Fallback */}
+          <Route path="*" element={<Navigate to="/radar" replace />} />
+        </Routes>
+      </Suspense>
+    </BrowserRouter>
   );
 };

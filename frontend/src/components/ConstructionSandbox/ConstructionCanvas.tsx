@@ -550,7 +550,7 @@ export const ConstructionCanvas: React.FC<ConstructionCanvasProps> = ({
 
       // Slowly rotate crane jibs when active
       if (craneGroupRef.current) {
-        craneGroupRef.current.children.forEach((craneObj, idx) => {
+        craneGroupRef.current.children.forEach((craneObj: THREE.Object3D, idx: number) => {
           const slew = craneObj.getObjectByName('slew');
           if (slew) {
             slew.rotation.y = Math.sin(time * 0.25 + idx * 1.5) * 0.85;
@@ -561,7 +561,7 @@ export const ConstructionCanvas: React.FC<ConstructionCanvasProps> = ({
       // Pulsing amber collision zones
       if (collisionMeshesRef.current) {
         const pulse = 0.25 + Math.sin(time * 4.0) * 0.18;
-        collisionMeshesRef.current.children.forEach((child) => {
+        collisionMeshesRef.current.children.forEach((child: THREE.Object3D) => {
           if (child.name === 'pulsing_collision_zone' && child instanceof THREE.Mesh) {
             (child.material as THREE.MeshBasicMaterial).opacity = pulse;
           }
