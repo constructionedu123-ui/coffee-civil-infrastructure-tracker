@@ -1002,7 +1002,7 @@ export const ConstructionCanvas: React.FC<ConstructionCanvasProps> = ({
       </div>
 
       {/* OrbitControls Navigation Helper Hint (Top Right) */}
-      <div className="absolute top-4 right-4 z-10 hidden md:flex items-center gap-2 bg-[#0f172a]/80 backdrop-blur-md border border-slate-800 text-[11px] text-slate-400 px-3 py-1.5 rounded-xl">
+      <div className="absolute top-4 right-72 z-10 hidden lg:flex items-center gap-2 bg-[#0f172a]/80 backdrop-blur-md border border-slate-800 text-[11px] text-slate-400 px-3 py-1.5 rounded-xl shadow-lg">
         <Compass className="w-3.5 h-3.5 text-sky-400" />
         <span>Left-click: Orbit • Right-click: Pan • Scroll: Zoom</span>
       </div>

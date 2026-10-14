@@ -15,7 +15,7 @@ export const SimulatorPage: React.FC = () => {
           <div className="w-full h-full bg-[#0a0f1d] flex flex-col items-center justify-center gap-3 text-slate-300">
             <Loader2 className="w-8 h-8 text-amber-500 animate-spin" />
             <span className="text-xs font-semibold tracking-wide text-neutral-400">
-              Memuat 4D Civil Construction Simulation Sandbox...
+              Loading Coffee Civil 4D Construction Simulation & Site Logistics Command Center...
             </span>
           </div>
         }

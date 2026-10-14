@@ -38,7 +38,7 @@ export const WeatherStressTest: React.FC<WeatherStressTestProps> = ({
   return (
     <>
       {/* Weather Launcher Button (Floating Top Right) */}
-      <div className="absolute top-16 right-4 z-10 flex flex-col items-end gap-2 pointer-events-auto">
+      <div className="absolute top-4 right-4 z-10 flex flex-col items-end gap-2 pointer-events-auto">
         <button
           onClick={onToggleOpen}
           className={`flex items-center gap-2 px-3 py-2 rounded-2xl border text-xs font-semibold shadow-2xl backdrop-blur-xl transition-all ${

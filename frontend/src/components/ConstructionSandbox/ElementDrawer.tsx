@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
   X,
   CheckCircle2,
@@ -10,8 +10,10 @@ import {
   UserCheck,
   Building2,
   Calendar,
+  Sparkles,
 } from 'lucide-react';
 import { StructuralElement, InspectionCheckItem } from './types';
+import { fireRfiApprovedConfetti } from '../../utils/confetti';
 
 interface ElementDrawerProps {
   element: StructuralElement | null;
@@ -32,6 +34,12 @@ export const ElementDrawer: React.FC<ElementDrawerProps> = ({
 
   // Local checklist state so user can interactively toggle check items
   const [checklist, setChecklist] = useState<InspectionCheckItem[]>(element.rfi.checkItems);
+  const [isApproved, setIsApproved] = useState<boolean>(element.rfi.status === 'APPROVED');
+
+  useEffect(() => {
+    setChecklist(element.rfi.checkItems);
+    setIsApproved(element.rfi.status === 'APPROVED');
+  }, [element.id]);
 
   // Status at current timeline week
   const getStatus = () => {
@@ -278,6 +286,25 @@ export const ElementDrawer: React.FC<ElementDrawerProps> = ({
                 <span className="font-medium text-slate-300">Supervising Consultant:</span>
                 <span className="text-slate-400 truncate">{element.rfi.consultant}</span>
               </div>
+            </div>
+
+            {/* QA/QC Sign-Off & Pour Permit Action */}
+            <div className="pt-2 border-t border-slate-800">
+              <button
+                onClick={() => {
+                  setChecklist((prev) => prev.map((item) => ({ ...item, checked: true })));
+                  setIsApproved(true);
+                  fireRfiApprovedConfetti();
+                }}
+                className={`w-full py-2 px-3 rounded-xl text-xs font-bold flex items-center justify-center gap-1.5 transition shadow-lg ${
+                  isApproved
+                    ? 'bg-emerald-600/90 text-white shadow-emerald-600/20 hover:bg-emerald-500'
+                    : 'bg-gradient-to-r from-amber-500 to-sky-500 hover:from-amber-400 hover:to-sky-400 text-slate-950 shadow-sky-500/20'
+                }`}
+              >
+                <Sparkles className="w-3.5 h-3.5" />
+                <span>{isApproved ? 'RFI Signed & Pour Permit Issued ✓' : 'Sign Off RFI & Issue Pour Permit'}</span>
+              </button>
             </div>
           </div>
         </div>

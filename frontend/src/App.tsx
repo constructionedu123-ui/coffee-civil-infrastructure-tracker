@@ -31,25 +31,25 @@ export const App: React.FC = () => {
     <BrowserRouter>
       <Suspense fallback={<LoadingFallback />}>
         <Routes>
-          {/* Construction Radar (Default & /radar) */}
-          <Route path="/" element={<InfrastructureTracker />} />
+          {/* Standalone 4D Construction Phasing & Site Logistics Simulator (Default) */}
+          <Route path="/" element={<SimulatorPage />} />
+          <Route path="/4d-simulator" element={<SimulatorPage />} />
+          <Route path="/simulator" element={<SimulatorPage />} />
+
+          {/* National Infrastructure Radar */}
           <Route path="/radar" element={<InfrastructureTracker />} />
 
-          {/* 4D Construction Phasing & Site Logistics Simulator (Full Screen) */}
-          <Route path="/4d-simulator" element={<SimulatorPage />} />
-
-          {/* Concrete Mix & Sieve Analysis Lab (SNI 7656 / ACI 211 / JMF) */}
+          {/* Concrete Mix & Sieve Analysis Lab */}
           <Route path="/mix-design" element={<MixDesignPage />} />
 
-          {/* Separate Future Route for EVM / S-Curve Cost Control */}
+          {/* Cost Control / S-Curve */}
           <Route path="/cost-control" element={<CostControlPage />} />
 
           {/* Legacy / Convenience Redirects */}
-          <Route path="/simulator" element={<Navigate to="/4d-simulator" replace />} />
           <Route path="/concrete" element={<Navigate to="/mix-design" replace />} />
 
           {/* Wildcard Fallback */}
-          <Route path="*" element={<Navigate to="/radar" replace />} />
+          <Route path="*" element={<Navigate to="/" replace />} />
         </Routes>
       </Suspense>
     </BrowserRouter>

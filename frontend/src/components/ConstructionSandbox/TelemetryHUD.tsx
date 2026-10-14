@@ -29,7 +29,7 @@ export const TelemetryHUD: React.FC<TelemetryHUDProps> = ({
   collisionPairs,
 }) => {
   return (
-    <div className="absolute top-16 left-4 z-10 flex flex-col gap-2 max-w-sm pointer-events-auto">
+    <div className="absolute top-4 left-4 z-10 flex flex-col gap-2 max-w-sm pointer-events-auto">
       {/* Primary Telemetry Bar Container */}
       <div className="bg-[#0f172a]/95 backdrop-blur-xl border border-slate-800 rounded-2xl p-3.5 shadow-2xl space-y-3">
         {/* Section Header */}

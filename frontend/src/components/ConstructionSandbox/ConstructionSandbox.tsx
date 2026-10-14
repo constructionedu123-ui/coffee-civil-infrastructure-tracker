@@ -1,9 +1,10 @@
-import React, { useState, useEffect, useMemo, useCallback } from 'react';
+import React, { useState, useEffect, useMemo, useCallback, useRef } from 'react';
 import { ConstructionCanvas } from './ConstructionCanvas';
 import { TimelineBar } from './TimelineBar';
 import { TelemetryHUD } from './TelemetryHUD';
 import { WeatherStressTest } from './WeatherStressTest';
 import { ElementDrawer } from './ElementDrawer';
+import { SimulatorHeader } from './SimulatorHeader';
 import {
   generateCorridorElements,
   SITE_CRANES,
@@ -17,6 +18,7 @@ import {
   TransitMixer,
   CraneCollisionPair,
 } from './types';
+import { fireHandoverGrandCelebration } from '../../utils/confetti';
 
 interface ConstructionSandboxProps {
   onBackToMap?: () => void;
@@ -167,8 +169,34 @@ export const ConstructionSandbox: React.FC<ConstructionSandboxProps> = ({ onBack
     }
   }, [elements, selectedElement]);
 
+  // Handover completion celebration at Week 104
+  const hasCelebratedHandoverRef = useRef(false);
+  useEffect(() => {
+    if (currentWeek === 104 && !hasCelebratedHandoverRef.current) {
+      hasCelebratedHandoverRef.current = true;
+      fireHandoverGrandCelebration();
+    } else if (currentWeek < 104) {
+      hasCelebratedHandoverRef.current = false;
+    }
+  }, [currentWeek]);
+
+  const handleTriggerCelebration = useCallback(() => {
+    fireHandoverGrandCelebration();
+  }, []);
+
   return (
     <div className="relative w-full h-full flex flex-col overflow-hidden bg-[#0a0f1d] text-slate-100 select-none font-sans">
+      {/* Standalone Clean Command Center Header */}
+      <SimulatorHeader
+        currentWeek={currentWeek}
+        weather={weather}
+        telemetry={telemetry}
+        activeCameraPreset={activeCameraPreset}
+        onSelectCameraPreset={setActiveCameraPreset}
+        onTriggerConfetti={handleTriggerCelebration}
+        collisionPairs={collisionPairs}
+      />
+
       {/* 3D WebGL Canvas Layer */}
       <div className="relative flex-1 w-full h-full overflow-hidden">
         <ConstructionCanvas
